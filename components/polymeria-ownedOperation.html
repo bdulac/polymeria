@@ -1,0 +1,21 @@
+<link rel="import" 
+  href="../polymer/polymer/polymer.html">
+
+<polymer-element name="polymeria-ownedOperation" attributes="name visibility">
+  <template>
+    <style>    
+    .owned-operation {
+      display: block;
+    }
+    </style>
+
+    <!-- UML OWNED OPERATION -->
+    <div class="owned-operation" layout vertical left>
+      {{ name }}(<content></content>)
+    </div>
+  </template>
+
+  <script>
+  Polymer({});
+  </script>
+</polymer-element>
