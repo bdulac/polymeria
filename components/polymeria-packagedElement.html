@@ -11,20 +11,28 @@
     }
     .packaged-element {
       display: block;
+      padding: 15px;
+    }
+    [type=uml-Class] {
+      background-color: white;
+      border-style: solid;
+      border-width: 1px;
       margin-left: auto;
       margin-right: auto;
       padding: 15px;
     }
-    [type=uml:Class] {
-      background-color: white;
+    [type=uml-Package] {
+      background-color: maroon;
       border-style: solid;
       border-width: 1px;
+      width: 100%;
+      padding: 15px;
     }
     </style>
 
     <!-- UML PACKAGEABLE ELEMENT -->
-    <div class="packaged-element" layout vertical center>
-      <div type="{{ type }}">
+    <div class="packaged-element" type="{{ type }}" layout vertical center>
+      <div>
       {{ name }}
       </div> 
       <content></content>   
