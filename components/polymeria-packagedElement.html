@@ -2,50 +2,47 @@
   href="../polymer/polymer/polymer.html">
 
 <polymer-element name="polymeria-packagedElement" attributes="name type">
-  <template>
-    <style>
-    :host {
-    }
-    .packaged-element-header {
-      padding-bottom: 10px;
-      margin-bottom: 10px;
-    }
-    .packaged-element {
-      display: block;
-      padding: 15px;
-    }
-    [type=uml-Class] {
-      background-color: white;
-      border-style: solid;
-      border-width: 1px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 15px;
-    }
-    [type=uml-Class] .packaged-element-header  {
-      border-bottom-style: solid;
-      border-bottom-width: 1px;
-      width: 100%;
-    }
-    [type=uml-Package] {
-      background-color: maroon;
-      border-style: solid;
-      border-width: 1px;
-      width: 100%;
-      padding: 15px;
-    }
-    </style>
-
-    <!-- UML PACKAGEABLE ELEMENT -->
-    <div class="packaged-element" type="{{ type }}" layout vertical center>
-      <div class="packaged-element-header">
-      {{ name }}
-      </div> 
-      <content></content>   
-    </div>
-  </template>
-
-  <script>
-  Polymer({});
-  </script>
+	<template>
+		<style>
+		:host {
+		}
+		[type=uml-Class] {
+			background-color: white;
+			border-style: solid;
+			border-width: 1px;
+			padding: 15px;
+			margin: 15px;
+		}
+		[type=uml-Class] .packaged-element-header  {
+			border-bottom-style: solid;
+			border-bottom-width: 1px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		[type=uml-Package] {
+			background-color: gray;
+			border-style: solid;
+			border-width: 1px;
+			padding: 15px;
+			margin: 15px;
+		}
+		[type=uml-Package] .packaged-element-header  {
+			border-bottom-style: ridge;
+			border-bottom-width: 1px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		</style>
+		
+		<!-- UML PACKAGEABLE ELEMENT: TYPE/CLASSIFIER OR PACKAGE -->
+		<div class="packaged-element" type="{{ type }}" layout vertical center>
+			<div class="packaged-element-header">
+			{{ name }}
+			</div> 
+			<content></content>   
+		</div>
+	</template>
+	<script>
+	Polymer({});
+	</script>
 </polymer-element>
