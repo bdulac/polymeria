@@ -7,11 +7,41 @@
   <link rel="import" href="components/polymeria-packagedElement.html">
   <link rel="import" href="components/polymeria-ownedAttribute.html">
   <link rel="import" href="components/polymeria-ownedOperation.html">
+  <style>
+  .cite-xml {
+    background-color: lightgray;
+    max-height: 100px;
+    overflow: scroll;
+  }
+  </style>
+  
 </head>
 <body unresolved>
 <p>
-<b>Translated UML model</b>:
-<pre>	&lt;polymeria-model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_gajMIF7MEeSa4sJ83GIR5A" name="org.test"&gt;
+<b>Initial UML model</b>:
+</p>
+<pre class="cite-xml">	&lt;model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_gajMIF7MEeSa4sJ83GIR5A" name="org.test"&gt;
+		&lt;packagedElement xmi:type="uml-Class" xmi:id="_gajMIV7MEeSa4sJ83GIR5A" name="LudeImpl"&gt;
+			&lt;ownedAttribute xmi:id="_gajMIl7MEeSa4sJ83GIR5A" name="myAttribute" visibility="private" type="_gajzMV7MEeSa4sJ83GIR5A"/&gt;
+			&lt;ownedOperation xmi:id="_gajMI17MEeSa4sJ83GIR5A" name="getMyAttribute" visibility="public"&gt;
+				&lt;ownedParameter xmi:id="_gajMJF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/&gt;
+			&lt;/ownedOperation&gt;
+		&lt;/packagedElement&gt;
+		&lt;packagedElement xmi:type="uml-Package" xmi:id="_gajzMF7MEeSa4sJ83GIR5A" name="Primitive types" visibility="private"&gt;
+			&lt;packagedElement xmi:type="uml-Class" xmi:id="_gajzMV7MEeSa4sJ83GIR5A" name="java.lang.String" visibility="package"/&gt;
+		&lt;/packagedElement&gt;
+		&lt;packagedElement xmi:type="uml-Class" xmi:id="_gajzMl7MEeSa4sJ83GIR5A" name="Interlude"&gt;
+			&lt;ownedOperation xmi:id="_gajzM17MEeSa4sJ83GIR5A" name="getMyAttribute" visibility="public"&gt;
+				&lt;ownedParameter xmi:id="_gajzNF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/&gt;
+			&lt;/ownedOperation&gt;
+		&lt;/packagedElement&gt;
+		&lt;packagedElement xmi:type="uml-Realization" xmi:id="_NP8jAF7NEeSa4sJ83GIR5A" client="_gajzMl7MEeSa4sJ83GIR5A _gajMIV7MEeSa4sJ83GIR5A"/&gt;
+	&lt;/model&gt;
+</pre>
+<p>
+<b>Translated UML model</b> (elements names compatibility):
+</p>
+<pre class="cite-xml">	&lt;polymeria-model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_gajMIF7MEeSa4sJ83GIR5A" name="org.test"&gt;
 		&lt;polymeria-packagedElement type="uml-Class" xmi:id="_gajMIV7MEeSa4sJ83GIR5A" name="LudeImpl"&gt;
 			&lt;polymeria-ownedAttribute xmi:id="_gajMIl7MEeSa4sJ83GIR5A" name="myAttribute" visibility="private" type="_gajzMV7MEeSa4sJ83GIR5A"/&gt;
 			&lt;polymeria-ownedOperation xmi:id="_gajMI17MEeSa4sJ83GIR5A" name="getMyAttribute" visibility="public"&gt;
