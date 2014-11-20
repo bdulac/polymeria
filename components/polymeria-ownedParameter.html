@@ -1,0 +1,23 @@
+<link rel="import" 
+  href="../polymer/polymer/polymer.html">
+
+<polymer-element name="polymeria-ownedParameter" attributes="name">
+	<template>
+		<style>
+		:host {
+		}
+		.owned-parameter {
+		}
+		.owned-parameter-header {
+		}
+		</style>
+		
+		<span class="owned-parameter">
+			<span class="owned-parameter-header">.{{ name }}</span>
+    		<content></content>   
+		</span>
+	</template>
+	<script>
+	Polymer({});
+	</script>
+</polymer-element>
