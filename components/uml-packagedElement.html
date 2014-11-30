@@ -6,7 +6,7 @@
 		<style>
 		:host {
 		}
-		[type=uml-Class] {
+		[element-type=uml-Class] {
 			background-color: white;
 			border-style: solid;
 			border-width: 1px;
@@ -18,21 +18,21 @@
 			max-width: 200px;
 			overflow: auto;
 		}
-		[type=uml-Class] .packaged-element-header  {
+		[element-type=uml-Class] .packaged-element-header  {
 			border-bottom-style: solid;
 			border-bottom-width: 1px;
 			margin-left: auto;
 			margin-right: auto;
 			margin-bottom: 15px;
 		}
-		[type=uml-Package] {
+		[element-type=uml-Package] {
 			background-color: gray;
 			border-style: solid;
 			border-width: 1px;
 			padding: 15px;
 			margin: 15px;
 		}
-		[type=uml-Package] .packaged-element-header  {
+		[element-type=uml-Package] .packaged-element-header  {
 			border-bottom-style: ridge;
 			border-bottom-width: 1px;
 			margin-left: auto;
@@ -40,7 +40,7 @@
 		}
 		</style>
 		
-		<div class="packaged-element" type="{{ type }}" layout vertical center>
+		<div class="packaged-element" element-type="{{ type }}" layout vertical center>
 			<span class="packaged-element-header">
 			{{ name }}
 			</span>
