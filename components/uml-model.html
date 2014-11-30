@@ -11,6 +11,7 @@
 			border-style: solid;
 			border-width: 1px;
 			padding: 15px;
+			margin: 0;
 		}
 		.model-element-header {
 			text-align: left;
@@ -25,9 +26,7 @@
 			<div class="model-element-header">
     			{{ name }}
     		</div>
-    		<content select="uml-packagedElement[type=uml-Class]"></content>
-    		<content select="uml-packagedElement[type=uml-Package]"></content>
-    		
+    		<content></content>
 		</div>
 	</template>
 	<script>
