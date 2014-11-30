@@ -1,7 +1,7 @@
 <link rel="import" 
   href="../polymer/polymer/polymer.html">
 
-<polymer-element name="polymeria-model" attributes="name">
+<polymer-element name="uml-model" attributes="name">
 	<template>
 		<style>
 		:host {
@@ -24,8 +24,10 @@
 		<div class="model-element" layout vertical center>
 			<div class="model-element-header">
     			{{ name }}
-    		</div> 
-    		<content></content>   
+    		</div>
+    		<content select="uml-packagedElement[type=uml-Class]"></content>
+    		<content select="uml-packagedElement[type=uml-Package]"></content>
+    		
 		</div>
 	</template>
 	<script>

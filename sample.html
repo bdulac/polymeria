@@ -4,16 +4,16 @@
 	  <title>Polymeria sample</title>
 	  <script src="polymer/platform/platform.js">
 	  </script>
-	  <link rel="import" href="components/polymeria-model.html">
-	  <link rel="import" href="components/polymeria-packagedElement.html">
-	  <link rel="import" href="components/polymeria-ownedAttribute.html">
-	  <link rel="import" href="components/polymeria-ownedOperation.html">
-	  <link rel="import" href="components/polymeria-ownedParameter.html">
+	  <link rel="import" href="components/uml-model.html">
+	  <link rel="import" href="components/uml-packagedElement.html">
+	  <link rel="import" href="components/uml-ownedAttribute.html">
+	  <link rel="import" href="components/uml-ownedOperation.html">
+	  <link rel="import" href="components/uml-ownedParameter.html">
 	  <style>
 	  .cite-xml {
 	    background-color: lightgray;
 	    max-height: 100px;
-	    overflow: scroll;
+	    overflow: auto;
 	  }
 	  </style>
 	</head>
@@ -24,7 +24,7 @@
 	&lt;packagedElement xmi:type="uml-Class" xmi:id="_gajMIV7MEeSa4sJ83GIR5A" name="LudeImpl"&gt;
 		&lt;ownedAttribute xmi:id="_gajMIl7MEeSa4sJ83GIR5A" name="myAttribute" visibility="private" type="_gajzMV7MEeSa4sJ83GIR5A"/&gt;
 		&lt;ownedOperation xmi:id="_gajMI17MEeSa4sJ83GIR5A" name="getMyAttribute" visibility="public"&gt;
-			&lt;polymeria-ownedParameter xmi:id="_gajMJF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/&gt;
+			&lt;uml-ownedParameter xmi:id="_gajMJF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/&gt;
 		&lt;/ownedOperation&gt;
 	&lt;/packagedElement&gt;
 	&lt;packagedElement xmi:type="uml-Package" xmi:id="_gajzMF7MEeSa4sJ83GIR5A" name="runtime.types" visibility="private"&gt;
@@ -32,7 +32,7 @@
 	&lt;/packagedElement&gt;
 	&lt;packagedElement xmi:type="uml-Class" xmi:id="_gajzMl7MEeSa4sJ83GIR5A" name="Interlude"&gt;
 		&lt;ownedOperation xmi:id="_gajzM17MEeSa4sJ83GIR5A" name="getMyAttribute" visibility="public"&gt;
-			&lt;polymeria-ownedParameter xmi:id="_gajzNF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/&gt;
+			&lt;uml-ownedParameter xmi:id="_gajzNF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/&gt;
 		&lt;/ownedOperation&gt;
 	&lt;/packagedElement&gt;
 	&lt;packagedElement xmi:type="uml-Realization" xmi:id="_NP8jAF7NEeSa4sJ83GIR5A" client="_gajzMl7MEeSa4sJ83GIR5A _gajMIV7MEeSa4sJ83GIR5A"/&gt;
@@ -41,45 +41,45 @@
 		</section>
 		<section>
 			<h4>Adapted UML model (for Polymer elements names compatibility):</h4>
-			<pre class="cite-xml">&lt;polymeria-model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_gajMIF7MEeSa4sJ83GIR5A" name="org.test"&gt;
-	&lt;polymeria-packagedElement type="uml-Class" xmi:id="_gajMIV7MEeSa4sJ83GIR5A" name="LudeImpl"&gt;
-		&lt;polymeria-ownedAttribute xmi:id="_gajMIl7MEeSa4sJ83GIR5A" name="myAttribute" visibility="private" type="_gajzMV7MEeSa4sJ83GIR5A"/&gt;
-		&lt;polymeria-ownedOperation xmi:id="_gajMI17MEeSa4sJ83GIR5A" name="getMyAttribute" visibility="public"&gt;
-			&lt;polymeria-ownedParameter xmi:id="_gajMJF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/&gt;
-		&lt;/polymeria-ownedOperation&gt;
-	&lt;/polymeria-packagedElement&gt;
-	&lt;polymeria-packagedElement type="uml-Package" xmi:id="_gajzMF7MEeSa4sJ83GIR5A" name="runtime.types" visibility="private"&gt;
-		&lt;polymeria-packagedElement type="uml-Class" xmi:id="_gajzMV7MEeSa4sJ83GIR5A" name="java.lang.String" visibility="package"/&gt;
-	&lt;/polymeria-packagedElement&gt;
-	&lt;polymeria-packagedElement type="uml-Class" xmi:id="_gajzMl7MEeSa4sJ83GIR5A" name="Interlude"&gt;
-		&lt;polymeria-ownedOperation xmi:id="_gajzM17MEeSa4sJ83GIR5A" name="getMyAttribute" visibility="public"&gt;
-			&lt;polymeria-ownedParameter xmi:id="_gajzNF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/&gt;
-		&lt;/polymeria-ownedOperation&gt;
-	&lt;/polymeria-packagedElement&gt;
-	&lt;polymeria-packagedElement type="uml-Realization" xmi:id="_NP8jAF7NEeSa4sJ83GIR5A" client="_gajzMl7MEeSa4sJ83GIR5A _gajMIV7MEeSa4sJ83GIR5A"/&gt;
-&lt;/polymeria-model&gt;
+			<pre class="cite-xml">&lt;uml-model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_gajMIF7MEeSa4sJ83GIR5A" name="org.test"&gt;
+	&lt;uml-packagedElement type="uml-Class" xmi:id="_gajMIV7MEeSa4sJ83GIR5A" name="LudeImpl"&gt;
+		&lt;uml-ownedAttribute xmi:id="_gajMIl7MEeSa4sJ83GIR5A" name="myAttribute" visibility="private" type="_gajzMV7MEeSa4sJ83GIR5A"/&gt;
+		&lt;uml-ownedOperation xmi:id="_gajMI17MEeSa4sJ83GIR5A" name="getMyAttribute" visibility="public"&gt;
+			&lt;uml-ownedParameter xmi:id="_gajMJF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/&gt;
+		&lt;/uml-ownedOperation&gt;
+	&lt;/uml-packagedElement&gt;
+	&lt;uml-packagedElement type="uml-Package" xmi:id="_gajzMF7MEeSa4sJ83GIR5A" name="runtime.types" visibility="private"&gt;
+		&lt;uml-packagedElement type="uml-Class" xmi:id="_gajzMV7MEeSa4sJ83GIR5A" name="java.lang.String" visibility="package"/&gt;
+	&lt;/uml-packagedElement&gt;
+	&lt;uml-packagedElement type="uml-Class" xmi:id="_gajzMl7MEeSa4sJ83GIR5A" name="Interlude"&gt;
+		&lt;uml-ownedOperation xmi:id="_gajzM17MEeSa4sJ83GIR5A" name="getMyAttribute" visibility="public"&gt;
+			&lt;uml-ownedParameter xmi:id="_gajzNF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/&gt;
+		&lt;/uml-ownedOperation&gt;
+	&lt;/uml-packagedElement&gt;
+	&lt;uml-packagedElement type="uml-Realization" xmi:id="_NP8jAF7NEeSa4sJ83GIR5A" client="_gajzMl7MEeSa4sJ83GIR5A _gajMIV7MEeSa4sJ83GIR5A"/&gt;
+&lt;/uml-model&gt;
 			</pre>
 		</section>
 		<section>
 			<h4>Result:</h4>
 			<div>
-				<polymeria-model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_gajMIF7MEeSa4sJ83GIR5A" name="org.test">
-					<polymeria-packagedElement type="uml-Class" xmi:id="_gajMIV7MEeSa4sJ83GIR5A" name="LudeImpl">
-						<polymeria-ownedAttribute xmi:id="_gajMIl7MEeSa4sJ83GIR5A" name="myAttribute" visibility="private" type="_gajzMV7MEeSa4sJ83GIR5A"/>
-						<polymeria-ownedOperation xmi:id="_gajMI17MEeSa4sJ83GIR5A" name="getMyAttribute" visibility="public">
-							<polymeria-ownedParameter xmi:id="_gajMJF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/>
-						</polymeria-ownedOperation>
-					</polymeria-packagedElement>
-					<polymeria-packagedElement type="uml-Package" xmi:id="_gajzMF7MEeSa4sJ83GIR5A" name="runtime.types" visibility="private">
-						<polymeria-packagedElement type="uml-Class" xmi:id="_gajzMV7MEeSa4sJ83GIR5A" name="java.lang.String" visibility="package"/>
-					</polymeria-packagedElement>
-					<polymeria-packagedElement type="uml-Class" xmi:id="_gajzMl7MEeSa4sJ83GIR5A" name="Interlude">
-						<polymeria-ownedOperation xmi:id="_gajzM17MEeSa4sJ83GIR5A" name="getMyAttribute" visibility="public">
-							<polymeria-ownedParameter xmi:id="_gajzNF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/>
-						</polymeria-ownedOperation>
-					</polymeria-packagedElement>
-					<polymeria-packagedElement type="uml-Realization" xmi:id="_NP8jAF7NEeSa4sJ83GIR5A" client="_gajzMl7MEeSa4sJ83GIR5A _gajMIV7MEeSa4sJ83GIR5A"/>
-				</polymeria-model>
+				<uml-model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_gajMIF7MEeSa4sJ83GIR5A" name="org.test">
+					<uml-packagedElement type="uml-Class" xmi:id="_vitV8HHDEeSW3aTl2B7TLQ" name="LudeImpl">
+						<uml-ownedAttribute xmi:id="_vitV8HHDEeSW3aTl2B7TLQ" name="myAttribute" visibility="private" type="_gajzMV7MEeSa4sJ83GIR5A" />
+						<uml-ownedOperation xmi:id="_vitV8HHDEeSW3aTl2B7TLQ" name="getMyAttribute" visibility="public">
+							<uml-ownedParameter xmi:id="_gajMJF7MEeSa4sJ83GIR5A" type="_vitV8HHDEeSW3aTl2B7TLQ" direction="return"/>
+						</uml-ownedOperation>
+					</uml-packagedElement>
+					<uml-packagedElement type="uml-Package" xmi:id="_gajzMF7MEeSa4sJ83GIR5A" name="runtime.types" visibility="private">
+						<uml-packagedElement type="uml-Class" xmi:id="_gajzMV7MEeSa4sJ83GIR5A" name="java.lang.String" visibility="package"/>
+					</uml-packagedElement>
+					<uml-packagedElement type="uml-Class" xmi:id="_gajzMl7MEeSa4sJ83GIR5A" name="Interlude">
+						<uml-ownedOperation xmi:id="_gajzM17MEeSa4sJ83GIR5A" name="getMethod" visibility="public">
+							<uml-ownedParameter xmi:id="_gajzNF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/>
+						</uml-ownedOperation>
+					</uml-packagedElement>
+					<uml-packagedElement type="uml-Realization" xmi:id="_NP8jAF7NEeSa4sJ83GIR5A" client="_gajzMl7MEeSa4sJ83GIR5A _gajMIV7MEeSa4sJ83GIR5A"/>
+				</uml-model>
 			</div>
 		</section>
 	</body>

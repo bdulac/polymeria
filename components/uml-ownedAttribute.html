@@ -1,17 +1,17 @@
 <link rel="import" 
   href="../polymer/polymer/polymer.html">
 
-<polymer-element name="polymeria-ownedAttribute" attributes="name visibility">
+<polymer-element name="uml-ownedAttribute" attributes="name visibility">
   <template>
     <style>    
     .owned-attribute {
       display: block;
     }
     </style>
-
-    <!-- UML OWNED ATTRIBUTE -->
+    
     <div class="owned-attribute" layout vertical left>
-    {{ name }}    
+    	{{ name }}
+    	<content></content>   
     </div>
   </template>
 

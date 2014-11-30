@@ -1,7 +1,7 @@
 <link rel="import" 
   href="../polymer/polymer/polymer.html">
 
-<polymer-element name="polymeria-packagedElement" attributes="name type">
+<polymer-element name="uml-packagedElement" attributes="name type">
 	<template>
 		<style>
 		:host {
@@ -11,7 +11,12 @@
 			border-style: solid;
 			border-width: 1px;
 			padding: 15px;
-			margin: 15px;
+			margin-bottom: 15px;
+			margin-top: 15px;
+			margin-left: auto;
+			margin-right: auto;
+			max-width: 200px;
+			overflow: auto;
 		}
 		[type=uml-Class] .packaged-element-header  {
 			border-bottom-style: solid;
@@ -38,8 +43,13 @@
 		<div class="packaged-element" type="{{ type }}" layout vertical center>
 			<span class="packaged-element-header">
 			{{ name }}
-			</span> 
-			<content></content>   
+			</span>
+			<!--
+			<content select="uml-ownedAttribute"></content>
+			<content select="uml-ownedOperation"></content>
+			<content select="uml-packagedElement[type=uml-Class]"></content>
+			-->
+			<content></content>
 		</div>
 	</template>
 	<script>
