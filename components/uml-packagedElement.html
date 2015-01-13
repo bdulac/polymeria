@@ -1,58 +1,120 @@
 <link rel="import" 
   href="../polymer/polymer/polymer.html">
+<!-- 
+# Primary palette (Orange)
 
+primary1: ffcc80
+# primary (200)
+
+primary2: ffe0b2
+# primary (100)
+
+primary3: e65100
+# primary (900)
+
+# Secondary palette (Deep purple)
+accent: 7c4dff
+# accent (A200)
+ -->
 <polymer-element name="uml-packagedElement" attributes="name type">
+	<link rel="stylesheet" href="../jquery-ui/themes/humanity/jquery-ui.css">    
 	<template>
 		<style>
-		:host {
-		}
-		[element-type=uml-Class] {
-			background-color: white;
-			border-style: solid;
-			border-width: 1px;
-			padding: 15px;
-			margin-bottom: 15px;
-			margin-top: 15px;
-			margin-left: auto;
-			margin-right: auto;
-			max-width: 200px;
-			overflow: auto;
-		}
-		[element-type=uml-Class] .packaged-element-header  {
-			border-bottom-style: solid;
-			border-bottom-width: 1px;
-			margin-left: auto;
-			margin-right: auto;
-			margin-bottom: 15px;
-		}
-		[element-type=uml-Package] {
-			background-color: gray;
-			border-style: solid;
-			border-width: 1px;
-			padding: 15px;
-			margin: 15px;
-		}
-		[element-type=uml-Package] .packaged-element-header  {
-			border-bottom-style: ridge;
-			border-bottom-width: 1px;
-			margin-left: auto;
-			margin-right: auto;
-		}
+			:host {
+			}
+			.class {
+				background-color: white;
+				border-style: outset;
+				border-width: 1px;
+				padding: 0;
+				margin: 15px;
+				margin-left: auto;
+				margin-right: auto;
+				max-width: 400px;
+				overflow: auto;
+				box-shadow: 1px 1px 1px silver;
+			}
+			.class > .content {
+				padding: 15px;
+				background-color: none;
+			}
+			.class > .name  {
+				margin-top: 0;
+				border-style: none;
+				border-bottom-style: solid;
+				border-bottom-width: 1px;
+				margin-left: 0;
+				margin-right: 0;
+				margin-bottom: 15px;
+				padding: 15px;
+				text-align: center;
+			}
+			.package {
+				margin: 15px;
+				text-align: left;
+			}
+			.package > .name  {
+				background-color: #ffe0b2;
+				border-style: solid;
+				border-bottom-style: none;
+				border-width: 1px;
+				border-radius: 3px 3px 0px 0px;
+				padding: 3px;
+				display: inline;
+				margin-left: 5px;
+				max-width: 250px;
+				overflow: auto;
+				float: left;
+			}
+			.package > .content {
+				background-color: #ffe0b2;
+				border-style: solid;
+				border-width: 1px;
+				border-radius: 3px 3px 0px 0px;
+				padding: 25px;
+				margin-top: 0;
+				min-width: 300px;
+			}
 		</style>
-		
-		<div class="packaged-element" element-type="{{ type }}" layout vertical center>
-			<span class="packaged-element-header">
-			{{ name }}
-			</span>
-			<!--
-			<content select="uml-ownedAttribute"></content>
-			<content select="uml-ownedOperation"></content>
-			<content select="uml-packagedElement[type=uml-Class]"></content>
-			-->
-			<content></content>
+		<div id="element">
+		<template bind if="{{ type == 'uml-Package' }}">
+			<div id="{{ name }}" class="package" vertical start-justified layout>
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		<template bind if="{{ type == 'uml-Class' }}">
+			<div id="{{ name }}" class="class" layout vertical>
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
+					<content></content>
+				</div>
+			</div>
+		</template>
 		</div>
 	</template>
+	<script src="../jquery/dist/jquery.min.js">
+    </script>
+    <script src="../jquery-ui/jquery-ui.min.js">
+    </script>
 	<script>
-	Polymer({});
-	</script>
+Polymer('uml-packagedElement', {
+    ready: function() {
+    	/*
+    	var myName = this.name;
+    	var id = '#'.concat(myName);
+    	console.log("And the name is = " + id);
+    	$(this.querySelector(id)).draggable();
+    	*/
+    	$(this.$.element).draggable();
+    }
+  
+});
+    </script>
 </polymer-element>
