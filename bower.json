@@ -1,0 +1,27 @@
+{
+  "name": "polymeria",
+  "version": "0.0.0",
+  "homepage": "https://github.com/bdulac/polymeria",
+  "authors": [
+    "Bérenger Dulac <berenger.dulac@laposte.net>"
+  ],
+  "description": "A set of Polymer components for an (Eclipse) UML2 model",
+  "keywords": [
+    "UML",
+    "Eclipse UML2",
+    "polymer",
+    "web components"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.2",
+    "jquery-ui": "~1.11.2"
+  }
+}
