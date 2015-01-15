@@ -2,20 +2,36 @@
   href="../polymer/polymer/polymer.html">
 
 <polymer-element name="uml-ownedAttribute" attributes="name visibility">
-  <template>
-    <style>    
-    .owned-attribute {
-      display: block;
-    }
-    </style>
-    
-    <div class="owned-attribute" layout vertical left>
-    	{{ name }}
-    	<content></content>   
-    </div>
-  </template>
-
-  <script>
-  Polymer({});
-  </script>
+	<template>
+		<style>    
+			.owned-attribute {
+				display: block;
+			}
+			.owned-attribute .name {
+			}
+			.owned-attribute .visibility {
+				color: #7c4dff;
+			}
+		</style>
+		<div class="owned-attribute" layout vertical left>
+			<span class="name">
+				<span class="visibility">
+					<template bind if="{{ visibility == 'private' }}">
+					-
+					</template>
+					<template bind if="{{ visibility == 'protected' }}">
+					#
+					</template>
+					<template bind if="{{ visibility == 'public' }}">
+					+
+					</template>
+				</span>
+				{{ name }}
+			</span>
+			<content></content>   
+		</div>
+	</template>
+	<script>
+Polymer({});
+	</script>
 </polymer-element>

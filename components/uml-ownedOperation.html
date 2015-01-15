@@ -1,20 +1,49 @@
 <link rel="import" 
   href="../polymer/polymer/polymer.html">
+<!-- 
+# Primary palette (Orange)
 
+primary1: ffcc80
+# primary (200)
+
+primary2: ffe0b2
+# primary (100)
+
+primary3: e65100
+# primary (900)
+
+# Secondary palette (Deep purple)
+accent: 7c4dff
+# accent (A200)
+ -->
 <polymer-element name="uml-ownedOperation" attributes="name visibility">
-  <template>
-    <style>    
-    .owned-operation {
-      display: block;
-    }
-    </style>
-
-    <div class="owned-operation" layout vertical left>
-      {{ name }}(<content></content>)
-    </div>
-  </template>
-
-  <script>
-  Polymer({});
-  </script>
+	<template>
+		<style>    
+			.owned-operation {
+				display: block;
+			}
+			.owned-operation .visibility {
+				color: #7c4dff;
+			}
+		</style>
+		<div class="owned-operation" layout vertical left>
+			<span class="name">
+				<span class="visibility">
+				<template bind if="{{ visibility == 'private' }}">
+				-
+				</template>
+				<template bind if="{{ visibility == 'protected' }}">
+				#
+				</template>
+				<template bind if="{{ visibility == 'public' }}">
+				+
+				</template>
+				</span>
+				{{ name }}(<content></content>)
+			</span>
+		</div>
+	</template>
+	<script>
+Polymer({});
+	</script>
 </polymer-element>
