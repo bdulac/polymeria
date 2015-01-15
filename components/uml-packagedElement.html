@@ -26,6 +26,7 @@ accent: 7c4dff
 				background-color: white;
 				border-style: outset;
 				border-width: 1px;
+				border-radius: 3px;
 				padding: 0;
 				margin: 15px;
 				margin-left: auto;
@@ -33,6 +34,11 @@ accent: 7c4dff
 				max-width: 400px;
 				overflow: auto;
 				box-shadow: 1px 1px 1px silver;
+				font-family: sans-serif;
+				float: left;
+			}
+			.class:active {
+				box-shadow: 10px 10px 10px gold;
 			}
 			.class > .content {
 				padding: 15px;
@@ -52,8 +58,10 @@ accent: 7c4dff
 			.package {
 				margin: 15px;
 				text-align: left;
+				float: left;
 			}
 			.package > .name  {
+				font-family: sans-serif;
 				background-color: #ffe0b2;
 				border-style: solid;
 				border-bottom-style: none;
@@ -67,6 +75,7 @@ accent: 7c4dff
 				float: left;
 			}
 			.package > .content {
+				font-family: sans-serif;
 				background-color: #ffe0b2;
 				border-style: solid;
 				border-width: 1px;
@@ -105,16 +114,15 @@ accent: 7c4dff
     </script>
 	<script>
 Polymer('uml-packagedElement', {
-    ready: function() {
-    	/*
-    	var myName = this.name;
-    	var id = '#'.concat(myName);
-    	console.log("And the name is = " + id);
-    	$(this.querySelector(id)).draggable();
-    	*/
-    	$(this.$.element).draggable();
-    }
-  
+	ready: function() {
+		/*
+		var myName = this.name;
+		var id = '#'.concat(myName);
+		console.log("And the name is = " + id);
+		$(this.querySelector(id)).draggable();
+		*/
+		$(this.$.element).draggable();
+	}
 });
-    </script>
+	</script>
 </polymer-element>

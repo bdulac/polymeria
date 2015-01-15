@@ -22,21 +22,33 @@ accent: 7c4dff
 		:host {
 		}
 		.model-element {
-    		border-style: solid;
+    		border-top-style: inset;
 			border-width: 1px;
 			padding: 15px;
 			margin: 0;
 		}
+		.model-element-header .name {
+			margin-top: auto;
+			margin-bottom: auto;
+			margin-left: 15px;
+			font-family: sans-serif;
+			font-weight: bold;
+			font-size: 1.5em;
+			padding: 5px;
+		}
 		.model-element-header {
-			border-style: solid;
+			border-style: none;
 			border-bottom-style: none;
+			min-height: 50px;
+			text-align: center;
 			border-width: 1px;
 			padding: 5px;
 			margin: 0;
+			box-shadow: 2px 2px 2px silver;
 		}
 		</style>
 		<div class="model-element-header" horizontal start-justified layout>
-    		<div>{{ name }}</div>
+    		<div class="name">{{ name }}</div>
     	</div>	
 		<div class="model-element" layout vertical center>
 			<content></content>
