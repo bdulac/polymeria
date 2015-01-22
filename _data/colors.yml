@@ -1,0 +1,18 @@
+# Material design colors
+
+# Primary palette
+
+primary1: 66bb6a
+
+primary2: a5d6a7
+
+primary3: 4caf50
+
+# Secondary palette (orange)
+accent: ffab40
+
+# General
+black: 333
+white: fff
+dark-gray: 444
+light-gray: f9f9f9

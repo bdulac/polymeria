@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+{% include head.html %}
+</head>
+<body unresolved>
+<core-scaffold responsivewidth="768px">
+<core-header-panel navigation flex mode="seamed">
+<core-toolbar class="panel-toolbar"></core-toolbar>
+<core-menu>
+{% for post in site.posts %}
+<paper-item><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></paper-item>
+{% endfor %}
+</core-menu>
+</core-header-panel>
+<div class="title-container" tool flex>
+<h1 class="title"><a href="{{ site.baseurl }}">{{ site.title }}</a></h1>
+<paper-icon-button class="download-button" icon="file-download"></paper-icon-button>
+</div>
+<div class="content">
+{{ content }}
+</div>
+</core-scaffold>
+</body>
+</html>

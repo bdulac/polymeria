@@ -1,0 +1,12 @@
+---
+layout: default
+title: Home
+---
+<main>
+{% for post in site.posts %}
+<section>
+<h2><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
+{{ post.excerpt }}
+</section>
+{% endfor %}
+</main>
