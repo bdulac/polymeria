@@ -18,6 +18,9 @@
     "**/.*",
     "node_modules",
     "bower_components",
+    "jquery",
+    "jquery-ui",
+    "polymer",
     "test",
     "tests"
   ],
