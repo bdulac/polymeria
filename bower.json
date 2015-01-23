@@ -1,6 +1,6 @@
 {
   "name": "polymeria",
-  "version": "~0.5.2",
+  "version": "~0.0.1",
   "homepage": "https://github.com/bdulac/polymeria",
   "authors": [
     "Bérenger Dulac <berenger.dulac@laposte.net>"
@@ -21,7 +21,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#~0.5.2",
+    "polymer": "Polymer/polymer#~0.5.3",
     "jquery-ui": "~1.11.2"
   }
 }
