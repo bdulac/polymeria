@@ -27,11 +27,11 @@ To define only <em>Polymeria</em> elements, there is only the need to load the p
 &lt;/head&gt;
 &lt;body unresolved&gt;
   &lt;uml-model name="My model"&gt;
-    &lt;uml-packagedElement type="uml-Package" name='My package'&gt;
-      &lt;uml-packagedElement type="uml-Class" name='MyClass'&gt;
-        &lt;uml-ownedAttribute name="myAttribute"&gt;
+    &lt;uml-packagedElement type="uml-Package" name="My package"&gt;
+      &lt;uml-packagedElement type="uml-Class" name="MyClass"&gt;
+        &lt;uml-ownedAttribute name="myAttribute" visibility="private"&gt;
         &lt;/uml-ownedAttribute&gt;
-        &lt;uml-ownedOperation name="myOperation"&gt;
+        &lt;uml-ownedOperation name="myOperation" visibility="protected"&gt;
           &lt;uml-ownedParameter name="myFirstParam"&gt;
           &lt;/uml-ownedParameter&gt;
           &lt;uml-ownedParameter name="mySecondParam"&gt;
