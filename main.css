@@ -1,5 +1,17 @@
 ---
 ---
+pre {
+	margin-left: 20px;
+	padding-left: 10px;
+    display: block;
+    font-size: 1.0em;
+    font-family: Courier;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+    border-left: 10px solid #F6DF6A;
+}
 body {
 font-family: RobotoDraft, sans-serif;
 font-weight: 300;
