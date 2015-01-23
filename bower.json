@@ -1,6 +1,6 @@
 {
   "name": "polymeria",
-  "version": "0.0.0",
+  "version": "~0.5.2",
   "homepage": "https://github.com/bdulac/polymeria",
   "authors": [
     "Bérenger Dulac <berenger.dulac@laposte.net>"
