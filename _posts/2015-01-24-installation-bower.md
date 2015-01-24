@@ -3,11 +3,14 @@ layout: post
 title: Installation
 --- 
 <p>
-As an introduction, to get bower, the first step is to install <a target="_blank" href="https://www.npmjs.com/">npm</a>, a Javascript package manager. For common environments, <a target="_blank" href="http://nodejs.org/download/">here</a> is the download page. With Ubuntu, a package is available:
+<em>Polymeria</em> is easy to install as a <em>Bower</em> package.
+</p>
+<p>
+As an introduction, the first step to get <em>Bower</em> is to install <a target="_blank" href="https://www.npmjs.com/">npm</a>, a <em>Javascript</em> package manager. <a target="_blank" href="http://nodejs.org/download/">Here</a> is the download page for common environments. A <a href="https://packages.debian.org/sid/npm"><em>Debian</em> package</a> is available, with <em>Ubuntu</em>:
 </p>
 <pre>sudo apt-get install npm</pre>
 <p>
-Installing bower with npm is done the following way:
+Then the install of <em>Bower</em> with npm is done the following way:
 </p>
 <pre>npm install -g bower</pre>
 <p>
@@ -15,10 +18,7 @@ When the bower command is available, here is the way to get <em>Polymeria</em> f
 </p>
 <pre>bower install https://github.com/bdulac/polymeria.git</pre>
 <p>
-Bower should ask a few question about the <em>Polymer</em> version to resolve: I struggled with the <em>bower.json</em> file but did not find a satisfying solution on that point.
-</p>
-<p>
-To define <em>Polymeria</em> UML elements, there is only the need to load the polyfill and to import the components: a single import helps to do so. The components depend on jQueryUI. As it is a dependency, if you wish to setup web components directly from the <em>bower_components</em> directory, here is a sample code:
+To define <em>Polymeria</em> UML elements, there is only the need to load the polyfill and to import the components: a single import helps to do so. The components depend on jQueryUI. As it is a dependency, if you wish to setup web components directly from the <em>bower_components</em> directory, the code is quite simple:
 </p>
 <pre>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
