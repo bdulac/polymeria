@@ -10,7 +10,7 @@ pre {
     white-space: pre-wrap;
     word-break: break-all;
     word-wrap: break-word;
-    border-left: 10px solid #F6DF6A;
+    border-left: 10px solid #{{ site.data.colors.accent }};
 }
 body {
 font-family: RobotoDraft, sans-serif;
@@ -58,7 +58,7 @@ color: #{{ site.data.colors.dark-gray }};
 }
 a {
 text-decoration: none;
-color: #{{ site.data.colors.primary1 }};
+color: #{{ site.data.colors.accent}};
 }
 a:hover {
 text-decoration: underline;
