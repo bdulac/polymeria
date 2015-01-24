@@ -11,6 +11,8 @@ pre {
     word-break: break-all;
     word-wrap: break-word;
     border-left: 10px solid #{{ site.data.colors.accent }};
+    color: #{{ site.data.colors.white }};
+    background-color: #{{ site.data.colors.black }};
 }
 body {
 font-family: RobotoDraft, sans-serif;
