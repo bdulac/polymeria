@@ -34,16 +34,16 @@ color: #{{ site.data.colors.white }};
 text-decoration: none;
 }
 h1 {
-font-size: 4.5rem;
-}
-h2 {
-font-size: 4rem;
-}
-h3 {
 font-size: 3.5rem;
 }
-h4 {
+h2 {
 font-size: 3rem;
+}
+h3 {
+font-size: 2.5rem;
+}
+h4 {
+font-size: 2.5rem;
 }
 h5 {
 font-size: 2.5rem;
@@ -70,6 +70,11 @@ margin: 32px;
 padding: 32px 64px 32px 64px;
 background-color: #{{ site.data.colors.light-gray }};
 box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+@media screen and (max-width: 640px) {
+  .content  {
+	padding: 6px 12px 16x 12px;
+  }
 }
 core-header-panel {
 background-color: #{{ site.data.colors.primary2 }};
