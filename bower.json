@@ -1,12 +1,19 @@
 {
   "name": "polymeria",
-  "version": "~0.0.0",
-  "main": "components",
+  "version": "0.0.1",
+  "main": [
+    "uml-model.html",
+    "uml-ownedAttribute.html",
+    "uml-ownedOperation.html",
+    "uml-ownedParameter.html",
+    "uml-packagedElement.html",
+    "uml-polymeria.html"
+  ],
   "homepage": "https://github.com/bdulac/polymeria",
   "authors": [
     "Bérenger Dulac"
   ],
-  "description": "A set of Polymer components for an (Eclipse) UML2 model",
+  "description": "A set of Web components for an (Eclipse) UML2 model",
   "keywords": [
     "UML",
     "Eclipse UML2",
