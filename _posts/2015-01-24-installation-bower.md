@@ -26,7 +26,7 @@ To define <em>Polymeria</em> UML elements, there is only the need to load the po
   &lt;meta charset="UTF-8"&gt;
   &lt;script src="bower_components/webcomponentsjs/webcomponents.js"&gt;
   &lt;/script&gt;
-  &lt;link rel="import" href="bower_components/polymeria/components/uml-polymeria.html"&gt;
+  &lt;link rel="import" href="bower_components/polymeria/uml-polymeria.html"&gt;
 &lt;/head&gt;
 &lt;body unresolved&gt;
   &lt;uml-model name="My model"&gt;
