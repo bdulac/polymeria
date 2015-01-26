@@ -3,10 +3,10 @@ layout: post
 title: First steps
 --- 
 <p>
-Enabling drag'n drop wasn't obvious for a <em>Java</em> developer not really familiar with <em>Javascript</em>. The next step will be far more challenging: connecting UML elements to represent associations.
+Enabling drag'n drop wasn't obvious for the <em>Java</em> developer not really familiar with <em>Javascript</em> I am. The next step will be far more challenging: connecting UML elements to represent associations.
 </p>
 <p>
-At first glance it seems simple: a few libraries do the job, <a target="_blank" href="https://jsplumbtoolkit.com/demo/flowchart/dom.html">one example</a> is really interesting. But all solutions require the assignation of <a target="_blank" href="http://www.w3.org/TR/html401/struct/global.html#h-7.5.2">HTML IDs</a> to UML elements.
+At first glance it seems simple: a few libraries do the job, <a target="_blank" href="https://jsplumbtoolkit.com/demo/flowchart/dom.html">one example with jsPlumb</a> is really interesting. But all the solutions I identified require the assignation of <a target="_blank" href="http://www.w3.org/TR/html401/struct/global.html#h-7.5.2">HTML IDs</a> to UML elements.
 </p>
 <p>
 These have to be <a target="_blank" href="http://www.w3.org/TR/WCAG20-TECHS/H93.html">unique in the Web page</a>. For such a result I choose to build a canonical name composed "recursively" by concatenation of the element simple name and the parent UML element canonical name: this seems a natural solution for a <em>Java</em> developer and could help further operations on the DOM.
