@@ -1,7 +1,7 @@
---- 
-layout: post 
+---
+layout: post
 title: Installation
---- 
+---
 <p>
 <em>Polymeria</em> is easy to install as a <em>Bower</em> package.
 </p>
