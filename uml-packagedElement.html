@@ -1,7 +1,6 @@
 <link rel="import" 
-  href="../polymer/polymer.html">
-
-<polymer-element name="uml-packagedElement" attributes="name type">
+  href="uml-element.html">
+<polymer-element name="uml-packagedElement" extends="uml-element" attributes="type">
 	<link rel="stylesheet" href="../jquery-ui/themes/humanity/jquery-ui.css">    
 	<template>
 		<style>
@@ -100,6 +99,7 @@
 	<script>
 Polymer('uml-packagedElement', {
 	ready: function() {
+		
 		/*
 		var myName = this.name;
 		var id = '#'.concat(myName);
