@@ -46,7 +46,7 @@ To define <em>Polymeria</em> UML elements, there is only the need to load the po
 &lt;/body&gt;
 &lt;/html&gt;</pre>
 <p>
-Using directly the  ressources in the <em>bower_components</em> directory is easy. If you wish to copy the dependencies in your profect, here are the required directories:
+Using directly the  ressources in the <em>bower_components</em> directory is easy. If you wish to copy the dependencies in your project, here are the required sub-directories of <em>bower_components</em>:
 </p>
 <ul>
   <li>webcomponentsjs</li>
