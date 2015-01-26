@@ -18,7 +18,7 @@ When the bower command is available, here is the way to get <em>Polymeria</em> f
 </p>
 <pre>bower install https://github.com/bdulac/polymeria.git</pre>
 <p>
-To define <em>Polymeria</em> UML elements, there is only the need to load the polyfill and to import the components: a single import helps to do so. The components depend on jQueryUI. As it is a dependency, if you wish to setup web components directly from the <em>bower_components</em> directory, the code is quite simple, here is a sample model:
+To define <em>Polymeria</em> UML elements, there is only the need to load the polyfill and to import the components: a single import helps to do so. The components depend on jQueryUI. As it is a dependency, if you wish to setup web components directly from the <em>bower_components</em> directory, the head tag is quite concise. Here is a sample document including a simple model:
 </p>
 <pre>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
