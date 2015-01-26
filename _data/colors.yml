@@ -1,19 +1,19 @@
 # Material design colors
 
-# Primary palette
+# Primary palette (Orange)
 
-#primary1: 66bb6a
 primary1: ffcc80
+# primary (200)
 
-#primary2: a5d6a7
 primary2: ffe0b2
+# primary (100)
 
-#primary3: 4caf50
 primary3: e65100
+# primary (900)
 
-# Secondary palette (orange)
-#accent: ffab40
+# Secondary palette (Deep purple)
 accent: 7c4dff
+# accent (A200)
 
 # General
 black: 333
