@@ -114,7 +114,7 @@ align-items: center;
 padding: 16px;
 }
 core-menu paper-item, core-menu paper-item a {
-color: #{{ site.data.colors.white }};
+color: #{{ site.data.colors.black }};
 }
 .download-button {
 margin-left: 16px;

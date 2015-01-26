@@ -2,14 +2,18 @@
 
 # Primary palette
 
-primary1: 66bb6a
+#primary1: 66bb6a
+primary1: ffcc80
 
-primary2: a5d6a7
+#primary2: a5d6a7
+primary2: ffe0b2
 
-primary3: 4caf50
+#primary3: 4caf50
+primary3: e65100
 
 # Secondary palette (orange)
-accent: ffab40
+#accent: ffab40
+accent: 7c4dff
 
 # General
 black: 333
