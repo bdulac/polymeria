@@ -13,18 +13,10 @@
 				this.elementType = elm.localName;
 				this.simpleName = elm.name;
 				// Functions assignations
-				this.getSimpleName = getSimpleName;
 				this.getParentElement = getParentElement;
 				this.getQualifiedName = getQualifiedName;
 				
 				// Functions declarations
-				function getSimpleName () {
-					var name;
-					if(this.simpleName) {
-						name = this.simpleName;
-					}
-					return name;
-				}
 				function getParentElement() {
 					var parentUmlElement;
 					var domParent = this.polymerElement.parentNode;
@@ -50,17 +42,17 @@
 							&&(umlParent.elementType != 'uml-model')
 					) {
 						var parentQualified = umlParent.getQualifiedName();
-						return parentQualified + '.' + this.getSimpleName();
+						return parentQualified + '.' + this.simpleName;
 					}
 					else if(
 							(typeof(umlParent) != 'undefined')
 							&&(umlParent.elementType == 'uml-model')
 					) {
 						var parentQualified = umlParent.getQualifiedName();
-						return parentQualified + '->' + this.getSimpleName();
+						return parentQualified + '->' + this.simpleName;
 					}
 					else {
-						return this.getSimpleName();
+						return this.simpleName;
 					}
 				}
 			}
@@ -68,6 +60,7 @@
 			var umlElementId = elm.getQualifiedName()
 			this.id = umlElementId;
 			this.umlElement = elm;
+			console.log("HTML id of the element: " + this.id);
 		}
 	});
   </script>
