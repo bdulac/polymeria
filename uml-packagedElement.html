@@ -22,7 +22,8 @@
 				float: left;
 			}
 			.class:active {
-				box-shadow: 3px 3px 3px silver;
+				border-style: inset;
+				border-width: 2px;
 			}
 			.class > .content {
 				padding: 15px;
@@ -66,12 +67,13 @@
 				border-radius: 3px 3px 0px 0px;
 				padding: 25px;
 				margin-top: 0;
+				text-align: center;
 				min-width: 300px;
 			}
 		</style>
 		<div id="element">
 		<template bind if="{{ type == 'uml-Package' }}">
-			<div id="{{ name }}" class="package" vertical start-justified layout>
+			<div id="{{ name }}" class="package" vertical center-justified layout>
 				<div class="name">
 				{{ name }}
 				</div>
@@ -99,14 +101,8 @@
 	<script>
 Polymer('uml-packagedElement', {
 	ready: function() {
-		
-		/*
-		var myName = this.name;
-		var id = '#'.concat(myName);
-		console.log("And the name is = " + id);
-		$(this.querySelector(id)).draggable();
-		*/
 		$(this.$.element).draggable();
+		this.super();
 	}
 });
 	</script>
