@@ -15,15 +15,15 @@
 		<div class="owned-operation" layout vertical left>
 			<span class="name">
 				<span class="visibility">
-				<template bind if="{{ visibility == 'private' }}">
-				-
-				</template>
-				<template bind if="{{ visibility == 'protected' }}">
-				#
-				</template>
-				<template bind if="{{ visibility == 'public' }}">
-				+
-				</template>
+					<template bind if="{{ visibility == 'private' }}">
+					-
+					</template>
+					<template bind if="{{ visibility == 'protected' }}">
+					#
+					</template>
+					<template bind if="{{ visibility == 'public' }}">
+					+
+					</template>
 				</span>
 				{{ name }}(<content></content>)
 			</span>
