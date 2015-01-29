@@ -1,7 +1,64 @@
 <link rel="import" 
   href="../polymer/polymer.html">
-<polymer-element name="uml-element" attributes="name" noscript>
+<polymer-element name="uml-element" attributes="name">
   <template>
     <content></content>
   </template>
+  <script>
+  Polymer('uml-element', { 
+		ready: function() {
+			function UmlElement(elm) {
+				// Properties
+				this.polymerElement = elm;
+				this.elementType = elm.localName;
+				this.simpleName = elm.name;
+				// Functions assignations
+				this.getSimpleName = getSimpleName;
+				this.getParentElement = getParentElement;
+				this.getQualifiedName = getQualifiedName;
+				
+				// Functions declarations
+				function getSimpleName () {
+					var name;
+					if(this.simpleName) {
+						name = this.simpleName;
+					}
+					return name;
+				}
+				function getParentElement() {
+					var parentUmlElement;
+					var domParent = this.polymerElement.parentNode;
+					while(
+						(typeof(domParent) != 'undefined')
+						&&(typeof(domParent.name) == 'undefined')
+						&&(domParent.parentNode)
+					) {
+						domParent = domParent.parentNode;
+					}
+					if(
+							(typeof(domParent) != 'undefined')
+							&&(typeof(domParent.name) != 'undefined')
+					) {
+						parentUmlElement = new UmlElement(domParent);
+					}
+					return parentUmlElement;
+				}
+				function getQualifiedName() {
+					var umlParent = this.getParentElement();
+					if(typeof(umlParent) != 'undefined') {
+						var parentQualified = umlParent.getQualifiedName();
+						return parentQualified + '.' + this.getSimpleName();
+					}
+					else {
+						return this.getSimpleName();
+					}
+				}
+			}
+			// var elm = new UmlElement(this);
+			// elm.getQualifiedName()
+			// console.log("The simple name is = " + elm.getSimpleName());
+			// console.log("The qualified name is = " + elm.getQualifiedName());
+		}
+	});
+  </script>
 </polymer-element>
