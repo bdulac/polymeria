@@ -73,7 +73,7 @@
 		</style>
 		<div id="element">
 		<template bind if="{{ type == 'uml-Package' }}">
-			<div id="{{ name }}" class="package" vertical center-justified layout>
+			<div class="package" vertical center-justified layout>
 				<div class="name">
 				{{ name }}
 				</div>
@@ -83,7 +83,7 @@
 			</div>
 		</template>
 		<template bind if="{{ type == 'uml-Class' }}">
-			<div id="{{ name }}" class="class" layout vertical>
+			<div class="class" layout vertical>
 				<div class="name">
 				{{ name }}
 				</div>
@@ -101,8 +101,11 @@
 	<script>
 Polymer('uml-packagedElement', {
 	ready: function() {
-		$(this.$.element).draggable();
 		this.super();
+		console.log("UML element ID = " + this.umlElement.getQualifiedName());
+		$(this.$.element).draggable();
+		// $(this.umlElement.polymerElement).draggable();
+		
 	}
 });
 	</script>
