@@ -52,8 +52,9 @@ Using directly the  resources in the <em>bower_components</em> directory is easy
   <li>webcomponentsjs</li>
   <li>jquery</li>
   <li>jquery-ui</li>
+  <li>polymer</li>
   <li>polymeria</li>
 </ul>
 <p>
-<em>Polymeria</em> depends on jQuery and jQueryUI. There is no need to add a direct reference to these frameworks in your HTML document, the <em>webcomponents.js</em> script and the <em>Polymeria</em> import are the only requirements for the UML elements to be rendered.
+<em>Polymeria</em> depends on <em>jQuery</em>, <em>jQueryUI</em> and <em>Polymer</em>. There is no need to add a direct reference to these frameworks in your HTML document.  The <em>Polymeria</em> import and the <em>webcomponents.js</em> script are the only requirements for the UML elements to be rendered. <em>webcomponents.js</em> is a polyfill providing support for Web Components in non-compliant browsers, it should become legacy with a better support of this growing standard.
 </p>
