@@ -5,27 +5,33 @@
     <content></content>
   </template>
   <script>
+/* Adaptation of a Web Component to an UML element */
 function UmlElement(customElm) {
-	// Properties
+	// The adapted Web Component
 	this.webComponent = customElm;
+	// The UML element type is the Web Component element name 
 	this.elementType = customElm.localName;
+	// The simple name is the Web component name attribute
 	this.simpleName = customElm.name;
-	// Functions assignations
-	this.getParentElement = getParentElement;
-	this.getQualifiedName = getQualifiedName;
+	// If no ID is set on the Web Component, 
 	if(!this.webComponent.id) {
+		// Then the ID of the Web Component is the UML element qualified name
 		this.webComponent.id = this.getQualifiedName();
 	}
+	// The UML element becomes an attribute of the Web Component
 	this.webComponent.umlElement = this;
-	
-	// Functions declarations
-	function getParentElement() {
+}
+UmlElement.prototype = {
+	/* Resolves the parent UML element of the UML element */
+	getParentElement : function() {
 		var parentUmlElement;
+		// Resolving the parent of the Web Component in the DOM
 		var domParent = this.webComponent.parentNode;
+		// The one we are looking for has an associated UML element
 		while(
 			(domParent)
-			&&(!domParent.name)
-			&&(domParent.parentNode)
+			&& (!domParent.umlElement)
+			&& (domParent.parentNode)
 		) {
 			domParent = domParent.parentNode;
 		}
@@ -33,18 +39,24 @@ function UmlElement(customElm) {
 				(domParent)
 				&&(domParent.name)
 		) {
-			parentUmlElement = new UmlElement(domParent);
+			parentUmlElement = domParent.umlElement;
 		}
 		return parentUmlElement;
-	}
-	function getQualifiedName() {
+	},
+	/* 
+	 * Resolves the qualified name of the UML element
+	 * This name is unique in the DOM because it contains the model name
+	 */
+	getQualifiedName : function() {
 		var umlParent = this.getParentElement();
 		if(umlParent) {
+			// If the parent is the model itself,
 			if(umlParent.elementType == 'uml-model') {
-				var parentQualified = umlParent.getQualifiedName();
-				return parentQualified + '->' + this.simpleName;
+				// Then the model name is delimited in the qualified name
+				return '{' + umlParent.simpleName + '}->' + this.simpleName;
 			}
 			else {
+				// Else we have the general case
 				var parentQualified = umlParent.getQualifiedName();
 				return parentQualified + '.' + this.simpleName;
 			}

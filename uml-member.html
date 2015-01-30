@@ -1,7 +1,43 @@
 <link rel="import" 
   href="uml-element.html">
-<polymer-element name="uml-member" extends="uml-element" attributes="visibility" noscript>
+<polymer-element name="uml-member" extends="uml-element" attributes="visibility">
   <template>
     <content></content>
   </template>
+  <script>
+/* Adaptation of a Web Component to an UML member element */
+function UmlMember(customElm) {
+	UmlElement.call(this, customElm);
+}
+UmlMember.prototype = Object.create(UmlElement.prototype, { 
+	getQualifiedName : {
+		value: function() {
+			var umlParent = this.getParentElement();
+			if(umlParent) {
+				// If the parent is a classifier,
+				if(umlParent.elementType == 'uml-packagedelement') {
+					// Then the simple name is introduced by a sharp
+					var parentQualified = umlParent.getQualifiedName();
+					return parentQualified + '#' + this.simpleName;
+				}
+				else {
+					// Else we have the general case
+					var parentQualified = umlParent.getQualifiedName();
+					return parentQualified + '.' + this.simpleName;
+				}
+			}
+			else {
+				return this.simpleName;
+			}
+		}
+	}
+}
+);
+UmlMember.prototype.constructor = UmlMember;
+Polymer('uml-member', { 
+	ready: function() {
+		new UmlMember(this);
+	}
+});
+  </script>
 </polymer-element>
