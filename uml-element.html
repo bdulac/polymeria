@@ -5,62 +5,59 @@
     <content></content>
   </template>
   <script>
-  Polymer('uml-element', { 
-		ready: function() {
-			function UmlElement(elm) {
-				// Properties
-				this.polymerElement = elm;
-				this.elementType = elm.localName;
-				this.simpleName = elm.name;
-				// Functions assignations
-				this.getParentElement = getParentElement;
-				this.getQualifiedName = getQualifiedName;
-				
-				// Functions declarations
-				function getParentElement() {
-					var parentUmlElement;
-					var domParent = this.polymerElement.parentNode;
-					while(
-						(typeof(domParent) != 'undefined')
-						&&(typeof(domParent.name) == 'undefined')
-						&&(domParent.parentNode)
-					) {
-						domParent = domParent.parentNode;
-					}
-					if(
-							(typeof(domParent) != 'undefined')
-							&&(typeof(domParent.name) != 'undefined')
-					) {
-						parentUmlElement = new UmlElement(domParent);
-					}
-					return parentUmlElement;
-				}
-				function getQualifiedName() {
-					var umlParent = this.getParentElement();
-					if(
-							(typeof(umlParent) != 'undefined')
-							&&(umlParent.elementType != 'uml-model')
-					) {
-						var parentQualified = umlParent.getQualifiedName();
-						return parentQualified + '.' + this.simpleName;
-					}
-					else if(
-							(typeof(umlParent) != 'undefined')
-							&&(umlParent.elementType == 'uml-model')
-					) {
-						var parentQualified = umlParent.getQualifiedName();
-						return parentQualified + '->' + this.simpleName;
-					}
-					else {
-						return this.simpleName;
-					}
-				}
-			}
-			var elm = new UmlElement(this);
-			var umlElementId = elm.getQualifiedName()
-			this.id = umlElementId;
-			this.umlElement = elm;
+function UmlElement(customElm) {
+	// Properties
+	this.webComponent = customElm;
+	this.elementType = customElm.localName;
+	this.simpleName = customElm.name;
+	// Functions assignations
+	this.getParentElement = getParentElement;
+	this.getQualifiedName = getQualifiedName;
+	if(!this.webComponent.id) {
+		this.webComponent.id = this.getQualifiedName();
+	}
+	this.webComponent.umlElement = this;
+	
+	// Functions declarations
+	function getParentElement() {
+		var parentUmlElement;
+		var domParent = this.webComponent.parentNode;
+		while(
+			(domParent)
+			&&(!domParent.name)
+			&&(domParent.parentNode)
+		) {
+			domParent = domParent.parentNode;
 		}
-	});
+		if(
+				(domParent)
+				&&(domParent.name)
+		) {
+			parentUmlElement = new UmlElement(domParent);
+		}
+		return parentUmlElement;
+	}
+	function getQualifiedName() {
+		var umlParent = this.getParentElement();
+		if(umlParent) {
+			if(umlParent.elementType == 'uml-model') {
+				var parentQualified = umlParent.getQualifiedName();
+				return parentQualified + '->' + this.simpleName;
+			}
+			else {
+				var parentQualified = umlParent.getQualifiedName();
+				return parentQualified + '.' + this.simpleName;
+			}
+		}
+		else {
+			return this.simpleName;
+		}
+	}
+}
+Polymer('uml-element', { 
+	ready: function() {
+		new UmlElement(this);
+	}
+});
   </script>
 </polymer-element>
