@@ -46,7 +46,7 @@ To define <em>Polymeria</em> UML elements, there is only the need to load the po
 &lt;/body&gt;
 &lt;/html&gt;</pre>
 <p>
-Using directly the  ressources in the <em>bower_components</em> directory is easy. If you wish to copy the dependencies in your project, here are the required sub-directories of <em>bower_components</em>:
+Using directly the  resources in the <em>bower_components</em> directory is easy and appropriate for development. If you wish to copy the dependencies in your project, these should be in a same folder to preserve the relative URIs. Here are the required sub-directories of <em>bower_components</em>:
 </p>
 <ul>
   <li>webcomponentsjs</li>
@@ -54,3 +54,6 @@ Using directly the  ressources in the <em>bower_components</em> directory is eas
   <li>jquery-ui</li>
   <li>polymeria</li>
 </ul>
+<p>
+<em>Polymeria</em> depends on jQuery and jQueryUI. There is no need to add a direct reference to these frameworks in your HTML document, the <em>webcomponents.js</em> script and the <em>Polymeria</em> import are the only requirements for the UML elements to be rendered.
+</p>
