@@ -3,7 +3,7 @@ layout: post
 title: Installation
 ---
 <p>
-<em>Polymeria</em> is easy to install as a <em>Bower</em> package.
+<em>Polymeria</em> UML is easy to install as a <em>Bower</em> package.
 </p>
 <p>
 As an introduction, the first step to get <em>Bower</em> is to install <a target="_blank" href="https://www.npmjs.com/">npm</a>, a <em>Javascript</em> package manager. <a target="_blank" href="http://nodejs.org/download/">Here</a> is the download page for common environments. A <a href="https://packages.debian.org/sid/npm"><em>Debian</em> package</a> is available, with <em>Ubuntu</em>:
@@ -16,7 +16,7 @@ Then the install of <em>Bower</em> with npm is done the following way:
 <p>
 When the bower command is available, here is the way to get <em>Polymeria</em> from the GitHub repository:
 </p>
-<pre>bower install https://github.com/bdulac/polymeria.git</pre>
+<pre>bower install polymeria-uml</pre>
 <p>
 To define <em>Polymeria</em> UML elements, there is only the need to load the polyfill and to import the components: a single import helps to do so. The components depend on jQueryUI. As it is a dependency, if you wish to setup web components directly from the <em>bower_components</em> directory, the head tag is quite concise. Here is a sample document including a simple model:
 </p>
@@ -26,7 +26,7 @@ To define <em>Polymeria</em> UML elements, there is only the need to load the po
   &lt;meta charset="UTF-8"&gt;
   &lt;script src="bower_components/webcomponentsjs/webcomponents.js"&gt;
   &lt;/script&gt;
-  &lt;link rel="import" href="bower_components/polymeria/uml-polymeria.html"&gt;
+  &lt;link rel="import" href="bower_components/polymeria-uml/uml-polymeria.html"&gt;
 &lt;/head&gt;
 &lt;body unresolved&gt;
   &lt;uml-model name="My model"&gt;
