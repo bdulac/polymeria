@@ -58,6 +58,7 @@ font-size: 1.5rem;
 p {
 padding-left: 16px;
 color: #{{ site.data.colors.dark-gray }};
+text-align: justify;
 }
 a {
 text-decoration: none;
