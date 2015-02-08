@@ -53,7 +53,7 @@ UmlElement.prototype = {
 			// If the parent is the model itself,
 			if(umlParent.elementType == 'uml-model') {
 				// Then the model name is delimited in the qualified name
-				return '{' + umlParent.simpleName + '}->' + this.simpleName;
+				return umlParent.simpleName + ':' + this.simpleName;
 			}
 			else {
 				// Else we have the general case
