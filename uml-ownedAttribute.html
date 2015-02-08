@@ -1,8 +1,11 @@
 <link rel="import" 
   href="uml-member.html">
-<polymer-element name="uml-ownedAttribute" extends="uml-member">
+<polymer-element name="uml-ownedAttribute" extends="uml-member" attributes="type">
 	<template>
-		<style>    
+		<style>
+			:host {
+				overflow: auto;
+			}
 			.owned-attribute {
 				display: block;
 			}
@@ -13,10 +16,15 @@
 				min-width: 40px;
 				text-align: center;
 			}
+			.attribute-type {
+			}
+			.attribute-type .name {
+				color: #7c4dff;
+			}
 		</style>
 		<div class="owned-attribute" layout vertical left>
 			<span class="name">
-				<span class="visibility">
+				<span id="visibility" class="visibility">
 					<template bind if="{{ visibility == 'private' }}">
 					-
 					</template>
@@ -28,11 +36,40 @@
 					</template>
 				</span>
 				{{ name }}
+				<span id="type" class="attribute-type">
+				: <span id="typeName" class="name"></span>
+				</span>
 			</span>
 			<content></content>   
 		</div>
 	</template>
 	<script>
-Polymer({});
+	Polymer('uml-ownedAttribute', {
+		domReady: function() {
+			this.super();
+			if(this.type) {
+				$(this.$.type).show();
+				var typeComponent = document.getElementById(this.type);
+				if(typeComponent) {
+					var typeUmlElement = typeComponent.umlElement;
+					if(typeUmlElement) {
+						$(this.$.typeName).text(typeUmlElement.simpleName);
+					}
+					else {
+						alert(
+							"Invalid DOM: ID " + this.type 
+							+ " is not a Polymeria UML component"
+						)
+					}
+				}
+				else {
+					alert("Invalid DOM: ID " + this.type + " not found")
+				}
+			}
+			else {
+				$(this.$.type).hide();
+			}
+		}
+	});
 	</script>
 </polymer-element>
