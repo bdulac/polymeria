@@ -2,16 +2,13 @@
   href="uml-element.html">
 <polymer-element name="uml-ownedParameter" extends="uml-element">
 	<template>
+		<link rel="stylesheet" type="text/css" href="colors.css" >
+		<link rel="stylesheet" type="text/css" href="elements.css" >
 		<style>
 		:host {
 		}
-		.owned-parameter {
-			padding-left: 8px;
-		}
-		.owned-parameter .name {
-		}
 		</style>
-		<div class="owned-parameter">
+		<div class="parameter">
 			<span class="name">{{ name }}</span>
     		<content></content>   
 		</div>
