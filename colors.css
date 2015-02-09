@@ -47,27 +47,15 @@
 .white-background {
 	background-color: #fff;
 }
-/*
-# Material design colors
-
-# Primary palette (Orange)
-
-primary1: ffcc80
-# primary (200)
-
-primary2: ffe0b2
-# primary (100)
-
-primary3: e65100
-# primary (900)
-
-# Secondary palette (Deep purple)
-accent: 7c4dff
-# accent (A200)
-
-# General
-black: 333
-white: fff
-dark-gray: 444
-light-gray: f9f9f9
-*/
+.dark-gray-color {
+	color: #444;
+}
+.dark-gray-background {
+	background-color: #444;
+}
+.light-gray-color {
+	color: #f9f9f9;
+}
+.light-gray-background {
+	background-color: #f9f9f9;
+}
