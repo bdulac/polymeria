@@ -1,0 +1,73 @@
+/* Material design colors */
+/* Primary palette (Orange) */
+.primary1-color {
+	/* 200 */
+	color: #ffcc80;
+}
+.primary1-background {
+	/* 200 */
+	background-color: #ffcc80;
+}
+.primary2-color {
+	/* 100 */
+	color: #ffe0b2;
+}
+.primary2-background {
+	/* 100 */
+	background-color: #ffe0b2;
+}
+.primary3-color {
+	/* 900 */
+	color: #e65100;
+}
+.primary3-background {
+	/* 900 */
+	background-color: #e65100;
+}
+/* Accent (Deep purple) */
+.accent-color {
+	/* A200 */
+	color: #7c4dff;
+}
+.accent-background {
+	/* A200 */
+	background-color: #7c4dff;
+}
+
+/* General colors */
+.black-color {
+	color: #333;
+}
+.black-background {
+	background-color: #333;
+}
+.white-color {
+	color: #fff;
+}
+.white-background {
+	background-color: #fff;
+}
+/*
+# Material design colors
+
+# Primary palette (Orange)
+
+primary1: ffcc80
+# primary (200)
+
+primary2: ffe0b2
+# primary (100)
+
+primary3: e65100
+# primary (900)
+
+# Secondary palette (Deep purple)
+accent: 7c4dff
+# accent (A200)
+
+# General
+black: 333
+white: fff
+dark-gray: 444
+light-gray: f9f9f9
+*/

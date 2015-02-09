@@ -1,13 +1,13 @@
 <link rel="import" 
   href="uml-element.html">
-<polymer-element name="uml-packagedElement" extends="uml-element" attributes="type">
-	<link rel="stylesheet" href="../jquery-ui/themes/humanity/jquery-ui.css">    
+<polymer-element name="uml-packagedElement" extends="uml-element" attributes="type client supplier">  
 	<template>
+		<link rel="stylesheet" href="../jquery-ui/themes/humanity/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="colors.css" >
 		<style>
 			:host {
 			}
 			.class {
-				background-color: white;
 				border-style: outset;
 				border-width: 1px;
 				border-radius: 3px;
@@ -47,7 +47,6 @@
 			}
 			.package > .name  {
 				font-family: sans-serif;
-				background-color: #ffe0b2;
 				border-style: solid;
 				border-bottom-style: none;
 				border-width: 1px;
@@ -61,7 +60,6 @@
 			}
 			.package > .content {
 				font-family: sans-serif;
-				background-color: #ffe0b2;
 				border-style: solid;
 				border-width: 1px;
 				border-radius: 3px 3px 0px 0px;
@@ -70,10 +68,26 @@
 				text-align: center;
 				min-width: 300px;
 			}
+			canvas {
+				background-color: #FFFFFF;
+				position: absolute;
+				z-index: -10;
+				/* control height and width in code to prevent stretching */
+			}
 		</style>
 		<div id="element">
 		<template bind if="{{ type == 'uml-Package' }}">
 			<div class="package" vertical center-justified layout>
+				<div class="name primary2-background">
+				{{ name }}
+				</div>
+				<div class="content primary2-background">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		<template bind if="{{ (type == 'uml-Class') || (type == 'uml-Interface') }}">
+			<div class="class white-background" layout vertical>
 				<div class="name">
 				{{ name }}
 				</div>
@@ -82,15 +96,11 @@
 				</div>
 			</div>
 		</template>
-		<template bind if="{{ type == 'uml-Class' }}">
-			<div class="class" layout vertical>
-				<div class="name">
-				{{ name }}
-				</div>
-				<div class="content">
-					<content></content>
-				</div>
-			</div>
+		<template bind if="{{ type == 'uml-Dependency' }}">
+		<!--
+			<div id="divCanvasId" class="divCanvasClass"></div>
+			<canvas id="html5CanvasId"></canvas>
+		-->
 		</template>
 		</div>
 	</template>
@@ -102,6 +112,72 @@
 Polymer('uml-packagedElement', {
 	ready: function() {
 		this.super();
+		/*
+		$(document).ready(function () {
+		    $.fn.dependency = {
+	
+		        _readjustHTML5CanvasHeight: function () {
+		            //clear the canvas by readjusting the width/height
+		            var html5Canvas = $('#html5CanvasId');
+		            var canvasDiv = $('#divCanvasId');
+	
+		            if (html5Canvas.length > 0) {
+		                html5Canvas[0].width = canvasDiv.width();
+		                html5Canvas[0].height = canvasDiv.height();
+		            }
+		        }
+		        ,
+		        //uses HTML5 <canvas> to draw line representing relationship
+		        //IE support with excanvas.js
+		        _drawLineBetweenElements: function (sourceElement, targetElement) {
+	
+		            //draw from/to the centre, not the top left
+		            //don't use .position()
+		            //that will be relative to the parent div and not the page
+		            var sourceX = sourceElement.offset().left + sourceElement.width() / 2;
+		            var sourceY = sourceElement.offset().top + sourceElement.height() / 2;
+	
+		            var targetX = targetElement.offset().left + sourceElement.width() / 2;
+		            var targetY = targetElement.offset().top + sourceElement.height() / 2;
+	
+		            var canvas = $('#html5CanvasId');
+	
+		            //you need to draw relative to the canvas not the page
+		            var canvasOffsetX = canvas.offset().left;
+		            var canvasOffsetY = canvas.offset().top;
+	
+		            var context = canvas[0].getContext('2d');
+	
+		            //draw line
+		            context.beginPath();
+		            context.moveTo(sourceX - canvasOffsetX, sourceY - canvasOffsetY);
+		            context.lineTo(targetX - canvasOffsetX, targetY - canvasOffsetY);
+		            context.closePath();
+		            //ink line
+		            context.lineWidth = 2;
+		            context.strokeStyle = "#000"; //black
+		            context.stroke();
+		        }
+		        ,
+	
+		        drawLines: function () {
+		        	//reset the canvas
+		        	$().dependency._readjustHTML5CanvasHeight();
+		
+		        	var elementsToDrawLinesBetween;
+		        	//you must create an object that holds the start and end of the line
+		        	//and populate a collection of them to iterate through
+		        	elementsToDrawLinesBetween.each(function (i, startEndPair) {
+		         		//dot notation used, you will probably have a different method
+		           		//to access these elements
+		           		var start = startEndPair.start;
+		         		var end = startEndPair.end;
+		         		$().dependency._drawLineBetweenElements(start, end);
+		         	});
+		        }
+		    }
+		});
+		*/
 		$(this.$.element).draggable();
 	}
 });

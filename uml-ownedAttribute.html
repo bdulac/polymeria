@@ -2,9 +2,11 @@
   href="uml-member.html">
 <polymer-element name="uml-ownedAttribute" extends="uml-member" attributes="type">
 	<template>
+		<link rel="stylesheet" type="text/css" href="colors.css" >
 		<style>
 			:host {
 				overflow: auto;
+				text-align: left;
 			}
 			.owned-attribute {
 				display: block;
@@ -12,19 +14,17 @@
 			.owned-attribute .name {
 			}
 			.owned-attribute .visibility {
-				color: #7c4dff;
 				min-width: 40px;
-				text-align: center;
+				text-align: left;
 			}
 			.attribute-type {
 			}
 			.attribute-type .name {
-				color: #7c4dff;
 			}
 		</style>
 		<div class="owned-attribute" layout vertical left>
-			<span class="name">
-				<span id="visibility" class="visibility">
+			<span>
+				<span id="visibility" class="visibility accent-color">
 					<template bind if="{{ visibility == 'private' }}">
 					-
 					</template>
@@ -35,8 +35,8 @@
 					+
 					</template>
 				</span>
-				{{ name }}
-				<span id="type" class="attribute-type">
+				<span>{{ name }}</span>
+				<span id="type" class="attribute-type accent-color">
 				: <span id="typeName" class="name"></span>
 				</span>
 			</span>

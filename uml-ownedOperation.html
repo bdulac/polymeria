@@ -2,19 +2,23 @@
   href="uml-member.html">
 <polymer-element name="uml-ownedOperation" extends="uml-member">
 	<template>
-		<style>    
+		<link rel="stylesheet" type="text/css" href="colors.css" >
+		<style>
+			:host {
+				overflow: auto;
+				text-align: left;
+			}
 			.owned-operation {
 				display: block;
 			}
 			.owned-operation .visibility {
-				color: #7c4dff;
 				min-width: 40px;
 				text-align: center;
 			}
 		</style>
 		<div class="owned-operation" layout vertical left>
-			<span class="name">
-				<span class="visibility">
+			<span>
+				<span class="visibility accent-color">
 					<template bind if="{{ visibility == 'private' }}">
 					-
 					</template>
@@ -25,7 +29,7 @@
 					+
 					</template>
 				</span>
-				{{ name }}(<content></content>)
+				<span class="name">{{ name }}</span>(<content></content>)
 			</span>
 		</div>
 	</template>

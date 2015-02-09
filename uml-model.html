@@ -2,6 +2,7 @@
   href="uml-element.html">
 <polymer-element name="uml-model" extends="uml-element">
 	<template>
+		<link rel="stylesheet" type="text/css" href="colors.css" >
 		<style>
 		:host {
 		}
@@ -18,7 +19,6 @@
 			padding: 5px;
 		}
 		.model-element-header {
-			background-color: #fff;
 			min-height: 50px;
 			text-align: center;
 			border-width: 1px;
@@ -27,7 +27,7 @@
 			box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.26);
 		}
 		</style>
-		<div class="model-element-header" horizontal start-justified layout>
+		<div class="model-element-header white-background" horizontal start-justified layout>
     		<div class="name">{{ name }}</div>
     	</div>	
 		<div class="model-element" layout horizontal center>
