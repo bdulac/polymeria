@@ -32,16 +32,20 @@
 		</div>
 	</template>
 	<script>
-	Polymer('uml-ownedAttribute', {
-		domReady: function() {
-			this.super();
-			if(this.type) {
-				$(this.$.type).show();
-				var typeComponent = document.getElementById(this.type);
+function UmlAttribute(customElm) {
+	UmlMember.call(this, customElm);
+	this.displayType();
+}
+UmlAttribute.prototype = Object.create(UmlMember.prototype, { 
+	displayType : {
+		value: function() {
+			if(this.webComponent.type) {
+				$(this.webComponent.$.type).show();
+				var typeComponent = document.getElementById(this.webComponent.type);
 				if(typeComponent) {
 					var typeUmlElement = typeComponent.umlElement;
 					if(typeUmlElement) {
-						$(this.$.typeName).text(typeUmlElement.simpleName);
+						$(this.webComponent.$.typeName).text(typeUmlElement.simpleName);
 					}
 					else {
 						alert(
@@ -55,9 +59,17 @@
 				}
 			}
 			else {
-				$(this.$.type).hide();
+				$(this.webComponent.$.type).hide();
 			}
 		}
-	});
+	}
+}
+);
+UmlAttribute.prototype.constructor = UmlAttribute;
+Polymer('uml-ownedAttribute', {
+	domReady: function() {
+		new UmlAttribute(this);
+	}
+});
 	</script>
 </polymer-element>
