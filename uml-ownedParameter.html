@@ -1,6 +1,6 @@
 <link rel="import" 
-  href="uml-element.html">
-<polymer-element name="uml-ownedParameter" extends="uml-element">
+  href="uml-member.html">
+<polymer-element name="uml-ownedParameter" extends="uml-member">
 	<template>
 		<link rel="stylesheet" type="text/css" href="colors.css" >
 		<link rel="stylesheet" type="text/css" href="elements.css" >
@@ -10,10 +10,20 @@
 		</style>
 		<div class="parameter">
 			<span class="name">{{ name }}</span>
+			<span id="type" class="type accent-color">
+				: <span id="typeName" class="name"></span>
+			</span>
     		<content></content>   
 		</div>
 	</template>
 	<script>
-Polymer({});
+	Polymer('uml-ownedParameter', { 
+		ready: function() {
+			new UmlMember(this);
+		}, 
+		domReady: function() {
+			this.umlElement.displayType();
+		}
+	});
 	</script>
 </polymer-element>

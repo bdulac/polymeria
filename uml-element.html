@@ -18,6 +18,7 @@ function UmlElement(customElm) {
 	if(!this.webComponent.id) {
 		// Then the ID of the Web Component is the UML element qualified name
 		this.webComponent.id = this.getQualifiedName();
+		console.log("Default ID assigned [" + this.webComponent.id + "]")
 	}
 	// The UML element becomes an attribute of the Web Component
 	this.webComponent.umlElement = this;
@@ -67,10 +68,6 @@ UmlElement.prototype = {
 		}
 	}
 }
-Polymer('uml-element', { 
-	ready: function() {
-		new UmlElement(this);
-	}
-});
+Polymer({});
   </script>
 </polymer-element>

@@ -1,6 +1,6 @@
 <link rel="import" 
   href="uml-member.html">
-<polymer-element name="uml-ownedAttribute" extends="uml-member" attributes="type">
+<polymer-element name="uml-ownedAttribute" extends="uml-member">
 	<template>
 		<link rel="stylesheet" type="text/css" href="colors.css" >
 		<link rel="stylesheet" type="text/css" href="elements.css" >
@@ -32,43 +32,12 @@
 		</div>
 	</template>
 	<script>
-function UmlAttribute(customElm) {
-	UmlMember.call(this, customElm);
-	this.displayType();
-}
-UmlAttribute.prototype = Object.create(UmlMember.prototype, { 
-	displayType : {
-		value: function() {
-			if(this.webComponent.type) {
-				$(this.webComponent.$.type).show();
-				var typeComponent = document.getElementById(this.webComponent.type);
-				if(typeComponent) {
-					var typeUmlElement = typeComponent.umlElement;
-					if(typeUmlElement) {
-						$(this.webComponent.$.typeName).text(typeUmlElement.simpleName);
-					}
-					else {
-						alert(
-							"Invalid DOM: ID " + this.type 
-							+ " is not a Polymeria UML component"
-						)
-					}
-				}
-				else {
-					alert("Invalid DOM: ID " + this.type + " not found")
-				}
-			}
-			else {
-				$(this.webComponent.$.type).hide();
-			}
-		}
-	}
-}
-);
-UmlAttribute.prototype.constructor = UmlAttribute;
-Polymer('uml-ownedAttribute', {
+Polymer('uml-ownedAttribute', { 
+	ready: function() {
+		new UmlMember(this);
+	}, 
 	domReady: function() {
-		new UmlAttribute(this);
+		this.umlElement.displayType();
 	}
 });
 	</script>

@@ -51,15 +51,15 @@ heightStyle: "content"
       <pre class="cite-xml">
 &lt;model name="My model"&gt;
   &lt;packagedElement type="Class" name="MyClass"&gt;
-    &lt;ownedAttribute name="myAttribute" visibility="private" /&gt;
-    &lt;ownedOperation name="myOperation" visibility="protected" /&gt;
+    &lt;ownedAttribute name="myAttribute" visibility="private" type="test" /&gt;
+    &lt;ownedOperation name="myOperation" visibility="protected" type="test" /&gt;
   &lt;/packagedElement&gt;
   &lt;packagedElement type="Package" name="My package"&gt;
     &lt;packagedElement type="Class" name="MyPackageClass"&gt;
       &lt;packagedElement type="Class" name="MyNestedClass" /&gt;
     &lt;/packagedElement&gt;
   &lt;/packagedElement&gt;
-  &lt;packagedElement type="Class" name="MyOtherClass"&gt;
+  &lt;packagedElement type="Class" name="MyOtherClass" id="test" &gt;
     &lt;ownedOperation name="myOperationWithParameters" visibility="public"&gt;
       &lt;ownedParameter name="myFirstParam" /&gt;
       &lt;ownedParameter name="mySecondParam" /&gt;
@@ -72,10 +72,10 @@ heightStyle: "content"
       <p class="label"><a href="http://bdulac.github.io/note/web-components-adapation-xml-document/" target="_blank">Adaptation of the XML source</a>: Web components names compatibility and self-closing tags removal</p>
       <pre class="cite-xml">
 &lt;uml-model name="My model"&gt;
-  &lt;uml-packagedElement type="uml-Class" name="MyClass"&gt;
-    &lt;uml-ownedAttribute name="myAttribute" visibility="private"&gt;
+  &lt;uml-packagedElement type="uml-Class" name="MyClass" &gt;
+    &lt;uml-ownedAttribute name="myAttribute" visibility="private" type="test" &gt;
     &lt;/uml-ownedAttribute&gt;
-    &lt;uml-ownedOperation name="myOperation" visibility="protected"&gt;
+    &lt;uml-ownedOperation name="myOperation" visibility="protected" type="test" &gt;
     &lt;/uml-ownedOperation&gt;
   &lt;/uml-packagedElement&gt;
   &lt;uml-packagedElement type="uml-Package" name="My package"&gt;
@@ -84,7 +84,7 @@ heightStyle: "content"
       &lt;/uml-packagedElement&gt;
     &lt;/uml-packagedElement&gt;
   &lt;/uml-packagedElement&gt;
-  &lt;uml-packagedElement type="uml-Class" name="MyOtherClass"&gt;
+  &lt;uml-packagedElement type="uml-Class" name="MyOtherClass" id="test" &gt;
     &lt;uml-ownedOperation name="myOperationWithParameters" visibility="public"&gt;
       &lt;uml-ownedParameter name="myFirstParam"&gt;
       &lt;/uml-ownedParameter&gt;
@@ -99,9 +99,15 @@ heightStyle: "content"
     <section>
       <uml-model name="My model">
           <uml-packagedElement type="uml-Class" name="MyClass">
-            <uml-ownedAttribute name="myAttribute" visibility="private">
+            <uml-ownedAttribute 
+              name="myAttribute" 
+              visibility="private"
+              type="test">
             </uml-ownedAttribute>
-            <uml-ownedOperation name="myOperation" visibility="protected">
+            <uml-ownedOperation 
+              name="myOperation" 
+              visibility="protected"
+              type="My model:MyOtherClass">
             </uml-ownedOperation>
           </uml-packagedElement>
           <uml-packagedElement type="uml-Package" name="My package">
@@ -113,10 +119,14 @@ heightStyle: "content"
             </uml-packagedElement>
           </uml-packagedElement>
           <uml-packagedElement type="uml-Class" name="MyOtherClass">
-            <uml-ownedOperation name="myOperationWithParameters" visibility="public">
-              <uml-ownedParameter name="myFirstParam">
+            <uml-ownedOperation
+              id="test" 
+              name="myOperationWithParameters" 
+              visibility="public"
+              type="My model:MyClass">
+              <uml-ownedParameter name="myFirstParam" type="My model:MyClass">
               </uml-ownedParameter>
-              <uml-ownedParameter name="mySecondParam">
+              <uml-ownedParameter name="mySecondParam" type="My model:MyClass">
               </uml-ownedParameter>
             </uml-ownedOperation>
           </uml-packagedElement>

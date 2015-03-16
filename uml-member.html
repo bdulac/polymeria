@@ -1,6 +1,6 @@
 <link rel="import" 
   href="uml-element.html">
-<polymer-element name="uml-member" extends="uml-element" attributes="visibility">
+<polymer-element name="uml-member" extends="uml-element" attributes="visibility type">
   <template>
     <content></content>
   </template>
@@ -30,14 +30,36 @@ UmlMember.prototype = Object.create(UmlElement.prototype, {
 				return this.simpleName;
 			}
 		}
+	},
+	displayType : {
+		value : function() {
+			if(this.webComponent.type) {
+				$(this.webComponent.$.type).show();
+				var typeComponent = document.getElementById(this.webComponent.type);
+				if(typeComponent) {
+					var typeUmlElement = typeComponent.umlElement;
+					if(typeUmlElement) {
+						$(this.webComponent.$.typeName).text(typeUmlElement.simpleName);
+					}
+					else {
+						alert(
+							"The element with ID '" + this.type 
+							+ "' is not a Polymeria UML component"
+						)
+					}
+				}
+				else if(this.webComponent.type) {
+					alert("ID '" + this.webComponent.type + "' not found in the DOM")
+				}
+			}
+			else {
+				$(this.webComponent.$.type).hide();
+			}
+		}
 	}
 }
 );
 UmlMember.prototype.constructor = UmlMember;
-Polymer('uml-member', { 
-	ready: function() {
-		new UmlMember(this);
-	}
-});
+Polymer({});
   </script>
 </polymer-element>

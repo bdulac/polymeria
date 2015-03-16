@@ -24,10 +24,20 @@
 					</template>
 				</span>
 				<span class="name">{{ name }}</span>(<content></content>)
+				<span id="type" class="type accent-color">
+				: <span id="typeName" class="name"></span>
+				</span>
 			</span>
 		</div>
 	</template>
 	<script>
-Polymer({});
+	Polymer('uml-ownedOperation', { 
+		ready: function() {
+			new UmlMember(this);
+		}, 
+		domReady: function() {
+			this.umlElement.displayType();
+		}
+	});
 	</script>
 </polymer-element>
