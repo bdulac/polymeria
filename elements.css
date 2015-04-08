@@ -86,13 +86,6 @@
 	text-align: center;
 }
 
-canvas {
-	background-color: #FFFFFF;
-	position: absolute;
-	z-index: -10;
-	/* control height and width in code to prevent stretching */
-}
-
 .attribute {
 	display: block;
 }
