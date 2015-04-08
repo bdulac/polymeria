@@ -41,14 +41,30 @@
 	<script>
 Polymer('uml-packagedElement', {
 	ready: function() {
-		new UmlElement(this);
+		if(this.type == 'uml-Dependency') {
+			new UmlRelationship(this);
+		}
+		else {
+			new UmlElement(this);
+		}
 		// An observer pattern attached to draggable elements could notify
 		// the depency to be redrawn
 		$(this.$.element).draggable({
 			start: function() {
 			},
 			drag: function() {
-				drawLine();
+				function getWebComponent(node) {
+					var myNode = node;
+					while(!myNode.host) {
+						myNode = myNode.parentNode;
+					}
+					if(myNode.host) {
+						var comp = myNode.host;
+						return comp;
+					}
+				}
+				var component = getWebComponent(this);
+				component.umlElement.notifyMoveListeners();
 			},
 			stop: function() {
 			}
@@ -70,10 +86,7 @@ Polymer('uml-packagedElement', {
 	}, 
 	domReady: function() {
 		if(this.umlElement.webComponent.type == 'uml-Dependency') {
-			var source = document.getElementById(this.umlElement.webComponent.supplier);
-			var target = document.getElementById(this.umlElement.webComponent.client);
-			$().dependency.drawRelationship(source, target);
-			
+			this.umlElement.displayRelationship();			
 		}
 	}
 });
