@@ -1,4 +1,51 @@
-/* Adaptation of a Web Component into an UML element */
+/**
+ * Identifies the position of a DOM or Shadow DOM element
+ * @param element
+ * Element to identify the position of
+ * @returns Object with two properties x and y (in CSS px)
+ */
+function getPosition(element) {
+    var xPosition = 0;
+    var yPosition = 0;
+  
+    while(element) {
+        xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+        yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+        element = element.offsetParent;
+    }
+    return { x: xPosition, y: yPosition };
+}
+
+/**
+ * Fetches the Web component related to a Shadow DOM node
+ * @param shadowDomNode
+ * Shadow DOM node
+ * @returns Related Web component
+ */
+function getWebComponent(shadowDomNode) {
+	var myNode = shadowDomNode;
+	while(!myNode.host) {
+		myNode = myNode.parentNode;
+	}
+	if(myNode.host) {
+		var comp = myNode.host;
+		return comp;
+	}
+}
+
+/** 
+ * Generates a valid GUID
+ * (From http://stackoverflow.com/a/2117523/1207019)
+ * @returns Generated GUID
+ */
+function guid() {
+	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+	    var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+	    return v.toString(16);
+	});
+}
+
+/** Adaptation of a Web Component into an UML element */
 function UmlElement(customElm) {
 	// The adapted Web Component
 	this.webComponent = customElm;
@@ -86,7 +133,7 @@ UmlElement.prototype = {
 		}
 	}
 }
-/* Adaptation of a Web Component into an UML relationship element */
+/** Adaptation of a Web Component into an UML relationship element */
 function UmlRelationship(customElm) {
 	UmlElement.call(this, customElm);
 }
@@ -102,7 +149,7 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 					this.target = document.getElementById(this.webComponent.client);
 					this.target.umlElement.addMoveListener(this);
 				}
-				$().dependency.drawRelationship(this.webComponent, this.source, this.target);
+				$().painter.drawRelationship(this.webComponent, this.source, this.target);
 			}
 		}
 	},
@@ -114,7 +161,8 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 }
 );
 UmlRelationship.prototype.constructor = UmlRelationship;
-/* Adaptation of a Web Component into an UML member element */
+
+/** Adaptation of a Web Component into an UML member element */
 function UmlMember(customElm) {
 	UmlElement.call(this, customElm);
 }
@@ -170,36 +218,18 @@ UmlMember.prototype = Object.create(UmlElement.prototype, {
 );
 UmlMember.prototype.constructor = UmlMember;
 
-function getPosition(element) {
-    var xPosition = 0;
-    var yPosition = 0;
-  
-    while(element) {
-        xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
-        yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
-        element = element.offsetParent;
-    }
-    return { x: xPosition, y: yPosition };
-}
 
-/** From http://stackoverflow.com/a/2117523/1207019 */
-function guid() {
-	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-	    var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-	    return v.toString(16);
-	});
-}
-
-/** 
- * jQuery plug-in drawing a relationship between two Polymeria web components
- * @param webComponent
- * Relationship web component
- * @param sourceComponent
- * Source web component
- * @param targetComponent
- * Target web component
- */
-$.fn.dependency = {
+/** jQuery plug-in drawing non-conventional features */
+$.fn.painter = {
+	/** 
+	 * Draws a relationship between two Polymeria web components
+	 * @param webComponent
+	 * Web component for the relationship
+	 * @param sourceComponent
+	 * Web component source of the relationship
+	 * @param targetComponent
+	 * Web component target of the relationship
+	 */
 	drawRelationship: function (webComponent, sourceComponent, targetComponent) {
 		console.log("Relationship = " + webComponent.id);
 		console.log("$ Coordinates identification");
@@ -225,17 +255,17 @@ $.fn.dependency = {
 		var canvasStartX;
 		var canvasLineStartX;
 		var canvasLineEndX;
-    	// Source is on the left
+    	// Source is on the left (target is on the right)
     	if(targetPosition.x > sourcePosition.x) {	
     		canvasStartX = sourcePosition.x;
     		canvasLineStartX = sourceElement.width() / 2;
     		canvasLineEndX = (targetPosition.x - sourcePosition.x) + targetElement.width() / 2;
     	}
-    	// Target is on the left
+    	// Source is on the right (target is on the left)
     	else {
     		canvasStartX = targetPosition.x;
-    		canvasLineStartX = (sourcePosition.x - targetPosition.x) + targetElement.width() / 2;
-    		canvasLineEndX = sourceElement.width() / 2;
+    		canvasLineStartX = (sourcePosition.x - targetPosition.x) + sourceElement.width() / 2;
+    		canvasLineEndX = targetElement.width() / 2;
     	}
 		var canvasEndX;
 		// Source lasts more on the right
@@ -256,13 +286,13 @@ $.fn.dependency = {
 		if(targetPosition.y > sourcePosition.y) {
 			canvasStartY = (sourcePosition.y + sourceElement.height());
 			canvasLineStartY = 0;
-    		canvasLineEndY = targetPosition.y - canvasStartY;
+    		canvasLineStartX = targetPosition.y - canvasStartY;
 		}
 		// Target is at the top
 		else {
 			canvasStartY = (targetPosition.y + targetElement.height());
-			canvasLineStartY = 0;
-    		canvasLineEndY = sourcePosition.y - canvasStartY;
+			canvasLineEndY = 0;
+    		canvasLineStartY = sourcePosition.y - canvasStartY;
 		}
 		var canvasEndY;
 		// Source goes lower
@@ -313,12 +343,10 @@ $.fn.dependency = {
         html5Canvas.style.height = canvasHeight + "px";
         html5Canvas.style.zIndex   = 250;
         
-        
         document.body.appendChild(canvasDiv);
         canvasDiv.appendChild(html5Canvas);
 	    
         console.log("$ Drawing the line");
-	    // var canvas = $('#html5CanvasId');
 	    var canvas = html5Canvas;
     
 	    //you need to draw relative to the canvas not the page
@@ -334,6 +362,7 @@ $.fn.dependency = {
 	    //ink line
 	    context.lineWidth = 2;
 	    // context.strokeStyle = "#000"; //black
+	    // TODO Use the CSS accent color (colors.css)
 	    context.strokeStyle = "#00f"; //blue
 	    context.stroke();
 	}

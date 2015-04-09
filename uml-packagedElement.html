@@ -47,46 +47,23 @@ Polymer('uml-packagedElement', {
 		else {
 			new UmlElement(this);
 		}
-		// An observer pattern attached to draggable elements could notify
-		// the depency to be redrawn
+		// An observer pattern attached to the draggable element notifies the 
+		// relationship to be redrawn
 		$(this.$.element).draggable({
 			start: function() {
 			},
 			drag: function() {
-				function getWebComponent(node) {
-					var myNode = node;
-					while(!myNode.host) {
-						myNode = myNode.parentNode;
-					}
-					if(myNode.host) {
-						var comp = myNode.host;
-						return comp;
-					}
-				}
 				var component = getWebComponent(this);
 				component.umlElement.notifyMoveListeners();
 			},
 			stop: function() {
 			}
 		});
-		function drawLine() {
-			console.log("---" + this);
-			/*
-			if(this.umlElement.webComponent.type == 'uml-Dependency') {
-				var source = document.getElementById(this.umlElement.webComponent.supplier);
-				var target = document.getElementById(this.umlElement.webComponent.client);
-				$().dependency.drawRelationship($(source), $(target));
-				//$().dependency._readjustHTML5CanvasHeight();			
-				//$().dependency._drawLineBetweenElements($(source), $(target));
-				
-			}
-			*/
-		}
 		
 	}, 
 	domReady: function() {
 		if(this.umlElement.webComponent.type == 'uml-Dependency') {
-			this.umlElement.displayRelationship();			
+			this.umlElement.displayRelationship();		
 		}
 	}
 });
