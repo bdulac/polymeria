@@ -64,6 +64,10 @@ heightStyle: "content"
       &lt;ownedParameter name="myFirstParam" /&gt;
       &lt;ownedParameter name="mySecondParam" /&gt;
     &lt;/ownedOperation&gt;
+    &lt;packagedElement type="uml-Class" name="MyAssociatedClass" id="test2"&gt;
+  &lt;/packagedElement&gt;
+  &lt;packagedElement type="uml-Dependency" client="test2" supplier="test"&gt;
+  &lt;/packagedElement&gt;
   &lt;/packagedElement&gt;
 &lt;/model&gt;</pre>
       </div>
@@ -91,6 +95,10 @@ heightStyle: "content"
       &lt;uml-ownedParameter name="mySecondParam"&gt;
       &lt;/uml-ownedParameter&gt;
     &lt;/uml-ownedOperation&gt;
+  &lt;/uml-packagedElement&gt;
+  &lt;uml-packagedElement type="uml-Class" name="MyAssociatedClass" id="test2"&gt;
+  &lt;/uml-packagedElement&gt;
+  &lt;uml-packagedElement type="uml-Dependency" client="test2" supplier="test"&gt;
   &lt;/uml-packagedElement&gt;
 &lt;/uml-model&gt;</pre>
     </div>
@@ -128,6 +136,13 @@ heightStyle: "content"
               <uml-ownedParameter name="mySecondParam" type="My model:MyClass">
               </uml-ownedParameter>
             </uml-ownedOperation>
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Class" name="MyAssociatedClass" id="test2">
+          </uml-packagedElement>
+          <uml-packagedElement 
+            type="uml-Dependency" 
+            client="test2"
+            supplier="test">
           </uml-packagedElement>
       </uml-model>
     </section>
