@@ -1,6 +1,6 @@
 <link rel="import" 
   href="uml-element.html">
-<polymer-element name="uml-packagedElement" extends="uml-element" attributes="type client supplier">  
+<polymer-element name="uml-packagedElement" extends="uml-element" attributes="type client supplier direction x y">  
 	<template>
 		<link rel="stylesheet" href="../jquery-ui/themes/humanity/jquery-ui.css">
 		<link rel="stylesheet" type="text/css" href="colors.css" >
@@ -15,13 +15,13 @@
 				<div class="name primary2-background">
 				{{ name }}
 				</div>
-				<div class="content primary2-background">
+				<div class="content primary2-background" layout>
 					<content></content>
 				</div>
 			</div>
 		</template>
 		<template bind if="{{ (type == 'uml-Class') || (type == 'uml-Interface') }}">
-			<div id="element" class="class white-background" layout vertical>
+			<div id="element" class="class white-background" layout vertical style="margin: 15px;">
 				<div class="name">
 				{{ name }}
 				</div>
@@ -40,6 +40,7 @@
     </script>
 	<script>
 Polymer('uml-packagedElement', {
+	direction: 'vertical', 
 	ready: function() {
 		if(this.type == 'uml-Dependency') {
 			new UmlRelationship(this);
@@ -59,7 +60,7 @@ Polymer('uml-packagedElement', {
 			stop: function() {
 			}
 		});
-		
+		this.umlElement.initializePosition();
 	}, 
 	domReady: function() {
 		if(this.umlElement.webComponent.type == 'uml-Dependency') {
