@@ -35,7 +35,7 @@ function getWebComponent(shadowDomNode) {
 
 /** 
  * Generates a valid GUID
- * (From http://stackoverflow.com/a/2117523/1207019)
+ * (from http://stackoverflow.com/a/2117523/1207019)
  * @returns Generated GUID
  */
 function guid() {
@@ -43,6 +43,32 @@ function guid() {
 	    var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
 	    return v.toString(16);
 	});
+}
+
+/**
+ * Identified a style value given a CSS selector
+ * (from http://stackoverflow.com/a/16966533/1207019)
+ * @param style
+ * Style which value has to be identified
+ * @param selector
+ * CSS selector to access the style
+ * @param sheet
+ * Stylesheet to have a look at (optional: default looks in all the stylesheets)
+ * @returns Value of the style found with the given selector
+ */
+function getStyleRuleValue(style, selector, sheet) {
+    var sheets = typeof sheet !== 'undefined' ? [sheet] : document.styleSheets;
+    for (var i = 0, l = sheets.length; i < l; i++) {
+        var sheet = sheets[i];
+        if( !sheet.cssRules ) { continue; }
+        for (var j = 0, k = sheet.cssRules.length; j < k; j++) {
+            var rule = sheet.cssRules[j];
+            if (rule.selectorText && rule.selectorText.split(',').indexOf(selector) !== -1) {
+                return rule.style[style];
+            }
+        }
+    }
+    return null;
 }
 
 /** Adaptation of a Web Component into an UML element */
@@ -89,6 +115,24 @@ UmlElement.prototype = {
 			this.moveListeners = [listener];
 		}
 	}, 
+	initializePosition : function() {
+		if(this.webComponent.y) {
+			if(this.webComponent.$.element) {
+				var elm = this.webComponent.$.element;
+				var topPosition = this.webComponent.y;
+				elm.style.position = "absolute";
+				elm.style.top = topPosition;
+			}
+		}
+		if(this.webComponent.x) {
+			if(this.webComponent.$.element) {
+				var elm = this.webComponent.$.element;
+				var leftPosition = this.webComponent.x;
+				elm.style.position = "absolute";
+				elm.style.left = leftPosition;
+			}
+		}
+	},
 	/* Resolves the parent UML element of the UML element */
 	getParentElement : function() {
 		var parentUmlElement;
@@ -143,10 +187,16 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 			if(this.webComponent.type == 'uml-Dependency') {
 				if(!this.source) {
 					this.source = document.getElementById(this.webComponent.supplier);
+					if(!this.source) {
+						alert('Id ' + this.webComponent.supplier + 'not found')
+					}
 					this.source.umlElement.addMoveListener(this);
 				}
 				if(!this.target) {
 					this.target = document.getElementById(this.webComponent.client);
+					if(!this.target) {
+						alert('Id ' + this.webComponent.client + 'not found')
+					}
 					this.target.umlElement.addMoveListener(this);
 				}
 				$().painter.drawRelationship(this.webComponent, this.source, this.target);
@@ -224,98 +274,194 @@ $.fn.painter = {
 	/** 
 	 * Draws a relationship between two Polymeria web components
 	 * @param webComponent
-	 * Web component for the relationship
+	 * Web component representing the relationship
 	 * @param sourceComponent
 	 * Web component source of the relationship
 	 * @param targetComponent
 	 * Web component target of the relationship
 	 */
 	drawRelationship: function (webComponent, sourceComponent, targetComponent) {
-		console.log("Relationship = " + webComponent.id);
-		console.log("$ Coordinates identification");
-		console.log("-->Source: " + sourceComponent.umlElement.getQualifiedName());
-		console.log("-->Target: " + targetComponent.umlElement.getQualifiedName());
+		// console.log("Relationship = " + webComponent.id);
+		// console.log("$ Coordinates identification");
+		// console.log("-->Source: " + sourceComponent.umlElement.getQualifiedName());
+		// console.log("-->Target: " + targetComponent.umlElement.getQualifiedName());
 		var sourceElement  = $(sourceComponent.$.element);
 		var targetElement  = $(targetComponent.$.element);
 		var sourcePosition = getPosition(sourceComponent.$.element);
+		/*
 		console.log(
-				"-->Source offset ; left=" + sourcePosition.x
+				"-->Source shadow element ; left=" + sourcePosition.x
 				+ " ; top=" + sourcePosition.y
 				+ " ; width=" + sourceElement.width()
 				+ " ; height=" + sourceElement.height()
 		);
+		*/
 	    var targetPosition = getPosition(targetComponent.$.element);
+	    /*
 	    console.log(
-				"-->Target offset ; left=" + targetPosition.x
+				"-->Target shadow element ; left=" + targetPosition.x
 				+ " ; top=" + targetPosition.y
 				+ " ; width=" + targetElement.width()
 				+ " ; height=" + targetElement.height()
 		);
-		console.log("$ Setting the canvas dimensions");
+		*/
+		// console.log("$ Setting the canvas dimensions");
 		var canvasStartX;
+		var canvasEndX;
 		var canvasLineStartX;
 		var canvasLineEndX;
-    	// Source is on the left (target is on the right)
-    	if(targetPosition.x > sourcePosition.x) {	
-    		canvasStartX = sourcePosition.x;
-    		canvasLineStartX = sourceElement.width() / 2;
-    		canvasLineEndX = (targetPosition.x - sourcePosition.x) + targetElement.width() / 2;
-    	}
-    	// Source is on the right (target is on the left)
-    	else {
-    		canvasStartX = targetPosition.x;
-    		canvasLineStartX = (sourcePosition.x - targetPosition.x) + sourceElement.width() / 2;
-    		canvasLineEndX = targetElement.width() / 2;
-    	}
-		var canvasEndX;
-		// Source lasts more on the right
-    	if(
-    			(targetPosition.x + targetElement.width()) 
-    			> (sourcePosition.x + sourceElement.width())
-    	) {
-    		canvasEndX = targetPosition.x + targetElement.width();
-    	}
-    	// Target lasts more on the right
-    	else {
-    		canvasEndX = sourcePosition.x + sourceElement.width();
-    	}
-		var canvasStartY;
-		var canvasLineStartY;
-		var canvasLineEndy;
-		// Source is at the top
-		if(targetPosition.y > sourcePosition.y) {
-			canvasStartY = (sourcePosition.y + sourceElement.height());
-			canvasLineStartY = 0;
-    		canvasLineStartX = targetPosition.y - canvasStartY;
-		}
-		// Target is at the top
-		else {
-			canvasStartY = (targetPosition.y + targetElement.height());
-			canvasLineEndY = 0;
-    		canvasLineStartY = sourcePosition.y - canvasStartY;
-		}
-		var canvasEndY;
-		// Source goes lower
+		// The source is aligned vertically on the target 
 		if(
-    			(targetPosition.y + targetElement.height()) 
-    			> (sourcePosition.y + sourceElement.height())
-    	) {	
+				(targetPosition.x <= sourcePosition.x)
+				&&((targetPosition.x + targetElement.width()) >= sourcePosition.x)
+		) {
+			// console.log('1');
+			canvasStartX = sourcePosition.x;
+			if((targetPosition.x + targetElement.width()) < (sourcePosition.x + sourceElement.width())) {
+				canvasEndX = targetPosition.x + targetElement.width();
+			}
+			else {
+				canvasEndX = sourcePosition.x + sourceElement.width();
+			}
+			canvasLineStartX = (canvasEndX - canvasStartX) / 2;
+			// If we can have a straight line, 
+    		if(canvasLineStartX < targetElement.width()) {
+    			// Then the start is the end
+    			canvasLineEndX = canvasLineStartX;
+    		}
+    		else {
+    			canvasLineEndX = targetElement.width() / 2;
+    		}
+		}
+		// The target is aligned vertically on the source
+		else if(
+				(sourcePosition.x <= targetPosition.x)
+				&&((sourcePosition.x + sourceElement.width()) >= targetPosition.x)
+		) {
+			// console.log('2');
+			canvasStartX = targetPosition.x;
+			if((targetPosition.x + targetElement.width()) < (sourcePosition.x + sourceElement.width())) {
+				canvasEndX = targetPosition.x + targetElement.width();
+			}
+			else {
+				canvasEndX = sourcePosition.x + sourceElement.width();
+			}
+			canvasLineStartX = (canvasEndX - canvasStartX) / 2;
+			// If we can have a straight line, 
+    		if(canvasLineStartX < targetElement.width()) {
+    			// Then the start is the end
+    			canvasLineEndX = canvasLineStartX;
+    		}
+    		else {
+    			canvasLineEndX = sourceElement.width() / 2;
+    		}
+		}
+    	// The source is on the left (target is on the right)
+		else if(targetPosition.x > sourcePosition.x) {	
+			// console.log('3');
+    		canvasStartX = sourcePosition.x + sourceElement.width();
+    		canvasEndX = targetPosition.x;
+    		if(targetPosition.y < sourcePosition.y) {
+    			canvasLineStartX = targetPosition.x - canvasStartX;
+    			canvasLineEndX = 0;
+    		}
+    		else {
+    			canvasLineStartX = 0;
+    			canvasLineEndX = targetPosition.x - canvasStartX;
+    		}
+    	}
+    	// The source is on the right (target is on the left)
+    	else {
+    		// console.log('4');
+    		canvasStartX = targetPosition.x + targetElement.width();
+    		canvasEndX = sourcePosition.x;
+    		if(targetPosition.y > sourcePosition.y) {
+    			canvasLineStartX = sourcePosition.x - canvasStartX;
+    			canvasLineEndX = 0;
+    		}
+    		else {
+    			canvasLineStartX = 0;
+    			canvasLineEndX = sourcePosition.x - canvasStartX;
+    		}
+    	}
+    	//console.log('Canvas X: ' + canvasStartX + " to " + canvasEndX);
+		var canvasStartY;
+		var canvasEndY;	
+		var canvasLineStartY;
+		var canvasLineEndY;
+		// The source is aligned horizontally on the target 
+		if(
+				(targetPosition.y <= sourcePosition.y)
+				&&((targetPosition.y + targetElement.height()) >= sourcePosition.y )
+		) {
+			// console.log('A');
+			canvasStartY = sourcePosition.y;
+			if((targetPosition.y + targetElement.height()) < (sourcePosition.y + sourceElement.height())) {
+				canvasEndY = targetPosition.y + targetElement.height();
+			}
+			else {
+				canvasEndY = sourcePosition.y + sourceElement.height();
+			}
+			// canvasLineStartY = (sourcePosition.y + sourceElement.height() / 2) - canvasStartY;
+			canvasLineStartY = (canvasEndY - canvasStartY) / 2;
+    		// If we can have a straight line, 
+    		if(canvasLineStartY < targetElement.height()) {
+    			// Then the start is the end
+    			canvasLineEndY = canvasLineStartY;
+    		}
+    		else {
+    			canvasLineEndY = (targetPosition.x + targetElement.height() / 2) - canvasStartY;
+    		}
+		}
+		// The target is aligned horizontally on the source
+		else if(
+				(sourcePosition.y <= targetPosition.y)
+				&&((sourcePosition.y + sourceElement.height()) >= targetPosition.y )
+		) {
+			// console.log('B');
+			canvasStartY = targetPosition.y;
+			if((targetPosition.y + targetElement.height()) < (sourcePosition.y + sourceElement.height())) {
+				canvasEndY = targetPosition.y + targetElement.height();
+			}
+			else {
+				canvasEndY = sourcePosition.y + sourceElement.height();
+			}
+			canvasLineStartY = (canvasEndY - canvasStartY) / 2;
+			// If we can have a straight line, 
+    		if(canvasLineStartY < sourceElement.height()) {
+    			// Then the start is the end
+    			canvasLineEndY = canvasLineStartY;
+    		}
+    		else {
+    			canvasLineEndY = (sourcePosition.x + sourceElement.height() / 2) - canvasStartY;
+    		}
+		}
+		// The source is at the top
+		else if((targetPosition.y + targetElement.height()) > sourcePosition.y) {
+			// console.log('C');
+			canvasStartY = sourcePosition.y + sourceElement.height();
 			canvasEndY = targetPosition.y;
+			canvasLineStartY = 0;
+			canvasLineEndY = targetPosition.y - canvasStartY;
 		}
-		// Target goes lower
+		// The target is at the top
 		else {
+			// console.log('D');
+			canvasStartY = targetPosition.y + targetElement.height();
 			canvasEndY = sourcePosition.y;
+			canvasLineStartY = 0;
+    		canvasLineEndY = sourcePosition.y - canvasStartY;
 		}
-    	
+		// console.log('Canvas Y: ' + canvasStartY + " to " + canvasEndY);
 		////////////////////////
 		
 		var canvasTop = canvasStartY;
 		var canvasLeft = canvasStartX;
 		var canvasHeight = canvasEndY - canvasStartY;
 		var canvasWidth = canvasEndX - canvasStartX;
-		console.log("$ Drawing the canvas");
-		console.log("-->Position = (left: " + canvasLeft + ", top: " + canvasTop + ")");
-	    console.log("-->Dimensions = (width: " + canvasWidth + ", height: " + canvasHeight + ")");
+		// console.log("$ Drawing the canvas");
+		// console.log("-->Position = (left: " + canvasLeft + ", top: " + canvasTop + ")");
+	    // console.log("-->Dimensions = (width: " + canvasWidth + ", height: " + canvasHeight + ")");
 	    // Trying to fetch an existing element
 	    var canvasDiv = document.getElementById("relationship[" + webComponent.id + "]");
 	    // If we have an existing element, 
@@ -342,28 +488,29 @@ $.fn.painter = {
         html5Canvas.style.width = canvasWidth + "px";
         html5Canvas.style.height = canvasHeight + "px";
         html5Canvas.style.zIndex   = 250;
+        // html5Canvas.style.border   = "dotted";
         
         document.body.appendChild(canvasDiv);
         canvasDiv.appendChild(html5Canvas);
 	    
-        console.log("$ Drawing the line");
-	    var canvas = html5Canvas;
+        var canvas = html5Canvas;
     
-	    //you need to draw relative to the canvas not the page
-	    console.log("Line start: (left = " + canvasLineStartX + ", top: " + canvasLineStartY + ")");
-	    console.log("Line end: (left = " + canvasLineEndX + ", top: " + canvasLineEndY + ")");
 	    var context = html5Canvas.getContext('2d');
 	    
-	    //draw line
+	    // Draw  the line
+	    // console.log("$ Drawing the line");
 	    context.beginPath();
 	    context.moveTo(canvasLineStartX, canvasLineStartY);
 	    context.lineTo(canvasLineEndX, canvasLineEndY);
 	    context.closePath();
 	    //ink line
 	    context.lineWidth = 2;
-	    // context.strokeStyle = "#000"; //black
-	    // TODO Use the CSS accent color (colors.css)
-	    context.strokeStyle = "#00f"; //blue
+	    var colorValue = getStyleRuleValue('color', '.accent-color');
+	    if(!colorValue) {
+	    	// Default is black
+	    	colorValue = "#000";
+	    }
+	    context.strokeStyle = colorValue;
 	    context.stroke();
 	}
 }
