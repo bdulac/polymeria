@@ -3,7 +3,7 @@ layout: post
 title: Second release
 ---
 <p>
-The second release is available. Here are the main features:
+The second release (v0.0.2) is <a href="https://github.com/bdulac/polymeria/releases/tag/v0.0.2">available on GitHub</a>. Here are the main features:
 </p>
 <ul>
   <li>A basic support of relationships with dependencies displayed as straight lines</li>
