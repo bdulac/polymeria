@@ -46,7 +46,7 @@ function guid() {
 }
 
 /**
- * Identified a style value given a CSS selector
+ * Identifies a style value given a CSS selector
  * (from http://stackoverflow.com/a/16966533/1207019)
  * @param style
  * Style which value has to be identified
@@ -71,7 +71,11 @@ function getStyleRuleValue(style, selector, sheet) {
     return null;
 }
 
-/** Adaptation of a Web Component into an UML element */
+/** 
+ * Adaptation of a Web Component into an UML element
+ * @param customElm
+ * Web component to adapt
+ */
 function UmlElement(customElm) {
 	// The adapted Web Component
 	this.webComponent = customElm;
@@ -133,7 +137,10 @@ UmlElement.prototype = {
 			}
 		}
 	},
-	/* Resolves the parent UML element of the UML element */
+	/** 
+	 * Resolves the parent UML element of the UML element
+	 * @returns Parent UML element
+	 */
 	getParentElement : function() {
 		var parentUmlElement;
 		// Resolving the parent of the Web Component in the DOM
@@ -154,9 +161,11 @@ UmlElement.prototype = {
 		}
 		return parentUmlElement;
 	},
-	/* 
+	/** 
 	 * Resolves the qualified name of the UML element
-	 * This name is unique in the DOM because it contains the model name
+	 * @returns Qualified name of the UML element. 
+	 * This name is unique in the DOM because it is prefixed with the 
+	 * model name.
 	 */
 	getQualifiedName : function() {
 		var umlParent = this.getParentElement();
@@ -177,14 +186,18 @@ UmlElement.prototype = {
 		}
 	}
 }
-/** Adaptation of a Web Component into an UML relationship element */
+/** 
+ * Adaptation of a Web Component into an UML relationship element
+ * @param customElm
+ * Web component to adapt
+ */
 function UmlRelationship(customElm) {
 	UmlElement.call(this, customElm);
 }
 UmlRelationship.prototype = Object.create(UmlElement.prototype, { 
 	displayRelationship : {
 		value : function() {
-			if(this.webComponent.type == 'uml-Dependency') {
+			// if(this.webComponent.type == 'uml-Dependency') {
 				if(!this.source) {
 					this.source = document.getElementById(this.webComponent.supplier);
 					if(!this.source) {
@@ -200,7 +213,7 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 					this.target.umlElement.addMoveListener(this);
 				}
 				$().painter.drawRelationship(this.webComponent, this.source, this.target);
-			}
+			// }
 		}
 	},
 	update : {
@@ -211,8 +224,39 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 }
 );
 UmlRelationship.prototype.constructor = UmlRelationship;
+/** 
+ * Adaptation of a Web Component into an UML association element
+ * @param customElm
+ * Web component to adapt
+ */
+function UmlAssociation(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = null;
+}
+UmlAssociation.prototype = Object.create(UmlRelationship.prototype, { 
+}
+);
+UmlAssociation.prototype.constructor = UmlAssociation;
 
-/** Adaptation of a Web Component into an UML member element */
+/** 
+ * Adaptation of a Web Component into an UML dependency element
+ * @param customElm
+ * Web component to adapt
+ */
+function UmlDependency(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = true;
+}
+UmlDependency.prototype = Object.create(UmlRelationship.prototype, { 
+}
+);
+UmlDependency.prototype.constructor = UmlDependency;
+
+/** 
+ * Adaptation of a Web Component into an UML member element
+ * @param customElm
+ * Web component to adapt
+ */
 function UmlMember(customElm) {
 	UmlElement.call(this, customElm);
 }
@@ -496,7 +540,9 @@ $.fn.painter = {
         var canvas = html5Canvas;
     
 	    var context = html5Canvas.getContext('2d');
-	    
+	    if(webComponent.umlElement.dashed) {
+	    	context.setLineDash([2,2]);
+	    }
 	    // Draw  the line
 	    // console.log("$ Drawing the line");
 	    context.beginPath();

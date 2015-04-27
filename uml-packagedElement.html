@@ -43,7 +43,10 @@ Polymer('uml-packagedElement', {
 	direction: 'vertical', 
 	ready: function() {
 		if(this.type == 'uml-Dependency') {
-			new UmlRelationship(this);
+			new UmlDependency(this);
+		}
+		else if(this.type == 'uml-Association') {
+			new UmlAssociation(this);
 		}
 		else {
 			new UmlElement(this);
@@ -63,7 +66,10 @@ Polymer('uml-packagedElement', {
 		this.umlElement.initializePosition();
 	}, 
 	domReady: function() {
-		if(this.umlElement.webComponent.type == 'uml-Dependency') {
+		if(
+				(this.umlElement.webComponent.type == 'uml-Dependency') 
+				||(this.umlElement.webComponent.type == 'uml-Association')
+		) {
 			this.umlElement.displayRelationship();		
 		}
 	}
