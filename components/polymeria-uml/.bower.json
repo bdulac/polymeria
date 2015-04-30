@@ -1,0 +1,48 @@
+{
+  "name": "polymeria-uml",
+  "version": "0.0.2",
+  "main": [
+    "uml-model.html",
+    "uml-ownedAttribute.html",
+    "uml-ownedOperation.html",
+    "uml-ownedParameter.html",
+    "uml-packagedElement.html",
+    "uml-polymeria.html"
+  ],
+  "homepage": "https://github.com/bdulac/polymeria",
+  "authors": [
+    "Bérenger Dulac"
+  ],
+  "description": "A set of Web components for an (Eclipse) UML2 model",
+  "keywords": [
+    "UML",
+    "Eclipse UML2",
+    "polymer",
+    "web-components"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "jquery",
+    "jquery-ui",
+    "polymer",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#0.5.3",
+    "jquery-ui": "~1.11.2"
+  },
+  "_release": "0.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.2",
+    "commit": "18f47ad113932641cb51e8a686b6a9a6a8a184ee"
+  },
+  "_source": "git://github.com/bdulac/polymeria.git",
+  "_target": "~0.0.2",
+  "_originalSource": "polymeria-uml",
+  "_direct": true
+}
