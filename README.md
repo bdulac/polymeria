@@ -3,13 +3,10 @@
 
 *Polymeria* UML is a set of [Polymer](https://www.polymer-project.org/) [Web components](http://www.w3.org/TR/custom-elements/) inspired by the [Eclipse UML2](http://www.eclipse.org/modeling/mdt/?project=uml2) model file. 
 
-Here follows an example:
 
-<iframe style="width: 100%; height: 100%;" src="http://bdulac.github.io/polymeria/sample/general/"></iframe>
+Here is the source of an HTML document of a basic class diagram:
 
-The code is quite concise, here is the source of the HTML document of this model:
-<pre>
-<!DOCTYPE html>
+<code><!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -59,10 +56,14 @@ The code is quite concise, here is the source of the HTML document of this model
     </uml-packagedElement>
   </uml-model>
 </body>
-</html></pre>
+</html></code>
+
+To get the result, you should [have a look here](http://bdulac.github.io/polymeria/sample/general/) as rendering web components in the *README* file is quite challenging.
 
 The project is a work in progress but should evolve soon to provide a respectful support of classes diagrams.
 
 [A variation of this sample](http://bdulac.github.io/sample/polymeria) is available and shows the modifications between the initial Eclipse UML2 model and the web components. If you want to play with the components, the [installation with Bower is documented](http://bdulac.github.io/polymeria/installation/) in the GitHub pages.
 
-Because of custom elements compatibility constraints (dash needed), the model file cannot respect strictly the Eclipse UML element names. The project started following my [discovery of the Polymer project](http://bdulac.github.io/note/web-components-polymer). A [post on my blog](http://bdulac.github.io/note/web-components-adapation-xml-document) details my early problems.
+Because of custom elements compatibility constraints (dash needed), the model file cannot respect strictly the Eclipse UML element names. 
+
+The project started following my [discovery of the Polymer project](http://bdulac.github.io/note/web-components-polymer). A [post on my blog](http://bdulac.github.io/note/web-components-adapation-xml-document) details my early problems.
