@@ -10,7 +10,7 @@ Here is the source of an HTML document of a basic class diagram:
 <html>
 <head>
   <meta charset="UTF-8">
-    <script src="http://bdulac.github.io/polymeria/components/webcomponentsjs/webcomponents.js">
+  <script src="http://bdulac.github.io/polymeria/components/webcomponentsjs/webcomponents.js">
   </script>
   <link rel="import" href="http://bdulac.github.io/polymeria/components/polymeria-uml/uml-polymeria.html">
 </head>
