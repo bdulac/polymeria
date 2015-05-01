@@ -9,52 +9,52 @@ Here is the source of an HTML document of a basic class diagram:
 <code><!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <script src="http://bdulac.github.io/polymeria/components/webcomponentsjs/webcomponents.js">
-  </script>
-  <link rel="import" href="http://bdulac.github.io/polymeria/components/polymeria-uml/uml-polymeria.html">
+&nbsp;&nbsp;<meta charset="UTF-8">
+&nbsp;&nbsp;<script src="http://bdulac.github.io/polymeria/components/webcomponentsjs/webcomponents.js">
+&nbsp;&nbsp;</script>
+&nbsp;&nbsp;<link rel="import" href="http://bdulac.github.io/polymeria/components/polymeria-uml/uml-polymeria.html">
 </head>
 <body unresolved>
-  <uml-model name="My model">
-    <uml-packagedElement type="uml-Class" name="MyClass">
-      <uml-ownedAttribute 
-        name="myAttribute" 
-        visibility="private"
-        type="test">
-      </uml-ownedAttribute>
-      <uml-ownedOperation 
-        name="myOperation" 
-        visibility="protected"
-        type="test">
-      </uml-ownedOperation>
-    </uml-packagedElement>
-    <uml-packagedElement type="uml-Package" name="My package">
-      <uml-packagedElement type="uml-Package" name="My nested package">
-      </uml-packagedElement>
-      <uml-packagedElement type="uml-Class" name="MyPackageClass">
-        <uml-packagedElement type="uml-Class" name="MyNestedClass">
-        </uml-packagedElement>
-      </uml-packagedElement>
-    </uml-packagedElement>
-    <uml-packagedElement type="uml-Class" name="MyOtherClass" id="test">
-      <uml-ownedOperation
-        name="myOperationWithParameters" 
-        visibility="public"
-        type="My model:MyClass">
-        <uml-ownedParameter name="myFirstParam" type="My model:MyClass">
-        </uml-ownedParameter>
-        <uml-ownedParameter name="mySecondParam" type="My model:MyClass">
-        </uml-ownedParameter>
-      </uml-ownedOperation>
-    </uml-packagedElement>
-    <uml-packagedElement type="uml-Class" name="MyAssociatedClass" id="test2">
-    </uml-packagedElement>
-    <uml-packagedElement 
-      type="uml-Dependency" 
-      client="test2"
-      supplier="test">
-    </uml-packagedElement>
-  </uml-model>
+&nbsp;&nbsp;<uml-model name="My model">
+&nbsp;&nbsp;&nbsp;&nbsp;<uml-packagedElement type="uml-Class" name="MyClass">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<uml-ownedAttribute 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name="myAttribute" 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibility="private"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type="test">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</uml-ownedAttribute>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<uml-ownedOperation 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name="myOperation" 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibility="protected"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type="test">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</uml-ownedOperation>
+&nbsp;&nbsp;&nbsp;&nbsp;</uml-packagedElement>
+&nbsp;&nbsp;&nbsp;&nbsp;<uml-packagedElement type="uml-Package" name="My package">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<uml-packagedElement type="uml-Package" name="My nested package">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</uml-packagedElement>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<uml-packagedElement type="uml-Class" name="MyPackageClass">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<uml-packagedElement type="uml-Class" name="MyNestedClass">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</uml-packagedElement>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</uml-packagedElement>
+&nbsp;&nbsp;&nbsp;&nbsp;</uml-packagedElement>
+&nbsp;&nbsp;&nbsp;&nbsp;<uml-packagedElement type="uml-Class" name="MyOtherClass" id="test">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<uml-ownedOperation
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name="myOperationWithParameters" 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibility="public"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type="My model:MyClass">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<uml-ownedParameter name="myFirstParam" type="My model:MyClass">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</uml-ownedParameter>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<uml-ownedParameter name="mySecondParam" type="My model:MyClass">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</uml-ownedParameter>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</uml-ownedOperation>
+&nbsp;&nbsp;&nbsp;&nbsp;</uml-packagedElement>
+&nbsp;&nbsp;&nbsp;&nbsp;<uml-packagedElement type="uml-Class" name="MyAssociatedClass" id="test2">
+&nbsp;&nbsp;&nbsp;&nbsp;</uml-packagedElement>
+&nbsp;&nbsp;&nbsp;&nbsp;<uml-packagedElement 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type="uml-Dependency" 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client="test2"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;supplier="test">
+&nbsp;&nbsp;&nbsp;&nbsp;</uml-packagedElement>
+&nbsp;&nbsp;</uml-model>
 </body>
 </html></code>
 
