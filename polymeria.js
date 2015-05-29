@@ -63,7 +63,8 @@ function getStyleRuleValue(style, selector, sheet) {
         if( !sheet.cssRules ) { continue; }
         for (var j = 0, k = sheet.cssRules.length; j < k; j++) {
             var rule = sheet.cssRules[j];
-            if (rule.selectorText && rule.selectorText.split(',').indexOf(selector) !== -1) {
+            var ruleSelectorText = rule.selectorText;
+            if (ruleSelectorText && ruleSelectorText.split(',').indexOf(selector) !== -1) {
                 return rule.style[style];
             }
         }
@@ -187,72 +188,6 @@ UmlElement.prototype = {
 	}
 }
 /** 
- * Adaptation of a Web Component into an UML relationship element
- * @param customElm
- * Web component to adapt
- */
-function UmlRelationship(customElm) {
-	UmlElement.call(this, customElm);
-}
-UmlRelationship.prototype = Object.create(UmlElement.prototype, { 
-	displayRelationship : {
-		value : function() {
-			// if(this.webComponent.type == 'uml-Dependency') {
-				if(!this.source) {
-					this.source = document.getElementById(this.webComponent.supplier);
-					if(!this.source) {
-						alert('Id ' + this.webComponent.supplier + 'not found')
-					}
-					this.source.umlElement.addMoveListener(this);
-				}
-				if(!this.target) {
-					this.target = document.getElementById(this.webComponent.client);
-					if(!this.target) {
-						alert('Id ' + this.webComponent.client + 'not found')
-					}
-					this.target.umlElement.addMoveListener(this);
-				}
-				$().painter.drawRelationship(this.webComponent, this.source, this.target);
-			// }
-		}
-	},
-	update : {
-		value : function() {
-			this.displayRelationship();
-		}
-	}
-}
-);
-UmlRelationship.prototype.constructor = UmlRelationship;
-/** 
- * Adaptation of a Web Component into an UML association element
- * @param customElm
- * Web component to adapt
- */
-function UmlAssociation(customElm) {
-	UmlRelationship.call(this, customElm);
-	this.dashed = null;
-}
-UmlAssociation.prototype = Object.create(UmlRelationship.prototype, { 
-}
-);
-UmlAssociation.prototype.constructor = UmlAssociation;
-
-/** 
- * Adaptation of a Web Component into an UML dependency element
- * @param customElm
- * Web component to adapt
- */
-function UmlDependency(customElm) {
-	UmlRelationship.call(this, customElm);
-	this.dashed = true;
-}
-UmlDependency.prototype = Object.create(UmlRelationship.prototype, { 
-}
-);
-UmlDependency.prototype.constructor = UmlDependency;
-
-/** 
  * Adaptation of a Web Component into an UML member element
  * @param customElm
  * Web component to adapt
@@ -312,6 +247,102 @@ UmlMember.prototype = Object.create(UmlElement.prototype, {
 );
 UmlMember.prototype.constructor = UmlMember;
 
+/** 
+ * Adaptation of a Web Component into an UML relationship element
+ * @param customElm
+ * Web component to adapt
+ */
+function UmlRelationship(customElm) {
+	UmlElement.call(this, customElm);
+}
+UmlRelationship.prototype = Object.create(UmlElement.prototype, { 
+	displayRelationship : {
+		value : function() {
+			// if(this.webComponent.type == 'uml-Dependency') {
+				if(!this.source) {
+					this.source = document.getElementById(this.webComponent.supplier);
+					if(!this.source) {
+						alert('Id ' + this.webComponent.supplier + 'not found')
+					}
+					this.source.umlElement.addMoveListener(this);
+				}
+				if(!this.target) {
+					this.target = document.getElementById(this.webComponent.client);
+					if(!this.target) {
+						alert('Id ' + this.webComponent.client + 'not found')
+					}
+					this.target.umlElement.addMoveListener(this);
+				}
+				$().painter.drawRelationship(this.webComponent, this.source, this.target);
+			// }
+		}
+	},
+	update : {
+		value : function() {
+			this.displayRelationship();
+		}
+	}, 
+	drawRelationshipEnd: {
+		value : function() {
+			
+		}
+	}
+}
+);
+UmlRelationship.prototype.constructor = UmlRelationship;
+
+/** 
+ * Adaptation of a Web Component into an UML association element
+ * @param customElm
+ * Web component to adapt
+ */
+function UmlAssociation(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = null;
+}
+UmlAssociation.prototype = Object.create(UmlRelationship.prototype, { 
+}
+);
+UmlAssociation.prototype.constructor = UmlAssociation;
+/** 
+ * Adaptation of a Web Component into an UML dependency element
+ * @param customElm
+ * Web component to adapt
+ */
+function UmlDependency(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = true;
+}
+UmlDependency.prototype = Object.create(UmlRelationship.prototype, { 
+	drawRelationshipEnd: {
+		value : function() {
+			if(this.relationshipCanvas) {
+				var headlen = 20;   // length of head in pixels
+				var fromX = this.relationshipCanvasStartX;
+				var fromY = this.relationshipCanvasStartY;
+				var toX = this.relationshipCanvasEndX;
+				var toY = this.relationshipCanvasEndY;
+				var angle = Math.atan2(toY-fromY,toX-fromX);
+				
+				var context = this.relationshipCanvas.getContext('2d');
+				context.lineWidth = 2;
+				context.beginPath();
+				context.setLineDash([15, 0]);
+				context.moveTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle-Math.PI/6),toY-headlen*Math.sin(angle-Math.PI/6));
+				
+				
+				context.moveTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle+Math.PI/6),toY-headlen*Math.sin(angle+Math.PI/6));
+				
+				context.closePath();
+				context.stroke();
+			}
+		}
+	}
+}
+);
+UmlDependency.prototype.constructor = UmlDependency;
 
 /** jQuery plug-in drawing non-conventional features */
 $.fn.painter = {
@@ -406,8 +437,8 @@ $.fn.painter = {
     		canvasStartX = sourcePosition.x + sourceElement.width();
     		canvasEndX = targetPosition.x;
     		if(targetPosition.y < sourcePosition.y) {
-    			canvasLineStartX = targetPosition.x - canvasStartX;
-    			canvasLineEndX = 0;
+    			canvasLineStartX = 0;
+    			canvasLineEndX = targetPosition.x - canvasStartX;
     		}
     		else {
     			canvasLineStartX = 0;
@@ -424,8 +455,8 @@ $.fn.painter = {
     			canvasLineEndX = 0;
     		}
     		else {
-    			canvasLineStartX = 0;
-    			canvasLineEndX = sourcePosition.x - canvasStartX;
+    			canvasLineStartX = sourcePosition.x - canvasStartX;
+    			canvasLineEndX = 0;
     		}
     	}
     	//console.log('Canvas X: ' + canvasStartX + " to " + canvasEndX);
@@ -493,8 +524,8 @@ $.fn.painter = {
 			// console.log('D');
 			canvasStartY = targetPosition.y + targetElement.height();
 			canvasEndY = sourcePosition.y;
-			canvasLineStartY = 0;
-    		canvasLineEndY = sourcePosition.y - canvasStartY;
+			canvasLineStartY = sourcePosition.y - canvasStartY;
+    		canvasLineEndY = 0;
 		}
 		// console.log('Canvas Y: ' + canvasStartY + " to " + canvasEndY);
 		////////////////////////
@@ -522,8 +553,8 @@ $.fn.painter = {
 	    canvasDiv.style.left = canvasLeft + "px";
         canvasDiv.style.margin   = 0;
         canvasDiv.style.padding   = 0;
-        canvasDiv.style.width   =  (canvasWidth + 5) + "px";
-        canvasDiv.style.height   =  (canvasHeight + 5) + "px";
+        canvasDiv.style.width   =  (canvasWidth + 10) + "px";
+        canvasDiv.style.height   =  (canvasHeight + 10) + "px";
         canvasDiv.style.zIndex   = 150;
         // With and height of the canvas must equal the CSS values in px
         // (canvas pixel / CSS px equivalence)
@@ -537,26 +568,43 @@ $.fn.painter = {
         document.body.appendChild(canvasDiv);
         canvasDiv.appendChild(html5Canvas);
 	    
-        var canvas = html5Canvas;
-    
-	    var context = html5Canvas.getContext('2d');
-	    if(webComponent.umlElement.dashed) {
-	    	context.setLineDash([2,2]);
-	    }
-	    // Draw  the line
-	    // console.log("$ Drawing the line");
-	    context.beginPath();
-	    context.moveTo(canvasLineStartX, canvasLineStartY);
-	    context.lineTo(canvasLineEndX, canvasLineEndY);
-	    context.closePath();
-	    //ink line
-	    context.lineWidth = 2;
-	    var colorValue = getStyleRuleValue('color', '.accent-color');
+        var colorValue = getStyleRuleValue('color', '.accent-color');
 	    if(!colorValue) {
 	    	// Default is black
 	    	colorValue = "#000";
 	    }
-	    context.strokeStyle = colorValue;
+        
+        var canvas = html5Canvas;
+    
+	    var context = html5Canvas.getContext('2d');
+	    
+	    context.lineWidth = 1;
+	    // Draw  the line
+	    // console.log("$ Drawing the line");
+	    context.beginPath();
+
+	    // context.strokeStyle = colorValue;
+	    if(webComponent.umlElement.dashed) {
+	    	// context.setLineDash([4,8]);
+	    	// context.setLineDash([2,4]);
+	    	context.setLineDash([5, 5]);
+	    }
+	    
+	    // context.fillStyle = colorValue;
+	    
+	    context.moveTo(canvasLineStartX, canvasLineStartY);
+	    context.lineTo(canvasLineEndX, canvasLineEndY);
+	    //ink line
+	    
+	    
+	    context.closePath();
 	    context.stroke();
+	    
+	    webComponent.umlElement.relationshipCanvas = canvas;
+	    webComponent.umlElement.relationshipCanvasStartX = canvasLineStartX;
+	    webComponent.umlElement.relationshipCanvasStartY = canvasLineStartY;
+	    webComponent.umlElement.relationshipCanvasEndX = canvasLineEndX;
+	    webComponent.umlElement.relationshipCanvasEndY = canvasLineEndY;
+	    webComponent.umlElement.drawRelationshipEnd();
 	}
 }
