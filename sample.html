@@ -50,23 +50,23 @@ heightStyle: "content"
       <p class="label">The initial XML source of the <a href="http://wiki.eclipse.org/MDT-UML2" target="_blank">Eclipse EMF-based</a> UML2 metamodel</p>
       <pre class="cite-xml">
 &lt;model name="My model"&gt;
-  &lt;packagedElement type="Class" name="MyClass"&gt;
+  &lt;packagedElement type="uml:Class" name="MyClass"&gt;
     &lt;ownedAttribute name="myAttribute" visibility="private" type="test" /&gt;
     &lt;ownedOperation name="myOperation" visibility="protected" type="test" /&gt;
   &lt;/packagedElement&gt;
-  &lt;packagedElement type="Package" name="My package"&gt;
-    &lt;packagedElement type="Class" name="MyPackageClass"&gt;
-      &lt;packagedElement type="Class" name="MyNestedClass" /&gt;
+  &lt;packagedElement type="uml:Package" name="My package"&gt;
+    &lt;packagedElement type="uml:Class" name="MyPackageClass"&gt;
+      &lt;packagedElement type="type:Class" name="MyNestedClass" /&gt;
     &lt;/packagedElement&gt;
   &lt;/packagedElement&gt;
-  &lt;packagedElement type="Class" name="MyOtherClass" id="test" &gt;
+  &lt;packagedElement type="uml:Class" name="MyOtherClass" id="test" &gt;
     &lt;ownedOperation name="myOperationWithParameters" visibility="public"&gt;
       &lt;ownedParameter name="myFirstParam" /&gt;
       &lt;ownedParameter name="mySecondParam" /&gt;
     &lt;/ownedOperation&gt;
-    &lt;packagedElement type="uml-Class" name="MyAssociatedClass" id="test2"&gt;
+    &lt;packagedElement type="uml:Class" name="MyAssociatedClass" id="test2"&gt;
   &lt;/packagedElement&gt;
-  &lt;packagedElement type="uml-Dependency" client="test2" supplier="test"&gt;
+  &lt;packagedElement type="uml:Dependency" client="test2" supplier="test"&gt;
   &lt;/packagedElement&gt;
   &lt;/packagedElement&gt;
 &lt;/model&gt;</pre>
