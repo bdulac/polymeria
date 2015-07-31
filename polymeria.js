@@ -95,7 +95,7 @@ function UmlElement(customElm) {
 	if(!this.webComponent.id) {
 		// Then the ID of the Web Component is the UML element qualified name
 		this.webComponent.id = this.getQualifiedName();
-		console.log("Default ID assigned [" + this.webComponent.id + "]")
+		console.log("Default ID assigned [" + this.webComponent.id + "]");
 	}
 	// The UML element becomes an attribute of the Web Component
 	this.webComponent.umlElement = this;
@@ -104,40 +104,55 @@ function UmlElement(customElm) {
 UmlElement.prototype = {
 	notifyMoveListeners : function() {
 		if(this.moveListeners) {
+			// console.log(this.simpleName + " notifying " + this.moveListeners.length + " children...");
 			for	(index = 0; index < this.moveListeners.length; index++) {
 				var listener = this.moveListeners[index];
 				if(listener.update) {
 					listener.update();
 				}
-			} 
+			}
 		}
 	},
+	/** 
+	 * Attaching another UML element as move listener of this UML element
+	 * @param listener
+	 * UML element to attach as move listener
+	 */
 	addMoveListener : function(listener) {
+		// console.log( listener.simpleName + " listening to " + this.simpleName );
 		if(this.moveListeners) {
 			this.moveListeners[this.moveListeners.length] = listener; 
 		}
 		else {
 			this.moveListeners = [listener];
 		}
-	}, 
-	initializePosition : function() {
-		if(this.webComponent.y) {
-			if(this.webComponent.$.element) {
-				var elm = this.webComponent.$.element;
-				var topPosition = this.webComponent.y;
-				elm.style.position = "absolute";
-				elm.style.top = topPosition;
-			}
-		}
-		if(this.webComponent.x) {
-			if(this.webComponent.$.element) {
-				var elm = this.webComponent.$.element;
-				var leftPosition = this.webComponent.x;
-				elm.style.position = "absolute";
-				elm.style.left = leftPosition;
-			}
-		}
 	},
+	/** 
+	 * Attaching another UML element as move listener of this UML element and 
+	 * all the parent UML elements recursively
+	 * @param listener
+	 * UML element to attach as move listener
+	 */
+	addRecursiveMoveListener : function(listener) {
+		// console.log( listener.simpleName + " listening to " + this.simpleName );
+		if(this.moveListeners) {
+			this.moveListeners[this.moveListeners.length] = listener; 
+		}
+		else {
+			this.moveListeners = [listener];
+		}
+		// Attaching the parent as move listener
+		var parentUmlElement = this.getParentElement();
+		if(parentUmlElement) {
+			parentUmlElement.addMoveListener(listener);
+			// console.log("Listeners=" + parentUmlElement.moveListeners);
+		}
+		/*
+		else {
+			console.log("NO PARENT !!!");
+		}
+		*/
+	}, 
 	/** 
 	 * Resolves the parent UML element of the UML element
 	 * @returns Parent UML element
@@ -161,6 +176,24 @@ UmlElement.prototype = {
 			parentUmlElement = domParent.umlElement;
 		}
 		return parentUmlElement;
+	},
+	initializePosition : function() {
+		if(this.webComponent.y) {
+			if(this.webComponent.$.element) {
+				var elm = this.webComponent.$.element;
+				var topPosition = this.webComponent.y;
+				elm.style.position = "absolute";
+				elm.style.top = topPosition;
+			}
+		}
+		if(this.webComponent.x) {
+			if(this.webComponent.$.element) {
+				var elm = this.webComponent.$.element;
+				var leftPosition = this.webComponent.x;
+				elm.style.position = "absolute";
+				elm.style.left = leftPosition;
+			}
+		}
 	},
 	/** 
 	 * Resolves the qualified name of the UML element
@@ -258,28 +291,35 @@ function UmlRelationship(customElm) {
 UmlRelationship.prototype = Object.create(UmlElement.prototype, { 
 	displayRelationship : {
 		value : function() {
-			// if(this.webComponent.type == 'uml-Dependency') {
 				if(!this.source) {
 					this.source = document.getElementById(this.webComponent.supplier);
 					if(!this.source) {
 						alert('Id ' + this.webComponent.supplier + 'not found')
 					}
-					this.source.umlElement.addMoveListener(this);
+					this.source.umlElement.addRecursiveMoveListener(this);
+					this.addRecursiveMoveListener(this.source.umlElement);
 				}
 				if(!this.target) {
 					this.target = document.getElementById(this.webComponent.client);
 					if(!this.target) {
 						alert('Id ' + this.webComponent.client + 'not found')
 					}
-					this.target.umlElement.addMoveListener(this);
+					this.target.umlElement.addRecursiveMoveListener(this);
+					this.addRecursiveMoveListener(this.target.umlElement);
 				}
 				$().painter.drawRelationship(this.webComponent, this.source, this.target);
-			// }
 		}
 	},
 	update : {
 		value : function() {
 			this.displayRelationship();
+			this.notifyMoveListeners();
+			for	(index = 0; index < this.moveListeners.length; index++) {
+				var listener = this.moveListeners[index];
+				if(listener.update) {
+					listener.update();
+				}
+			}
 		}
 	}, 
 	drawRelationshipEnd: {
@@ -317,7 +357,7 @@ UmlDependency.prototype = Object.create(UmlRelationship.prototype, {
 	drawRelationshipEnd: {
 		value : function() {
 			if(this.relationshipCanvas) {
-				var headlen = 20;   // length of head in pixels
+				var headlen = 17;   // length of head in pixels
 				var fromX = this.relationshipCanvasStartX;
 				var fromY = this.relationshipCanvasStartY;
 				var toX = this.relationshipCanvasEndX;
@@ -329,11 +369,11 @@ UmlDependency.prototype = Object.create(UmlRelationship.prototype, {
 				context.beginPath();
 				context.setLineDash([15, 0]);
 				context.moveTo(toX, toY);
-				context.lineTo(toX-headlen*Math.cos(angle-Math.PI/6),toY-headlen*Math.sin(angle-Math.PI/6));
+				context.lineTo(toX-headlen*Math.cos(angle-Math.PI/8),toY-headlen*Math.sin(angle-Math.PI/8));
 				
 				
 				context.moveTo(toX, toY);
-				context.lineTo(toX-headlen*Math.cos(angle+Math.PI/6),toY-headlen*Math.sin(angle+Math.PI/6));
+				context.lineTo(toX-headlen*Math.cos(angle+Math.PI/8),toY-headlen*Math.sin(angle+Math.PI/8));
 				
 				context.closePath();
 				context.stroke();
@@ -553,15 +593,15 @@ $.fn.painter = {
 	    canvasDiv.style.left = canvasLeft + "px";
         canvasDiv.style.margin   = 0;
         canvasDiv.style.padding   = 0;
-        canvasDiv.style.width   =  (canvasWidth + 10) + "px";
-        canvasDiv.style.height   =  (canvasHeight + 10) + "px";
+        canvasDiv.style.width   =  (canvasWidth + 5) + "px";
+        canvasDiv.style.height   =  (canvasHeight + 5) + "px";
         canvasDiv.style.zIndex   = 150;
         // With and height of the canvas must equal the CSS values in px
         // (canvas pixel / CSS px equivalence)
         html5Canvas.width = canvasWidth;
         html5Canvas.height = canvasHeight;
-        html5Canvas.style.width = canvasWidth + "px";
-        html5Canvas.style.height = canvasHeight + "px";
+        html5Canvas.style.width = (canvasWidth) + "px";
+        html5Canvas.style.height = (canvasHeight) + "px";
         html5Canvas.style.zIndex   = 250;
         // html5Canvas.style.border   = "dotted";
         
@@ -585,9 +625,7 @@ $.fn.painter = {
 
 	    // context.strokeStyle = colorValue;
 	    if(webComponent.umlElement.dashed) {
-	    	// context.setLineDash([4,8]);
-	    	// context.setLineDash([2,4]);
-	    	context.setLineDash([5, 5]);
+	    	context.setLineDash([7, 8]);
 	    }
 	    
 	    // context.fillStyle = colorValue;
