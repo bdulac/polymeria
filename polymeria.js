@@ -145,13 +145,7 @@ UmlElement.prototype = {
 		var parentUmlElement = this.getParentElement();
 		if(parentUmlElement) {
 			parentUmlElement.addMoveListener(listener);
-			// console.log("Listeners=" + parentUmlElement.moveListeners);
 		}
-		/*
-		else {
-			console.log("NO PARENT !!!");
-		}
-		*/
 	}, 
 	/** 
 	 * Resolves the parent UML element of the UML element
@@ -332,7 +326,7 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 UmlRelationship.prototype.constructor = UmlRelationship;
 
 /** 
- * Adaptation of a Web Component into an UML association element
+ * Adaptation of a Web Component into an UML association relationship
  * @param customElm
  * Web component to adapt
  */
@@ -345,7 +339,7 @@ UmlAssociation.prototype = Object.create(UmlRelationship.prototype, {
 );
 UmlAssociation.prototype.constructor = UmlAssociation;
 /** 
- * Adaptation of a Web Component into an UML dependency element
+ * Adaptation of a Web Component into an UML dependency relationship
  * @param customElm
  * Web component to adapt
  */
@@ -383,6 +377,53 @@ UmlDependency.prototype = Object.create(UmlRelationship.prototype, {
 }
 );
 UmlDependency.prototype.constructor = UmlDependency;
+/** 
+ * Adaptation of a Web Component into an UML realization relationship
+ * @param customElm
+ * Web component to adapt
+ */
+function UmlRealization(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = true;
+}
+UmlRealization.prototype = Object.create(UmlRelationship.prototype, { 
+	drawRelationshipEnd: {
+		value : function() {
+			if(this.relationshipCanvas) {
+				var headlen = 17;   // length of head in pixels
+				var fromX = this.relationshipCanvasStartX;
+				var fromY = this.relationshipCanvasStartY;
+				var toX = this.relationshipCanvasEndX;
+				var toY = this.relationshipCanvasEndY;
+				var angle = Math.atan2(toY-fromY,toX-fromX);
+				
+				var context = this.relationshipCanvas.getContext('2d');
+				
+				context.lineWidth = 1;
+				context.beginPath();
+				context.setLineDash([15, 0]);
+				
+				context.moveTo(toX-headlen*Math.cos(angle-Math.PI/7),toY-headlen*Math.sin(angle-Math.PI/8));
+				context.lineTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle+Math.PI/7),toY-headlen*Math.sin(angle+Math.PI/8));
+				context.fillStyle="white";
+				
+				context.fill();
+				
+				
+				context.closePath();
+				
+				
+				
+				context.stroke();
+				
+				
+			}
+		}
+	}
+}
+);
+UmlRealization.prototype.constructor = UmlRealization;
 
 /** jQuery plug-in drawing non-conventional features */
 $.fn.painter = {

@@ -48,6 +48,9 @@ Polymer('uml-packagedElement', {
 		else if(this.type == 'uml-Association') {
 			new UmlAssociation(this);
 		}
+		else if(this.type == 'uml-Realization') {
+			new UmlRealization(this);
+		}
 		else {
 			new UmlElement(this);
 		}
@@ -69,6 +72,7 @@ Polymer('uml-packagedElement', {
 		if(
 				(this.umlElement.webComponent.type == 'uml-Dependency') 
 				||(this.umlElement.webComponent.type == 'uml-Association')
+				||(this.umlElement.webComponent.type == 'uml-Realization')
 		) {
 			this.umlElement.displayRelationship();		
 		}
