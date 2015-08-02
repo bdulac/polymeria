@@ -286,17 +286,33 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 	displayRelationship : {
 		value : function() {
 				if(!this.source) {
-					this.source = document.getElementById(this.webComponent.supplier);
-					if(!this.source) {
-						alert('Id ' + this.webComponent.supplier + 'not found')
+					if(this.webComponent.supplier) {
+						this.source = document.getElementById(this.webComponent.supplier);
+						if(!this.source) {
+							alert('Id ' + this.webComponent.supplier + 'not found')
+						}
+					}
+					else {
+						this.source = document.getElementById(this.webComponent.parentNode.id);
+						if(!this.source) {
+							alert('Id ' + this.webComponent.parentNode.id + 'not found')
+						}
 					}
 					this.source.umlElement.addRecursiveMoveListener(this);
 					this.addRecursiveMoveListener(this.source.umlElement);
 				}
 				if(!this.target) {
-					this.target = document.getElementById(this.webComponent.client);
-					if(!this.target) {
-						alert('Id ' + this.webComponent.client + 'not found')
+					if(this.webComponent.client) {
+						this.target = document.getElementById(this.webComponent.client);
+						if(!this.target) {
+							alert('Id ' + this.webComponent.client + 'not found')
+						}
+					}
+					else {
+						this.target = document.getElementById(this.webComponent.general);
+						if(!this.target) {
+							alert('Id ' + this.webComponent.general + 'not found')
+						}
 					}
 					this.target.umlElement.addRecursiveMoveListener(this);
 					this.addRecursiveMoveListener(this.target.umlElement);
@@ -424,6 +440,54 @@ UmlRealization.prototype = Object.create(UmlRelationship.prototype, {
 }
 );
 UmlRealization.prototype.constructor = UmlRealization;
+
+/** 
+ * Adaptation of a Web Component into an UML generalization relationship
+ * @param customElm
+ * Web component to adapt
+ */
+function UmlGeneralization(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = false;
+}
+UmlGeneralization.prototype = Object.create(UmlRelationship.prototype, { 
+	drawRelationshipEnd: {
+		value : function() {
+			if(this.relationshipCanvas) {
+				var headlen = 17;   // length of head in pixels
+				var fromX = this.relationshipCanvasStartX;
+				var fromY = this.relationshipCanvasStartY;
+				var toX = this.relationshipCanvasEndX;
+				var toY = this.relationshipCanvasEndY;
+				var angle = Math.atan2(toY-fromY,toX-fromX);
+				
+				var context = this.relationshipCanvas.getContext('2d');
+				
+				context.lineWidth = 1;
+				context.beginPath();
+				context.setLineDash([15, 0]);
+				
+				context.moveTo(toX-headlen*Math.cos(angle-Math.PI/7),toY-headlen*Math.sin(angle-Math.PI/8));
+				context.lineTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle+Math.PI/7),toY-headlen*Math.sin(angle+Math.PI/8));
+				context.fillStyle="white";
+				
+				context.fill();
+				
+				
+				context.closePath();
+				
+				
+				
+				context.stroke();
+				
+				
+			}
+		}
+	}
+}
+);
+UmlGeneralization.prototype.constructor = UmlGeneralization;
 
 /** jQuery plug-in drawing non-conventional features */
 $.fn.painter = {

@@ -1,0 +1,28 @@
+<link rel="import" 
+  href="uml-element.html">
+<polymer-element name="uml-generalization" extends="uml-element" attributes="type general direction x y">  
+	<template>
+		
+	</template>
+	<script src="./polymeria.js">
+    </script>
+	<script>
+Polymer('uml-generalization', {
+	direction: 'vertical', 
+	ready: function() {
+		if(this.type == 'uml-Generalization') {
+			new UmlGeneralization(this);
+		}
+		
+		this.umlElement.initializePosition();
+	}, 
+	domReady: function() {
+		if(
+				(this.umlElement.webComponent.type == 'uml-Generalization')
+		) {
+			this.umlElement.displayRelationship();		
+		}
+	}
+});
+	</script>
+</polymer-element>
