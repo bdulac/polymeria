@@ -1,8 +1,9 @@
 {
   "name": "polymeria-uml",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": [
     "uml-model.html",
+    "uml-generalization.html",
     "uml-ownedAttribute.html",
     "uml-ownedOperation.html",
     "uml-ownedParameter.html",
