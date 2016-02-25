@@ -354,6 +354,7 @@ UmlAssociation.prototype = Object.create(UmlRelationship.prototype, {
 }
 );
 UmlAssociation.prototype.constructor = UmlAssociation;
+
 /** 
  * Adaptation of a Web Component into an UML dependency relationship
  * @param customElm
@@ -393,6 +394,7 @@ UmlDependency.prototype = Object.create(UmlRelationship.prototype, {
 }
 );
 UmlDependency.prototype.constructor = UmlDependency;
+
 /** 
  * Adaptation of a Web Component into an UML realization relationship
  * @param customElm
@@ -693,20 +695,26 @@ $.fn.painter = {
 	    canvasDiv.id = "relationship[" + webComponent.id + "]";
 	    var html5Canvas = document.createElement("canvas");
 	    
+	    canvasDiv.style.borderWith = 0;
+	    canvasDiv.style.borderStyle = "none";
 	    canvasDiv.style.position = "absolute";
 	    canvasDiv.style.top = canvasTop + "px";
 	    canvasDiv.style.left = canvasLeft + "px";
         canvasDiv.style.margin   = 0;
         canvasDiv.style.padding   = 0;
-        canvasDiv.style.width   =  (canvasWidth + 5) + "px";
-        canvasDiv.style.height   =  (canvasHeight + 5) + "px";
+        canvasDiv.style.width   =  (canvasWidth) + "px";
+        canvasDiv.style.height   =  (canvasHeight) + "px";
         canvasDiv.style.zIndex   = 150;
         // With and height of the canvas must equal the CSS values in px
         // (canvas pixel / CSS px equivalence)
+        html5Canvas.style.borderWith = 0;
+        html5Canvas.style.borderStyle = "none";
         html5Canvas.width = canvasWidth;
         html5Canvas.height = canvasHeight;
         html5Canvas.style.width = (canvasWidth) + "px";
         html5Canvas.style.height = (canvasHeight) + "px";
+        html5Canvas.style.margin   = 0;
+        html5Canvas.style.padding   = 0;
         html5Canvas.style.zIndex   = 250;
         // html5Canvas.style.border   = "dotted";
         
