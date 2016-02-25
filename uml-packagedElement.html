@@ -2,14 +2,13 @@
   href="uml-element.html">
 <polymer-element name="uml-packagedElement" extends="uml-element" attributes="type client supplier direction x y">
 	<template>
-		<link rel="stylesheet" href="../jquery-ui/themes/humanity/jquery-ui.css">
 		<link rel="stylesheet" type="text/css" href="colors.css" >
 		<link rel="stylesheet" type="text/css" href="elements.css" >
 		<style>
 			:host {
 			}
 		</style>
-		<div>
+		<div style="margin: 0; padding: 0;">
 		<template bind if="{{ type == 'uml-Package' }}">
 			<div id="element" class="package" vertical layout>
 				<div class="name primary2-background">
@@ -32,10 +31,13 @@
 		</template>
 		</div>
 	</template>
+	<!--
 	<script src="../jquery/dist/jquery.min.js">
     </script>
+
     <script src="../jquery-ui/jquery-ui.min.js">
     </script>
+    -->
     <script src="./polymeria.js">
     </script>
 	<script>
@@ -54,8 +56,10 @@ Polymer('uml-packagedElement', {
 		else {
 			new UmlElement(this);
 		}
+
 		// An observer pattern attached to the draggable element notifies the 
 		// relationship to be redrawn
+		/*
 		$(this.$.element).draggable({
 			start: function() {
 			},
@@ -66,6 +70,7 @@ Polymer('uml-packagedElement', {
 			stop: function() {
 			}
 		});
+		*/
 		this.umlElement.initializePosition();
 	}, 
 	domReady: function() {
