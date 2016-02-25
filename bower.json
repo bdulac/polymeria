@@ -26,11 +26,13 @@
     "**/.*",
     "node_modules",
     "bower_components",
+    "jquery",
     "polymer",
     "test",
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#0.5.3"
+    "polymer": "Polymer/polymer#0.5.3", 
+    "jquery": "~2.2.1"
   }
 }

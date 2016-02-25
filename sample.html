@@ -4,21 +4,7 @@
     <title>Polymeria sample</title>
     <script src="bower_components/webcomponentsjs/webcomponents.js">
     </script>
-    <script src="bower_components/jquery/dist/jquery.min.js">
-    </script>
-    <script src="bower_components/jquery-ui/jquery-ui.min.js">
-    </script>
-    <link rel="stylesheet" href="bower_components/jquery-ui/themes/humanity/jquery-ui.css">
     <link rel="import" href="bower_components/polymeria-uml/uml-polymeria.html">
-    <script>
-$(function() {
-$( "#accordion" ).accordion({
-collapsible: true, 
-active: false, 
-heightStyle: "content"
-});
-});
-    </script>
   </head>
   <style>
     body {
@@ -43,67 +29,6 @@ heightStyle: "content"
 	}
   </style>
   <body style="background-color: #f9f9f9;" unresolved>
-  <section>
-  	<div id="accordion">
-      <h3 title="Initial XML source">Eclipse UML2 model</h3>
-      <div>
-      <p class="label">The initial XML source of the <a href="http://wiki.eclipse.org/MDT-UML2" target="_blank">Eclipse EMF-based</a> UML2 metamodel</p>
-      <pre class="cite-xml">
-&lt;model name="My model"&gt;
-  &lt;packagedElement type="uml:Class" name="MyClass"&gt;
-    &lt;ownedAttribute name="myAttribute" visibility="private" type="test" /&gt;
-    &lt;ownedOperation name="myOperation" visibility="protected" type="test" /&gt;
-  &lt;/packagedElement&gt;
-  &lt;packagedElement type="uml:Package" name="My package"&gt;
-    &lt;packagedElement type="uml:Class" name="MyPackageClass"&gt;
-      &lt;packagedElement type="type:Class" name="MyNestedClass" /&gt;
-    &lt;/packagedElement&gt;
-  &lt;/packagedElement&gt;
-  &lt;packagedElement type="uml:Class" name="MyOtherClass" id="test" &gt;
-    &lt;ownedOperation name="myOperationWithParameters" visibility="public"&gt;
-      &lt;ownedParameter name="myFirstParam" /&gt;
-      &lt;ownedParameter name="mySecondParam" /&gt;
-    &lt;/ownedOperation&gt;
-    &lt;packagedElement type="uml:Class" name="MyAssociatedClass" id="test2"&gt;
-  &lt;/packagedElement&gt;
-  &lt;packagedElement type="uml:Dependency" client="test2" supplier="test"&gt;
-  &lt;/packagedElement&gt;
-  &lt;/packagedElement&gt;
-&lt;/model&gt;</pre>
-      </div>
-      <h3 title="Adaptation of the XML source">Web components</h3>
-      <div>
-      <p class="label"><a href="http://bdulac.github.io/note/web-components-adapation-xml-document/" target="_blank">Adaptation of the XML source</a>: Web components names compatibility and self-closing tags removal</p>
-      <pre class="cite-xml">
-&lt;uml-model name="My model"&gt;
-  &lt;uml-packagedElement type="uml-Class" name="MyClass" &gt;
-    &lt;uml-ownedAttribute name="myAttribute" visibility="private" type="test" &gt;
-    &lt;/uml-ownedAttribute&gt;
-    &lt;uml-ownedOperation name="myOperation" visibility="protected" type="test" &gt;
-    &lt;/uml-ownedOperation&gt;
-  &lt;/uml-packagedElement&gt;
-  &lt;uml-packagedElement type="uml-Package" name="My package"&gt;
-    &lt;uml-packagedElement type="uml-Class" name="MyPackageClass"&gt;
-      &lt;uml-packagedElement type="uml-Class" name="MyNestedClass"&gt;
-      &lt;/uml-packagedElement&gt;
-    &lt;/uml-packagedElement&gt;
-  &lt;/uml-packagedElement&gt;
-  &lt;uml-packagedElement type="uml-Class" name="MyOtherClass" id="test" &gt;
-    &lt;uml-ownedOperation name="myOperationWithParameters" visibility="public"&gt;
-      &lt;uml-ownedParameter name="myFirstParam"&gt;
-      &lt;/uml-ownedParameter&gt;
-      &lt;uml-ownedParameter name="mySecondParam"&gt;
-      &lt;/uml-ownedParameter&gt;
-    &lt;/uml-ownedOperation&gt;
-  &lt;/uml-packagedElement&gt;
-  &lt;uml-packagedElement type="uml-Class" name="MyAssociatedClass" id="test2"&gt;
-  &lt;/uml-packagedElement&gt;
-  &lt;uml-packagedElement type="uml-Dependency" client="test2" supplier="test"&gt;
-  &lt;/uml-packagedElement&gt;
-&lt;/uml-model&gt;</pre>
-    </div>
-    </div>
-    </section>
     <section>
       <uml-model name="My model">
           <uml-packagedElement type="uml-Class" name="MyClass" id="classA">
@@ -163,6 +88,67 @@ heightStyle: "content"
             supplier="classB">
           </uml-packagedElement>
       </uml-model>
+    </section>
+    <section>
+  	<div id="accordion">
+      <h3 title="Initial XML source">Eclipse UML2 model</h3>
+      <div>
+      <p class="label">The initial XML source of the <a href="http://wiki.eclipse.org/MDT-UML2" target="_blank">Eclipse EMF-based</a> UML2 metamodel</p>
+      <pre class="cite-xml">
+&lt;model name="My model"&gt;
+  &lt;packagedElement type="uml:Class" name="MyClass"&gt;
+    &lt;ownedAttribute name="myAttribute" visibility="private" type="test" /&gt;
+    &lt;ownedOperation name="myOperation" visibility="protected" type="test" /&gt;
+  &lt;/packagedElement&gt;
+  &lt;packagedElement type="uml:Package" name="My package"&gt;
+    &lt;packagedElement type="uml:Class" name="MyPackageClass"&gt;
+      &lt;packagedElement type="type:Class" name="MyNestedClass" /&gt;
+    &lt;/packagedElement&gt;
+  &lt;/packagedElement&gt;
+  &lt;packagedElement type="uml:Class" name="MyOtherClass" id="test" &gt;
+    &lt;ownedOperation name="myOperationWithParameters" visibility="public"&gt;
+      &lt;ownedParameter name="myFirstParam" /&gt;
+      &lt;ownedParameter name="mySecondParam" /&gt;
+    &lt;/ownedOperation&gt;
+    &lt;packagedElement type="uml:Class" name="MyAssociatedClass" id="test2"&gt;
+  &lt;/packagedElement&gt;
+  &lt;packagedElement type="uml:Dependency" client="test2" supplier="test"&gt;
+  &lt;/packagedElement&gt;
+  &lt;/packagedElement&gt;
+&lt;/model&gt;</pre>
+      </div>
+      <h3 title="Adaptation of the XML source">Web components</h3>
+      <div>
+      <p class="label"><a href="http://bdulac.github.io/note/web-components-adapation-xml-document/" target="_blank">Adaptation of the XML source</a>: Web components names compatibility and self-closing tags removal</p>
+      <pre class="cite-xml">
+&lt;uml-model name="My model"&gt;
+  &lt;uml-packagedElement type="uml-Class" name="MyClass" &gt;
+    &lt;uml-ownedAttribute name="myAttribute" visibility="private" type="test" &gt;
+    &lt;/uml-ownedAttribute&gt;
+    &lt;uml-ownedOperation name="myOperation" visibility="protected" type="test" &gt;
+    &lt;/uml-ownedOperation&gt;
+  &lt;/uml-packagedElement&gt;
+  &lt;uml-packagedElement type="uml-Package" name="My package"&gt;
+    &lt;uml-packagedElement type="uml-Class" name="MyPackageClass"&gt;
+      &lt;uml-packagedElement type="uml-Class" name="MyNestedClass"&gt;
+      &lt;/uml-packagedElement&gt;
+    &lt;/uml-packagedElement&gt;
+  &lt;/uml-packagedElement&gt;
+  &lt;uml-packagedElement type="uml-Class" name="MyOtherClass" id="test" &gt;
+    &lt;uml-ownedOperation name="myOperationWithParameters" visibility="public"&gt;
+      &lt;uml-ownedParameter name="myFirstParam"&gt;
+      &lt;/uml-ownedParameter&gt;
+      &lt;uml-ownedParameter name="mySecondParam"&gt;
+      &lt;/uml-ownedParameter&gt;
+    &lt;/uml-ownedOperation&gt;
+  &lt;/uml-packagedElement&gt;
+  &lt;uml-packagedElement type="uml-Class" name="MyAssociatedClass" id="test2"&gt;
+  &lt;/uml-packagedElement&gt;
+  &lt;uml-packagedElement type="uml-Dependency" client="test2" supplier="test"&gt;
+  &lt;/uml-packagedElement&gt;
+&lt;/uml-model&gt;</pre>
+    </div>
+    </div>
     </section>
   </body>
 </html>
