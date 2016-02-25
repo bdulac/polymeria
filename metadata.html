@@ -1,26 +1,75 @@
-<x-meta id="uml-model" label="Model" group="Polymeria UML">
+<x-meta id="uml-model" label="Model" group="UML">
 
   <template>
-  
-    <uml-model name="My model"></uml-model>
-    
+    <uml-model></uml-model>
   </template>
+
+  <property name="name" kind="string"></property>
   
   <template id="imports">
-  
     <link rel="import" href="uml-model.html">
-    
   </template>
   
 </x-meta>
-<x-meta id="uml-class" label="Class" group="Polymeria UML">
+<x-meta id="uml-package" label="Package" group="UML">
 
   <template>
   
-    <uml-packagedElement type="uml-Class" name="MyClass" id="myClassIdentifier">
+    <uml-packagedElement type="uml-Package" name="mypackage" id="my-package-id">
     </uml-packagedElement>
     
   </template>
+  
+  <property name="name" kind="string"></property>
+  
+  
+  <template id="imports">
+  
+    <link rel="import" href="uml-packagedElement.html">
+  </template>
+  
+</x-meta>
+<x-meta id="uml-class" label="Class" group="UML">
+
+  <template>
+  
+    <uml-packagedElement type="uml-Class" name="MyNewClass" id="my-new-class-identifier">
+    </uml-packagedElement>
+    
+  </template>
+  
+  <!-- 
+  <property name="name" kind="string"></property>
+  <property name="type" kind="string"></property>
+  <property name="client" kind="string"></property>
+  <property name="supplier" kind="string"></property>
+  <property name="x" kind="number"></property>
+  <property name="y" kind="number"></property>
+   -->
+  
+  <property name="name" kind="string"></property>
+  <property name="x" kind="number"></property>
+  <property name="y" kind="number"></property>
+  
+  <template id="imports">
+  
+    <link rel="import" href="uml-packagedElement.html">
+  </template>
+  
+</x-meta>
+<x-meta id="uml-interface" label="Interface" group="UML">
+
+  <template>
+  
+    <uml-packagedElement type="uml-Interface" name="MyInterface" id="my-interface-identifier">
+    </uml-packagedElement>
+    
+  </template>
+  
+  <property name="name" kind="string"></property>
+  <property name="x" kind="number"></property>
+  <property name="y" kind="number"></property>
+  
   
   <template id="imports">
   
@@ -29,19 +78,43 @@
   </template>
   
 </x-meta>
-<x-meta id="uml-class" label="Interface" group="Polymeria UML">
+<x-meta id="uml-method" label="Method" group="UML">
 
   <template>
   
-    <uml-packagedElement type="uml-Interface" name="MyInterface" id="myInterfaceIdentifier">
-    </uml-packagedElement>
+    <uml-ownedOperation type="my-interface-identifier" name="MyMethod" id="my-method-identifier">
+    </uml-ownedOperation>
     
   </template>
+  
+  
+  <property name="name" kind="string"></property>
+  <property name="visibility" kind="string"></property>
+  <property name="type" kind="string"></property>
   
   <template id="imports">
   
     <link rel="import" href="uml-packagedElement.html">
+  </template>
+  
+</x-meta>
+<x-meta id="uml-attribute" label="Attribute" group="UML">
+
+  <template>
+  
+    <uml-ownedAttribute type="my-class-identifier" name="myAttribute" id="my-attribute-identifier">
+    </uml-ownedAttribute>
     
+  </template>
+  
+  
+  <property name="name" kind="string"></property>
+  <property name="visibility" kind="string"></property>
+  <property name="type" kind="string"></property>
+  
+  <template id="imports">
+  
+    <link rel="import" href="uml-packagedElement.html">
   </template>
   
 </x-meta>
