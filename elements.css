@@ -1,3 +1,16 @@
+* {
+	margin: 0;
+	padding: 0;
+	border-width: 0;
+	border-style: none;
+	outline-width: 0;
+	outline-style: none;
+	font-size: 1em;
+	line-height: 1.2em;
+	font-weight: 500;
+	font-family: sans-serif;
+	width: initial;
+}
 .model-header {
 	min-height: 50px;
 	text-align: center;
