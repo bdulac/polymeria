@@ -1,25 +1,27 @@
 <link rel="import" 
   href="../polymer/polymer.html">
-<polymer-element name="uml-packagedElement" attributes="name type client supplier direction x y">
+<dom-module id="uml-packagedElement">
 	<template>
 		<link rel="stylesheet" type="text/css" href="colors.css" >
 		<link rel="stylesheet" type="text/css" href="elements.css" >
 		<style>
 			:host {
+				display: block;
+				box-sizing: border-box;
 			}
 		</style>
-		<div style="margin: 0; padding: 0;">
-		<template bind if="{{ type == 'uml-Package' }}">
-			<div id="element" class="package" vertical layout>
+		<span>
+		<template  is="dom-if" if="{{ isPackage(type) }}">
+			<div id="element" class="package">
 				<div class="name primary2-background">
 				{{ name }}
 				</div>
-				<div class="content primary2-background" layout>
+				<div class="content primary2-background">
 					<content></content>
 				</div>
 			</div>
 		</template>
-		<template bind if="{{ (type == 'uml-Class') || (type == 'uml-Interface') }}">
+		<template is="dom-if" if="{{ isClass(type) }}">
 			<div id="element" class="class white-background" layout vertical style="margin: 15px;">
 				<div class="name">
 				{{ name }}
@@ -29,59 +31,118 @@
 				</div>
 			</div>
 		</template>
-		</div>
+		<template is="dom-if" if="{{ isInterface(type) }}">
+			<div id="element" class="interface white-background" layout vertical style="margin: 15px;">
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		</span>
 	</template>
-	
-	<script src="../jquery/dist/jquery.min.js">
-    </script>
-    <!--
-    <script src="../jquery-ui/jquery-ui.min.js">
-    </script>
-    -->
-    <script src="./polymeria.js">
-    </script>
+    <script src="../jquery/dist/jquery.min.js"></script>
+    <script src="./polymeria.js"></script>
 	<script>
-Polymer('uml-packagedElement', {
-	direction: 'vertical', 
-	ready: function() {
-		if(this.type == 'uml-Dependency') {
-			new UmlDependency(this);
-		}
-		else if(this.type == 'uml-Association') {
-			new UmlAssociation(this);
-		}
-		else if(this.type == 'uml-Realization') {
-			new UmlRealization(this);
-		}
-		else {
-			new UmlElement(this);
-		}
-
-		// An observer pattern attached to the draggable element notifies the 
-		// relationship to be redrawn
-		/*
-		$(this.$.element).draggable({
-			start: function() {
+	(function() {
+		var PackagedElement = Polymer({
+			is: "uml-packagedElement",
+			properties: {
+				name: String,
+				type: String, 
+				client: String, 
+				supplier: String, 
+				direction: {
+					type: String,
+					value: 'vertical'
+				}, 
+				x: Number, 
+				y: Number
 			},
-			drag: function() {
-				var component = getWebComponent(this);
-				component.umlElement.notifyMoveListeners();
+			isPackage: function(type) {
+				return (type == 'uml-Package');
 			},
-			stop: function() {
+			isClass: function(type) {
+				return (type == 'uml-Class');
+			},
+			isInterface: function(type) {
+				return (type == 'uml-Interface');
+			},
+			isAssociation: function(type) {
+				return (type == 'uml-Association');
+			},
+			isDependency: function(type) {
+				return (type == 'uml-Dependency');
+			},
+			isRealization: function(type) {
+				return (type == 'uml-Realization');
+			},
+			ready: function() {
+				/*
+				console.log("TYPE=" + this.type);
+				console.log("NAME=" + this.name);
+				console.log("CLIENT=" + this.client);
+				console.log("SUPPLIER=" + this.supplier);
+				*/
+				// TODO à niveau, pas de propriété disponible !!!
+				// Comment adapter le binding côté JS ? (fait pour la template)
+				
+			}, 
+			attached: function() {
+				if(this.type == 'uml-Dependency') {
+					new UmlDependency(this);
+				}
+				else if(this.type == 'uml-Association') {
+					new UmlAssociation(this);
+				}
+				else if(this.type == 'uml-Realization') {
+					new UmlRealization(this);
+				}
+				else {
+					new UmlElement(this);
+				}
+				this.umlElement.initializePosition();
+				if(
+							(this.type == 'uml-Dependency') 
+							||(this.type == 'uml-Association')
+							||(this.type == 'uml-Realization')
+				) {
+						this.umlElement.displayRelationship();		
+				}
+				/*
+				window.addEventListener('WebComponentsReady', function(e) {
+					
+				});
+				*/
+				// An observer pattern attached to the draggable element notifies the 
+				// relationship to be redrawn
+				/*
+				$(this.$.element).draggable({
+					start: function() {
+					},
+					drag: function() {
+						var component = getWebComponent(this);
+						component.umlElement.notifyMoveListeners();
+					},
+					stop: function() {
+					}
+				});
+				*/
+				/*
+				this.umlElement.initializePosition();
+				if(
+						(this.type == 'uml-Dependency') 
+						||(this.type == 'uml-Association')
+						||(this.type == 'uml-Realization')
+				) {
+					this.umlElement.displayRelationship();		
+				}
+				*/
 			}
 		});
-		*/
-		this.umlElement.initializePosition();
-	}, 
-	domReady: function() {
-		if(
-				(this.umlElement.webComponent.type == 'uml-Dependency') 
-				||(this.umlElement.webComponent.type == 'uml-Association')
-				||(this.umlElement.webComponent.type == 'uml-Realization')
-		) {
-			this.umlElement.displayRelationship();		
-		}
-	}
-});
+		var el = new PackagedElement();
+	})();
 	</script>
-</polymer-element>
+</dom-module>

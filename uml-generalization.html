@@ -1,25 +1,35 @@
 <link rel="import" 
   href="../polymer/polymer.html">
-<polymer-element name="uml-generalization" attributes="name type general direction x y">
-	<script src="./polymeria.js">
-    </script>
+<dom-module id="uml-generalization">
+	<template>
+	</template>
+	<script src="../jquery/dist/jquery.min.js"></script>
+	<script src="./polymeria.js"></script>
 	<script>
-Polymer('uml-generalization', {
-	direction: 'vertical', 
-	ready: function() {
-		if(this.type == 'uml-Generalization') {
-			new UmlGeneralization(this);
-		}
-		
-		this.umlElement.initializePosition();
-	}, 
-	domReady: function() {
-		if(
-				(this.umlElement.webComponent.type == 'uml-Generalization')
-		) {
-			this.umlElement.displayRelationship();		
-		}
-	}
-});
+	(function() {
+		var Generalization = Polymer({
+			is: "uml-generalization",
+			properties: {
+				name: String,
+				type: String, 
+				general: String, 
+				direction: {
+					type: String,
+					value: 'vertical'
+				}, 
+				x: Number, 
+				y: Number
+			}, 
+			ready: function() {
+				
+			}, 
+			attached: function() {
+				new UmlGeneralization(this);
+				this.umlElement.initializePosition();
+				this.umlElement.displayRelationship();
+			}
+		});
+		var el = new Generalization();
+	})();
 	</script>
-</polymer-element>
+</dom-module>

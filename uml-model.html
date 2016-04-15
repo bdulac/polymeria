@@ -1,12 +1,14 @@
 <link rel="import" 
   href="../polymer/polymer.html">
-<polymer-element name="uml-model" attributes="name">
+<dom-module id="uml-model" attributes="name">
 	<template>
 		<link rel="stylesheet" type="text/css" href="colors.css" >
 		<link rel="stylesheet" type="text/css" href="elements.css" >
 		<style>
 		:host {
 			padding: 0;
+			display: block;
+			box-sizing: border-box;
 		}
 		</style>
 		<div class="model-header white-background" horizontal layout center>
@@ -19,11 +21,19 @@
 			<content></content>
 		</div>
 	</template>
+	<script src="./polymeria.js"></script>
 	<script>
-	Polymer('uml-model', {
-		ready: function() {
-			new UmlElement(this);
-		}
-	});
+	(function() {
+		var Model = Polymer({
+			is: "uml-model",
+			properties: {
+				name: String
+			}, 
+			attached: function() {
+				new UmlElement(this);
+			}
+		});
+		var el = new Model();
+	})();
 	</script>
-</polymer-element>
+</dom-module>

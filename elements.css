@@ -1,16 +1,3 @@
-* {
-	margin: 0;
-	padding: 0;
-	border-width: 0;
-	border-style: none;
-	outline-width: 0;
-	outline-style: none;
-	font-size: 1em;
-	line-height: 1.2em;
-	font-weight: 500;
-	font-family: sans-serif;
-	width: initial;
-}
 .model-header {
 	min-height: 50px;
 	text-align: center;
@@ -18,9 +5,12 @@
 	padding: 5px;
 	margin: 0;
 	min-height: 50px;
+	max-width: 300px;
 	text-align: center;
 	border-width: 1px;
+	border-radius: 0 0 0.5em 0;
 	box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.26);
+	background-color: white;
 }
 .model-header .name {
 	margin-top: auto;
@@ -30,6 +20,7 @@
 	font-weight: bold;
 	font-size: 1.5em;
 	padding: 5px;
+	padding-right: 3em;
 	margin: 0;
 	text-align: center;
 }
@@ -41,12 +32,25 @@
 .model .class {
 	marding: 15px;
 }
-
+uml-packagedelement {
+	display: inline-block;
+}
+.uml-packagedelement {
+	display: inline-block;
+}
+.uml-packagedelement div {
+	display: block;
+}
+.uml-packagedelement > .package, .uml-packagedelement > .class, .uml-packagedelement > .interface {	
+	padding: 0;
+	margin: 0;
+	display: inline-block;
+}
 .package {
 	margin: 15px;
 	text-align: left;
-	float: left;
 	max-width: 100%;
+	display: inline-block; 
 }
 .package > .name  {
 	font-family: sans-serif;
@@ -55,11 +59,9 @@
 	border-width: 1px;
 	border-radius: 3px 3px 0px 0px;
 	padding: 3px;
-	display: inline;
 	margin-left: 5px;
 	max-width: 250px;
 	overflow: auto;
-	float: left;
 }
 .package > .content {
 	font-family: sans-serif;
@@ -84,7 +86,7 @@
 	overflow: auto;
 	box-shadow: 1px 1px 1px silver;
 	font-family: sans-serif;
-	float: left;
+	display: block;
 }
 .class:active {
 	border-style: inset;
@@ -95,6 +97,39 @@
 	background-color: none;
 }
 .class > .name  {
+	margin-top: 0;
+	border-style: none;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	margin-left: 0;
+	margin-right: 0;
+	margin-bottom: 15px;
+	padding: 15px;
+	text-align: center;
+}
+
+.interface {
+	border-style: outset;
+	border-width: 1px;
+	border-radius: 3px;
+	padding: 0;
+	margin: 15px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 400px;
+	overflow: auto;
+	box-shadow: 1px 1px 1px silver;
+	font-family: sans-serif;
+}
+.interface:active {
+	border-style: inset;
+	border-width: 2px;
+}
+.interface > .content {
+	padding: 15px;
+	background-color: none;
+}
+.interface > .name  {
 	margin-top: 0;
 	border-style: none;
 	border-bottom-style: solid;

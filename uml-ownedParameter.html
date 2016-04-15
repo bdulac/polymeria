@@ -1,6 +1,6 @@
 <link rel="import" 
   href="../polymer/polymer.html">
-<polymer-element name="uml-ownedParameter" attributes="name visibility type">
+<dom-module id="uml-ownedParameter">
 	<template>
 		<link rel="stylesheet" type="text/css" href="colors.css" >
 		<link rel="stylesheet" type="text/css" href="elements.css" >
@@ -16,14 +16,23 @@
     		<content></content>   
 		</div>
 	</template>
+	<script src="./polymeria.js"></script>
 	<script>
-	Polymer('uml-ownedParameter', { 
-		ready: function() {
-			new UmlMember(this);
-		}, 
-		domReady: function() {
-			this.umlElement.displayType();
-		}
-	});
+	(function() {
+		var OwnedParameter = Polymer({
+			is: "uml-ownedParameter", 
+			properties: {
+				name: String,
+				type: String
+			}, 
+			ready: function() {
+			}, 
+			attached: function() {
+				new UmlMember(this);
+				this.umlElement.displayType();
+			}
+		});
+		var el = new OwnedParameter();
+	})();			
 	</script>
-</polymer-element>
+</dom-module>

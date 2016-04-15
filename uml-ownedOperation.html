@@ -1,6 +1,6 @@
 <link rel="import" 
   href="../polymer/polymer.html">
-<polymer-element name="uml-ownedOperation" attributes="name visibility type">
+<dom-module id="uml-ownedOperation">
 	<template>
 		<link rel="stylesheet" type="text/css" href="colors.css" >
 		<link rel="stylesheet" type="text/css" href="elements.css" >
@@ -13,13 +13,13 @@
 		<div class="method" layout vertical left>
 			<span>
 				<span class="visibility accent-color">
-					<template bind if="{{ visibility == 'private' }}">
+					<template is="dom-if" if="{{ isPrivate(visibility) }}">
 					-
 					</template>
-					<template bind if="{{ visibility == 'protected' }}">
+					<template is="dom-if" if="{{ isProtected(visibility) }}">
 					#
 					</template>
-					<template bind if="{{ visibility == 'public' }}">
+					<template is="dom-if" if="{{ isPublic(visibility) }}">
 					+
 					</template>
 				</span>
@@ -30,14 +30,33 @@
 			</span>
 		</div>
 	</template>
+	<script src="./polymeria.js"></script>
 	<script>
-	Polymer('uml-ownedOperation', { 
-		ready: function() {
-			new UmlMember(this);
-		}, 
-		domReady: function() {
-			this.umlElement.displayType();
-		}
-	});
+	(function() {
+		var OwnedOperation = Polymer({
+			is: "uml-ownedOperation",
+			properties: {
+				name: String,
+				visibility: String, 
+				type: String
+			}, 
+			isPrivate: function(visibility) {
+				return (visibility == 'private');
+			},
+			isProtected: function(visibility) {
+				return (visibility == 'protected');
+			},
+			isPublic: function(visibility) {
+				return (visibility == 'public');
+			},
+			ready: function() {
+			}, 
+			attached: function() {
+				new UmlMember(this);
+				this.umlElement.displayType();
+			}
+		});
+		var el = new OwnedOperation();
+	})();
 	</script>
-</polymer-element>
+</dom-module>
