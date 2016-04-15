@@ -79,16 +79,7 @@
 			isRealization: function(type) {
 				return (type == 'uml-Realization');
 			},
-			ready: function() {
-				/*
-				console.log("TYPE=" + this.type);
-				console.log("NAME=" + this.name);
-				console.log("CLIENT=" + this.client);
-				console.log("SUPPLIER=" + this.supplier);
-				*/
-				// TODO à niveau, pas de propriété disponible !!!
-				// Comment adapter le binding côté JS ? (fait pour la template)
-				
+			ready: function() {				
 			}, 
 			attached: function() {
 				if(this.type == 'uml-Dependency') {
@@ -111,35 +102,6 @@
 				) {
 						this.umlElement.displayRelationship();		
 				}
-				/*
-				window.addEventListener('WebComponentsReady', function(e) {
-					
-				});
-				*/
-				// An observer pattern attached to the draggable element notifies the 
-				// relationship to be redrawn
-				/*
-				$(this.$.element).draggable({
-					start: function() {
-					},
-					drag: function() {
-						var component = getWebComponent(this);
-						component.umlElement.notifyMoveListeners();
-					},
-					stop: function() {
-					}
-				});
-				*/
-				/*
-				this.umlElement.initializePosition();
-				if(
-						(this.type == 'uml-Dependency') 
-						||(this.type == 'uml-Association')
-						||(this.type == 'uml-Realization')
-				) {
-					this.umlElement.displayRelationship();		
-				}
-				*/
 			}
 		});
 		var el = new PackagedElement();
