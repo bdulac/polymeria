@@ -1,6 +1,6 @@
 {
   "name": "polymeria-uml",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": [
     "uml-model.html",
     "uml-generalization.html",
