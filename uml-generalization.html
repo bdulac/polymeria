@@ -28,7 +28,13 @@
 				this.async(function() {
 					this.umlElement.initializePosition();
 					this.umlElement.displayRelationship();
-				});
+					$(window).on("resize", 
+							{ relationshipElement: this.umlElement }, 
+							function( event ) {
+								event.data.relationshipElement.displayRelationship();
+							}
+					);
+				}, 500);
 			}
 		});
 		var el = new Generalization();

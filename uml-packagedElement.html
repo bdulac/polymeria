@@ -95,16 +95,22 @@
 					new UmlElement(this);
 				}
 				this.async(function() {
-				      // code that formerly resided in `domReady`
-				    this.umlElement.initializePosition();
+					this.umlElement.initializePosition();
 					if(
 							(this.type == 'uml-Dependency') 
 							||(this.type == 'uml-Association')
 							||(this.type == 'uml-Realization')
 					) {
-						this.umlElement.displayRelationship();		
+						this.umlElement.initializePosition();
+						this.umlElement.displayRelationship();
+						$(window).on("resize", 
+								{ relationshipElement: this.umlElement }, 
+								function( event ) {
+									event.data.relationshipElement.displayRelationship();
+								}
+						);
 					}
-				});
+				}, 500);
 			}
 		});
 		var el = new PackagedElement();
