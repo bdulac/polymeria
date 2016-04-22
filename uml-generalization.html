@@ -25,8 +25,10 @@
 			}, 
 			attached: function() {
 				new UmlGeneralization(this);
-				this.umlElement.initializePosition();
-				this.umlElement.displayRelationship();
+				this.async(function() {
+					this.umlElement.initializePosition();
+					this.umlElement.displayRelationship();
+				});
 			}
 		});
 		var el = new Generalization();

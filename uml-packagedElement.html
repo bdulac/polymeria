@@ -94,14 +94,17 @@
 				else {
 					new UmlElement(this);
 				}
-				this.umlElement.initializePosition();
-				if(
+				this.async(function() {
+				      // code that formerly resided in `domReady`
+				    this.umlElement.initializePosition();
+					if(
 							(this.type == 'uml-Dependency') 
 							||(this.type == 'uml-Association')
 							||(this.type == 'uml-Realization')
-				) {
+					) {
 						this.umlElement.displayRelationship();		
-				}
+					}
+				});
 			}
 		});
 		var el = new PackagedElement();
