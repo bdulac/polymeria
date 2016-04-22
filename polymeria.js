@@ -139,7 +139,7 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
 		canvasLineStartX = (canvasEndX - canvasStartX) / 2;
 		// If we can have a straight line, 
 		if(canvasLineStartX < targetElement.width()) {
-			// Then the start is the end
+			// Then the start X is the same as the end
 			canvasLineEndX = canvasLineStartX;
 		}
 		else {
@@ -162,7 +162,7 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
 		canvasLineStartX = (canvasEndX - canvasStartX) / 2;
 		// If we can have a straight line, 
 		if(canvasLineStartX < targetElement.width()) {
-			// Then the start is the end
+			// Then the start X is the  same as the end
 			canvasLineEndX = canvasLineStartX;
 		}
 		else {
@@ -219,7 +219,7 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
 		canvasLineStartY = (canvasEndY - canvasStartY) / 2;
 		// If we can have a straight line, 
 		if(canvasLineStartY < targetElement.height()) {
-			// Then the start is the end
+			// Then the start Y is the same as the end
 			canvasLineEndY = canvasLineStartY;
 		}
 		else {
@@ -242,7 +242,7 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
 		canvasLineStartY = (canvasEndY - canvasStartY) / 2;
 		// If we can have a straight line, 
 		if(canvasLineStartY < sourceElement.height()) {
-			// Then the start is the end
+			// Then the start Y is the same as the end
 			canvasLineEndY = canvasLineStartY;
 		}
 		else {
@@ -272,8 +272,8 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
 	var canvasLeft = canvasStartX;
 	var canvasHeight = canvasEndY - canvasStartY;
 	var canvasWidth = canvasEndX - canvasStartX;
-	console.log("$ Drawing the canvas");
-	console.log("-->Position = (left: " + canvasLeft + ", top: " + canvasTop + ")");
+	// console.log("$ Drawing the canvas");
+	// console.log("-->Position = (left: " + canvasLeft + ", top: " + canvasTop + ")");
     // console.log("-->Dimensions = (width: " + canvasWidth + ", height: " + canvasHeight + ")");
     // Trying to fetch an existing element
     var canvasDiv = document.getElementById("relationship[" + webComponent.id + "]");
