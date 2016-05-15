@@ -1,5 +1,31 @@
 <link rel="import" 
   href="../polymer/polymer.html">
+<!--
+`<uml-ownedAttribute>` is the representation of an 
+<a href="http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Property.html">UML class attribute</a>.
+
+
+Three different attributes are supported: 
+<ul>
+  <li>`name` specifies the attribute name</li>
+  <li>`visibility` represents the attribute visibility</li>
+  <li>The `type` attribute allows to display the type of the attribute, using the `id` to identify it</li>
+</ul>
+
+In typical use, the `<uml-ownedAttribute>` belongs to an UML class.
+Its type might be an interface or another class:
+
+    <uml-packagedElement type="uml-Class" name="My Class" id="my-class">
+      <uml-ownedAttribute 
+          name="myAttribute" 
+          visibility="private"
+          type="my-interface">
+      </uml-ownedAttribute>
+    </uml-packagedElement>
+    <uml-packagedElement type="uml-Interface" name="My Interface"  id="my-interface">
+    </uml-packagedElement>
+
+-->  
 <dom-module id="uml-ownedAttribute">
 	<template>
 		<link rel="stylesheet" type="text/css" href="colors.css" >

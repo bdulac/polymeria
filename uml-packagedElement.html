@@ -1,5 +1,37 @@
 <link rel="import" 
   href="../polymer/polymer.html">
+<!--
+`<uml-packagedElement>` is the representation of an 
+<a href="http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/PackageableElement.html">UML packageable element</a>, 
+i.e. an element which could be nested into a package.
+
+Six different types of `<uml-packagedElement>` are supported: 
+<ul>
+  <li>uml-Class</li>
+  <li>uml-Interface</li>
+  <li>uml-Package</li>
+  <li>uml-Association</li>
+  <li>uml-Dependency</li>
+  <li>uml-Realization</li>
+</ul>
+
+Several attributes allow to display the different types of elements:
+<ul>
+  <li>The element type is specified via the `type` attribute</li>
+  <li>A `name` attribute specifies the displayed name for classes, interfaces and packages</li>
+  <li>Two `supplier` and `client` attributes specify the source and target of relationships</li>
+  <li>An `id` attribute is used for the identification of elements, it is required in order to represent relationships</li>
+</ul>
+
+    <uml-packagedElement type="uml-Package" name="My package">
+      <uml-packagedElement type="uml-Interface" id="my-client">
+      </uml-packagedElement>
+      <uml-packagedElement type="uml-Class" id="my-supplier">
+      </uml-packagedElement>
+      <uml-packagedElement type="uml-Realization" id="my-realization" client="my-client" supplier="my-supplier">
+      </uml-packagedElement>
+    </uml-packagedElement>
+-->
 <dom-module id="uml-packagedElement">
 	<template>
 		<link rel="stylesheet" type="text/css" href="colors.css" >

@@ -1,5 +1,17 @@
 <link rel="import" 
   href="../polymer/polymer.html">
+<!--
+`<uml-model>` is the representation of an 
+<a href="http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Model.html">UML model</a>.
+
+In typical use, the `<uml-model>` has a name and contains the model elements:
+
+    <body>
+      <uml-model name="My model">
+          <uml-packagedElement type="uml-Package" name="My package"></uml-packagedElement>
+      </uml-model>
+
+-->  
 <dom-module id="uml-model" attributes="name">
 	<template>
 		<link rel="stylesheet" type="text/css" href="colors.css" >
