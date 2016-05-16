@@ -1,10 +1,11 @@
 <link rel="import" 
   href="../polymer/polymer.html">
 <!--
-`<uml-generalization>` is the representation of an 
-<a href="http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Generalization.html">UML generalization relationship</a>.
+Representation of an UML [generalization relationship](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Generalization.html)
 
-The `general` attribute specifies the target of the generalization, the relationship is nested in the source element:
+The relationship is nested in the source element. The `general` attribute specifies the target of the generalization.
+
+Example:
 
     <uml-packagedElement type="uml-Class" name="MyParentClass" id="parent">
     </uml-packagedElement>
@@ -25,11 +26,12 @@ The `general` attribute specifies the target of the generalization, the relation
 			properties: {
 				name: String,
 				type: String, 
+				/** Target of the generalization. */
 				general: String, 
-				direction: {
+				/*direction: {
 					type: String,
 					value: 'vertical'
-				}, 
+				},*/ 
 				x: Number, 
 				y: Number
 			}, 

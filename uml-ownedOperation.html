@@ -1,18 +1,13 @@
 <link rel="import" 
   href="../polymer/polymer.html">
 <!--
-`<uml-ownedOperation>` is the representation of an 
-<a href="http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Operation.html">UML method</a>.
+Representation of an UML [method](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Operation.html)
 
 
-Three different attributes are supported: 
-<ul>
-  <li>`name` specifies the method name</li>
-  <li>`visibility` represents the method visibility</li>
-  <li>The `type` attribute allows to display the return type of the method, using the `id` to identify it</li>
-</ul>
+In typical use, the `<uml-ownedOperation>` belongs to an UML class or interface. 
+I might contains parameters.
 
-In typical use, the `<uml-ownedOperation>` belongs to an UML class or interface:
+Example: 
 
     <uml-packagedElement type="uml-Class" name="My A Class" id="my-class-a">
       <uml-ownedOperation
@@ -25,7 +20,6 @@ In typical use, the `<uml-ownedOperation>` belongs to an UML class or interface:
     </uml-packagedElement>
     <uml-packagedElement type="uml-Class" name="My B Class"  id="my-class-b">
     </uml-packagedElement>
-
 -->   
 <dom-module id="uml-ownedOperation">
 	<template>
@@ -63,8 +57,11 @@ In typical use, the `<uml-ownedOperation>` belongs to an UML class or interface:
 		var OwnedOperation = Polymer({
 			is: "uml-ownedOperation",
 			properties: {
+				/** The method name. */
 				name: String,
+				/** The method visibility: `private`, `public`, `protected`. */
 				visibility: String, 
+				/** The return type of the method, using the `id` to identify it. */
 				type: String
 			}, 
 			isPrivate: function(visibility) {

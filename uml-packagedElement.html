@@ -1,27 +1,13 @@
 <link rel="import" 
   href="../polymer/polymer.html">
 <!--
-`<uml-packagedElement>` is the representation of an 
-<a href="http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/PackageableElement.html">UML packageable element</a>, 
-i.e. an element which could be nested into a package.
+Representation of an UML [packageable element](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/PackageableElement.html)
 
-Six different types of `<uml-packagedElement>` are supported: 
-<ul>
-  <li>uml-Class</li>
-  <li>uml-Interface</li>
-  <li>uml-Package</li>
-  <li>uml-Association</li>
-  <li>uml-Dependency</li>
-  <li>uml-Realization</li>
-</ul>
+A packageable element is an element which could be nested into a package.
 
-Several attributes allow to display the different types of elements:
-<ul>
-  <li>The element type is specified via the `type` attribute</li>
-  <li>A `name` attribute specifies the displayed name for classes, interfaces and packages</li>
-  <li>Two `supplier` and `client` attributes specify the source and target of relationships</li>
-  <li>An `id` attribute is used for the identification of elements, it is required in order to represent relationships</li>
-</ul>
+The properties allow to display different types of elements.
+
+Example:
 
     <uml-packagedElement type="uml-Package" name="My package">
       <uml-packagedElement type="uml-Interface" id="my-client">
@@ -82,16 +68,39 @@ Several attributes allow to display the different types of elements:
 		var PackagedElement = Polymer({
 			is: "uml-packagedElement",
 			properties: {
+				/** the displayed name for classes, interfaces and packages. */
 				name: String,
+				/**
+				 * The element type.
+				 * Six different types of `<uml-packagedElement>` are supported: 
+				 *  <ul>
+				 *    <li>uml-Class</li>
+				 *    <li>uml-Interface</li>
+				 *    <li>uml-Package</li>
+				 *    <li>uml-Association</li>
+				 *    <li>uml-Dependency</li>
+				 *    <li>uml-Realization</li>
+				 *  </ul>
+				 */
 				type: String, 
+				/** 
+				 * Specify the source the source of a relationship 
+				 * (`uml-Association`, `uml-Dependency`, `uml-Relationship`).
+				 */
 				client: String, 
-				supplier: String, 
+				/** 
+				 * Specify the target the source of a relationship 
+				 * (`uml-Association`, `uml-Dependency`, `uml-Relationship`).
+				 */
+				supplier: String,
+				/*
 				direction: {
 					type: String,
 					value: 'vertical'
-				}, 
+				},*/ 
 				x: Number, 
 				y: Number
+				*/
 			},
 			isPackage: function(type) {
 				return (type == 'uml-Package');

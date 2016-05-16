@@ -1,17 +1,11 @@
 <link rel="import" 
   href="../polymer/polymer.html">
 <!--
-`<uml-ownedParameter>` is the representation of an 
-<a href="http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Parameter.html">UML method parameter</a>.
+Representation of an UML [method parameter](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Parameter.html)
 
+In typical use, the `<uml-ownedParameter>` belongs to an UML method.
 
-Two different attributes are supported: 
-<ul>
-  <li>`name` specifies the parameter name</li>
-  <li>`type` specifies the type of the method, using the `id` to identify it</li>
-</ul>
-
-In typical use, the `<uml-ownedParameter>` belongs to an UML method:
+Example: 
 
     <uml-packagedElement type="uml-Class" name="My A Class" id="my-class-a">
       <uml-ownedOperation
@@ -26,7 +20,6 @@ In typical use, the `<uml-ownedParameter>` belongs to an UML method:
     </uml-packagedElement>
     <uml-packagedElement type="uml-Class" name="My B Class"  id="my-class-b">
     </uml-packagedElement>
-
 -->  
 <dom-module id="uml-ownedParameter">
 	<template>
@@ -50,7 +43,9 @@ In typical use, the `<uml-ownedParameter>` belongs to an UML method:
 		var OwnedParameter = Polymer({
 			is: "uml-ownedParameter", 
 			properties: {
+				/** The parameter name. */
 				name: String,
+				/** The parameter type, using the `id` to identify it. */
 				type: String
 			}, 
 			ready: function() {
