@@ -46,6 +46,10 @@ uml-packagedelement {
 	margin: 0;
 	display: inline-block;
 }
+.uml-packagedelement > .package {
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
 .package {
 	margin: 15px;
 	text-align: left;
