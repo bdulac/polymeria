@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>uml-generalization</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js">
+    </script>
+    <link rel="import" href="../../uml-model.html">
+    <link rel="import" href="../../uml-packagedElement.html">
+    <link rel="import" href="../../uml-generalization.html">
+  </head>
+  <style>
+    body {
+      margin: 0;
+	  padding: 0;
+	  width: 100%;
+	  height: 100%;
+	}
+  </style>
+  <body unresolved>
+    <section>
+      <uml-model name="My test model">
+        <uml-packagedElement type="uml-Package" name="My generalization package">
+          <uml-packagedElement type="uml-Class" name="MyParentClass" id="client-class">
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Class" name="MyChildClass" id="supplier-class">
+            <uml-generalization 
+              type="uml-Generalization" 
+              general="client-class">
+            </uml-generalization>
+          </uml-packagedElement>
+        </uml-packagedElement>
+    </section>
+  </body>
+</html>

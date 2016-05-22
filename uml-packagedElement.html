@@ -1,7 +1,7 @@
 <link rel="import" 
   href="../polymer/polymer.html">
 <!--
-Representation of an UML [packageable element](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/PackageableElement.html)
+<h2>Representation of an UML [packageable element](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/PackageableElement.html)</h2>
 
 A packageable element is an element which could be nested into a package.
 
@@ -17,6 +17,8 @@ Example:
       <uml-packagedElement type="uml-Realization" id="my-realization" client="my-client" supplier="my-supplier">
       </uml-packagedElement>
     </uml-packagedElement>
+    
+@demo demo/uml-packagedElement.html
 -->
 <dom-module id="uml-packagedElement">
 	<template>
@@ -68,10 +70,8 @@ Example:
 		var PackagedElement = Polymer({
 			is: "uml-packagedElement",
 			properties: {
-				/** the displayed name for classes, interfaces and packages. */
-				name: String,
 				/**
-				 * The element type.
+				 * Element type.
 				 * Six different types of `<uml-packagedElement>` are supported: 
 				 *  <ul>
 				 *    <li>uml-Class</li>
@@ -82,9 +82,11 @@ Example:
 				 *    <li>uml-Realization</li>
 				 *  </ul>
 				 */
-				type: String, 
+				type: String,
+				/** Element displayed name (`uml-Class`, `uml-Interface`, `uml-Package`) */
+				name: String,
 				/** 
-				 * Specify the source the source of a relationship 
+				 * Specify the source of a relationship 
 				 * (`uml-Association`, `uml-Dependency`, `uml-Relationship`).
 				 */
 				client: String, 
@@ -93,12 +95,15 @@ Example:
 				 * (`uml-Association`, `uml-Dependency`, `uml-Relationship`).
 				 */
 				supplier: String,
-				/*
-				direction: {
-					type: String,
-					value: 'vertical'
-				},*/ 
+				/**
+				 * Sets the left position as absolute 
+				 (usage is discouraged if the element is nested in an `uml-Package`).
+				 */
 				x: Number, 
+				/**
+				 * Sets the top position as absolute 
+				 (usage is discouraged if the element is nested in an `uml-Package`).
+				 */
 				y: Number
 			},
 			isPackage: function(type) {

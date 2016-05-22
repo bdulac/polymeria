@@ -3,7 +3,7 @@
 <!--
 Representation of an UML [model](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Model.html)
 
-In typical use, the `<uml-model>` has a name and contains the model elements.
+In the Eclipse UML hierarchy, the model is itself a package. As a consequence, the `<uml-model>` contains packaged elements.
 
 Example: 
 
@@ -12,6 +12,7 @@ Example:
           <uml-packagedElement type="uml-Package" name="My package"></uml-packagedElement>
       </uml-model>
 
+@demo demo/uml-model.html
 -->  
 <dom-module id="uml-model" attributes="name">
 	<template>

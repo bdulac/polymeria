@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <title>uml-packagedElement</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js">
+    </script>
+    <link rel="import" href="../../uml-model.html">
+    <link rel="import" href="../../uml-packagedElement.html">
+    <link rel="import" href="../../uml-ownedAttribute.html">
+    <link rel="import" href="../../uml-ownedOperation.html">
+    <link rel="import" href="../../uml-ownedParameter.html">
+  </head>
+  <style>
+    body {
+      margin: 0;
+	  padding: 0;
+	  width: 100%;
+	  height: 100%;
+	}
+  </style>
+  <body unresolved>
+    <section>
+     <uml-model name="Test model">
+        <uml-packagedElement type="uml-Package" name='My parent package' id="my-parent-package">
+          <uml-packagedElement type="uml-Package" name='My association package' id="my-association-package">
+            <uml-packagedElement type="uml-Class" name='MySupplier' id="my-association-supplier">
+            </uml-packagedElement>
+            <uml-packagedElement type="uml-Class" name='MyClient' id="my-association-client">
+            </uml-packagedElement>
+            <uml-packagedElement type="uml-Dependency" supplier="my-association-supplier" client="my-association-client">
+            </uml-packagedElement>
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Package" name='My dependency package' id="my-dependency-package">
+            <uml-packagedElement type="uml-Class" name='MySupplier' id="my-dependency-supplier">
+            </uml-packagedElement>
+            <uml-packagedElement type="uml-Class" name='MyClient' id="my-dependency-client">
+            </uml-packagedElement>
+            <uml-packagedElement type="uml-Dependency" supplier="my-dependency-supplier" client="my-dependency-client">
+            </uml-packagedElement>
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Package" name='My realization package' id="my-realization-package">
+             <uml-packagedElement type="uml-Class" name='MyImplementation' id="my-implementation">
+            </uml-packagedElement>
+            <uml-packagedElement type="uml-Interface" name='MyInterface' id="my-interface">
+            </uml-packagedElement>
+            <uml-packagedElement type="uml-Realization" supplier="my-interface" client="my-implementation">
+            </uml-packagedElement>
+          </uml-packagedElement>
+        </uml-packagedElement>
+      </uml-model>
+    </section>
+  </body>
+</html>
