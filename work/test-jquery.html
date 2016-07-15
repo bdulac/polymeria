@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>jQuery UI Tests</title>
+<link rel="stylesheet" href="jquery-ui/themes/ui-lightness/jquery-ui.css">
+<script src="polymer/webcomponentsjs/webcomponents.js">
+</script>
+<link rel="import" href="polymer/polymer/polymer.html">
+</head>
+<body>
+  
+  <polymer-element
+    name="test-datepicker">
+    <template>
+      <style>:host {display:block;}</style>
+        <p>Date: <input type="text" id="dp"></p>
+    </template>
+  </dom-module>
+  
+  <h1>Standard Example</h1>
+  <p>Date: <input type="text" id="datepicker"></p>
+  
+  <h1>Polymer Example</h1>
+  <test-datepicker></test-datepicker>
+
+  <script src="jquery/dist/jquery.min.js"></script>
+  <script src="jquery-ui/jquery-ui.min.js"></script>
+  
+  <script>
+    $(function() {
+      jQuery.contains = function() {
+        return true;
+      };
+      $( "#datepicker" ).datepicker();
+    });   
+  </script>
+  
+  <script>
+  console.log("initializing dp");
+Polymer('test-datepicker', {
+  
+    ready: function() {
+      $(this.$.dp).datepicker();
+    }
+  
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Polymeria sample</title>
+    <script src="../bower_components/webcomponentsjs/webcomponents.js">
+    </script>
+    <link rel="import" href="../bower_components/polymeria-uml/uml-polymeria.html">
+  </head>
+  <body style="background-color: #f9f9f9;" unresolved>
+    <section>
+      <uml-model name="model">
+      <!-- 
+        <uml-packagedElement type="uml-Package" name="Vertical Source Package">
+          <uml-packagedElement type="uml-Class" name="MyClientClass">
+            <uml-ownedAttribute 
+              name="myAttribute" 
+              visibility="private"
+              type="model:Vertical Source Package.MySupplierClass">
+            </uml-ownedAttribute>
+            <uml-ownedOperation 
+              name="myOperation" 
+              visibility="protected"
+              type="model:Vertical Source Package.MySupplierClass">
+            </uml-ownedOperation>
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Class" name="MySupplierClass">
+            <uml-ownedAttribute 
+              name="myAttribute" 
+              visibility="private">
+            </uml-ownedAttribute>
+            <uml-ownedOperation name="myOperation" visibility="protected">
+            </uml-ownedOperation>
+          </uml-packagedElement>
+          <uml-packagedElement 
+            type="uml-Association" 
+            client="model:Vertical Source Package.MyClientClass"
+            supplier="model:Vertical Source Package.MySupplierClass">
+          </uml-packagedElement>
+        </uml-packagedElement>
+        <uml-packagedElement type="uml-Package" name="Vertical Target Package" direction="vertical">
+          <uml-packagedElement type="uml-Class" name="MySupplierClass">
+            <uml-ownedAttribute 
+              name="myAttribute" 
+              visibility="private"
+              type="model:Vertical Target Package.MyClientClass">
+            </uml-ownedAttribute>
+            <uml-ownedOperation 
+              name="myOperation" 
+              visibility="protected"
+              type="model:Vertical Target Package.MyClientClass">
+            </uml-ownedOperation>
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Class" name="MyClientClass">
+            <uml-ownedAttribute 
+              name="myAttribute" 
+              visibility="private">
+            </uml-ownedAttribute>
+            <uml-ownedOperation name="myOperation" visibility="protected">
+            </uml-ownedOperation>
+          </uml-packagedElement>
+          <uml-packagedElement 
+            type="uml-Association" 
+            client="model:Vertical Target Package.MyClientClass"
+            supplier="model:Vertical Target Package.MySupplierClass">
+          </uml-packagedElement>
+        </uml-packagedElement>
+        -->
+          <uml-packagedElement type="uml-Class" name="MySupplierClass">
+            <uml-ownedAttribute 
+              name="myAttribute" 
+              visibility="private">
+            </uml-ownedAttribute>
+            <uml-ownedOperation name="myOperation" visibility="protected">
+            </uml-ownedOperation>
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Class" name="MyClientClass">
+            <uml-ownedAttribute 
+              name="myAttribute" 
+              visibility="private"
+              type="model:MySupplierClass">
+            </uml-ownedAttribute>
+            <uml-ownedOperation 
+              name="myOperation" 
+              visibility="protected"
+              type="model:MySupplierClass">
+            </uml-ownedOperation>
+          </uml-packagedElement>
+          <uml-packagedElement 
+            type="uml-Association" 
+            client="model:MyClientClass"
+            supplier="model:MySupplierClass">
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Class" name="MySupplierClass2" x="1150px" y="75px">
+            <uml-ownedAttribute 
+              name="myAttribute" 
+              visibility="private">
+            </uml-ownedAttribute>
+            <uml-ownedOperation name="myOperation" visibility="protected">
+            </uml-ownedOperation>
+          </uml-packagedElement>
+          <uml-packagedElement 
+            type="uml-Association" 
+            client="model:MyClientClass2"
+            supplier="model:MySupplierClass2">
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Class" name="MyClientClass2" x="1350px" y="300px">
+            <uml-ownedAttribute 
+              name="myAttribute" 
+              visibility="private"
+              type="model:MySupplierClass2">
+            </uml-ownedAttribute>
+            <uml-ownedOperation 
+              name="myOperation" 
+              visibility="protected"
+              type="model:MySupplierClass2">
+            </uml-ownedOperation>
+          </uml-packagedElement>
+      </uml-model>
+    </section>
+  </body>
+</html>

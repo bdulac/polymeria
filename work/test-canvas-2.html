@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<body>
+	<div style="border-style: solid; border-color: red; width: ">
+		<canvas id="my-canvas" width="900px" style="border-style: solid; border-color: blue; margin: 0; max-width: 100%;"></canvas>
+	</div>
+<script>
+    // Get the context
+    var context = document.getElementById("my-canvas").getContext('2d');
+    
+    // Anti aliasing fix. This makes the lines look crisp and sharp and means that rounding to the
+    // nearest half pixel is not needed. If you don't mind slightly thicker lines you can do without this
+    context.translate(0.5, 0.5);
+    // Draw the circle
+    context.beginPath();
+        context.setLineDash([5]);
+        context.arc(65,65,50,0,2 * Math.PI,false);
+    context.stroke();
+    
+    // Draw the square
+    context.beginPath();
+        context.setLineDash([5,2]);
+        context.rect(130,15,100,100);
+    context.stroke();
+    // Draw the triangle
+    context.lineWidth = 2;
+    
+    context.beginPath();
+        
+        context.setLineDash([1,2]);
+        context.moveTo(245,115);
+        context.lineTo(295,15);
+        context.lineTo(345,115);
+    context.closePath();
+    context.stroke();
+    // Draw the irregular shape
+    context.beginPath();
+        context.fillStyle = '#eee';
+        context.setLineDash([15]);
+        context.moveTo(360,115);
+        context.lineTo(375,95);
+        context.lineTo(405,15);
+        context.lineTo(445,65);
+        context.lineTo(445,115);
+    context.closePath();
+    context.fill();
+    context.stroke();
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<link rel="import"
+  href="../../polymer/polymer.html">
+<!--
+<h2>Representation of an UML [generalization relationship](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Generalization.html)</h2>
+
+The relationship is nested in the source element. The `general` attribute specifies the target of the generalization.
+
+Example:
+
+    <uml-packagedElement type="uml-Class" name="MyParentClass" id="parent">
+    </uml-packagedElement>
+    <uml-packagedElement type="uml-Class" name="MyChildClass">
+      <uml-generalization type="uml-Generalization" general="parent">
+      </uml-generalization>
+    </uml-packagedElement>
+
+@demo demo/uml-generalization.html
+-->
+<dom-module id="uml-generalization">
+	<template>
+	</template>
+	<script src="../../jquery/dist/jquery.min.js"></script>
+	<script src="../polymeria.js"></script>
+	<script>
+	(function() {
+		var Generalization = Polymer({
+			is: "uml-generalization",
+			properties: {
+				name: String,
+				type: String,
+				/** Target of the generalization. */
+				general: String,
+				/*direction: {
+					type: String,
+					value: 'vertical'
+				},*/
+				x: Number,
+				y: Number
+			},
+			ready: function() {
+
+			},
+			attached: function() {
+				new UmlGeneralization(this);
+				this.async(function() {
+					this.umlElement.initializePosition();
+					this.umlElement.displayRelationship();
+					$(window).on("resize",
+							{ relationshipElement: this.umlElement },
+							function( event ) {
+								event.data.relationshipElement.displayRelationship();
+							}
+					);
+				}, 500);
+			}
+		});
+		var el = new Generalization();
+	})();
+	</script>
+</dom-module>

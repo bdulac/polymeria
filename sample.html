@@ -4,7 +4,7 @@
     <title>Polymeria sample</title>
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js">
     </script>
-    <link rel="import" href="bower_components/polymeria-uml/uml-polymeria.html">
+    <link rel="import" href="polymeria-uml.html">
   </head>
   <style>
     body {
@@ -15,7 +15,7 @@
 	}
 	#source {
 	  padding: 2em;
-	  
+
 	}
 	#source h3 {
 	  margin: 0.5em;
@@ -26,8 +26,8 @@
 	  font-size: 0.7em;
 	  padding: 0.5em;
 	  margin: 0.5em;
-	  border: 1px solid #000; 
-	  background: #eee; 
+	  border: 1px solid #000;
+	  background: #eee;
 	  color: #333;
 	  border-radius: 5px;
 	}
@@ -42,19 +42,19 @@
     <section>
       <uml-model name="My model">
           <uml-packagedElement type="uml-Class" name="MyClass" id="classA">
-            <uml-ownedAttribute 
-              name="myAttribute" 
+            <uml-ownedAttribute
+              name="myAttribute"
               visibility="private"
               type="classB">
             </uml-ownedAttribute>
-            <uml-ownedOperation 
-              name="myOperation" 
+            <uml-ownedOperation
+              name="myOperation"
               visibility="protected"
               type="classB">
             </uml-ownedOperation>
             <uml-packagedElement type="uml-Class" name="MyNestedClass">
-              <uml-ownedAttribute 
-                name="myOtherAttribute" 
+              <uml-ownedAttribute
+                name="myOtherAttribute"
                 visibility="private"
                 type="classA">
             </uml-ownedAttribute>
@@ -66,22 +66,22 @@
               </uml-packagedElement>
               <uml-packagedElement type="uml-Class" name="MyImplementation" id="implementation">
               </uml-packagedElement>
-              <uml-packagedElement 
-                type="uml-Realization" 
+              <uml-packagedElement
+                type="uml-Realization"
                 client="interface"
                 supplier="implementation">
-          </uml-packagedElement>
+              </uml-packagedElement>
             </uml-packagedElement>
             <uml-packagedElement type="uml-Class" name="MyParentClass" id="parent">
             </uml-packagedElement>
             <uml-packagedElement type="uml-Class" name="MyChildClass">
-            <uml-generalization type="uml-Generalization" general="parent">
-            </uml-generalization>
-            </uml-packagedElement>            
+              <uml-generalization type="uml-Generalization" general="parent">
+              </uml-generalization>
+            </uml-packagedElement>
           </uml-packagedElement>
           <uml-packagedElement type="uml-Class" name="MyOtherClass" id="classB">
             <uml-ownedOperation
-              name="myOperationWithParameters" 
+              name="myOperationWithParameters"
               visibility="public"
               type="classA">
               <uml-ownedParameter name="myFirstParam" type="classA">

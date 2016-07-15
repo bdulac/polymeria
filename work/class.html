@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+	<head>
+	  <title>Polymeria sample</title>
+	  <script src="polymer/platform/platform.js">
+	  </script>
+	  <link rel="import" href="../uml-model/uml-model.html">
+	  <link rel="import" href="../uml-packagedElement/luml-packagedElement.html">
+	  <link rel="import" href="../uml-ownedAttribute/uml-ownedAttribute.html">
+	  <link rel="import" href="../uml-ownedOperation/uml-ownedOperation.html">
+	  <link rel="import" href="../uml-ownedParameter/uml-ownedParameter.html">
+	  <style>
+	  .cite-xml {
+	    background-color: lightgray;
+	    max-height: 100px;
+	    overflow: scroll;
+	  }
+	  </style>
+	</head>
+	<body unresolved>
+		<section>
+			<h4>Initial UML model:</h4>
+			<pre class="cite-xml">&lt;model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_gajMIF7MEeSa4sJ83GIR5A" name="org.test"&gt;
+	&lt;packagedElement xmi:type="uml-Class" xmi:id="_gajMIV7MEeSa4sJ83GIR5A" name="LudeImpl"&gt;
+		&lt;ownedAttribute xmi:id="_gajMIl7MEeSa4sJ83GIR5A" name="myAttribute" visibility="private" type="_gajzMV7MEeSa4sJ83GIR5A"/&gt;
+		&lt;ownedOperation xmi:id="_gajMI17MEeSa4sJ83GIR5A" name="getMyAttribute" visibility="public"&gt;
+			&lt;uml-ownedParameter xmi:id="_gajMJF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/&gt;
+		&lt;/ownedOperation&gt;
+	&lt;/packagedElement&gt;
+&lt;/model&gt;
+			</pre>
+		</section>
+		<section>
+			<h4>Adapted UML model (for Polymer elements names compatibility):</h4>
+			<pre class="cite-xml">&lt;uml-model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_gajMIF7MEeSa4sJ83GIR5A" name="org.test"&gt;
+	&lt;uml-packagedElement type="uml-Class" xmi:id="_gajMIV7MEeSa4sJ83GIR5A" name="LudeImpl"&gt;
+		&lt;uml-ownedAttribute xmi:id="_gajMIl7MEeSa4sJ83GIR5A" name="myAttribute" visibility="private" type="_gajzMV7MEeSa4sJ83GIR5A"/&gt;
+		&lt;uml-ownedOperation xmi:id="_gajMI17MEeSa4sJ83GIR5A" name="getMyAttribute" visibility="public"&gt;
+			&lt;uml-ownedParameter xmi:id="_gajMJF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/&gt;
+		&lt;/uml-ownedOperation&gt;
+	&lt;/uml-packagedElement&gt;
+&lt;/uml-model&gt;
+			</pre>
+		</section>
+		<section>
+			<h4>Result:</h4>
+			<div>
+				<uml-model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_gajMIF7MEeSa4sJ83GIR5A" name="org.test">
+					<uml-packagedElement type="uml-Class" xmi:id="_gajMIV7MEeSa4sJ83GIR5A" name="LudeImpl">
+						<uml-ownedAttribute xmi:id="_gajMIl7MEeSa4sJ83GIR5A" name="myAttribute" visibility="private" type="_gajzMV7MEeSa4sJ83GIR5A"/>
+
+						<uml-ownedOperation xmi:id="_gajMI17MEeSa4sJ83GIR5A" name="getMyAttribute" visibility="public">
+							<uml-ownedParameter xmi:id="_gajMJF7MEeSa4sJ83GIR5A" type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/>
+						</uml-ownedOperation>
+
+					</uml-packagedElement>
+				</uml-model>
+			</div>
+		</section>
+	</body>
+</html>

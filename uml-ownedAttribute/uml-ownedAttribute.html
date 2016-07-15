@@ -1,0 +1,86 @@
+<link rel="import"
+  href="../../polymer/polymer.html">
+<!--
+<h2>Representation of an UML [class attribute](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Property.html)</h2>
+
+In typical use, the `<uml-ownedAttribute>` belongs to an UML class.
+Its type might be an interface or another class.
+
+Example:
+
+    <uml-packagedElement type="uml-Class" name="My Class" id="my-class">
+      <uml-ownedAttribute
+          name="myAttribute"
+          visibility="private"
+          type="my-interface">
+      </uml-ownedAttribute>
+    </uml-packagedElement>
+    <uml-packagedElement type="uml-Interface" name="My Interface"  id="my-interface">
+    </uml-packagedElement>
+
+@demo demo/uml-ownedAttribute.html
+-->
+<dom-module id="uml-ownedAttribute">
+	<template>
+		<link rel="stylesheet" type="text/css" href="../colors.css" >
+		<link rel="stylesheet" type="text/css" href="../elements.css" >
+		<style>
+			:host {
+				overflow: auto;)
+				text-align: left;
+			}
+		</style>
+		<div class="attribute" layout vertical left>
+			<span>
+				<span id="visibility" class="visibility accent-color">
+					<template is="dom-if" if="{{ isPrivate(visibility) }}">
+					-
+					</template>
+					<template is="dom-if" if="{{ isProtected(visibility) }}">
+					#
+					</template>
+					<template is="dom-if" if="{{ isPublic(visibility) }}">
+					+
+					</template>
+				</span>
+				<span>{{ name }}</span>
+				<span id="type" class="type accent-color">
+				: <span id="typeName" class="name"></span>
+				</span>
+			</span>
+			<content></content>
+		</div>
+	</template>
+	<script src="../polymeria.js"></script>
+	<script>
+	(function() {
+		var OwnedParameter = Polymer({
+			is: "uml-ownedAttribute",
+			properties: {
+				/** The attribute name. */
+				name: String,
+				/** The attribute visibility: `private`, `public`, `protected`. */
+				visibility: String,
+				/** The type of the attribute, using the `id` to identify it. */
+				type: String
+			},
+			isPrivate: function(visibility) {
+				return (visibility == 'private');
+			},
+			isProtected: function(visibility) {
+				return (visibility == 'protected');
+			},
+			isPublic: function(visibility) {
+				return (visibility == 'public');
+			},
+			ready: function() {
+			},
+			attached: function() {
+				new UmlMember(this);
+				this.umlElement.displayType();
+			}
+		});
+		var el = new OwnedParameter();
+	})();
+	</script>
+</dom-module>

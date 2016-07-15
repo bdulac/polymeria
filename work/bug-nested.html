@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Polymeria sample</title>
+    <script src="polymer/platform/platform.js">
+    </script>
+    <link rel="import" href="polymer/polymer/polymer.html">
+    <dom-module id="test-composite" attributes="name">
+      <style>
+		  .composite {
+		    background-color: gray;
+		    padding: 15px;
+		  }
+      </style>
+      <template>
+        <div class="composite" layout vertical left>
+          <div>{{ name }}</div>
+          <content></content>   
+        </div>
+      </template>
+      <script>
+      Polymer({});
+      </script>
+    </dom-module>
+    <dom-module id="test-component" attributes="name">
+      <style>
+		  .component {
+		    background-color: white;
+		    margin-left: auto;
+		    margin-right: auto;
+		    padding: 15px;
+		    border-style: solid;
+		    border-width: 1px;
+		  }
+      </style>
+      <template>
+        <div class="component" layout vertical left>
+          <div>{{ name }}</div>
+          <content></content>
+        </div>
+      </template>
+      <script>
+      Polymer({});
+      </script>
+    </dom-module>
+  </head>
+  <body unresolved>
+    <section>
+      <div>
+      <test-composite name='Root composite'>
+        <test-component name='First level nested component A'>
+        </test-component>
+        <test-composite name='First level nested composite'>
+          <test-component name='Second level nested component'>
+          </test-component>
+        </test-composite>
+        <test-component name='First level nested component B'>
+        </test-component>
+      </test-composite>
+      </div>
+    </section>
+  </body>
+</html>
