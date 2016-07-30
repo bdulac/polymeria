@@ -40,7 +40,7 @@ Here is the source of an HTML document of a basic class diagram:
           <uml-ownedOperation
             name="myOperationWithParameters"
             visibility="public"
-            type="My model:MyClass">
+            type="my-class">
             <uml-ownedParameter name="myFirstParam" type="my-class">
             </uml-ownedParameter>
             <uml-ownedParameter name="mySecondParam" type="my-class">
