@@ -2,13 +2,7 @@
   "name": "polymeria-uml",
   "version": "0.0.4",
   "main": [
-    "uml-model.html",
-    "uml-generalization.html",
-    "uml-ownedAttribute.html",
-    "uml-ownedOperation.html",
-    "uml-ownedParameter.html",
-    "uml-packagedElement.html",
-    "uml-polymeria.html"
+    "polymeria-uml.html"
   ],
   "homepage": "https://github.com/bdulac/polymeria",
   "authors": [
