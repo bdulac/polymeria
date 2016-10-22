@@ -1,7 +1,7 @@
 <link rel="import"
   href="../../polymer/polymer.html">
 <!--
-Representation of an UML [model](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Model.html)
+Representation of an UML [model](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Model.html).
 
 In the Eclipse UML hierarchy, the model is itself a package. As a consequence, the `<uml-model>` contains packaged elements.
 
@@ -9,10 +9,14 @@ Example:
 
     <body>
       <uml-model name="My model">
-          <uml-packagedElement type="uml-Package" name="My package"></uml-packagedElement>
+          <uml-packagedElement type="uml-Package" name='My sample package' id="my-sample-package">
+              <uml-packagedElement type="uml-Class" id="my-association-supplier" name="My sample class"></uml-packagedElement>
+              <uml-packagedElement type="uml-Class" id="my-association-client" name="My associated class"></uml-packagedElement>
+              <uml-packagedElement type="uml-Association" supplier="my-association-supplier" client="my-association-client">
+            </uml-packagedElement>
+          </uml-packagedElement>
       </uml-model>
-
-@demo demo/uml-model.html
+@demo uml-model/demo/uml-model.html
 -->
 <dom-module id="uml-model" attributes="name">
 	<template>

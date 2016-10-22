@@ -2,10 +2,10 @@
 <html>
   <head>
     <title>uml-model</title>
-    <script src="../../webcomponentsjs/webcomponents-lite.min.js">
+    <script src="../../../webcomponentsjs/webcomponents-lite.min.js">
     </script>
-    <link rel="import" href="../../uml-model.html">
-    <link rel="import" href="../../uml-packagedElement.html">
+    <link rel="import" href="../../uml-model/uml-model.html">
+    <link rel="import" href="../../uml-packagedElement/uml-packagedElement.html">
   </head>
   <style>
     body {
@@ -17,9 +17,13 @@
   </style>
   <body unresolved>
     <section>
-      <uml-model name="My test model">
-        <uml-packagedElement type="uml-Class" name='MySampleClass' id="sample-class">
-        </uml-packagedElement>
+      <uml-model name="My model">
+          <uml-packagedElement type="uml-Package" name='My sample package' id="my-sample-package">
+              <uml-packagedElement type="uml-Class" id="my-association-supplier" name="My sample class"></uml-packagedElement>
+              <uml-packagedElement type="uml-Class" id="my-association-client" name="My associated class"></uml-packagedElement>
+              <uml-packagedElement type="uml-Association" supplier="my-association-supplier" client="my-association-client">
+            </uml-packagedElement>
+          </uml-packagedElement>
       </uml-model>
     </section>
   </body>

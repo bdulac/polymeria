@@ -2,11 +2,11 @@
 <html>
   <head>
     <title>uml-ownedAttribute</title>
-    <script src="../../webcomponentsjs/webcomponents-lite.min.js">
+    <script src="../../../webcomponentsjs/webcomponents-lite.min.js">
     </script>
-    <link rel="import" href="../../uml-model.html">
-    <link rel="import" href="../../uml-packagedElement.html">
-    <link rel="import" href="../../uml-ownedAttribute.html">
+    <link rel="import" href="../../uml-model/uml-model.html">
+    <link rel="import" href="../../uml-packagedElement/uml-packagedElement.html">
+    <link rel="import" href="../../uml-ownedAttribute/uml-ownedAttribute.html">
   </head>
   <style>
     body {
@@ -23,20 +23,20 @@
           <uml-ownedAttribute 
                 name="myPrivateAttribute" 
                 visibility="private"
-                type="type-class">
+                type="my-type-interface">
           </uml-ownedAttribute>
           <uml-ownedAttribute 
                 name="myProtectedAttribute" 
                 visibility="protected"
-                type="type-class">
+                type="my-type-interface">
           </uml-ownedAttribute>
           <uml-ownedAttribute 
                 name="myPublicAttribute" 
                 visibility="public"
-                type="type-class">
+                type="my-type-interface">
           </uml-ownedAttribute>
         </uml-packagedElement>
-        <uml-packagedElement type="uml-Class" name='MyTypeClass' id="type-class">
+        <uml-packagedElement type="uml-Interface" name="My type interface"  id="my-type-interface">
         </uml-packagedElement>
       </uml-model>
     </section>
