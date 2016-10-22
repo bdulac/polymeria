@@ -68,4 +68,4 @@ If you want to play with the components, the [installation with Bower is documen
 
 Because of custom elements compatibility constraints (dash needed), the model file cannot respect strictly the Eclipse UML element names. Another limitation is the use of namespaces in regular HTML documents. As a consequence, the *uml* namespace sequence using a colon is replaced with a dashed prefix followed by a dash. As shown in the preceding example, this has a direct consequence on elements and attributes names.
 
-The project started following my [discovery of the Polymer project](http://bdulac.github.io/note/web-components-polymer). A [post on my blog](http://bdulac.github.io/note/web-components-adapation-xml-document) details my early problems.
+The project started following my [discovery of the Polymer project](http://bdulac.github.io/note/web-components-polymer). A [post on my blog](http://bdulac.github.io/note/web-components-adaptation-xml-document) details my early problems.
