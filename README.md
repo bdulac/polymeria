@@ -87,3 +87,13 @@ When the bower command is available, here is the way to get Polymeria from the G
 ```
 bower install polymeria-uml
 ```
+
+Download
+--------
+
+A directly usable *Zip* file including *Polymeria UML* and its *Bower* dependencies is available [here](http://bdulac.github.io/polymeria/polymeria_0.0.5.zip).
+
+Components documentation
+--------
+
+The *Polymeria* components documentation is available [here](http://bdulac.github.io/polymeria/components/polymeria-uml/).
