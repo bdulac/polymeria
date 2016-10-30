@@ -1,8 +1,9 @@
 {
   "name": "polymeria-uml",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "main": [
     "uml-model.html",
+    "uml-generalization.html",
     "uml-ownedAttribute.html",
     "uml-ownedOperation.html",
     "uml-ownedParameter.html",
@@ -26,23 +27,25 @@
     "node_modules",
     "bower_components",
     "jquery",
-    "jquery-ui",
     "polymer",
     "test",
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#0.5.3",
-    "jquery-ui": "~1.11.2"
+    "polymer": "Polymer/polymer#^1.3.0",
+    "jquery": "~2.2.1"
   },
-  "_release": "0.0.2",
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.1.6"
+  },
+  "_release": "0.0.4",
   "_resolution": {
     "type": "version",
-    "tag": "v0.0.2",
-    "commit": "18f47ad113932641cb51e8a686b6a9a6a8a184ee"
+    "tag": "v0.0.4",
+    "commit": "04bbb9a6cb26cc57e73d6cec90fe42d3ef9c3d4b"
   },
-  "_source": "git://github.com/bdulac/polymeria.git",
-  "_target": "~0.0.2",
+  "_source": "https://github.com/bdulac/polymeria.git",
+  "_target": "^0.0.4",
   "_originalSource": "polymeria-uml",
   "_direct": true
 }

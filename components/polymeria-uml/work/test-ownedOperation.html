@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Polymeria sample</title>
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js">
+    </script>
+    <link rel="import" href="../bower_components/polymeria-uml/uml-polymeria.html">
+  </head>
+  <style>
+    body {
+      margin: 0;
+	  padding: 0;
+	  width: 100%;
+	  height: 100%;
+	}
+  </style>
+  <body unresolved>
+    <section>
+      <uml-model name="My test model">
+        <uml-packagedElement type="uml-Class" name='MyOwningClass' id="sample-class">
+          <uml-ownedOperation
+                name="myProtectedMethod" 
+                visibility="protected"
+                type="return-type-class">
+            <uml-ownedParameter
+                name="param" 
+                type="param-type-class">
+            </uml-ownedParameter>
+          </uml-ownedOperation>
+        </uml-packagedElement>
+        <uml-packagedElement type="uml-Class" name='MyReturnTypeClass' id="return-type-class">
+        </uml-packagedElement>
+        <uml-packagedElement type="uml-Class" name='MyParameterTypeClass' id="param-type-class">
+        </uml-packagedElement>
+      </uml-model>
+    </section>
+  </body>
+</html>

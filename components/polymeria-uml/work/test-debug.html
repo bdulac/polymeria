@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+	  <title>Polymeria sample</title>
+	  <script src="polymer/platform/platform.js">
+	  </script>
+	  <link rel="import" href="components/uml-model.html">
+	  <link rel="import" href="components/uml-packagedElement.html">
+	  <link rel="import" href="components/uml-ownedAttribute.html">
+	  <link rel="import" href="components/uml-ownedOperation.html">
+	  <link rel="import" href="components/uml-ownedParameter.html">
+	  <style>
+	  .cite-xml {
+	    background-color: lightgray;
+	    max-height: 100px;
+	    overflow: scroll;
+	  }
+	  </style>
+	</head>
+	<body unresolved>
+		<section>
+			<h4>Initial UML model:</h4>
+			<pre class="cite-xml">
+			</pre>
+		</section>
+		<section>
+			<h4>Adapted UML model (for Polymer elements names compatibility):</h4>
+			<pre class="cite-xml">
+			</pre>
+		</section>
+		<section>
+			<h4>Result:</h4>
+			<div>
+				<uml-packagedElement type="uml-Class" name="LudeImpl">
+					<uml-ownedAttribute name="myAttribute" visibility="private"/>
+					<uml-ownedOperation name="getMyAttribute" visibility="public">
+						<uml-ownedParameter type="_gajzMV7MEeSa4sJ83GIR5A" direction="return"/>
+					</uml-ownedOperation>		
+				</uml-packagedElement>
+			</div>
+		</section>
+	</body>
+</html>

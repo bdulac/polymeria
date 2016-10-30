@@ -1,5 +1,5 @@
 /**
- * Identifies the position of a DOM or Shadow DOM element
+ * Identifies the position of a DOM or Shadow DOM element.
  * @param element
  * Element to identify the position of
  * @returns Object with two properties x and y (in CSS px)
@@ -7,17 +7,12 @@
 function getPosition(element) {
     var xPosition = 0;
     var yPosition = 0;
-  
-    while(element) {
-        xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
-        yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
-        element = element.offsetParent;
-    }
-    return { x: xPosition, y: yPosition };
+    var offset = $(element).offset();
+    return { x: offset.left, y: offset.top };
 }
 
 /**
- * Fetches the Web component related to a Shadow DOM node
+ * Fetches the Web component related to a Shadow DOM node.
  * @param shadowDomNode
  * Shadow DOM node
  * @returns Related Web component
@@ -33,8 +28,24 @@ function getWebComponent(shadowDomNode) {
 	}
 }
 
+/**
+ * Fetches the parent Polymeria component of a Web component.
+ * @param webComponent
+ * The Web component to fetch the parent for.
+ * @returns Parent Polymeria component of the Web component.
+ */
+function getParentPolymeriaComponent(webComponent) {
+	var parentNode = webComponent.parentNode;
+	if(parentNode.nodeName) {
+		if(parentNode.nodeName.startsWith("UML-")) {
+			return parentNode;
+		}
+	}
+	return getParentPolymeriaComponent(parentNode);
+}
+
 /** 
- * Generates a valid GUID
+ * Generates a valid GUID.
  * (from http://stackoverflow.com/a/2117523/1207019)
  * @returns Generated GUID
  */
@@ -46,7 +57,7 @@ function guid() {
 }
 
 /**
- * Identified a style value given a CSS selector
+ * Identifies a style value given a CSS selector.
  * (from http://stackoverflow.com/a/16966533/1207019)
  * @param style
  * Style which value has to be identified
@@ -63,7 +74,8 @@ function getStyleRuleValue(style, selector, sheet) {
         if( !sheet.cssRules ) { continue; }
         for (var j = 0, k = sheet.cssRules.length; j < k; j++) {
             var rule = sheet.cssRules[j];
-            if (rule.selectorText && rule.selectorText.split(',').indexOf(selector) !== -1) {
+            var ruleSelectorText = rule.selectorText;
+            if (ruleSelectorText && ruleSelectorText.split(',').indexOf(selector) !== -1) {
                 return rule.style[style];
             }
         }
@@ -71,7 +83,273 @@ function getStyleRuleValue(style, selector, sheet) {
     return null;
 }
 
-/** Adaptation of a Web Component into an UML element */
+/** 
+ * Draws a relationship between two Polymeria web components.
+ * @param webComponent
+ * Web component representing the relationship
+ * @param sourceComponent
+ * Web component source of the relationship
+ * @param targetComponent
+ * Web component target of the relationship
+ */
+function drawRelationship(webComponent, sourceComponent, targetComponent) {
+	console.log("Relationship = " + webComponent.id);
+	console.log("$ Coordinates identification");
+	console.log("-->Source: " + sourceComponent.umlElement.getQualifiedName());
+	console.log("-->Target: " + targetComponent.umlElement.getQualifiedName());
+	var sourceElement  = $(sourceComponent.$$('#element'));
+	var targetElement  = $(targetComponent.$$('#element'));
+	var sourcePosition = getPosition(sourceElement[0]);
+	console.log(
+			"-->Source shadow element ; left=" + sourcePosition.x
+			+ " ; top=" + sourcePosition.y
+			+ " ; width=" + sourceElement.width()
+			+ " ; height=" + sourceElement.height()
+	);
+	var targetPosition = getPosition(targetElement[0]);
+    console.log(
+			"-->Target shadow element ; left=" + targetPosition.x
+			+ " ; top=" + targetPosition.y
+			+ " ; width=" + targetElement.width()
+			+ " ; height=" + targetElement.height()
+	);
+	console.log("$ Setting the canvas dimensions");
+	var canvasStartX;
+	var canvasEndX;
+	var canvasLineStartX;
+	var canvasLineEndX;
+	// The source is aligned vertically on the target 
+	if(
+			(targetPosition.x <= sourcePosition.x)
+			&&((targetPosition.x + targetElement.width()) >= sourcePosition.x)
+	) {
+		// console.log('1');
+		canvasStartX = sourcePosition.x;
+		if((targetPosition.x + targetElement.width()) < (sourcePosition.x + sourceElement.width())) {
+			canvasEndX = targetPosition.x + targetElement.width();
+		}
+		else {
+			canvasEndX = sourcePosition.x + sourceElement.width();
+		}
+		canvasLineStartX = (canvasEndX - canvasStartX) / 2;
+		// If we can have a straight line, 
+		if(canvasLineStartX < targetElement.width()) {
+			// Then the start X is the same as the end
+			canvasLineEndX = canvasLineStartX;
+		}
+		else {
+			canvasLineEndX = targetElement.width() / 2;
+		}
+	}
+	// The target is aligned vertically on the source
+	else if(
+			(sourcePosition.x <= targetPosition.x)
+			&&((sourcePosition.x + sourceElement.width()) >= targetPosition.x)
+	) {
+		// console.log('2');
+		canvasStartX = targetPosition.x;
+		if((targetPosition.x + targetElement.width()) < (sourcePosition.x + sourceElement.width())) {
+			canvasEndX = targetPosition.x + targetElement.width();
+		}
+		else {
+			canvasEndX = sourcePosition.x + sourceElement.width();
+		}
+		canvasLineStartX = (canvasEndX - canvasStartX) / 2;
+		// If we can have a straight line, 
+		if(canvasLineStartX < targetElement.width()) {
+			// Then the start X is the  same as the end
+			canvasLineEndX = canvasLineStartX;
+		}
+		else {
+			canvasLineEndX = sourceElement.width() / 2;
+		}
+	}
+	// The source is on the left (target is on the right)
+	else if(targetPosition.x > sourcePosition.x) {	
+		// console.log('3');
+		canvasStartX = sourcePosition.x + sourceElement.width();
+		canvasEndX = targetPosition.x;
+		if(targetPosition.y < sourcePosition.y) {
+			canvasLineStartX = 0;
+			canvasLineEndX = targetPosition.x - canvasStartX;
+		}
+		else {
+			canvasLineStartX = 0;
+			canvasLineEndX = targetPosition.x - canvasStartX;
+		}
+	}
+	// The source is on the right (target is on the left)
+	else {
+		// console.log('4');
+		canvasStartX = targetPosition.x + targetElement.width();
+		canvasEndX = sourcePosition.x;
+		if(targetPosition.y > sourcePosition.y) {
+			canvasLineStartX = sourcePosition.x - canvasStartX;
+			canvasLineEndX = 0;
+		}
+		else {
+			canvasLineStartX = sourcePosition.x - canvasStartX;
+			canvasLineEndX = 0;
+		}
+	}
+	//console.log('Canvas X: ' + canvasStartX + " to " + canvasEndX);
+	var canvasStartY;
+	var canvasEndY;	
+	var canvasLineStartY;
+	var canvasLineEndY;
+	// The source is aligned horizontally on the target 
+	if(
+			(targetPosition.y <= sourcePosition.y)
+			&&((targetPosition.y + targetElement.height()) >= sourcePosition.y )
+	) {
+		// console.log('A');
+		canvasStartY = sourcePosition.y;
+		if((targetPosition.y + targetElement.height()) < (sourcePosition.y + sourceElement.height())) {
+			canvasEndY = targetPosition.y + targetElement.height();
+		}
+		else {
+			canvasEndY = sourcePosition.y + sourceElement.height();
+		}
+		// canvasLineStartY = (sourcePosition.y + sourceElement.height() / 2) - canvasStartY;
+		canvasLineStartY = (canvasEndY - canvasStartY) / 2;
+		// If we can have a straight line, 
+		if(canvasLineStartY < targetElement.height()) {
+			// Then the start Y is the same as the end
+			canvasLineEndY = canvasLineStartY;
+		}
+		else {
+			canvasLineEndY = (targetPosition.x + targetElement.height() / 2) - canvasStartY;
+		}
+	}
+	// The target is aligned horizontally on the source
+	else if(
+			(sourcePosition.y <= targetPosition.y)
+			&&((sourcePosition.y + sourceElement.height()) >= targetPosition.y )
+	) {
+		// console.log('B');
+		canvasStartY = targetPosition.y;
+		if((targetPosition.y + targetElement.height()) < (sourcePosition.y + sourceElement.height())) {
+			canvasEndY = targetPosition.y + targetElement.height();
+		}
+		else {
+			canvasEndY = sourcePosition.y + sourceElement.height();
+		}
+		canvasLineStartY = (canvasEndY - canvasStartY) / 2;
+		// If we can have a straight line, 
+		if(canvasLineStartY < sourceElement.height()) {
+			// Then the start Y is the same as the end
+			canvasLineEndY = canvasLineStartY;
+		}
+		else {
+			canvasLineEndY = (sourcePosition.x + sourceElement.height() / 2) - canvasStartY;
+		}
+	}
+	// The source is at the top
+	else if((targetPosition.y + targetElement.height()) > sourcePosition.y) {
+		// console.log('C');
+		canvasStartY = sourcePosition.y + sourceElement.height();
+		canvasEndY = targetPosition.y;
+		canvasLineStartY = 0;
+		canvasLineEndY = targetPosition.y - canvasStartY;
+	}
+	// The target is at the top
+	else {
+		// console.log('D');
+		canvasStartY = targetPosition.y + targetElement.height();
+		canvasEndY = sourcePosition.y;
+		canvasLineStartY = sourcePosition.y - canvasStartY;
+		canvasLineEndY = 0;
+	}
+	// console.log('Canvas Y: ' + canvasStartY + " to " + canvasEndY);
+	////////////////////////
+	
+	var canvasTop = canvasStartY;
+	var canvasLeft = canvasStartX;
+	var canvasHeight = canvasEndY - canvasStartY;
+	var canvasWidth = canvasEndX - canvasStartX;
+	// console.log("$ Drawing the canvas");
+	// console.log("-->Position = (left: " + canvasLeft + ", top: " + canvasTop + ")");
+    // console.log("-->Dimensions = (width: " + canvasWidth + ", height: " + canvasHeight + ")");
+    // Trying to fetch an existing element
+    var canvasDiv = document.getElementById("relationship[" + webComponent.id + "]");
+    // If we have an existing element, 
+    if(canvasDiv) {
+    	// The we remove it
+    	canvasDiv.parentNode.removeChild(canvasDiv);
+    }
+    canvasDiv = document.createElement("div");
+    canvasDiv.id = "relationship[" + webComponent.id + "]";
+    var html5Canvas = document.createElement("canvas");
+    
+    canvasDiv.style.borderWith = 0;
+    canvasDiv.style.borderStyle = "none";
+    canvasDiv.style.position = "absolute";
+    canvasDiv.style.top = canvasTop + "px";
+    canvasDiv.style.left = canvasLeft + "px";
+    canvasDiv.style.margin   = 0;
+    canvasDiv.style.padding   = 0;
+    canvasDiv.style.width   =  (canvasWidth) + "px";
+    canvasDiv.style.height   =  (canvasHeight) + "px";
+    canvasDiv.style.zIndex   = 150;
+    // With and height of the canvas must equal the CSS values in px
+    // (canvas pixel / CSS px equivalence)
+    html5Canvas.style.borderWith = 0;
+    html5Canvas.style.borderStyle = "none";
+    html5Canvas.width = canvasWidth;
+    html5Canvas.height = canvasHeight;
+    html5Canvas.style.width = (canvasWidth) + "px";
+    html5Canvas.style.height = (canvasHeight) + "px";
+    html5Canvas.style.margin   = 0;
+    html5Canvas.style.padding   = 0;
+    html5Canvas.style.zIndex   = 250;
+    // html5Canvas.style.border   = "dotted";
+    
+    document.body.appendChild(canvasDiv);
+    canvasDiv.appendChild(html5Canvas);
+    
+    var colorValue = getStyleRuleValue('color', '.accent-color');
+    if(!colorValue) {
+    	// Default is black
+    	colorValue = "#000";
+    }
+    
+    var canvas = html5Canvas;
+
+    var context = html5Canvas.getContext('2d');
+    
+    context.lineWidth = 1;
+    // Draw  the line
+    // console.log("$ Drawing the line");
+    context.beginPath();
+
+    // context.strokeStyle = colorValue;
+    if(webComponent.umlElement.dashed) {
+    	context.setLineDash([7, 8]);
+    }
+    
+    // context.fillStyle = colorValue;
+    
+    context.moveTo(canvasLineStartX, canvasLineStartY);
+    context.lineTo(canvasLineEndX, canvasLineEndY);
+    //ink line
+    
+    
+    context.closePath();
+    context.stroke();
+    
+    webComponent.umlElement.relationshipCanvas = canvas;
+    webComponent.umlElement.relationshipCanvasStartX = canvasLineStartX;
+    webComponent.umlElement.relationshipCanvasStartY = canvasLineStartY;
+    webComponent.umlElement.relationshipCanvasEndX = canvasLineEndX;
+    webComponent.umlElement.relationshipCanvasEndY = canvasLineEndY;
+    webComponent.umlElement.drawRelationshipEnd();
+}
+
+/** 
+ * Adaptation of a Web Component into an UML element
+ * @param customElm
+ * Web component to adapt
+ */
 function UmlElement(customElm) {
 	// The adapted Web Component
 	this.webComponent = customElm;
@@ -90,50 +368,63 @@ function UmlElement(customElm) {
 	if(!this.webComponent.id) {
 		// Then the ID of the Web Component is the UML element qualified name
 		this.webComponent.id = this.getQualifiedName();
-		console.log("Default ID assigned [" + this.webComponent.id + "]")
+		console.log("Default ID assigned [" + this.webComponent.id + "]");
 	}
 	// The UML element becomes an attribute of the Web Component
 	this.webComponent.umlElement = this;
 	this.moveListeners = [];
+	this.childrenElements = [];
 }
 UmlElement.prototype = {
 	notifyMoveListeners : function() {
 		if(this.moveListeners) {
+			// console.log(this.simpleName + " notifying " + this.moveListeners.length + " children...");
 			for	(index = 0; index < this.moveListeners.length; index++) {
 				var listener = this.moveListeners[index];
 				if(listener.update) {
 					listener.update();
 				}
-			} 
+			}
 		}
 	},
+	/** 
+	 * Attaching another UML element as move listener of this UML element
+	 * @param listener
+	 * UML element to attach as move listener
+	 */	
 	addMoveListener : function(listener) {
+		// console.log( listener.simpleName + " listening to " + this.simpleName );
 		if(this.moveListeners) {
 			this.moveListeners[this.moveListeners.length] = listener; 
 		}
 		else {
 			this.moveListeners = [listener];
 		}
-	}, 
-	initializePosition : function() {
-		if(this.webComponent.y) {
-			if(this.webComponent.$.element) {
-				var elm = this.webComponent.$.element;
-				var topPosition = this.webComponent.y;
-				elm.style.position = "absolute";
-				elm.style.top = topPosition;
-			}
-		}
-		if(this.webComponent.x) {
-			if(this.webComponent.$.element) {
-				var elm = this.webComponent.$.element;
-				var leftPosition = this.webComponent.x;
-				elm.style.position = "absolute";
-				elm.style.left = leftPosition;
-			}
-		}
 	},
-	/* Resolves the parent UML element of the UML element */
+	/** 
+	 * Attaching another UML element as move listener of this UML element and 
+	 * all the parent UML elements recursively
+	 * @param listener
+	 * UML element to attach as move listener
+	 */
+	addRecursiveMoveListener : function(listener) {
+		// console.log( listener.simpleName + " listening to " + this.simpleName );
+		if(this.moveListeners) {
+			this.moveListeners[this.moveListeners.length] = listener; 
+		}
+		else {
+			this.moveListeners = [listener];
+		}
+		// Attaching the parent as move listener
+		var parentUmlElement = this.getParentElement();
+		if(parentUmlElement) {
+			parentUmlElement.addMoveListener(listener);
+		}
+	}, 
+	/** 
+	 * Resolves the parent UML element of the UML element
+	 * @returns Parent UML element
+	 */
 	getParentElement : function() {
 		var parentUmlElement;
 		// Resolving the parent of the Web Component in the DOM
@@ -154,9 +445,29 @@ UmlElement.prototype = {
 		}
 		return parentUmlElement;
 	},
-	/* 
+	initializePosition : function() {
+		if(this.webComponent.y) {
+			if(this.webComponent.$.element) {
+				var elm = this.webComponent.$.element;
+				var topPosition = this.webComponent.y;
+				elm.style.position = "absolute";
+				elm.style.top = topPosition;
+			}
+		}
+		if(this.webComponent.x) {
+			if(this.webComponent.$.element) {
+				var elm = this.webComponent.$.element;
+				var leftPosition = this.webComponent.x;
+				elm.style.position = "absolute";
+				elm.style.left = leftPosition;
+			}
+		}
+	},
+	/** 
 	 * Resolves the qualified name of the UML element
-	 * This name is unique in the DOM because it contains the model name
+	 * @returns Qualified name of the UML element. 
+	 * This name is unique in the DOM because it is prefixed with the 
+	 * model name.
 	 */
 	getQualifiedName : function() {
 		var umlParent = this.getParentElement();
@@ -177,42 +488,11 @@ UmlElement.prototype = {
 		}
 	}
 }
-/** Adaptation of a Web Component into an UML relationship element */
-function UmlRelationship(customElm) {
-	UmlElement.call(this, customElm);
-}
-UmlRelationship.prototype = Object.create(UmlElement.prototype, { 
-	displayRelationship : {
-		value : function() {
-			if(this.webComponent.type == 'uml-Dependency') {
-				if(!this.source) {
-					this.source = document.getElementById(this.webComponent.supplier);
-					if(!this.source) {
-						alert('Id ' + this.webComponent.supplier + 'not found')
-					}
-					this.source.umlElement.addMoveListener(this);
-				}
-				if(!this.target) {
-					this.target = document.getElementById(this.webComponent.client);
-					if(!this.target) {
-						alert('Id ' + this.webComponent.client + 'not found')
-					}
-					this.target.umlElement.addMoveListener(this);
-				}
-				$().painter.drawRelationship(this.webComponent, this.source, this.target);
-			}
-		}
-	},
-	update : {
-		value : function() {
-			this.displayRelationship();
-		}
-	}
-}
-);
-UmlRelationship.prototype.constructor = UmlRelationship;
-
-/** Adaptation of a Web Component into an UML member element */
+/** 
+ * Adaptation of a Web Component into an UML member element
+ * @param customElm
+ * Web component to adapt
+ */
 function UmlMember(customElm) {
 	UmlElement.call(this, customElm);
 }
@@ -241,7 +521,7 @@ UmlMember.prototype = Object.create(UmlElement.prototype, {
 	displayType : {
 		value : function() {
 			if(this.webComponent.type) {
-				$(this.webComponent.$.type).show();
+				$(this.webComponent.type).show();
 				var typeComponent = document.getElementById(this.webComponent.type);
 				if(typeComponent) {
 					var typeUmlElement = typeComponent.umlElement;
@@ -268,249 +548,219 @@ UmlMember.prototype = Object.create(UmlElement.prototype, {
 );
 UmlMember.prototype.constructor = UmlMember;
 
-
-/** jQuery plug-in drawing non-conventional features */
-$.fn.painter = {
-	/** 
-	 * Draws a relationship between two Polymeria web components
-	 * @param webComponent
-	 * Web component representing the relationship
-	 * @param sourceComponent
-	 * Web component source of the relationship
-	 * @param targetComponent
-	 * Web component target of the relationship
-	 */
-	drawRelationship: function (webComponent, sourceComponent, targetComponent) {
-		// console.log("Relationship = " + webComponent.id);
-		// console.log("$ Coordinates identification");
-		// console.log("-->Source: " + sourceComponent.umlElement.getQualifiedName());
-		// console.log("-->Target: " + targetComponent.umlElement.getQualifiedName());
-		var sourceElement  = $(sourceComponent.$.element);
-		var targetElement  = $(targetComponent.$.element);
-		var sourcePosition = getPosition(sourceComponent.$.element);
-		/*
-		console.log(
-				"-->Source shadow element ; left=" + sourcePosition.x
-				+ " ; top=" + sourcePosition.y
-				+ " ; width=" + sourceElement.width()
-				+ " ; height=" + sourceElement.height()
-		);
-		*/
-	    var targetPosition = getPosition(targetComponent.$.element);
-	    /*
-	    console.log(
-				"-->Target shadow element ; left=" + targetPosition.x
-				+ " ; top=" + targetPosition.y
-				+ " ; width=" + targetElement.width()
-				+ " ; height=" + targetElement.height()
-		);
-		*/
-		// console.log("$ Setting the canvas dimensions");
-		var canvasStartX;
-		var canvasEndX;
-		var canvasLineStartX;
-		var canvasLineEndX;
-		// The source is aligned vertically on the target 
-		if(
-				(targetPosition.x <= sourcePosition.x)
-				&&((targetPosition.x + targetElement.width()) >= sourcePosition.x)
-		) {
-			// console.log('1');
-			canvasStartX = sourcePosition.x;
-			if((targetPosition.x + targetElement.width()) < (sourcePosition.x + sourceElement.width())) {
-				canvasEndX = targetPosition.x + targetElement.width();
-			}
-			else {
-				canvasEndX = sourcePosition.x + sourceElement.width();
-			}
-			canvasLineStartX = (canvasEndX - canvasStartX) / 2;
-			// If we can have a straight line, 
-    		if(canvasLineStartX < targetElement.width()) {
-    			// Then the start is the end
-    			canvasLineEndX = canvasLineStartX;
-    		}
-    		else {
-    			canvasLineEndX = targetElement.width() / 2;
-    		}
+/** 
+ * Adaptation of a Web Component into an UML relationship element
+ * @param customElm
+ * Web component to adapt
+ */
+function UmlRelationship(customElm) {
+	UmlElement.call(this, customElm);
+}
+UmlRelationship.prototype = Object.create(UmlElement.prototype, { 
+	displayRelationship : {
+		value : function() {
+				if(!this.source) {
+					if(this.webComponent.supplier) {
+						this.source = document.getElementById(this.webComponent.supplier);
+						if(!this.source) {
+							alert('Id ' + this.webComponent.supplier + ' not found in the DOM')
+						}
+					}
+					else {
+						this.source = document.getElementById(getParentPolymeriaComponent(this.webComponent).id);
+						if(!this.source) {
+							alert('Id ' + this.webComponent.parentNode.id + ' not found in the DOM')
+						}
+					}
+					this.source.umlElement.addRecursiveMoveListener(this);
+					this.addRecursiveMoveListener(this.source.umlElement);
+				}
+				if(!this.target) {
+					if(this.webComponent.client) {
+						this.target = document.getElementById(this.webComponent.client);
+						if(!this.target) {
+							alert('Id ' + this.webComponent.client + 'not found')
+						}
+					}
+					else {
+						this.target = document.getElementById(this.webComponent.general);
+						if(!this.target) {
+							alert('Id ' + this.webComponent.general + 'not found')
+						}
+					}
+					this.target.umlElement.addRecursiveMoveListener(this);
+					this.addRecursiveMoveListener(this.target.umlElement);
+				}
+				drawRelationship(this.webComponent, this.source, this.target);
 		}
-		// The target is aligned vertically on the source
-		else if(
-				(sourcePosition.x <= targetPosition.x)
-				&&((sourcePosition.x + sourceElement.width()) >= targetPosition.x)
-		) {
-			// console.log('2');
-			canvasStartX = targetPosition.x;
-			if((targetPosition.x + targetElement.width()) < (sourcePosition.x + sourceElement.width())) {
-				canvasEndX = targetPosition.x + targetElement.width();
+	},
+	update : {
+		value : function() {
+			this.displayRelationship();
+			this.notifyMoveListeners();
+			for	(index = 0; index < this.moveListeners.length; index++) {
+				var listener = this.moveListeners[index];
+				if(listener.update) {
+					listener.update();
+				}
 			}
-			else {
-				canvasEndX = sourcePosition.x + sourceElement.width();
-			}
-			canvasLineStartX = (canvasEndX - canvasStartX) / 2;
-			// If we can have a straight line, 
-    		if(canvasLineStartX < targetElement.width()) {
-    			// Then the start is the end
-    			canvasLineEndX = canvasLineStartX;
-    		}
-    		else {
-    			canvasLineEndX = sourceElement.width() / 2;
-    		}
 		}
-    	// The source is on the left (target is on the right)
-		else if(targetPosition.x > sourcePosition.x) {	
-			// console.log('3');
-    		canvasStartX = sourcePosition.x + sourceElement.width();
-    		canvasEndX = targetPosition.x;
-    		if(targetPosition.y < sourcePosition.y) {
-    			canvasLineStartX = targetPosition.x - canvasStartX;
-    			canvasLineEndX = 0;
-    		}
-    		else {
-    			canvasLineStartX = 0;
-    			canvasLineEndX = targetPosition.x - canvasStartX;
-    		}
-    	}
-    	// The source is on the right (target is on the left)
-    	else {
-    		// console.log('4');
-    		canvasStartX = targetPosition.x + targetElement.width();
-    		canvasEndX = sourcePosition.x;
-    		if(targetPosition.y > sourcePosition.y) {
-    			canvasLineStartX = sourcePosition.x - canvasStartX;
-    			canvasLineEndX = 0;
-    		}
-    		else {
-    			canvasLineStartX = 0;
-    			canvasLineEndX = sourcePosition.x - canvasStartX;
-    		}
-    	}
-    	//console.log('Canvas X: ' + canvasStartX + " to " + canvasEndX);
-		var canvasStartY;
-		var canvasEndY;	
-		var canvasLineStartY;
-		var canvasLineEndY;
-		// The source is aligned horizontally on the target 
-		if(
-				(targetPosition.y <= sourcePosition.y)
-				&&((targetPosition.y + targetElement.height()) >= sourcePosition.y )
-		) {
-			// console.log('A');
-			canvasStartY = sourcePosition.y;
-			if((targetPosition.y + targetElement.height()) < (sourcePosition.y + sourceElement.height())) {
-				canvasEndY = targetPosition.y + targetElement.height();
-			}
-			else {
-				canvasEndY = sourcePosition.y + sourceElement.height();
-			}
-			// canvasLineStartY = (sourcePosition.y + sourceElement.height() / 2) - canvasStartY;
-			canvasLineStartY = (canvasEndY - canvasStartY) / 2;
-    		// If we can have a straight line, 
-    		if(canvasLineStartY < targetElement.height()) {
-    			// Then the start is the end
-    			canvasLineEndY = canvasLineStartY;
-    		}
-    		else {
-    			canvasLineEndY = (targetPosition.x + targetElement.height() / 2) - canvasStartY;
-    		}
+	}, 
+	drawRelationshipEnd: {
+		value : function() {
+			
 		}
-		// The target is aligned horizontally on the source
-		else if(
-				(sourcePosition.y <= targetPosition.y)
-				&&((sourcePosition.y + sourceElement.height()) >= targetPosition.y )
-		) {
-			// console.log('B');
-			canvasStartY = targetPosition.y;
-			if((targetPosition.y + targetElement.height()) < (sourcePosition.y + sourceElement.height())) {
-				canvasEndY = targetPosition.y + targetElement.height();
-			}
-			else {
-				canvasEndY = sourcePosition.y + sourceElement.height();
-			}
-			canvasLineStartY = (canvasEndY - canvasStartY) / 2;
-			// If we can have a straight line, 
-    		if(canvasLineStartY < sourceElement.height()) {
-    			// Then the start is the end
-    			canvasLineEndY = canvasLineStartY;
-    		}
-    		else {
-    			canvasLineEndY = (sourcePosition.x + sourceElement.height() / 2) - canvasStartY;
-    		}
-		}
-		// The source is at the top
-		else if((targetPosition.y + targetElement.height()) > sourcePosition.y) {
-			// console.log('C');
-			canvasStartY = sourcePosition.y + sourceElement.height();
-			canvasEndY = targetPosition.y;
-			canvasLineStartY = 0;
-			canvasLineEndY = targetPosition.y - canvasStartY;
-		}
-		// The target is at the top
-		else {
-			// console.log('D');
-			canvasStartY = targetPosition.y + targetElement.height();
-			canvasEndY = sourcePosition.y;
-			canvasLineStartY = 0;
-    		canvasLineEndY = sourcePosition.y - canvasStartY;
-		}
-		// console.log('Canvas Y: ' + canvasStartY + " to " + canvasEndY);
-		////////////////////////
-		
-		var canvasTop = canvasStartY;
-		var canvasLeft = canvasStartX;
-		var canvasHeight = canvasEndY - canvasStartY;
-		var canvasWidth = canvasEndX - canvasStartX;
-		// console.log("$ Drawing the canvas");
-		// console.log("-->Position = (left: " + canvasLeft + ", top: " + canvasTop + ")");
-	    // console.log("-->Dimensions = (width: " + canvasWidth + ", height: " + canvasHeight + ")");
-	    // Trying to fetch an existing element
-	    var canvasDiv = document.getElementById("relationship[" + webComponent.id + "]");
-	    // If we have an existing element, 
-	    if(canvasDiv) {
-	    	// The we remove it
-	    	canvasDiv.parentNode.removeChild(canvasDiv);
-	    }
-	    canvasDiv = document.createElement("div");
-	    canvasDiv.id = "relationship[" + webComponent.id + "]";
-	    var html5Canvas = document.createElement("canvas");
-	    
-	    canvasDiv.style.position = "absolute";
-	    canvasDiv.style.top = canvasTop + "px";
-	    canvasDiv.style.left = canvasLeft + "px";
-        canvasDiv.style.margin   = 0;
-        canvasDiv.style.padding   = 0;
-        canvasDiv.style.width   =  (canvasWidth + 5) + "px";
-        canvasDiv.style.height   =  (canvasHeight + 5) + "px";
-        canvasDiv.style.zIndex   = 150;
-        // With and height of the canvas must equal the CSS values in px
-        // (canvas pixel / CSS px equivalence)
-        html5Canvas.width = canvasWidth;
-        html5Canvas.height = canvasHeight;
-        html5Canvas.style.width = canvasWidth + "px";
-        html5Canvas.style.height = canvasHeight + "px";
-        html5Canvas.style.zIndex   = 250;
-        // html5Canvas.style.border   = "dotted";
-        
-        document.body.appendChild(canvasDiv);
-        canvasDiv.appendChild(html5Canvas);
-	    
-        var canvas = html5Canvas;
-    
-	    var context = html5Canvas.getContext('2d');
-	    
-	    // Draw  the line
-	    // console.log("$ Drawing the line");
-	    context.beginPath();
-	    context.moveTo(canvasLineStartX, canvasLineStartY);
-	    context.lineTo(canvasLineEndX, canvasLineEndY);
-	    context.closePath();
-	    //ink line
-	    context.lineWidth = 2;
-	    var colorValue = getStyleRuleValue('color', '.accent-color');
-	    if(!colorValue) {
-	    	// Default is black
-	    	colorValue = "#000";
-	    }
-	    context.strokeStyle = colorValue;
-	    context.stroke();
 	}
 }
+);
+UmlRelationship.prototype.constructor = UmlRelationship;
+
+/** 
+ * Adaptation of a Web Component into an UML association relationship
+ * @param customElm
+ * Web component to adapt
+ */
+function UmlAssociation(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = null;
+}
+UmlAssociation.prototype = Object.create(UmlRelationship.prototype, { 
+}
+);
+UmlAssociation.prototype.constructor = UmlAssociation;
+
+/** 
+ * Adaptation of a Web Component into an UML dependency relationship
+ * @param customElm
+ * Web component to adapt
+ */
+function UmlDependency(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = true;
+}
+UmlDependency.prototype = Object.create(UmlRelationship.prototype, { 
+	drawRelationshipEnd: {
+		value : function() {
+			if(this.relationshipCanvas) {
+				var headlen = 17;   // length of head in pixels
+				var fromX = this.relationshipCanvasStartX;
+				var fromY = this.relationshipCanvasStartY;
+				var toX = this.relationshipCanvasEndX;
+				var toY = this.relationshipCanvasEndY;
+				var angle = Math.atan2(toY-fromY,toX-fromX);
+				
+				var context = this.relationshipCanvas.getContext('2d');
+				context.lineWidth = 2;
+				context.beginPath();
+				context.setLineDash([15, 0]);
+				context.moveTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle-Math.PI/8),toY-headlen*Math.sin(angle-Math.PI/8));
+				
+				
+				context.moveTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle+Math.PI/8),toY-headlen*Math.sin(angle+Math.PI/8));
+				
+				context.closePath();
+				context.stroke();
+			}
+		}
+	}
+}
+);
+UmlDependency.prototype.constructor = UmlDependency;
+
+/** 
+ * Adaptation of a Web Component into an UML realization relationship
+ * @param customElm
+ * Web component to adapt
+ */
+function UmlRealization(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = true;
+}
+UmlRealization.prototype = Object.create(UmlRelationship.prototype, { 
+	drawRelationshipEnd: {
+		value : function() {
+			if(this.relationshipCanvas) {
+				var headlen = 17;   // length of head in pixels
+				var fromX = this.relationshipCanvasStartX;
+				var fromY = this.relationshipCanvasStartY;
+				var toX = this.relationshipCanvasEndX;
+				var toY = this.relationshipCanvasEndY;
+				var angle = Math.atan2(toY-fromY,toX-fromX);
+				
+				var context = this.relationshipCanvas.getContext('2d');
+				
+				context.lineWidth = 1;
+				context.beginPath();
+				context.setLineDash([15, 0]);
+				
+				context.moveTo(toX-headlen*Math.cos(angle-Math.PI/7),toY-headlen*Math.sin(angle-Math.PI/8));
+				context.lineTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle+Math.PI/7),toY-headlen*Math.sin(angle+Math.PI/8));
+				context.fillStyle="white";
+				
+				context.fill();
+				
+				
+				context.closePath();
+				
+				
+				
+				context.stroke();
+				
+				
+			}
+		}
+	}
+}
+);
+UmlRealization.prototype.constructor = UmlRealization;
+
+/** 
+ * Adaptation of a Web Component into an UML generalization relationship
+ * @param customElm
+ * Web component to adapt
+ */
+function UmlGeneralization(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = false;
+}
+UmlGeneralization.prototype = Object.create(UmlRelationship.prototype, { 
+	drawRelationshipEnd: {
+		value : function() {
+			if(this.relationshipCanvas) {
+				var headlen = 17;   // length of head in pixels
+				var fromX = this.relationshipCanvasStartX;
+				var fromY = this.relationshipCanvasStartY;
+				var toX = this.relationshipCanvasEndX;
+				var toY = this.relationshipCanvasEndY;
+				var angle = Math.atan2(toY-fromY,toX-fromX);
+				
+				var context = this.relationshipCanvas.getContext('2d');
+				
+				context.lineWidth = 1;
+				context.beginPath();
+				context.setLineDash([15, 0]);
+				
+				context.moveTo(toX-headlen*Math.cos(angle-Math.PI/7),toY-headlen*Math.sin(angle-Math.PI/8));
+				context.lineTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle+Math.PI/7),toY-headlen*Math.sin(angle+Math.PI/8));
+				context.fillStyle="white";
+				
+				context.fill();
+				
+				
+				context.closePath();
+				
+				
+				
+				context.stroke();
+				
+				
+			}
+		}
+	}
+}
+);
+UmlGeneralization.prototype.constructor = UmlGeneralization;

@@ -1,0 +1,164 @@
+<link rel="import"
+  href="../../polymer/polymer.html">
+<!--
+<h2>Representation of an UML [packageable element](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/PackageableElement.html)</h2>
+
+A packageable element is an element which could be nested into a package.
+
+The properties allow to display different types of elements.
+
+Example:
+
+    <uml-packagedElement type="uml-Package" name="My package">
+      <uml-packagedElement type="uml-Interface" id="my-client">
+      </uml-packagedElement>
+      <uml-packagedElement type="uml-Class" id="my-supplier">
+      </uml-packagedElement>
+      <uml-packagedElement type="uml-Realization" id="my-realization" client="my-client" supplier="my-supplier">
+      </uml-packagedElement>
+    </uml-packagedElement>
+
+@demo demo/uml-packagedElement.html
+-->
+<dom-module id="uml-packagedElement">
+	<template>
+		<link rel="stylesheet" type="text/css" href="../colors.css" >
+		<link rel="stylesheet" type="text/css" href="../elements.css" >
+		<style>
+			:host {
+				display: block;
+				box-sizing: border-box;
+			}
+		</style>
+		<span>
+		<template  is="dom-if" if="{{ isPackage(type) }}">
+			<div id="element" class="package">
+				<div class="name primary2-background">
+				{{ name }}
+				</div>
+				<div class="content primary2-background">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		<template is="dom-if" if="{{ isClass(type) }}">
+			<div id="element" class="class white-background" layout vertical style="margin: 15px;">
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		<template is="dom-if" if="{{ isInterface(type) }}">
+			<div id="element" class="interface white-background" layout vertical style="margin: 15px;">
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		</span>
+	</template>
+    <script src="../../jquery/dist/jquery.min.js"></script>
+    <script src="../polymeria.js"></script>
+	<script>
+	(function() {
+		var PackagedElement = Polymer({
+			is: "uml-packagedElement",
+			properties: {
+				/**
+				 * Element type.
+				 * Six different types of `<uml-packagedElement>` are supported:
+				 *  <ul>
+				 *    <li>uml-Class</li>
+				 *    <li>uml-Interface</li>
+				 *    <li>uml-Package</li>
+				 *    <li>uml-Association</li>
+				 *    <li>uml-Dependency</li>
+				 *    <li>uml-Realization</li>
+				 *  </ul>
+				 */
+				type: String,
+				/** Element displayed name (`uml-Class`, `uml-Interface`, `uml-Package`) */
+				name: String,
+				/**
+				 * Specify the source of a relationship
+				 * (`uml-Association`, `uml-Dependency`, `uml-Relationship`).
+				 */
+				client: String,
+				/**
+				 * Specify the target the source of a relationship
+				 * (`uml-Association`, `uml-Dependency`, `uml-Relationship`).
+				 */
+				supplier: String,
+				/**
+				 * Sets the left position as absolute
+				 (usage is discouraged if the element is nested in an `uml-Package`).
+				 */
+				x: Number,
+				/**
+				 * Sets the top position as absolute
+				 (usage is discouraged if the element is nested in an `uml-Package`).
+				 */
+				y: Number
+			},
+			isPackage: function(type) {
+				return (type == 'uml-Package');
+			},
+			isClass: function(type) {
+				return (type == 'uml-Class');
+			},
+			isInterface: function(type) {
+				return (type == 'uml-Interface');
+			},
+			isAssociation: function(type) {
+				return (type == 'uml-Association');
+			},
+			isDependency: function(type) {
+				return (type == 'uml-Dependency');
+			},
+			isRealization: function(type) {
+				return (type == 'uml-Realization');
+			},
+			ready: function() {
+			},
+			attached: function() {
+				if(this.type == 'uml-Dependency') {
+					new UmlDependency(this);
+				}
+				else if(this.type == 'uml-Association') {
+					new UmlAssociation(this);
+				}
+				else if(this.type == 'uml-Realization') {
+					new UmlRealization(this);
+				}
+				else {
+					new UmlElement(this);
+				}
+				this.async(function() {
+					this.umlElement.initializePosition();
+					if(
+							(this.type == 'uml-Dependency')
+							||(this.type == 'uml-Association')
+							||(this.type == 'uml-Realization')
+					) {
+						this.umlElement.initializePosition();
+						this.umlElement.displayRelationship();
+						$(window).on("resize",
+								{ relationshipElement: this.umlElement },
+								function( event ) {
+									event.data.relationshipElement.displayRelationship();
+								}
+						);
+					}
+				}, 500);
+			}
+		});
+		var el = new PackagedElement();
+	})();
+	</script>
+</dom-module>
