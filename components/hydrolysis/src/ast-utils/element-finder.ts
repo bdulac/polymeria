@@ -134,8 +134,7 @@ export function elementFinder() {
 
     leaveCallExpression: function leaveCallExpression(node, parent) {
       var callee = node.callee;
-      var args = node.arguments
-      if (callee.type == 'Identifier' && args.length === 1 && args[0].type === 'ObjectExpression') {
+      if (callee.type == 'Identifier') {
         const ident = <estree.Identifier>callee;
         if (ident.name == 'Polymer') {
           if (element) {
