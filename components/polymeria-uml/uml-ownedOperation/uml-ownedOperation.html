@@ -1,26 +1,37 @@
 <link rel="import"
   href="../../polymer/polymer.html">
 <!--
-<h2>Representation of an UML [method](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Operation.html)</h2>
+`<uml-ownedOperation>` is the representation of an UML [method](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Operation.html).
 
-In typical use, the `<uml-ownedOperation>` belongs to an UML class or interface.
-I might contains parameters.
+The `<uml-ownedOperation>` belongs to an UML [class](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Class.html) or [interface](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Interface.html). In other words, the container should be an [`uml-packagedElement`](#uml-packagedElement) of type `uml-Class`or `uml-Interface`.
+
+An `<uml-ownedOperation>` might contain several [`<uml-ownedParameter>`](#uml-ownedParameter).
+
+Its `type` property is the `id` of the return type of the method. It should be an [`uml-packagedElement`](#uml-packagedElement) of type `uml-Class`or `uml-Interface`
 
 Example:
 
-    <uml-packagedElement type="uml-Class" name="My A Class" id="my-class-a">
-      <uml-ownedOperation
-        name="myOperationWithParameters"
-        visibility="public"
-        type="my-class-b">
-        <uml-ownedParameter name="myParam" type="my-class-a">
-        </uml-ownedParameter>
-      </uml-ownedOperation>
-    </uml-packagedElement>
-    <uml-packagedElement type="uml-Class" name="My B Class"  id="my-class-b">
-    </uml-packagedElement>
-
-@demo demo/uml-ownedOperation.html
+    <head>
+        <script src="webcomponentsjs/webcomponents-lite.min.js">
+        </script>
+        <link rel="import" href="polymeria-uml/uml-packagedElement/uml-packagedElement.html">
+        <link rel="import" href="polymeria-uml/uml-ownedOperation/uml-ownedOperation.html">
+        <link rel="import" href="polymeria-uml/uml-ownedParameter/uml-ownedParameter.html">
+    </head>
+    <body unresolved>
+        <uml-packagedElement type="uml-Class" name="My A Class" id="my-class-a">
+          <uml-ownedOperation
+            name="myOperationWithParameters"
+            visibility="public"
+            type="my-class-b">
+            <uml-ownedParameter name="myParam" type="my-class-a">
+            </uml-ownedParameter>
+          </uml-ownedOperation>
+        </uml-packagedElement>
+        <uml-packagedElement type="uml-Class" name="My B Class"  id="my-class-b">
+        </uml-packagedElement>
+    </body>        
+@demo uml-ownedOperation/demo/uml-ownedOperation.html
 -->
 <dom-module id="uml-ownedOperation">
 	<template>
@@ -35,13 +46,13 @@ Example:
 		<div class="method" layout vertical left>
 			<span>
 				<span class="visibility accent-color">
-					<template is="dom-if" if="{{ isPrivate(visibility) }}">
+					<template is="dom-if" if="{{ _isPrivate(visibility) }}">
 					-
 					</template>
-					<template is="dom-if" if="{{ isProtected(visibility) }}">
+					<template is="dom-if" if="{{ _isProtected(visibility) }}">
 					#
 					</template>
-					<template is="dom-if" if="{{ isPublic(visibility) }}">
+					<template is="dom-if" if="{{ _isPublic(visibility) }}">
 					+
 					</template>
 				</span>
@@ -62,16 +73,31 @@ Example:
 				name: String,
 				/** The method visibility: `private`, `public`, `protected`. */
 				visibility: String,
-				/** The return type of the method, using the `id` to identify it. */
+				/** The return type of the method, an UML class or interface (using the element `id` to identify it). */
 				type: String
 			},
-			isPrivate: function(visibility) {
+			/**
+			 * Tests if a visibility is private.
+			 * @param {string} visibility 
+			 * The visibility to test.
+			 */
+			_isPrivate: function(visibility) {
 				return (visibility == 'private');
 			},
-			isProtected: function(visibility) {
+			/**
+			 * Tests if a visibility is protected.
+			 * @param {string} visibility 
+			 * The visibility to test.
+			 */
+			_isProtected: function(visibility) {
 				return (visibility == 'protected');
 			},
-			isPublic: function(visibility) {
+			/**
+			 * Tests if a visibility is public.
+			 * @param {string} visibility 
+			 * The visibility to test.
+			 */
+			_isPublic: function(visibility) {
 				return (visibility == 'public');
 			},
 			ready: function() {

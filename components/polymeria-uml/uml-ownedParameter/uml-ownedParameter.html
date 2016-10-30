@@ -1,27 +1,37 @@
 <link rel="import"
   href="../../polymer/polymer.html">
 <!--
-<h2>Representation of an UML [method parameter](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Parameter.html)</h2>
+`uml-ownedParameter` is the representation of an UML [method parameter](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Parameter.html).
 
-In typical use, the `<uml-ownedParameter>` belongs to an UML method.
+The `<uml-ownedParameter>` belongs to an [`uml-ownedOperation`](#uml-ownedOperation).
+
+Its `type` property is the `id` of the parameter type. It should be an [`uml-packagedElement`](#uml-packagedElement) of type `uml-Class`or `uml-Interface`.
 
 Example:
 
-    <uml-packagedElement type="uml-Class" name="My A Class" id="my-class-a">
-      <uml-ownedOperation
-        name="myOperationWithParameters"
-        visibility="public"
-        type="my-class-b">
-        <uml-ownedParameter name="myFirstParam" type="my-class-a">
-        </uml-ownedParameter>
-        <uml-ownedParameter name="mySecondParam" type="my-class-b">
-        </uml-ownedParameter>
-      </uml-ownedOperation>
-    </uml-packagedElement>
-    <uml-packagedElement type="uml-Class" name="My B Class"  id="my-class-b">
-    </uml-packagedElement>
-
-@demo demo/uml-ownedOperation.html
+    <head>
+        <script src="webcomponentsjs/webcomponents-lite.min.js">
+        </script>
+        <link rel="import" href="polymeria-uml/uml-packagedElement/uml-packagedElement.html">
+        <link rel="import" href="polymeria-uml/uml-ownedOperation/uml-ownedOperation.html">
+        <link rel="import" href="polymeria-uml/uml-ownedParameter/uml-ownedParameter.html">
+    </head>
+    <body unresolved>
+        <uml-packagedElement type="uml-Class" name="My A Class" id="my-class-a">
+            <uml-ownedOperation
+                name="myOperationWithParameters"
+                visibility="public"
+                type="my-class-b">
+                <uml-ownedParameter name="myFirstParam" type="my-class-a">
+                </uml-ownedParameter>
+                <uml-ownedParameter name="mySecondParam" type="my-class-b">
+                </uml-ownedParameter>
+            </uml-ownedOperation>
+        </uml-packagedElement>
+        <uml-packagedElement type="uml-Class" name="My B Class"  id="my-class-b">
+        </uml-packagedElement>
+    </body>
+@demo uml-ownedOperation/demo/uml-ownedOperation.html
 -->
 <dom-module id="uml-ownedParameter">
 	<template>

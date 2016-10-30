@@ -1,24 +1,38 @@
 <link rel="import"
   href="../../polymer/polymer.html">
 <!--
-<h2>Representation of an UML [packageable element](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/PackageableElement.html)</h2>
+`uml-packagedElement` is the representation of an UML [packageable element](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/PackageableElement.html).
 
-A packageable element is an element which could be nested into a package.
+An `uml-packagedElement` is an element which could be nested into a [package](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Package.html). In other words, the container might be an [`uml-model`](#uml-model) or another `uml-packagedElement` of type `uml-Package`.
 
-The properties allow to display different types of elements.
+The  `type` property allow to display different types of UML elements: 
+<ul>
+    <li>uml-Class</li>
+    <li>uml-Interface</li>
+    <li>uml-Package</li>
+    <li>uml-Association</li>
+    <li>uml-Dependency</li>
+    <li>uml-Realization</li>
+</ul>
 
 Example:
 
-    <uml-packagedElement type="uml-Package" name="My package">
-      <uml-packagedElement type="uml-Interface" id="my-client">
-      </uml-packagedElement>
-      <uml-packagedElement type="uml-Class" id="my-supplier">
-      </uml-packagedElement>
-      <uml-packagedElement type="uml-Realization" id="my-realization" client="my-client" supplier="my-supplier">
-      </uml-packagedElement>
-    </uml-packagedElement>
-
-@demo demo/uml-packagedElement.html
+    <head>
+        <script src="webcomponentsjs/webcomponents-lite.min.js">
+        </script>
+        <link rel="import" href="polymeria-uml/uml-packagedElement/uml-packagedElement.html">
+    </head>
+    <body unresolved>
+        <uml-packagedElement type="uml-Package" name="My package">
+          <uml-packagedElement type="uml-Interface" id="my-client">
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Class" id="my-supplier">
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Realization" id="my-realization" client="my-client" supplier="my-supplier">
+          </uml-packagedElement>
+        </uml-packagedElement>
+    </body>        
+@demo uml-packagedElement/demo/uml-packagedElement.html
 -->
 <dom-module id="uml-packagedElement">
 	<template>

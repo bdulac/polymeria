@@ -64,8 +64,26 @@ The project is a work in progress but should evolve soon to provide a respectful
 
 [A variation of this sample](http://bdulac.github.io/sample/polymeria) shows the modifications between the initial Eclipse UML2 model and the web components.
 
-If you want to play with the components, the [installation with Bower is documented](http://bdulac.github.io/polymeria/installation/) in the GitHub pages.
+The project started following my [discovery of the Polymer project](http://bdulac.github.io/note/web-components-polymer). A [post on my blog](http://bdulac.github.io/note/web-components-adaptation-xml-document) details my early problems.
 
 Because of custom elements compatibility constraints (dash needed), the model file cannot respect strictly the Eclipse UML element names. Another limitation is the use of namespaces in regular HTML documents. As a consequence, the *uml* namespace sequence using a colon is replaced with a dashed prefix followed by a dash. As shown in the preceding example, this has a direct consequence on elements and attributes names.
 
-The project started following my [discovery of the Polymer project](http://bdulac.github.io/note/web-components-polymer). A [post on my blog](http://bdulac.github.io/note/web-components-adapation-xml-document) details my early problems.
+Installation with bower
+--------
+
+If you want to play with the components, the installation with *[Bower](https://bower.io/)* is rather simple.
+
+The first step is to install *[npm](https://www.npmjs.com/)*,  a *JavaScript* package manager. [Here](https://nodejs.org/en/download/) is the download page for common environments. A [debian package](https://packages.debian.org/sid/npm) is available, with *Ubuntu*:
+```
+sudo apt-get install npm
+```
+
+Then the install of *Bower* with *npm* is done the following way:
+```
+npm install -g bower
+```
+
+When the bower command is available, here is the way to get Polymeria from the GitHub repository:
+```
+bower install polymeria-uml
+```

@@ -1,24 +1,32 @@
 <link rel="import"
   href="../../polymer/polymer.html">
 <!--
-<h2>Representation of an UML [class attribute](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Property.html)</h2>
+`<uml-ownedAttribute>` is the representation of an UML [class attribute](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Property.html).
 
-In typical use, the `<uml-ownedAttribute>` belongs to an UML class.
-Its type might be an interface or another class.
+The `<uml-ownedAttribute>` belongs to an UML [class](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Class.html). In other words, the container should be an [`uml-packagedElement`](#uml-packagedElement) of type `uml-Class`.
+
+Its `type` property is the `id` of the attribute type. It should be an [`uml-packagedElement`](#uml-packagedElement) of type `uml-Class`or `uml-Interface`
 
 Example:
 
-    <uml-packagedElement type="uml-Class" name="My Class" id="my-class">
-      <uml-ownedAttribute
-          name="myAttribute"
-          visibility="private"
-          type="my-interface">
-      </uml-ownedAttribute>
-    </uml-packagedElement>
-    <uml-packagedElement type="uml-Interface" name="My Interface"  id="my-interface">
-    </uml-packagedElement>
-
-@demo demo/uml-ownedAttribute.html
+    <head>
+        <script src="webcomponentsjs/webcomponents-lite.min.js">
+        </script>
+        <link rel="import" href="polymeria-uml/uml-packagedElement/uml-packagedElement.html">
+        <link rel="import" href="polymeria-uml/uml-ownedAttribute/uml-ownedAttribute.html">
+    </head>
+    <body unresolved>
+        <uml-packagedElement type="uml-Class" name="My Class" id="my-class">
+          <uml-ownedAttribute
+              name="myAttribute"
+              visibility="private"
+              type="my-type-interface">
+          </uml-ownedAttribute>
+        </uml-packagedElement>
+        <uml-packagedElement type="uml-Interface" name="My type interface"  id="my-type-interface">
+        </uml-packagedElement>
+    </body>
+@demo uml-ownedAttribute/demo/uml-ownedAttribute.html
 -->
 <dom-module id="uml-ownedAttribute">
 	<template>
@@ -33,13 +41,13 @@ Example:
 		<div class="attribute" layout vertical left>
 			<span>
 				<span id="visibility" class="visibility accent-color">
-					<template is="dom-if" if="{{ isPrivate(visibility) }}">
+					<template is="dom-if" if="{{ _isPrivate(visibility) }}">
 					-
 					</template>
-					<template is="dom-if" if="{{ isProtected(visibility) }}">
+					<template is="dom-if" if="{{ _isProtected(visibility) }}">
 					#
 					</template>
-					<template is="dom-if" if="{{ isPublic(visibility) }}">
+					<template is="dom-if" if="{{ _isPublic(visibility) }}">
 					+
 					</template>
 				</span>
@@ -64,13 +72,28 @@ Example:
 				/** The type of the attribute, using the `id` to identify it. */
 				type: String
 			},
-			isPrivate: function(visibility) {
+			/**
+			 * Tests if a visibility is private.
+			 * @param {string} visibility 
+			 * The visibility to test.
+			 */
+			_isPrivate: function(visibility) {
 				return (visibility == 'private');
 			},
-			isProtected: function(visibility) {
+			/**
+			 * Tests if a visibility is protected.
+			 * @param {string} visibility 
+			 * The visibility to test.
+			 */
+			_isProtected: function(visibility) {
 				return (visibility == 'protected');
 			},
-			isPublic: function(visibility) {
+			/**
+			 * Tests if a visibility is public.
+			 * @param {string} visibility 
+			 * The visibility to test.
+			 */
+			_isPublic: function(visibility) {
 				return (visibility == 'public');
 			},
 			ready: function() {
