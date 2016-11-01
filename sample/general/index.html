@@ -2,23 +2,43 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <script src="http://bdulac.github.io/polymeria/components/webcomponentsjs/webcomponents.js">
+  <script src="http://bdulac.github.io/polymeria/components/webcomponentsjs/webc
+omponents.js">
   </script>
-  <link rel="import" href="http://bdulac.github.io/polymeria/components/polymeria-uml/uml-polymeria.html">
+  <link rel="import" href="http://bdulac.github.io/polymeria/components/polymeri
+a-uml/uml-polymeria.html">
 </head>
 <body unresolved>
   <uml-model name="My model">
-    <uml-packagedElement type="uml-Class" name="MyClass">
-      <uml-ownedAttribute 
-        name="myAttribute" 
+    <uml-packagedElement type="uml-Class" name="MyClass" id="my-class">
+      <uml-ownedAttribute
+        name="myAttribute"
         visibility="private"
-        type="test">
+        type="my-other-class">
       </uml-ownedAttribute>
-      <uml-ownedOperation 
-        name="myOperation" 
+      <uml-ownedOperation
+        name="myOperation"
         visibility="protected"
-        type="test">
+        type="my-other-class">
       </uml-ownedOperation>
+    </uml-packagedElement>
+    <uml-packagedElement type="uml-Class" name="MyOtherClass" id="my-other-class">
+      <uml-ownedOperation
+        name="myOperationWithParameters"
+        visibility="public"
+        type="my-class">
+        <uml-ownedParameter name="myFirstParam" type="my-class">
+        </uml-ownedParameter>
+        <uml-ownedParameter name="mySecondParam" type="my-class">
+        </uml-ownedParameter>
+      </uml-ownedOperation>
+    </uml-packagedElement>
+    <uml-packagedElement type="uml-Class" name="MyAssociatedClass" id="my-associated-class">
+    </uml-packagedElement>
+    <uml-packagedElement
+      type="uml-Dependency"
+      client="my-associated-class"
+      supplier="my-other-class">
     </uml-packagedElement>
     <uml-packagedElement type="uml-Package" name="My package">
       <uml-packagedElement type="uml-Package" name="My nested package">
@@ -28,24 +48,7 @@
         </uml-packagedElement>
       </uml-packagedElement>
     </uml-packagedElement>
-    <uml-packagedElement type="uml-Class" name="MyOtherClass" id="test">
-      <uml-ownedOperation
-        name="myOperationWithParameters" 
-        visibility="public"
-        type="My model:MyClass">
-        <uml-ownedParameter name="myFirstParam" type="My model:MyClass">
-        </uml-ownedParameter>
-        <uml-ownedParameter name="mySecondParam" type="My model:MyClass">
-        </uml-ownedParameter>
-      </uml-ownedOperation>
-    </uml-packagedElement>
-    <uml-packagedElement type="uml-Class" name="MyAssociatedClass" id="test2">
-    </uml-packagedElement>
-    <uml-packagedElement 
-      type="uml-Dependency" 
-      client="test2"
-      supplier="test">
-    </uml-packagedElement>
   </uml-model>
 </body>
 </html>
+
