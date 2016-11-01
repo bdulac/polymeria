@@ -8,55 +8,58 @@ Here is the source of an HTML document of a basic class diagram:
 
     <!DOCTYPE html>
     <html>
-    <head>
-      <meta charset="UTF-8">
-      <script src="http://bdulac.github.io/polymeria/components/webcomponentsjs/webcomponents.js">
-      </script>
-      <link rel="import" href="http://bdulac.github.io/polymeria/components/polymeria-uml/uml-polymeria.html">
-    </head>
-    <body unresolved>
-      <uml-model name="My model">
-        <uml-packagedElement type="uml-Class" name="MyClass" id="my-class">
-          <uml-ownedAttribute
-            name="myAttribute"
-            visibility="private"
-            type="my-other-class">
-          </uml-ownedAttribute>
-          <uml-ownedOperation
-            name="myOperation"
-            visibility="protected"
-            type="my-other-class">
-          </uml-ownedOperation>
-        </uml-packagedElement>
-        <uml-packagedElement type="uml-Package" name="My package">
-          <uml-packagedElement type="uml-Package" name="My nested package">
+      <head>
+        <meta charset="UTF-8">
+        <script src="http://bdulac.github.io/polymeria/components/webcomponentsjs/webc
+      omponents.js">
+        </script>
+        <link rel="import" href="http://bdulac.github.io/polymeria/components/polymeri
+      a-uml/uml-polymeria.html">
+      </head>
+      <body unresolved>
+        <uml-model name="My model">
+          <uml-packagedElement type="uml-Class" name="MyClass" id="my-class">
+            <uml-ownedAttribute
+              name="myAttribute"
+              visibility="private"
+              type="my-other-class">
+            </uml-ownedAttribute>
+            <uml-ownedOperation
+              name="myOperation"
+              visibility="protected"
+              type="my-other-class">
+            </uml-ownedOperation>
           </uml-packagedElement>
-          <uml-packagedElement type="uml-Class" name="MyPackageClass">
-            <uml-packagedElement type="uml-Class" name="MyNestedClass">
+          <uml-packagedElement type="uml-Class" name="MyOtherClass" id="my-other-class">
+            <uml-ownedOperation
+              name="myOperationWithParameters"
+              visibility="public"
+              type="my-class">
+              <uml-ownedParameter name="myFirstParam" type="my-class">
+              </uml-ownedParameter>
+              <uml-ownedParameter name="mySecondParam" type="my-class">
+              </uml-ownedParameter>
+            </uml-ownedOperation>
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Class" name="MyAssociatedClass" id="my-associated-class">
+          </uml-packagedElement>
+          <uml-packagedElement
+            type="uml-Dependency"
+            client="my-associated-class"
+            supplier="my-other-class">
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Package" name="My package">
+            <uml-packagedElement type="uml-Package" name="My nested package">
+            </uml-packagedElement>
+            <uml-packagedElement type="uml-Class" name="MyPackageClass">
+              <uml-packagedElement type="uml-Class" name="MyNestedClass">
+              </uml-packagedElement>
             </uml-packagedElement>
           </uml-packagedElement>
-        </uml-packagedElement>
-        <uml-packagedElement type="uml-Class" name="MyOtherClass" id="my-other-class">
-          <uml-ownedOperation
-            name="myOperationWithParameters"
-            visibility="public"
-            type="my-class">
-            <uml-ownedParameter name="myFirstParam" type="my-class">
-            </uml-ownedParameter>
-            <uml-ownedParameter name="mySecondParam" type="my-class">
-            </uml-ownedParameter>
-          </uml-ownedOperation>
-        </uml-packagedElement>
-        <uml-packagedElement type="uml-Class" name="MyAssociatedClass" id="my-associated-class">
-        </uml-packagedElement>
-        <uml-packagedElement
-          type="uml-Dependency"
-          client="my-associated-class"
-          supplier="my-other-class">
-        </uml-packagedElement>
-      </uml-model>
-    </body>
+        </uml-model>
+      </body>
     </html>
+    
 
 To get the result, you should [have a look here](http://bdulac.github.io/polymeria/sample/general/) (sorry, but rendering web components in the *README* file is quite challenging).
 
