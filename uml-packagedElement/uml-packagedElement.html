@@ -15,6 +15,9 @@ The  `type` property allow to display different types of UML elements:
     <li>uml-Realization</li>
 </ul>
 
+By default, the positioning of packaged elements is relative. 
+Two `x` and `y` properties allow  absolute positioning but this might have tricky effects.
+
 Example:
 
     <head>
@@ -154,7 +157,6 @@ Example:
 					new UmlElement(this);
 				}
 				this.async(function() {
-					this.umlElement.initializePosition();
 					if(
 							(this.type == 'uml-Dependency')
 							||(this.type == 'uml-Association')
@@ -168,6 +170,9 @@ Example:
 									event.data.relationshipElement.displayRelationship();
 								}
 						);
+					}
+					else {
+						this.umlElement.initializePosition();
 					}
 				}, 500);
 			}
