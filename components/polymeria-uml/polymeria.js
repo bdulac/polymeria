@@ -1,7 +1,7 @@
 /**
  * Identifies the position of a DOM or Shadow DOM element.
  * @param element
- * Element to identify the position of
+ * Element to identify the position of.
  * @returns Object with two properties x and y (in CSS px)
  */
 function getPosition(element) {
@@ -446,21 +446,12 @@ UmlElement.prototype = {
 		return parentUmlElement;
 	},
 	initializePosition : function() {
-		if(this.webComponent.y) {
-			if(this.webComponent.$.element) {
-				var elm = this.webComponent.$.element;
-				var topPosition = this.webComponent.y;
-				elm.style.position = "absolute";
-				elm.style.top = topPosition;
-			}
-		}
-		if(this.webComponent.x) {
-			if(this.webComponent.$.element) {
-				var elm = this.webComponent.$.element;
-				var leftPosition = this.webComponent.x;
-				elm.style.position = "absolute";
-				elm.style.left = leftPosition;
-			}
+		var elm = this.webComponent.$$('#element');
+		// Absolute positioning
+		if(this.webComponent.x && this.webComponent.y && elm) {
+			$(elm).css({ position: "absolute",
+		        marginLeft: 0, marginTop: 0,
+		        top: this.webComponent.y, left: this.webComponent.x});
 		}
 	},
 	/** 

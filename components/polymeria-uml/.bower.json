@@ -36,7 +36,7 @@
   "_resolution": {
     "type": "version",
     "tag": "v0.0.5",
-    "commit": "b5cbcfcbb8cc1746514d081d892621b407529c5d"
+    "commit": "cc5cf2edcc49850d79f0bc048b6cc1e51c1939eb"
   },
   "_source": "https://github.com/bdulac/polymeria.git",
   "_target": "^0.0.5",
