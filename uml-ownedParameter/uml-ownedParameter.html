@@ -64,7 +64,9 @@ Example:
 			},
 			attached: function() {
 				new UmlMember(this);
-				this.umlElement.displayType();
+				this.async(function() {
+					this.umlElement.displayType();
+				}, 500);
 			}
 		});
 		var el = new OwnedParameter();
