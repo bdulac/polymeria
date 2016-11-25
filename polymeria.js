@@ -511,23 +511,27 @@ UmlMember.prototype = Object.create(UmlElement.prototype, {
 	},
 	displayType : {
 		value : function() {
-			if(this.webComponent.type) {
-				$(this.webComponent.type).show();
-				var typeComponent = document.getElementById(this.webComponent.type);
+			var memberType = this.webComponent.type;
+			if(memberType) {
+				var typeComponent = document.getElementById(memberType);
 				if(typeComponent) {
 					var typeUmlElement = typeComponent.umlElement;
 					if(typeUmlElement) {
 						$(this.webComponent.$.typeName).text(typeUmlElement.simpleName);
 					}
 					else {
-						alert(
-							"The element with ID '" + this.type 
-							+ "' is not a Polymeria UML component"
+						console.error(
+							"The element with ID '" + memberType
+							+ "' is not a valid Polymeria UML component"
 						)
 					}
 				}
 				else if(this.webComponent.type) {
-					alert("ID '" + this.webComponent.type + "' not found in the DOM")
+					console.log(
+							"ID '" + this.webComponent.type + "' not found in the DOM, "
+							+ "diplaying the literal value...");
+					$(this.webComponent.$.typeName).text(this.webComponent.type);
+					$(this.webComponent.$.typeName).css('color', 'black');
 				}
 			}
 			else {
@@ -554,13 +558,13 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 					if(this.webComponent.supplier) {
 						this.source = document.getElementById(this.webComponent.supplier);
 						if(!this.source) {
-							alert('Id ' + this.webComponent.supplier + ' not found in the DOM')
+							console.error('Id ' + this.webComponent.supplier + ' not found in the DOM')
 						}
 					}
 					else {
 						this.source = document.getElementById(getParentPolymeriaComponent(this.webComponent).id);
 						if(!this.source) {
-							alert('Id ' + this.webComponent.parentNode.id + ' not found in the DOM')
+							console.error('Id ' + this.webComponent.parentNode.id + ' not found in the DOM')
 						}
 					}
 					this.source.umlElement.addRecursiveMoveListener(this);
@@ -570,13 +574,13 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 					if(this.webComponent.client) {
 						this.target = document.getElementById(this.webComponent.client);
 						if(!this.target) {
-							alert('Id ' + this.webComponent.client + 'not found')
+							console.error('Id ' + this.webComponent.client + 'not found')
 						}
 					}
 					else {
 						this.target = document.getElementById(this.webComponent.general);
 						if(!this.target) {
-							alert('Id ' + this.webComponent.general + 'not found')
+							console.error('Id ' + this.webComponent.general + 'not found')
 						}
 					}
 					this.target.umlElement.addRecursiveMoveListener(this);
