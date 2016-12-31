@@ -2,7 +2,7 @@
  * Identifies the position of a DOM or Shadow DOM element.
  * @param element
  * Element to identify the position of.
- * @returns Object with two properties x and y (in CSS px)
+ * @returns Object with two properties x and y (in CSS px).
  */
 function getPosition(element) {
     var xPosition = 0;
@@ -14,8 +14,8 @@ function getPosition(element) {
 /**
  * Fetches the Web component related to a Shadow DOM node.
  * @param shadowDomNode
- * Shadow DOM node
- * @returns Related Web component
+ * Shadow DOM node.
+ * @returns Related Web component.
  */
 function getWebComponent(shadowDomNode) {
 	var myNode = shadowDomNode;
@@ -47,7 +47,7 @@ function getParentPolymeriaComponent(webComponent) {
 /** 
  * Generates a valid GUID.
  * (from http://stackoverflow.com/a/2117523/1207019)
- * @returns Generated GUID
+ * @returns Generated GUID.
  */
 function guid() {
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -60,12 +60,12 @@ function guid() {
  * Identifies a style value given a CSS selector.
  * (from http://stackoverflow.com/a/16966533/1207019)
  * @param style
- * Style which value has to be identified
+ * Style which value has to be identified.
  * @param selector
- * CSS selector to access the style
+ * CSS selector to access the style.
  * @param sheet
  * Stylesheet to have a look at (optional: default looks in all the stylesheets)
- * @returns Value of the style found with the given selector
+ * @returns Value of the style found with the given selector.
  */
 function getStyleRuleValue(style, selector, sheet) {
     var sheets = typeof sheet !== 'undefined' ? [sheet] : document.styleSheets;
@@ -86,11 +86,11 @@ function getStyleRuleValue(style, selector, sheet) {
 /** 
  * Draws a relationship between two Polymeria web components.
  * @param webComponent
- * Web component representing the relationship
+ * Web component representing the relationship.
  * @param sourceComponent
- * Web component source of the relationship
+ * Web component source of the relationship.
  * @param targetComponent
- * Web component target of the relationship
+ * Web component target of the relationship.
  */
 function drawRelationship(webComponent, sourceComponent, targetComponent) {
 	console.log("Relationship = " + webComponent.id);
@@ -346,9 +346,9 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
 }
 
 /** 
- * Adaptation of a Web Component into an UML element
+ * Adaptation of a Web Component into an UML element.
  * @param customElm
- * Web component to adapt
+ * Web component to adapt.
  */
 function UmlElement(customElm) {
 	// The adapted Web Component
@@ -388,9 +388,9 @@ UmlElement.prototype = {
 		}
 	},
 	/** 
-	 * Attaching another UML element as move listener of this UML element
+	 * Attaching another UML element as move listener of this UML element.
 	 * @param listener
-	 * UML element to attach as move listener
+	 * UML element to attach as move listener.
 	 */	
 	addMoveListener : function(listener) {
 		// console.log( listener.simpleName + " listening to " + this.simpleName );
@@ -403,9 +403,9 @@ UmlElement.prototype = {
 	},
 	/** 
 	 * Attaching another UML element as move listener of this UML element and 
-	 * all the parent UML elements recursively
+	 * all the parent UML elements recursively.
 	 * @param listener
-	 * UML element to attach as move listener
+	 * UML element to attach as move listener.
 	 */
 	addRecursiveMoveListener : function(listener) {
 		// console.log( listener.simpleName + " listening to " + this.simpleName );
@@ -422,8 +422,8 @@ UmlElement.prototype = {
 		}
 	}, 
 	/** 
-	 * Resolves the parent UML element of the UML element
-	 * @returns Parent UML element
+	 * Resolves the parent UML element of the UML element.
+	 * @returns Parent UML element.
 	 */
 	getParentElement : function() {
 		var parentUmlElement;
@@ -455,7 +455,7 @@ UmlElement.prototype = {
 		}
 	},
 	/** 
-	 * Resolves the qualified name of the UML element
+	 * Resolves the qualified name of the UML element.
 	 * @returns Qualified name of the UML element. 
 	 * This name is unique in the DOM because it is prefixed with the 
 	 * model name.
@@ -480,9 +480,9 @@ UmlElement.prototype = {
 	}
 }
 /** 
- * Adaptation of a Web Component into an UML member element
+ * Adaptation of a Web Component into an UML member element.
  * @param customElm
- * Web component to adapt
+ * Web component to adapt.
  */
 function UmlMember(customElm) {
 	UmlElement.call(this, customElm);
@@ -544,9 +544,9 @@ UmlMember.prototype = Object.create(UmlElement.prototype, {
 UmlMember.prototype.constructor = UmlMember;
 
 /** 
- * Adaptation of a Web Component into an UML relationship element
+ * Adaptation of a Web Component into an UML relationship element.
  * @param customElm
- * Web component to adapt
+ * Web component to adapt.
  */
 function UmlRelationship(customElm) {
 	UmlElement.call(this, customElm);
@@ -555,12 +555,19 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 	displayRelationship : {
 		value : function() {
 				if(!this.source) {
+					// If we have a supplier (common case)
 					if(this.webComponent.supplier) {
 						this.source = document.getElementById(this.webComponent.supplier);
 						if(!this.source) {
 							console.error('Id ' + this.webComponent.supplier + ' not found in the DOM')
 						}
 					}
+					// If we have a note component
+					else if(this.webComponent.annotatedelement) {
+						// The the source is the note component itself
+						this.source = document.getElementById(this.webComponent.id);
+					}
+					// Else the source is the parent component
 					else {
 						this.source = document.getElementById(getParentPolymeriaComponent(this.webComponent).id);
 						if(!this.source) {
@@ -577,11 +584,20 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 							console.error('Id ' + this.webComponent.client + 'not found')
 						}
 					}
-					else {
+					else if(this.webComponent.general) {
 						this.target = document.getElementById(this.webComponent.general);
 						if(!this.target) {
 							console.error('Id ' + this.webComponent.general + 'not found')
 						}
+					}
+					else if(this.webComponent.annotatedelement) {
+						this.target = document.getElementById(this.webComponent.annotatedelement);
+						if(!this.target) {
+							console.error('Id ' + this.webComponent.annotatedelement + 'not found')
+						}
+					}
+					else {
+						throw "No target could be identified for component " + this.webComponent;
 					}
 					this.target.umlElement.addRecursiveMoveListener(this);
 					this.addRecursiveMoveListener(this.target.umlElement);
@@ -611,9 +627,9 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 UmlRelationship.prototype.constructor = UmlRelationship;
 
 /** 
- * Adaptation of a Web Component into an UML association relationship
+ * Adaptation of a Web Component into an UML association relationship.
  * @param customElm
- * Web component to adapt
+ * Web component to adapt.
  */
 function UmlAssociation(customElm) {
 	UmlRelationship.call(this, customElm);
@@ -625,49 +641,9 @@ UmlAssociation.prototype = Object.create(UmlRelationship.prototype, {
 UmlAssociation.prototype.constructor = UmlAssociation;
 
 /** 
- * Adaptation of a Web Component into an UML dependency relationship
+ * Adaptation of a Web Component into an UML realization relationship.
  * @param customElm
- * Web component to adapt
- */
-function UmlDependency(customElm) {
-	UmlRelationship.call(this, customElm);
-	this.dashed = true;
-}
-UmlDependency.prototype = Object.create(UmlRelationship.prototype, { 
-	drawRelationshipEnd: {
-		value : function() {
-			if(this.relationshipCanvas) {
-				var headlen = 17;   // length of head in pixels
-				var fromX = this.relationshipCanvasStartX;
-				var fromY = this.relationshipCanvasStartY;
-				var toX = this.relationshipCanvasEndX;
-				var toY = this.relationshipCanvasEndY;
-				var angle = Math.atan2(toY-fromY,toX-fromX);
-				
-				var context = this.relationshipCanvas.getContext('2d');
-				context.lineWidth = 2;
-				context.beginPath();
-				context.setLineDash([15, 0]);
-				context.moveTo(toX, toY);
-				context.lineTo(toX-headlen*Math.cos(angle-Math.PI/8),toY-headlen*Math.sin(angle-Math.PI/8));
-				
-				
-				context.moveTo(toX, toY);
-				context.lineTo(toX-headlen*Math.cos(angle+Math.PI/8),toY-headlen*Math.sin(angle+Math.PI/8));
-				
-				context.closePath();
-				context.stroke();
-			}
-		}
-	}
-}
-);
-UmlDependency.prototype.constructor = UmlDependency;
-
-/** 
- * Adaptation of a Web Component into an UML realization relationship
- * @param customElm
- * Web component to adapt
+ * Web component to adapt.
  */
 function UmlRealization(customElm) {
 	UmlRelationship.call(this, customElm);
@@ -713,9 +689,9 @@ UmlRealization.prototype = Object.create(UmlRelationship.prototype, {
 UmlRealization.prototype.constructor = UmlRealization;
 
 /** 
- * Adaptation of a Web Component into an UML generalization relationship
+ * Adaptation of a Web Component into an UML generalization relationship.
  * @param customElm
- * Web component to adapt
+ * Web component to adapt.
  */
 function UmlGeneralization(customElm) {
 	UmlRelationship.call(this, customElm);
@@ -759,3 +735,17 @@ UmlGeneralization.prototype = Object.create(UmlRelationship.prototype, {
 }
 );
 UmlGeneralization.prototype.constructor = UmlGeneralization;
+
+/** 
+ * Adaptation of a Web Component into an UML owned comment.
+ * @param customElm
+ * Web component to adapt.
+ */
+function UmlOwnedComment(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = true;
+}
+UmlOwnedComment.prototype = Object.create(UmlRelationship.prototype, { 
+}
+);
+UmlOwnedComment.prototype.constructor = UmlOwnedComment;

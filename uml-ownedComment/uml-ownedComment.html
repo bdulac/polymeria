@@ -1,0 +1,70 @@
+<link rel="import"
+  href="../../polymer/polymer.html">
+<!--
+`<uml-ownedComment>` is the representation of an UML [comment](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Comment.html).
+
+The `<uml-ownedComment>` is an comment (note) which could be owned by another element (the container might be an [`uml-model`](#uml-model) or any other element).
+
+Example:
+
+    <head>
+        <script src="webcomponentsjs/webcomponents-lite.min.js">
+        </script>
+        <link rel="import" href="polymeria-uml/uml-packagedElement/uml-packagedElement.html">
+        <link rel="import" href="polymeria-uml/uml-ownedComment/uml-ownedComment.html">
+        <link rel="import" href="polymeria-uml/uml-generalization/uml-model.html">
+    </head>
+    <body unresolved>
+        <uml-model>
+          <uml-packagedElement type="uml-Class" name="My annotated class" id="annotated-class">
+          </uml-packagedElement>
+          <uml-ownedComment type="uml-Comment" annotatedElement="annotated-class">
+            <body>My note</body>
+          </uml-ownedComment>
+        </uml-model>
+    </body>        
+@demo uml-ownedComment/demo/uml-ownedComment.html
+-->
+<dom-module id="uml-ownedComment">
+	<template>
+			<div id="element" class="note primary1-background" layout vertical>
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
+					<content></content>
+				</div>
+			</div>	
+	</template>
+	<script src="../../jquery/dist/jquery.min.js"></script>
+	<script src="../polymeria.js"></script>
+	<script>
+	(function() {
+		var Comment = Polymer({
+			is: "uml-ownedComment",
+			properties: {
+				/** The type of the notation (`uml-Comment`). */
+				type: String,
+				/** The `id` of the element target of the notation. */
+				annotatedelement: String
+			},
+			ready: function() {
+			},
+			attached: function() {
+				new UmlOwnedComment(this);
+				this.async(function() {
+					this.umlElement.initializePosition();
+					this.umlElement.displayRelationship();
+					$(window).on("resize",
+							{ relationshipElement: this.umlElement },
+							function( event ) {
+								event.data.relationshipElement.displayRelationship();
+							}
+					);
+				}, 800);
+			}
+		});
+		var el = new Comment();
+	})();
+	</script>
+</dom-module>

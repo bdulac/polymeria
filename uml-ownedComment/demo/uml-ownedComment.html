@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>uml-generalization</title>
+    <script src="../../../webcomponentsjs/webcomponents-lite.min.js">
+    </script>
+    <link rel="import" href="../../uml-model/uml-model.html">
+    <link rel="import" href="../../uml-packagedElement/uml-packagedElement.html">
+    <link rel="import" href="../../uml-ownedComment/uml-ownedComment.html">
+  </head>
+  <style>
+    body {
+      margin: 0;
+	  padding: 0;
+	  width: 100%;
+	  height: 100%;
+	}
+  </style>
+  <body unresolved>
+    <section>
+    <uml-model name="My comment demo">
+      <uml-packagedElement type="uml-Class" name="My annotated class" id="annotated-class">
+      </uml-packagedElement>
+      <uml-ownedComment type="uml-Comment" annotatedElement="annotated-class">
+        <body>My note</body>
+      </uml-ownedComment>
+    </uml-model>
+    </section>
+  </body>
+</html>
