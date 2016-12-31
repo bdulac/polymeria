@@ -16,7 +16,7 @@ Example:
         <link rel="import" href="polymeria-uml/uml-ownedAttribute/uml-ownedAttribute.html">
     </head>
     <body unresolved>
-        <uml-packagedElement type="uml-Class" name="My Class" id="my-class">
+        <uml-packagedElement type="uml-Class" name="My owning class" id="my-class">
           <uml-ownedAttribute
               name="myAttribute"
               visibility="private"
@@ -69,7 +69,7 @@ Example:
 				name: String,
 				/** The attribute visibility: `private`, `public`, `protected`. */
 				visibility: String,
-				/** The type of the attribute, using the `id` to identify it. */
+				/** The `id` of the attribute type (a literal value is accepted). */
 				type: String
 			},
 			/**

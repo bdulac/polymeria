@@ -19,22 +19,22 @@
   </style>
   <body unresolved>
     <section>
-      <uml-model name="My test model">
-        <uml-packagedElement type="uml-Class" name='MyOwningClass' id="sample-class">
-          <uml-ownedOperation
-                name="myProtectedMethod" 
-                visibility="protected"
-                type="return-type-class">
-            <uml-ownedParameter
-                name="param" 
-                type="param-type-class">
-            </uml-ownedParameter>
-          </uml-ownedOperation>
-        </uml-packagedElement>
-        <uml-packagedElement type="uml-Class" name='MyReturnTypeClass' id="return-type-class">
-        </uml-packagedElement>
-        <uml-packagedElement type="uml-Class" name='MyParameterTypeClass' id="param-type-class">
-        </uml-packagedElement>
+      <uml-model name="My operation demo (with parameters)">
+          <uml-packagedElement type="uml-Class" name='My owning class' id="owning-class">
+              <uml-ownedOperation
+                  name="myProtectedMethod" 
+                  visibility="protected"
+                  type="return-type-class">
+                  <uml-ownedParameter
+                      name="param" 
+                      type="param-type-class">
+                  </uml-ownedParameter>
+              </uml-ownedOperation>
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Class" name='My return type class' id="return-type-class">
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Class" name='My parameter type class' id="param-type-class">
+          </uml-packagedElement>
       </uml-model>
     </section>
   </body>

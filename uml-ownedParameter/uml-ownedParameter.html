@@ -17,18 +17,20 @@ Example:
         <link rel="import" href="polymeria-uml/uml-ownedParameter/uml-ownedParameter.html">
     </head>
     <body unresolved>
-        <uml-packagedElement type="uml-Class" name="My A Class" id="my-class-a">
+        <uml-packagedElement type="uml-Class" name='My owning class' id="owning-class">
             <uml-ownedOperation
-                name="myOperationWithParameters"
-                visibility="public"
-                type="my-class-b">
-                <uml-ownedParameter name="myFirstParam" type="my-class-a">
-                </uml-ownedParameter>
-                <uml-ownedParameter name="mySecondParam" type="my-class-b">
+                name="myProtectedMethod" 
+                visibility="protected"
+                type="return-type-class">
+                <uml-ownedParameter
+                    name="param" 
+                    type="param-type-class">
                 </uml-ownedParameter>
             </uml-ownedOperation>
         </uml-packagedElement>
-        <uml-packagedElement type="uml-Class" name="My B Class"  id="my-class-b">
+        <uml-packagedElement type="uml-Class" name='My return type class' id="return-type-class">
+        </uml-packagedElement>
+        <uml-packagedElement type="uml-Class" name='My parameter type class' id="param-type-class">
         </uml-packagedElement>
     </body>
 @demo uml-ownedOperation/demo/uml-ownedOperation.html
@@ -57,7 +59,7 @@ Example:
 			properties: {
 				/** The parameter name. */
 				name: String,
-				/** The parameter type, using the `id` to identify it. */
+				/** The `id` of the parameter type (a literal value is accepted). */
 				type: String
 			},
 			ready: function() {

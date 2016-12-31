@@ -18,17 +18,18 @@
   </style>
   <body unresolved>
     <section>
-      <uml-model name="My test model">
-        <uml-packagedElement type="uml-Package" name="My generalization package">
-          <uml-packagedElement type="uml-Class" name="MyParentClass" id="client-class">
-          </uml-packagedElement>
-          <uml-packagedElement type="uml-Class" name="MyChildClass" id="supplier-class">
-            <uml-generalization 
-              type="uml-Generalization" 
-              general="client-class">
-            </uml-generalization>
-          </uml-packagedElement>
+      <uml-model name="My generalization demo">
+          <uml-packagedElement type="uml-Package" name="My generalization package">
+              <uml-packagedElement type="uml-Class" name="MyParentClass" id="client-class">
+              </uml-packagedElement>
+              <uml-packagedElement type="uml-Class" name="MyChildClass" id="supplier-class">
+                  <uml-generalization 
+                      type="uml-Generalization" 
+                      general="client-class">
+                  </uml-generalization>
+            </uml-packagedElement>
         </uml-packagedElement>
+      </uml-model>  
     </section>
   </body>
 </html>

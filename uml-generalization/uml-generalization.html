@@ -14,11 +14,13 @@ Example:
         <link rel="import" href="polymeria-uml/uml-generalization/uml-generalization.html">
     </head>
     <body unresolved>
-        <uml-packagedElement type="uml-Class" name="MyParentClass" id="parent">
+        <uml-packagedElement type="uml-Class" name="MyParentClass" id="client-class">
         </uml-packagedElement>
-        <uml-packagedElement type="uml-Class" name="MyChildClass">
-          <uml-generalization type="uml-Generalization" general="parent">
-          </uml-generalization>
+        <uml-packagedElement type="uml-Class" name="MyChildClass" id="supplier-class">
+            <uml-generalization 
+                type="uml-Generalization" 
+                general="client-class">
+            </uml-generalization>
         </uml-packagedElement>
     </body>        
 @demo uml-generalization/demo/uml-generalization.html
@@ -35,7 +37,7 @@ Example:
 			properties: {
 				name: String,
 				type: String,
-				/** Target of the generalization. */
+				/** The `id` of the element target of the generalization. */
 				general: String
 				/*, direction: {
 					type: String,
@@ -56,7 +58,7 @@ Example:
 								event.data.relationshipElement.displayRelationship();
 							}
 					);
-				}, 500);
+				}, 800);
 			}
 		});
 		var el = new Generalization();
