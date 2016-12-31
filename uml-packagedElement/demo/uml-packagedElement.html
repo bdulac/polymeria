@@ -20,24 +20,10 @@
   </style>
   <body unresolved>
     <section>
-     <uml-model name="Test model">
+     <uml-model name="My packagedElement demo">
+        <uml-packagedElement type="uml-Class" name='MyAbsolutePositionedClass' id="my-absolute-class" x="600" y="150">
+         </uml-packagedElement>
         <uml-packagedElement type="uml-Package" name='My parent package' id="my-parent-package">
-          <uml-packagedElement type="uml-Package" name='My association package' id="my-association-package">
-            <uml-packagedElement type="uml-Class" name='MySupplier' id="my-association-supplier">
-            </uml-packagedElement>
-            <uml-packagedElement type="uml-Class" name='MyClient' id="my-association-client">
-            </uml-packagedElement>
-            <uml-packagedElement type="uml-Association" supplier="my-association-supplier" client="my-association-client">
-            </uml-packagedElement>
-          </uml-packagedElement>
-          <uml-packagedElement type="uml-Package" name='My dependency package' id="my-dependency-package">
-            <uml-packagedElement type="uml-Class" name='MySupplier' id="my-dependency-supplier">
-            </uml-packagedElement>
-            <uml-packagedElement type="uml-Class" name='MyClient' id="my-dependency-client">
-            </uml-packagedElement>
-            <uml-packagedElement type="uml-Dependency" supplier="my-dependency-supplier" client="my-dependency-client">
-            </uml-packagedElement>
-          </uml-packagedElement>
           <uml-packagedElement type="uml-Package" name='My realization package' id="my-realization-package">
              <uml-packagedElement type="uml-Class" name='MyImplementation' id="my-implementation">
             </uml-packagedElement>
@@ -46,9 +32,23 @@
             <uml-packagedElement type="uml-Realization" supplier="my-interface" client="my-implementation">
             </uml-packagedElement>
           </uml-packagedElement>
+          <uml-packagedElement type="uml-Package" name='My association package' id="my-association-package">
+            <uml-packagedElement type="uml-Artifact" name='MySupplier' id="my-association-supplier">
+            </uml-packagedElement>
+            <uml-packagedElement type="uml-Node" name='MyClient' id="my-association-client">
+            </uml-packagedElement>
+            <uml-packagedElement type="uml-Association" supplier="my-association-supplier" client="my-association-client">
+            </uml-packagedElement>
+          </uml-packagedElement>
+          <uml-packagedElement type="uml-Package" name='My dependency package' id="my-dependency-package">
+            <uml-packagedElement type="uml-Device" name='MySupplier' id="my-dependency-supplier">
+            </uml-packagedElement>
+            <uml-packagedElement type="uml-ExecutionEnvironment" name='MyClient' id="my-dependency-client">
+            </uml-packagedElement>
+            <uml-packagedElement type="uml-Dependency" supplier="my-dependency-supplier" client="my-dependency-client">
+            </uml-packagedElement>
+          </uml-packagedElement>
         </uml-packagedElement>
-        <uml-packagedElement type="uml-Class" name='MyAbsolutePosClass' id="my-absolute-class" x="300" y="50">
-         </uml-packagedElement>
       </uml-model>
     </section>
   </body>

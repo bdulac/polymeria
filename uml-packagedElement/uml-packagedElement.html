@@ -13,6 +13,10 @@ The  `type` property allow to display different types of UML elements:
     <li>uml-Association</li>
     <li>uml-Dependency</li>
     <li>uml-Realization</li>
+    <li>uml-Artifact</li>
+    <li>uml-Device</li>
+    <li>uml-ExecutionEnvironment</li>
+    <li>uml-Node</li>
 </ul>
 
 By default, the positioning of packaged elements is relative. 
@@ -48,7 +52,7 @@ Example:
 			}
 		</style>
 		<span>
-		<template  is="dom-if" if="{{ isPackage(type) }}">
+		<template  is="dom-if" if="{{ _isPackage(type) }}">
 			<div id="element" class="package">
 				<div class="name primary2-background">
 				{{ name }}
@@ -58,7 +62,7 @@ Example:
 				</div>
 			</div>
 		</template>
-		<template is="dom-if" if="{{ isClass(type) }}">
+		<template is="dom-if" if="{{ _isClass(type) }}">
 			<div id="element" class="class white-background" layout vertical style="margin: 15px;">
 				<div class="name">
 				{{ name }}
@@ -68,8 +72,51 @@ Example:
 				</div>
 			</div>
 		</template>
-		<template is="dom-if" if="{{ isInterface(type) }}">
+		<template is="dom-if" if="{{ _isInterface(type) }}">
 			<div id="element" class="interface white-background" layout vertical style="margin: 15px;">
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		<template is="dom-if" if="{{ _isNode(type) }}">
+			<div id="element" class="node white-background" layout vertical>
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		<template is="dom-if" if="{{ _isExecutionEnvironment(type) }}">
+			<div id="element" class="node execution-environment white-background" layout vertical>
+				<div class="stereotype accent-color">«execution environment»</div>
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		<template is="dom-if" if="{{ _isDevice(type) }}">
+			<div id="element" class="node device white-background" layout vertical>
+				<div class="stereotype accent-color">«device»</div>
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		<template is="dom-if" if="{{ _isArtifact(type) }}">
+			<div id="element" class="artifact white-background" layout vertical>
+				<div class="stereotype accent-color">«artifact»</div>
 				<div class="name">
 				{{ name }}
 				</div>
@@ -89,7 +136,7 @@ Example:
 			properties: {
 				/**
 				 * Element type.
-				 * Six different types of `<uml-packagedElement>` are supported:
+				 * Different types of `<uml-packagedElement>` are supported:
 				 *  <ul>
 				 *    <li>uml-Class</li>
 				 *    <li>uml-Interface</li>
@@ -97,6 +144,10 @@ Example:
 				 *    <li>uml-Association</li>
 				 *    <li>uml-Dependency</li>
 				 *    <li>uml-Realization</li>
+				 *    <li>uml-ExecutionEnvironment</li>
+				 *    <li>uml-Device</li>
+				 *    <li>uml-Node</li>
+				 *    <li>uml-Artifact</li>
 				 *  </ul>
 				 */
 				type: String,
@@ -123,23 +174,35 @@ Example:
 				 */
 				y: Number
 			},
-			isPackage: function(type) {
+			_isPackage: function(type) {
 				return (type == 'uml-Package');
 			},
-			isClass: function(type) {
+			_isClass: function(type) {
 				return (type == 'uml-Class');
 			},
-			isInterface: function(type) {
+			_isInterface: function(type) {
 				return (type == 'uml-Interface');
 			},
-			isAssociation: function(type) {
+			_isAssociation: function(type) {
 				return (type == 'uml-Association');
 			},
-			isDependency: function(type) {
+			_isDependency: function(type) {
 				return (type == 'uml-Dependency');
 			},
-			isRealization: function(type) {
+			_isRealization: function(type) {
 				return (type == 'uml-Realization');
+			},
+			_isNode: function(type) {
+				return (type == 'uml-Node');
+			},
+			_isExecutionEnvironment: function(type) {
+				return (type == 'uml-ExecutionEnvironment');
+			},
+			_isDevice: function(type) {
+				return (type == 'uml-Device');
+			},
+			_isArtifact: function(type) {
+				return (type == 'uml-Artifact');
 			},
 			ready: function() {
 			},
