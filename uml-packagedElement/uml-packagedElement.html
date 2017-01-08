@@ -7,16 +7,19 @@ An `uml-packagedElement` is an element which could be nested into a [package](ht
 
 The  `type` property allow to display different types of UML elements: 
 <ul>
-    <li>uml-Class</li>
-    <li>uml-Interface</li>
-    <li>uml-Package</li>
-    <li>uml-Association</li>
-    <li>uml-Dependency</li>
-    <li>uml-Realization</li>
+	<li>uml-Actor</li>
     <li>uml-Artifact</li>
+    <li>uml-Association</li>
+    <li>uml-Class</li>
+    <li>uml-Clomponent</li>
+    <li>uml-Dependency</li>
     <li>uml-Device</li>
     <li>uml-ExecutionEnvironment</li>
+    <li>uml-Interface</li>
     <li>uml-Node</li>
+    <li>uml-Package</li>
+    <li>uml-Realization</li>
+    <li>uml-UseCase</li>
 </ul>
 
 By default, the positioning of packaged elements is relative. 
@@ -44,7 +47,7 @@ Example:
 <dom-module id="uml-packagedElement">
 	<template>
 		<link rel="stylesheet" type="text/css" href="../colors.css" >
-		<link rel="stylesheet" type="text/css" href="../elements.css" >
+		<link rel="stylesheet" type="text/css" href="elements.css" >
 		<style>
 			:host {
 				display: block;
@@ -52,18 +55,63 @@ Example:
 			}
 		</style>
 		<span>
-		<template  is="dom-if" if="{{ _isPackage(type) }}">
-			<div id="element" class="package">
-				<div class="name primary2-background">
+		<template is="dom-if" if="{{ _isActor(type) }}">
+			<div id="element" class="actor" layout vertical>
+				<div class="stereotype"></div>
+				<div class="name">
 				{{ name }}
 				</div>
-				<div class="content primary2-background">
+				<div class="content">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		<template is="dom-if" if="{{ _isArtifact(type) }}">
+			<div id="element" class="artifact white-background" layout vertical>
+				<div class="stereotype accent-color">«artifact»</div>
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
 					<content></content>
 				</div>
 			</div>
 		</template>
 		<template is="dom-if" if="{{ _isClass(type) }}">
 			<div id="element" class="class white-background" layout vertical style="margin: 15px;">
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		<template is="dom-if" if="{{ _isComponent(type) }}">
+			<div id="element" class="component white-background" layout vertical>
+				<div class="stereotype accent-color">«component»</div>
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		<template is="dom-if" if="{{ _isDevice(type) }}">
+			<div id="element" class="node device white-background" layout vertical>
+				<div class="stereotype accent-color">«device»</div>
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		<template is="dom-if" if="{{ _isExecutionEnvironment(type) }}">
+			<div id="element" class="node execution-environment white-background" layout vertical>
+				<div class="stereotype accent-color">«execution environment»</div>
 				<div class="name">
 				{{ name }}
 				</div>
@@ -92,31 +140,18 @@ Example:
 				</div>
 			</div>
 		</template>
-		<template is="dom-if" if="{{ _isExecutionEnvironment(type) }}">
-			<div id="element" class="node execution-environment white-background" layout vertical>
-				<div class="stereotype accent-color">«execution environment»</div>
-				<div class="name">
+		<template  is="dom-if" if="{{ _isPackage(type) }}">
+			<div id="element" class="package">
+				<div class="name primary2-background">
 				{{ name }}
 				</div>
-				<div class="content">
+				<div class="content primary2-background">
 					<content></content>
 				</div>
 			</div>
 		</template>
-		<template is="dom-if" if="{{ _isDevice(type) }}">
-			<div id="element" class="node device white-background" layout vertical>
-				<div class="stereotype accent-color">«device»</div>
-				<div class="name">
-				{{ name }}
-				</div>
-				<div class="content">
-					<content></content>
-				</div>
-			</div>
-		</template>
-		<template is="dom-if" if="{{ _isArtifact(type) }}">
-			<div id="element" class="artifact white-background" layout vertical>
-				<div class="stereotype accent-color">«artifact»</div>
+		<template  is="dom-if" if="{{ _isUseCase(type) }}">
+			<div id="element" class="use-case white-background">
 				<div class="name">
 				{{ name }}
 				</div>
@@ -138,16 +173,19 @@ Example:
 				 * Element type.
 				 * Different types of `<uml-packagedElement>` are supported:
 				 *  <ul>
-				 *    <li>uml-Class</li>
-				 *    <li>uml-Interface</li>
-				 *    <li>uml-Package</li>
-				 *    <li>uml-Association</li>
-				 *    <li>uml-Dependency</li>
-				 *    <li>uml-Realization</li>
-				 *    <li>uml-ExecutionEnvironment</li>
-				 *    <li>uml-Device</li>
-				 *    <li>uml-Node</li>
+				 *    <li>uml-Actor</li>
 				 *    <li>uml-Artifact</li>
+				 *    <li>uml-Association</li>
+				 *    <li>uml-Class</li>
+				 *    <li>uml-Component</li>
+				 *    <li>uml-Dependency</li>
+				 *    <li>uml-Device</li>
+				 *    <li>uml-ExecutionEnvironment</li>
+				 *    <li>uml-Interface</li>
+				 *    <li>uml-Node</li>
+				 *    <li>uml-Package</li>
+				 *    <li>uml-Realization</li>
+				 *    <li>uml-UseCase</li>
 				 *  </ul>
 				 */
 				type: String,
@@ -174,35 +212,44 @@ Example:
 				 */
 				y: Number
 			},
-			_isPackage: function(type) {
-				return (type == 'uml-Package');
+			_isActor: function(type) {
+				return (type == 'uml-Actor');
 			},
-			_isClass: function(type) {
-				return (type == 'uml-Class');
-			},
-			_isInterface: function(type) {
-				return (type == 'uml-Interface');
+			_isArtifact: function(type) {
+				return (type == 'uml-Artifact');
 			},
 			_isAssociation: function(type) {
 				return (type == 'uml-Association');
 			},
-			_isDependency: function(type) {
-				return (type == 'uml-Dependency');
+			_isClass: function(type) {
+				return (type == 'uml-Class');
 			},
-			_isRealization: function(type) {
-				return (type == 'uml-Realization');
-			},
-			_isNode: function(type) {
-				return (type == 'uml-Node');
-			},
-			_isExecutionEnvironment: function(type) {
-				return (type == 'uml-ExecutionEnvironment');
+			_isComponent: function(type) {
+				return (type == 'uml-Component');
 			},
 			_isDevice: function(type) {
 				return (type == 'uml-Device');
 			},
-			_isArtifact: function(type) {
-				return (type == 'uml-Artifact');
+			_isDependency: function(type) {
+				return (type == 'uml-Dependency');
+			},
+			_isExecutionEnvironment: function(type) {
+				return (type == 'uml-ExecutionEnvironment');
+			},
+			_isInterface: function(type) {
+				return (type == 'uml-Interface');
+			},
+			_isNode: function(type) {
+				return (type == 'uml-Node');
+			},
+			_isPackage: function(type) {
+				return (type == 'uml-Package');
+			},
+			_isRealization: function(type) {
+				return (type == 'uml-Realization');
+			},
+			_isUseCase: function(type) {
+				return (type == 'uml-UseCase');
 			},
 			ready: function() {
 			},
