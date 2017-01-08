@@ -337,6 +337,21 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     context.closePath();
     context.stroke();
     
+    if(webComponent.name) {
+    	var labelDiv = document.createElement("div");
+    	$(labelDiv).text(webComponent.name);
+    	labelDiv.style.textAlign = "center";
+    	labelDiv.style.position = "absolute";
+    	labelDiv.style.width = "100px";
+    	labelDiv.style.maxWidth = "100px";
+    	document.body.appendChild(labelDiv);
+    	var textTop = canvasTop + (canvasWidth / 2  - 50);
+    	var textLeft = canvasLeft + (canvasHeight / 2 - 50);
+    	labelDiv.style.top = textTop + "px";
+    	labelDiv.style.left = textLeft + "px";
+
+    }
+    
     webComponent.umlElement.relationshipCanvas = canvas;
     webComponent.umlElement.relationshipCanvasStartX = canvasLineStartX;
     webComponent.umlElement.relationshipCanvasStartY = canvasLineStartY;
@@ -639,6 +654,46 @@ UmlAssociation.prototype = Object.create(UmlRelationship.prototype, {
 }
 );
 UmlAssociation.prototype.constructor = UmlAssociation;
+
+/** 
+ * Adaptation of a Web Component into an UML dependency relationship.
+ * @param customElm
+ * Web component to adapt.
+ */
+function UmlDependency(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = true;
+}
+UmlDependency.prototype = Object.create(UmlRelationship.prototype, { 
+	drawRelationshipEnd: {
+		value : function() {
+			if(this.relationshipCanvas) {
+				var headlen = 17;   // length of head in pixels
+				var fromX = this.relationshipCanvasStartX;
+				var fromY = this.relationshipCanvasStartY;
+				var toX = this.relationshipCanvasEndX;
+				var toY = this.relationshipCanvasEndY;
+				var angle = Math.atan2(toY-fromY,toX-fromX);
+				
+				var context = this.relationshipCanvas.getContext('2d');
+				context.lineWidth = 2;
+				context.beginPath();
+				context.setLineDash([15, 0]);
+				context.moveTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle-Math.PI/8),toY-headlen*Math.sin(angle-Math.PI/8));
+				
+				
+				context.moveTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle+Math.PI/8),toY-headlen*Math.sin(angle+Math.PI/8));
+				
+				context.closePath();
+				context.stroke();
+			}
+		}
+	}
+}
+);
+UmlDependency.prototype.constructor = UmlDependency;
 
 /** 
  * Adaptation of a Web Component into an UML realization relationship.
