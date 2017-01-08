@@ -3,38 +3,53 @@
 <!--
 `uml-model` is the representation of an UML [model](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Model.html).
 
-In the Eclipse UML hierarchy, the model is itself a package. As a consequence, the `<uml-model>` might contain several [`<uml-packagedElement>`](#uml-packagedElement).
+In the Eclipse UML hierarchy, the model is itself a package. As a consequence, the `<uml-model>` might contain several [`<uml-packagedElement>`](#uml-packagedElement) which can be related to different kind of UML diagrams.
+
+A single import simplifies the integration of multiple <em>Polymeria</em> UML components.
 
 Example:
 
     <head>
         <script src="webcomponentsjs/webcomponents-lite.min.js">
         </script>
-        <link rel="import" href="polymeria-uml/uml-model/uml-model.html">
-        <link rel="import" href="polymeria-uml/uml-packagedElement/uml-packagedElement.html">
-        <link rel="import" href="polymeria-uml/uml-generalization/uml-generalization.html">
-        <link rel="import" href="polymeria-uml/uml-ownedAttribute/uml-ownedAttribute.html">
-        <link rel="import" href="polymeria-uml/uml-ownedComment/uml-ownedComment.html">
-        <link rel="import" href="polymeria-uml/uml-ownedOperation/uml-ownedOperation.html">
-        <link rel="import" href="polymeria-uml/uml-ownedParameter/uml-ownedParameter.html">
+        <link rel="import" href="polymeria-uml/uml-polymeria.html">
     </head>
     <body unresolved>
         <uml-model name="My model">
-            <uml-packagedElement type="uml-Package" name='My sample package' id="my-sample-package">
-                <uml-packagedElement type="uml-Class" id="my-association-supplier" name="My sample class">
+            <uml-packagedElement type="uml-Package" name='My use cases package' id="my-use-cases-package">
+                <uml-packagedElement type="uml-Actor" id="my-use-cases-actor" name="My actor">
+                </uml-packagedElement>
+                <uml-packagedElement type="uml-UseCase" id="my-use-case" name="My use case">
+                    <uml-include type="uml-Include" addition="my-included-use-case"/>
+                </uml-packagedElement>
+                <uml-packagedElement type="uml-UseCase" id="my-included-case" name="My included use case">
+                </uml-packagedElement>
+                <uml-packagedElement type="uml-Dependency" supplier="my-use-cases-actor" client="my-use-case">
+                </uml-packagedElement>
+            </uml-packagedElement>
+            <uml-ownedComment type="uml-Comment" annotatedElement="my-use-cases-package">
+                 <body>This example package contains use cases. More informations about <em>uml-packagedElement</em> are available in <a href="../../#uml-packagedElement" target="_blank">the Web component documentation</a>.</body>
+           </uml-ownedComment>
+            <uml-packagedElement type="uml-Package" name='My deployment package' id="my-deployment-package">
+                <uml-packagedElement type="uml-Device" id="my-dependency-supplier" name="My device">
+                </uml-packagedElement>
+                <uml-packagedElement type="uml-ExecutionEnvironment" id="my-dependency-client" name="My execution environment">
+                </uml-packagedElement>
+                <uml-packagedElement type="uml-Dependency" supplier="my-dependency-supplier" client="my-dependency-client">
+                </uml-packagedElement>
+            </uml-packagedElement>
+            <uml-packagedElement type="uml-Package" name='My classes package' id="my-class-package">
+                <uml-packagedElement type="uml-Interface" id="my-realization-interface" name="My associated interface">
+                </uml-packagedElement>
+                <uml-packagedElement type="uml-Class" id="my-realization-implementation" name="My sample class">
                     <uml-ownedAttribute name="myPrivateAttribute" visibility="private"></uml-ownedAttribute>
                     <uml-ownedOperation name="myProtectedOperation" visibility="protected">
                         <uml-ownedParameter name="myParam"></uml-ownedParameter>
                     </uml-ownedOperation>
                 </uml-packagedElement>
-                <uml-packagedElement type="uml-Artifact" id="my-association-client" name="My associated interface">
-                </uml-packagedElement>
-                <uml-packagedElement type="uml-Association" supplier="my-association-supplier" client="my-association-client">
+                <uml-packagedElement type="uml-Realization" supplier="my-realization-interface" client="my-realization-implementation">
                 </uml-packagedElement>
             </uml-packagedElement>
-            <uml-ownedComment type="uml-Comment" annotatedElement="my-sample-package">
-                <body>My comment on the package</body>
-            </uml-ownedComment>
         </uml-model>
     </body>
 @demo uml-model/demo/uml-model.html
@@ -42,7 +57,7 @@ Example:
 <dom-module id="uml-model" attributes="name">
 	<template>
 		<link rel="stylesheet" type="text/css" href="../colors.css" >
-		<link rel="stylesheet" type="text/css" href="../elements.css" >
+		<link rel="stylesheet" type="text/css" href="elements.css" >
 		<style>
 		:host {
 			padding: 0;
@@ -66,7 +81,7 @@ Example:
 		var Model = Polymer({
 			is: "uml-model",
 			properties: {
-				/** The name of the model (displayed). */
+				/** The (displayed) name of the model. */
 				name: String
 			},
 			attached: function() {
