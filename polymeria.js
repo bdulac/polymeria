@@ -123,7 +123,6 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
 			(targetPosition.x <= sourcePosition.x)
 			&&((targetPosition.x + targetElement.width()) >= sourcePosition.x)
 	) {
-		// console.log('1');
 		canvasStartX = sourcePosition.x;
 		if((targetPosition.x + targetElement.width()) < (sourcePosition.x + sourceElement.width())) {
 			canvasEndX = targetPosition.x + targetElement.width();
@@ -146,7 +145,6 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
 			(sourcePosition.x <= targetPosition.x)
 			&&((sourcePosition.x + sourceElement.width()) >= targetPosition.x)
 	) {
-		// console.log('2');
 		canvasStartX = targetPosition.x;
 		if((targetPosition.x + targetElement.width()) < (sourcePosition.x + sourceElement.width())) {
 			canvasEndX = targetPosition.x + targetElement.width();
@@ -166,7 +164,6 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
 	}
 	// The source is on the left (target is on the right)
 	else if(targetPosition.x > sourcePosition.x) {	
-		// console.log('3');
 		canvasStartX = sourcePosition.x + sourceElement.width();
 		canvasEndX = targetPosition.x;
 		if(targetPosition.y < sourcePosition.y) {
@@ -180,7 +177,6 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
 	}
 	// The source is on the right (target is on the left)
 	else {
-		// console.log('4');
 		canvasStartX = targetPosition.x + targetElement.width();
 		canvasEndX = sourcePosition.x;
 		if(targetPosition.y > sourcePosition.y) {
@@ -192,17 +188,15 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
 			canvasLineEndX = 0;
 		}
 	}
-	//console.log('Canvas X: ' + canvasStartX + " to " + canvasEndX);
 	var canvasStartY;
 	var canvasEndY;	
 	var canvasLineStartY;
 	var canvasLineEndY;
-	// The source is aligned horizontally on the target 
+	// Source aligned horizontally on the target 
 	if(
 			(targetPosition.y <= sourcePosition.y)
 			&&((targetPosition.y + targetElement.height()) >= sourcePosition.y )
 	) {
-		// console.log('A');
 		canvasStartY = sourcePosition.y;
 		if((targetPosition.y + targetElement.height()) < (sourcePosition.y + sourceElement.height())) {
 			canvasEndY = targetPosition.y + targetElement.height();
@@ -221,12 +215,11 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
 			canvasLineEndY = (targetPosition.x + targetElement.height() / 2) - canvasStartY;
 		}
 	}
-	// The target is aligned horizontally on the source
+	// Target aligned horizontally on the source
 	else if(
 			(sourcePosition.y <= targetPosition.y)
 			&&((sourcePosition.y + sourceElement.height()) >= targetPosition.y )
 	) {
-		// console.log('B');
 		canvasStartY = targetPosition.y;
 		if((targetPosition.y + targetElement.height()) < (sourcePosition.y + sourceElement.height())) {
 			canvasEndY = targetPosition.y + targetElement.height();
@@ -244,32 +237,25 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
 			canvasLineEndY = (sourcePosition.x + sourceElement.height() / 2) - canvasStartY;
 		}
 	}
-	// The source is at the top
+	// Source at the top
 	else if((targetPosition.y + targetElement.height()) > sourcePosition.y) {
-		// console.log('C');
 		canvasStartY = sourcePosition.y + sourceElement.height();
 		canvasEndY = targetPosition.y;
 		canvasLineStartY = 0;
 		canvasLineEndY = targetPosition.y - canvasStartY;
 	}
-	// The target is at the top
+	// Target at the top
 	else {
-		// console.log('D');
 		canvasStartY = targetPosition.y + targetElement.height();
 		canvasEndY = sourcePosition.y;
 		canvasLineStartY = sourcePosition.y - canvasStartY;
 		canvasLineEndY = 0;
 	}
-	// console.log('Canvas Y: ' + canvasStartY + " to " + canvasEndY);
 	////////////////////////
-	
 	var canvasTop = canvasStartY;
 	var canvasLeft = canvasStartX;
 	var canvasHeight = canvasEndY - canvasStartY;
 	var canvasWidth = canvasEndX - canvasStartX;
-	// console.log("$ Drawing the canvas");
-	// console.log("-->Position = (left: " + canvasLeft + ", top: " + canvasTop + ")");
-    // console.log("-->Dimensions = (width: " + canvasWidth + ", height: " + canvasHeight + ")");
     // Trying to fetch an existing element
     var canvasDiv = document.getElementById("relationship[" + webComponent.id + "]");
     // If we have an existing element, 
@@ -280,7 +266,6 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     canvasDiv = document.createElement("div");
     canvasDiv.id = "relationship[" + webComponent.id + "]";
     var html5Canvas = document.createElement("canvas");
-    
     canvasDiv.style.borderWith = 0;
     canvasDiv.style.borderStyle = "none";
     canvasDiv.style.position = "absolute";
@@ -302,7 +287,6 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     html5Canvas.style.margin   = 0;
     html5Canvas.style.padding   = 0;
     html5Canvas.style.zIndex   = 250;
-    // html5Canvas.style.border   = "dotted";
     
     document.body.appendChild(canvasDiv);
     canvasDiv.appendChild(html5Canvas);
@@ -318,8 +302,7 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     var context = html5Canvas.getContext('2d');
     
     context.lineWidth = 1;
-    // Draw  the line
-    // console.log("$ Drawing the line");
+    // Drawing  the line
     context.beginPath();
 
     // context.strokeStyle = colorValue;
@@ -338,18 +321,56 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     context.stroke();
     
     if(webComponent.name) {
-    	var labelDiv = document.createElement("div");
+    	// Trying to fetch an existing element
+    	var labelDiv = document.getElementById("label[" + webComponent.id + "]");
+    	// If we have an existing element, 
+    	if(labelDiv) {
+    		// The we remove it
+    		labelDiv.parentNode.removeChild(labelDiv);
+    	}
+    	labelDiv = document.createElement("div");
+    	labelDiv.id = "label[" + webComponent.id + "]";
     	$(labelDiv).text(webComponent.name);
     	labelDiv.style.textAlign = "center";
     	labelDiv.style.position = "absolute";
-    	labelDiv.style.width = "100px";
-    	labelDiv.style.maxWidth = "100px";
+    	var width = canvasLineEndX - canvasLineStartX;
+    	var height = canvasLineEndY - canvasLineStartY;
+    	labelDiv.style.width = width;
+    	labelDiv.style.maxWidth = width;
     	document.body.appendChild(labelDiv);
-    	var textTop = canvasTop + (canvasWidth / 2  - 50);
-    	var textLeft = canvasLeft + (canvasHeight / 2 - 50);
+    	var textTop = canvasTop + ( canvasHeight / 2  - 30 );
+    	var textLeft = canvasLeft;
     	labelDiv.style.top = textTop + "px";
     	labelDiv.style.left = textLeft + "px";
-
+    }
+    if(webComponent.stereotype) {
+    	// Trying to fetch an existing element
+    	var stereotypeDiv = document.getElementById("stereotype[" + webComponent.id + "]");
+    	// If we have an existing element, 
+    	if(stereotypeDiv) {
+    		// The we remove it
+    		stereotypeDiv.parentNode.removeChild(stereotypeDiv);
+    	}
+    	stereotypeDiv = document.createElement("div");
+    	stereotypeDiv.id = "stereotype[" + webComponent.id + "]";
+    	$(stereotypeDiv).text("«" + webComponent.stereotype + "»");
+    	$(stereotypeDiv).addClass("accent-color");
+    	$(stereotypeDiv).addClass("stereotype");
+    	stereotypeDiv.style.textAlign = "center";
+    	stereotypeDiv.style.position = "absolute";
+    	var width = canvasLineEndX - canvasLineStartX;
+    	var height = canvasLineEndY - canvasLineStartY;
+    	stereotypeDiv.style.width = width;
+    	stereotypeDiv.style.maxWidth = width;
+    	stereotypeDiv.style.minWidth = width;
+    	stereotypeDiv.style.margin = "0";
+    	stereotypeDiv.style.padding = "0";
+    	document.body.appendChild(stereotypeDiv);
+    	var height = stereotypeDiv.style.fontSize + stereotypeDiv.style.fontSize;
+    	var textTop = canvasTop + ( canvasHeight / 2  - 30 );
+    	var textLeft = canvasLeft;
+    	stereotypeDiv.style.top = textTop + "px";
+    	stereotypeDiv.style.left = textLeft + "px";
     }
     
     webComponent.umlElement.relationshipCanvas = canvas;
@@ -357,6 +378,7 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     webComponent.umlElement.relationshipCanvasStartY = canvasLineStartY;
     webComponent.umlElement.relationshipCanvasEndX = canvasLineEndX;
     webComponent.umlElement.relationshipCanvasEndY = canvasLineEndY;
+    // Drawing the relationship end (different for each type of relationship)
     webComponent.umlElement.drawRelationshipEnd();
 }
 
@@ -393,7 +415,7 @@ function UmlElement(customElm) {
 UmlElement.prototype = {
 	notifyMoveListeners : function() {
 		if(this.moveListeners) {
-			// console.log(this.simpleName + " notifying " + this.moveListeners.length + " children...");
+			// Notifying movement listeners
 			for	(index = 0; index < this.moveListeners.length; index++) {
 				var listener = this.moveListeners[index];
 				if(listener.update) {
@@ -423,7 +445,6 @@ UmlElement.prototype = {
 	 * UML element to attach as move listener.
 	 */
 	addRecursiveMoveListener : function(listener) {
-		// console.log( listener.simpleName + " listening to " + this.simpleName );
 		if(this.moveListeners) {
 			this.moveListeners[this.moveListeners.length] = listener; 
 		}
@@ -461,13 +482,47 @@ UmlElement.prototype = {
 		return parentUmlElement;
 	},
 	initializePosition : function() {
+		/*
 		var elm = this.webComponent.$$('#element');
+		var id = this.webComponent.id;
+		var comp = document.getElementById(id);
 		// Absolute positioning
-		if(this.webComponent.x && this.webComponent.y && elm) {
-			$(elm).css({ position: "absolute",
+		// var elPosition = $(this.webComponent).css('position');
+		var elPosition = comp.style.position;
+		if(elPosition) {
+			var elTop = $(this.webComponent).css('top');
+			var elLeft = $(this.webComponent).css('left');
+			$(elm).css({ position: elPosition,
 		        marginLeft: 0, marginTop: 0,
-		        top: this.webComponent.y, left: this.webComponent.x});
+		        top: elTop, left: elLeft});
 		}
+		
+		var elWidth = this.webComponent.style.width;
+		if(elWidth) {
+			$(elm).css({ width: elWidth});
+		}
+		var elMinWidth = this.webComponent.style.minWidth;
+		if(elMinWidth) {
+			$(elm).css({ minWidth: elMinWidth});
+		}
+		
+		var elMaxWidth = $(this.webComponent).css('max-width');
+		if(elMaxWidth) {
+			$(elm).css({ maxWidth: elMaxWidth});
+		}
+		var elHeight = $(this.webComponent).css('height');
+		if(elHeight) {
+			$(elm).css({ height: elHeight});
+		}
+		var elMinHeight = $(this.webComponent).css('min-height');
+		if(elMinHeight) {
+			$(elm).css({ minHeight: elMinHeight});
+		}
+		var elMaxHeight = $(this.webComponent).css('max-height');
+		if(elMaxHeight) {
+			$(elm).css({ maxHeight: elMaxHeight});
+		}
+		*/
 	},
 	/** 
 	 * Resolves the qualified name of the UML element.
@@ -596,19 +651,27 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 					if(this.webComponent.client) {
 						this.target = document.getElementById(this.webComponent.client);
 						if(!this.target) {
-							console.error('Id ' + this.webComponent.client + 'not found')
+							console.error('Id ' + this.webComponent.client + ' not found in the DOM');
 						}
 					}
 					else if(this.webComponent.general) {
 						this.target = document.getElementById(this.webComponent.general);
 						if(!this.target) {
-							console.error('Id ' + this.webComponent.general + 'not found')
+							console.error('Id ' + this.webComponent.general + ' not found in the DOM');
+						}
+					}
+					else if(this.webComponent.addition) {
+						this.target = document.getElementById(this.webComponent.addition);
+						if(!this.target) {
+							console.error('Id ' + this.webComponent.addition + ' not found in the DOM');
 						}
 					}
 					else if(this.webComponent.annotatedelement) {
 						this.target = document.getElementById(this.webComponent.annotatedelement);
 						if(!this.target) {
-							console.error('Id ' + this.webComponent.annotatedelement + 'not found')
+							console.error(
+								'Id ' + this.webComponent.annotatedelement + 'not found in the DOM'
+							);
 						}
 					}
 					else {
@@ -694,6 +757,88 @@ UmlDependency.prototype = Object.create(UmlRelationship.prototype, {
 }
 );
 UmlDependency.prototype.constructor = UmlDependency;
+
+/** 
+ * Adaptation of a Web Component into an UML include relationship.
+ * @param customElm
+ * Web component to adapt.
+ */
+function UmlInclude(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = true;
+	this.webComponent.stereotype = "include";
+}
+UmlInclude.prototype = Object.create(UmlRelationship.prototype, { 
+	drawRelationshipEnd: {
+		value : function() {
+			if(this.relationshipCanvas) {
+				var headlen = 17;   // length of head in pixels
+				var fromX = this.relationshipCanvasStartX;
+				var fromY = this.relationshipCanvasStartY;
+				var toX = this.relationshipCanvasEndX;
+				var toY = this.relationshipCanvasEndY;
+				var angle = Math.atan2(toY-fromY,toX-fromX);
+				
+				var context = this.relationshipCanvas.getContext('2d');
+				context.lineWidth = 2;
+				context.beginPath();
+				context.setLineDash([15, 0]);
+				context.moveTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle-Math.PI/8),toY-headlen*Math.sin(angle-Math.PI/8));
+				
+				
+				context.moveTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle+Math.PI/8),toY-headlen*Math.sin(angle+Math.PI/8));
+				
+				context.closePath();
+				context.stroke();
+			}
+		}
+	}
+}
+);
+UmlInclude.prototype.constructor = UmlInclude;
+
+/** 
+ * Adaptation of a Web Component into an UML extends relationship.
+ * @param customElm
+ * Web component to adapt.
+ */
+function UmlExtend(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = true;
+	this.webComponent.stereotype = "extends";
+}
+UmlExtend.prototype = Object.create(UmlRelationship.prototype, { 
+	drawRelationshipEnd: {
+		value : function() {
+			if(this.relationshipCanvas) {
+				var headlen = 17;   // length of head in pixels
+				var fromX = this.relationshipCanvasStartX;
+				var fromY = this.relationshipCanvasStartY;
+				var toX = this.relationshipCanvasEndX;
+				var toY = this.relationshipCanvasEndY;
+				var angle = Math.atan2(toY-fromY,toX-fromX);
+				
+				var context = this.relationshipCanvas.getContext('2d');
+				context.lineWidth = 2;
+				context.beginPath();
+				context.setLineDash([15, 0]);
+				context.moveTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle-Math.PI/8),toY-headlen*Math.sin(angle-Math.PI/8));
+				
+				
+				context.moveTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle+Math.PI/8),toY-headlen*Math.sin(angle+Math.PI/8));
+				
+				context.closePath();
+				context.stroke();
+			}
+		}
+	}
+}
+);
+UmlExtend.prototype.constructor = UmlExtend;
 
 /** 
  * Adaptation of a Web Component into an UML realization relationship.

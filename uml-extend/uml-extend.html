@@ -1,0 +1,66 @@
+<link rel="import"
+  href="../../polymer/polymer.html">
+<!--
+`<uml-extend>` is the representation of an UML [extend relationship](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Extend.html).
+
+The `<uml-extend>` is nested in the source element. The `addition` attribute specifies the target of the extension.
+
+Example:
+
+    <head>
+        <script src="webcomponentsjs/webcomponents-lite.min.js">
+        </script>
+        <link rel="import" href="polymeria-uml/uml-packagedElement/uml-packagedElement.html">
+        <link rel="import" href="polymeria-uml/uml-extend/uml-extend.html">
+    </head>
+    <body unresolved>
+        <uml-packagedElement type="uml-Actor" id="my-use-cases-actor" name="My actor">
+        </uml-packagedElement>
+        <uml-packagedElement type="uml-UseCase" id="my-use-case" name="My use case">
+            <uml-extend type="uml-Extend" addition="my-extend-use-case"/>
+        </uml-packagedElement>
+        <uml-packagedElement type="uml-UseCase" id="my-included-case" name="My extended use case">
+        </uml-packagedElement>
+        <uml-packagedElement type="uml-Dependency" supplier="my-use-cases-actor" client="my-use-case">
+         </uml-packagedElement>
+    </body>        
+@demo uml-extend/demo/uml-extend.html
+-->
+<dom-module id="uml-extend">
+	<template>
+	</template>
+	<script src="../../jquery/dist/jquery.min.js"></script>
+	<script src="../polymeria.js"></script>
+	<script>
+	(function() {
+		var Generalization = Polymer({
+			is: "uml-extend",
+			properties: {
+				name: String,
+				/** The `id` of the element target of the inclusion. */
+				addition: String
+				/*, direction: {
+					type: String,
+					value: 'vertical'
+				},*/
+			},
+			ready: function() {
+			},
+			attached: function() {
+				new UmlExtend(this);
+				this.async(function() {
+					this.umlElement.initializePosition();
+					this.umlElement.displayRelationship();
+					$(window).on("resize",
+							{ relationshipElement: this.umlElement },
+							function( event ) {
+								event.data.relationshipElement.displayRelationship();
+							}
+					);
+				}, 800);
+			}
+		});
+		var el = new Generalization();
+	})();
+	</script>
+</dom-module>
