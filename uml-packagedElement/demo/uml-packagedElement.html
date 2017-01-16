@@ -17,11 +17,19 @@
 	  width: 100%;
 	  height: 100%;
 	}
+	#my-absolute-component {
+		position: absolute;
+		top: 2em;
+		left: 12em;
+		width: 16em;
+		min-width: 16em;
+		max-width: 16em;
+	}
   </style>
   <body unresolved>
     <section>
      <uml-model name="My packagedElement demo">
-        <uml-packagedElement type="uml-Component" name='My absolutely positioned component' id="my-absolute-component" x="600" y="150">
+        <uml-packagedElement type="uml-Component" name='My absolutely positioned component' id="my-absolute-component">
          </uml-packagedElement>
         <uml-packagedElement type="uml-Package" name='My parent package' id="my-parent-package">
           <uml-packagedElement type="uml-Package" name='My realization package' id="my-realization-package">

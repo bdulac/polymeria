@@ -22,8 +22,7 @@ The  `type` property allow to display different types of UML elements:
     <li>uml-UseCase</li>
 </ul>
 
-By default, the positioning of packaged elements is relative. 
-Two `x` and `y` properties allow  absolute positioning but this might have tricky effects.
+By default, the positioning of packaged elements is relative. It is possible to override the CSS position and dimension properties to get a custom result (for non relationship elements only). But this might have tricky effects on nested elements.
 
 Example:
 
@@ -200,17 +199,7 @@ Example:
 				 * Specify the target the source of a relationship
 				 * (`uml-Association`, `uml-Dependency`, `uml-Relationship`).
 				 */
-				supplier: String,
-				/**
-				 * Sets the left position as absolute
-				 (usage is discouraged if the element is nested in an `uml-Package`).
-				 */
-				x: Number,
-				/**
-				 * Sets the top position as absolute
-				 (usage is discouraged if the element is nested in an `uml-Package`).
-				 */
-				y: Number
+				supplier: String
 			},
 			_isActor: function(type) {
 				return (type == 'uml-Actor');

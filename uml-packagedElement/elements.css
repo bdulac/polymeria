@@ -44,6 +44,10 @@ uml-packagedelement {
 	min-width: 300px;
 }
 
+uml-packagedelement[type="uml-Class"] {
+	max-width: 400px;
+}
+
 .class {
 	border-style: outset;
 	border-width: 1px;
@@ -52,7 +56,7 @@ uml-packagedelement {
 	margin: 15px;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 400px;
+	max-width: 90%;
 	overflow: auto;
 	box-shadow: 1px 1px 1px silver;
 	font-family: sans-serif;
@@ -79,6 +83,10 @@ uml-packagedelement {
 	text-align: center;
 }
 
+uml-packagedelement[type="uml-Interface"] {
+	max-width: 400px;
+}
+
 .interface {
 	border-style: outset;
 	border-width: 1px;
@@ -87,7 +95,7 @@ uml-packagedelement {
 	margin: 15px;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 400px;
+	max-width: 90%;
 	overflow: auto;
 	box-shadow: 1px 1px 1px silver;
 	font-family: sans-serif;
@@ -112,20 +120,20 @@ uml-packagedelement {
 	padding: 15px;
 	text-align: center;
 }
+
+uml-packagedelement[type="uml-Node"] {
+	max-width: 400px;
+}
 .node {
 	border-style: solid;
 	border-width: 1px;
 	padding: 0;
-	margin: 0;
-	margin-left: 1em;
-	margin-top: 1em;
-	margin-right: auto;
-	max-width: 400px;
+	margin: 1em 4em;
+	max-width: 90%;
 	overflow: auto;
 	font-family: sans-serif;
 }
 .node {
-	float:left;
 	box-shadow:  1px -1px rgb(0, 0, 0),
 		 2px -2px rgb(251, 250, 250),
 		 3px -3px rgb(249, 248, 248),
@@ -167,6 +175,9 @@ uml-packagedelement {
 	margin-bottom: 15px;
 	padding: 15px;
 	text-align: center;
+}
+
+uml-packagedelement[type="uml-Artifact"] {
 	max-width: 400px;
 }
 
@@ -178,7 +189,7 @@ uml-packagedelement {
 	margin: 15px;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 400px;
+	max-width: 90%;
 	overflow: auto;
 	box-shadow: 1px 1px 1px silver;
 	font-family: sans-serif;
@@ -202,6 +213,10 @@ uml-packagedelement {
 	padding: 15px;
 	text-align: center;
 }
+
+uml-packagedelement[type="uml-Component"] {
+	max-width: 600px;
+}
 .component {
 	border-style: outset;
 	border-width: 1px;
@@ -210,7 +225,7 @@ uml-packagedelement {
 	margin: 15px;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 400px;
+	max-width: 90%;
 	overflow: auto;
 	box-shadow: 1px 1px 1px silver;
 	font-family: sans-serif;
@@ -242,13 +257,18 @@ uml-packagedelement {
 	text-align: center;
 }
 
+uml-packagedelement[type="uml-UseCase"] {
+	min-width: 200px;
+	width: 300px;
+	max-width: 400px;
+}
 .use-case {
 	border-style: outset;
 	border-width: 1px;
 	border-radius: 100%;
 	padding: 0;
-	margin: 15px;
-	max-width: 400px;
+	margin: 1em 4em;
+	width: 90%;
 	max-height: 6em;
 	overflow: auto;
 	box-shadow: 1px 1px 1px silver;
@@ -274,6 +294,8 @@ uml-packagedelement {
 	text-align: center;
 }
 
+uml-packagedelement[type="uml-Actor"] {
+}
 .actor {
 	background-image: url("actor.png");
 	background-repeat: no-repeat;
