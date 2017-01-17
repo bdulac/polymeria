@@ -1,4 +1,4 @@
-uml-node[type="uml-InitialNode"] {
+uml-node[type="uml:InitialNode"] {
 	padding: 0;
 	margin: auto;
 	max-width: 1em;
@@ -23,12 +23,12 @@ uml-node[type="uml-InitialNode"] {
 	border-style: inset;
 	border-width: 2px;
 }
-uml-node[type="uml-InitialNode"] > .content {
+uml-node[type="uml:InitialNode"] > .content {
 	padding: 5px;
 	background-color: none;
 	text-align: left;
 }
-uml-node[type="uml-InitialNode"] > .name  {
+uml-node[type="uml:InitialNode"] > .name  {
 	margin-top: 1em;
 	margin-left: 0;
 	margin-right: 0;
@@ -37,7 +37,7 @@ uml-node[type="uml-InitialNode"] > .name  {
 	text-align: center;
 }
 
-uml-node[type="uml-ActivityFinalNode"] {
+uml-node[type="uml:ActivityFinalNode"] {
 	padding: 0;
 	margin: auto;
 	max-width: 1em;
@@ -62,12 +62,12 @@ uml-node[type="uml-ActivityFinalNode"] {
 	border-style: inset;
 	border-width: 2px;
 }
-uml-node[type="uml-ActivityFinalNode"] > .content {
+uml-node[type="uml:ActivityFinalNode"] > .content {
 	padding: 5px;
 	background-color: none;
 	text-align: left;
 }
-uml-node[type="uml-ActivityFinalNode"] > .name  {
+uml-node[type="uml:ActivityFinalNode"] > .name  {
 	margin-top: 1em;
 	margin-left: 0;
 	margin-right: 0;
@@ -77,7 +77,7 @@ uml-node[type="uml-ActivityFinalNode"] > .name  {
 }
 
 
-uml-node[type="uml-OpaqueAction"] {
+uml-node[type="uml:OpaqueAction"] {
 	min-width: 8em;
 	width: 8em;
 	max-width: 30em;

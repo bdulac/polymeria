@@ -44,7 +44,7 @@ uml-packagedelement {
 	min-width: 300px;
 }
 
-uml-packagedelement[type="uml-Class"] {
+uml-packagedelement[type="uml:Class"] {
 	max-width: 400px;
 }
 
@@ -83,7 +83,7 @@ uml-packagedelement[type="uml-Class"] {
 	text-align: center;
 }
 
-uml-packagedelement[type="uml-Interface"] {
+uml-packagedelement[type="uml:Interface"] {
 	max-width: 400px;
 }
 
@@ -121,7 +121,7 @@ uml-packagedelement[type="uml-Interface"] {
 	text-align: center;
 }
 
-uml-packagedelement[type="uml-Node"] {
+uml-packagedelement[type="uml:Node"] {
 	max-width: 400px;
 }
 .node {
@@ -177,7 +177,7 @@ uml-packagedelement[type="uml-Node"] {
 	text-align: center;
 }
 
-uml-packagedelement[type="uml-Artifact"] {
+uml-packagedelement[type="uml:Artifact"] {
 	max-width: 400px;
 }
 
@@ -214,7 +214,7 @@ uml-packagedelement[type="uml-Artifact"] {
 	text-align: center;
 }
 
-uml-packagedelement[type="uml-Component"] {
+uml-packagedelement[type="uml:Component"] {
 	max-width: 600px;
 }
 .component {
@@ -257,7 +257,7 @@ uml-packagedelement[type="uml-Component"] {
 	text-align: center;
 }
 
-uml-packagedelement[type="uml-UseCase"] {
+uml-packagedelement[type="uml:UseCase"] {
 	min-width: 200px;
 	width: 300px;
 	max-width: 400px;
@@ -294,7 +294,7 @@ uml-packagedelement[type="uml-UseCase"] {
 	text-align: center;
 }
 
-uml-packagedelement[type="uml-Actor"] {
+uml-packagedelement[type="uml:Actor"] {
 }
 .actor {
 	background-image: url("actor.png");
@@ -317,7 +317,7 @@ uml-packagedelement[type="uml-Actor"] {
 	text-align: center;
 }
 
-uml-packagedelement[type="uml-Activity"] {
+uml-packagedelement[type="uml:Activity"] {
 	min-width: 200px;
 	width: 600px;
 	max-width: 100%;

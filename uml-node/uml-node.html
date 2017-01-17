@@ -7,9 +7,9 @@ An `uml-node` is an element which could be nested into a [package](http://downlo
 
 The  `type` property allow to display different types of UML elements: 
 <ul>
-	<li>uml-InitialNode</li>
-    <li>uml-ControlFlow</li>
-    <li>uml-OpaqueAction</li>
+	<li>uml:InitialNode</li>
+    <li>uml:ControlFlow</li>
+    <li>uml:OpaqueAction</li>
 </ul>
 
 By default, the positioning of nodes is relative. It is possible to override the CSS position and dimension properties to get a custom result (for non relationship elements only). But this might have tricky effects on nested elements.
@@ -22,12 +22,12 @@ Example:
         <link rel="import" href="polymeria-uml/uml-packagedElement/uml-packagedElement.html">
     </head>
     <body unresolved>
-        <uml-packagedElement type="uml-Activity" name='My activity' id="my-activity">
-        	<uml-node type="uml-InitialNode" id="initial-node">
+        <uml-packagedElement type="uml:Activity" name='My activity' id="my-activity">
+        	<uml-node type="uml:InitialNode" id="initial-node">
         	</uml-node>
-        	<uml-node type="uml-ControlFlow" outgoing="first-action" incoming="initial-node">
+        	<uml-node type="uml:ControlFlow" outgoing="first-action" incoming="initial-node">
         	</uml-node>
-        	<uml-node type="uml-OpaqueAction" name="My first action" id="first-action">
+        	<uml-node type="uml:OpaqueAction" name="My first action" id="first-action">
         	</uml-node>
          </uml-packagedElement>
         </uml-packagedElement>
@@ -92,10 +92,10 @@ Example:
 				 * Element type.
 				 * Different types of `<uml-node>` are supported:
 				 *  <ul>
-				 *    <li>uml-InitialNode</li>
-				 *    <li>uml-ActivityFinalNode</li>
-				 *    <li>uml-ControlFlow</li>
-				 *    <li>uml-OpaqueAction</li>
+				 *    <li>uml:InitialNode</li>
+				 *    <li>uml:ActivityFinalNode</li>
+				 *    <li>uml:ControlFlow</li>
+				 *    <li>uml:OpaqueAction</li>
 				 *  </ul>
 				 */
 				type: String,
@@ -113,21 +113,21 @@ Example:
 				incoming: String
 			},
 			_isInitialNode: function(type) {
-				return (type == 'uml-InitialNode');
+				return (type == 'uml:InitialNode');
 			},
 			_isOpaqueAction: function(type) {
-				return (type == 'uml-OpaqueAction');
+				return (type == 'uml:OpaqueAction');
 			},
 			_isControlFlow: function(type) {
-				return (type == 'uml-ControlFlow');
+				return (type == 'uml:ControlFlow');
 			},
 			_isActivityFinalNode: function(type) {
-				return (type == 'uml-ActivityFinalNode');
+				return (type == 'uml:ActivityFinalNode');
 			},
 			ready: function() {
 			},
 			attached: function() {
-				if(this.type == 'uml-ControlFlow') {
+				if(this.type == 'uml:ControlFlow') {
 					new UmlControlFlow(this);
 				}
 				else {
@@ -135,7 +135,7 @@ Example:
 				}
 				this.async(function() {
 					if(
-							(this.type == 'uml-ControlFlow')
+							(this.type == 'uml:ControlFlow')
 					) {
 						this.umlElement.initializePosition();
 						this.umlElement.displayRelationship();

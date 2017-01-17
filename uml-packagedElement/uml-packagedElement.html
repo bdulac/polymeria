@@ -7,20 +7,20 @@ An `uml-packagedElement` is an element which could be nested into a [package](ht
 
 The  `type` property allow to display different types of UML elements: 
 <ul>
-	<li>uml-Actor</li>
-	<li>uml-Activity</li>
-    <li>uml-Artifact</li>
-    <li>uml-Association</li>
-    <li>uml-Class</li>
-    <li>uml-Clomponent</li>
-    <li>uml-Dependency</li>
-    <li>uml-Device</li>
-    <li>uml-ExecutionEnvironment</li>
-    <li>uml-Interface</li>
-    <li>uml-Node</li>
-    <li>uml-Package</li>
-    <li>uml-Realization</li>
-    <li>uml-UseCase</li>
+	<li>uml:Actor</li>
+	<li>uml:Activity</li>
+    <li>uml:Artifact</li>
+    <li>uml:Association</li>
+    <li>uml:Class</li>
+    <li>uml:Clomponent</li>
+    <li>uml:Dependency</li>
+    <li>uml:Device</li>
+    <li>uml:ExecutionEnvironment</li>
+    <li>uml:Interface</li>
+    <li>uml:Node</li>
+    <li>uml:Package</li>
+    <li>uml:Realization</li>
+    <li>uml:UseCase</li>
 </ul>
 
 By default, the positioning of packaged elements is relative. It is possible to override the CSS position and dimension properties to get a custom result (for non relationship elements only). But this might have tricky effects on nested elements.
@@ -33,12 +33,12 @@ Example:
         <link rel="import" href="polymeria-uml/uml-packagedElement/uml-packagedElement.html">
     </head>
     <body unresolved>
-        <uml-packagedElement type="uml-Package" name="My package">
-          <uml-packagedElement type="uml-Interface" id="my-client">
+        <uml-packagedElement type="uml:Package" name="My package">
+          <uml-packagedElement type="uml:Interface" id="my-client">
           </uml-packagedElement>
-          <uml-packagedElement type="uml-Class" id="my-supplier">
+          <uml-packagedElement type="uml:Class" id="my-supplier">
           </uml-packagedElement>
-          <uml-packagedElement type="uml-Realization" id="my-realization" client="my-client" supplier="my-supplier">
+          <uml-packagedElement type="uml:Realization" id="my-realization" client="my-client" supplier="my-supplier">
           </uml-packagedElement>
         </uml-packagedElement>
     </body>        
@@ -184,20 +184,20 @@ Example:
 				 * Element type.
 				 * Different types of `<uml-packagedElement>` are supported:
 				 *  <ul>
-				 *    <li>uml-Actor</li>
-				 *    <li>uml-Activity</li>
-				 *    <li>uml-Artifact</li>
-				 *    <li>uml-Association</li>
-				 *    <li>uml-Class</li>
-				 *    <li>uml-Component</li>
-				 *    <li>uml-Dependency</li>
-				 *    <li>uml-Device</li>
-				 *    <li>uml-ExecutionEnvironment</li>
-				 *    <li>uml-Interface</li>
-				 *    <li>uml-Node</li>
-				 *    <li>uml-Package</li>
-				 *    <li>uml-Realization</li>
-				 *    <li>uml-UseCase</li>
+				 *    <li>uml:Actor</li>
+				 *    <li>uml:Activity</li>
+				 *    <li>uml:Artifact</li>
+				 *    <li>uml:Association</li>
+				 *    <li>uml:Class</li>
+				 *    <li>uml:Component</li>
+				 *    <li>uml:Dependency</li>
+				 *    <li>uml:Device</li>
+				 *    <li>uml:ExecutionEnvironment</li>
+				 *    <li>uml:Interface</li>
+				 *    <li>uml:Node</li>
+				 *    <li>uml:Package</li>
+				 *    <li>uml:Realization</li>
+				 *    <li>uml:UseCase</li>
 				 *  </ul>
 				 */
 				type: String,
@@ -215,57 +215,57 @@ Example:
 				supplier: String
 			},
 			_isActor: function(type) {
-				return (type == 'uml-Actor');
+				return (type == 'uml:Actor');
 			},
 			_isActivity: function(type) {
-				return (type == 'uml-Activity');
+				return (type == 'uml:Activity');
 			},
 			_isArtifact: function(type) {
-				return (type == 'uml-Artifact');
+				return (type == 'uml:Artifact');
 			},
 			_isAssociation: function(type) {
-				return (type == 'uml-Association');
+				return (type == 'uml:Association');
 			},
 			_isClass: function(type) {
-				return (type == 'uml-Class');
+				return (type == 'uml:Class');
 			},
 			_isComponent: function(type) {
-				return (type == 'uml-Component');
+				return (type == 'uml:Component');
 			},
 			_isDevice: function(type) {
-				return (type == 'uml-Device');
+				return (type == 'uml:Device');
 			},
 			_isDependency: function(type) {
-				return (type == 'uml-Dependency');
+				return (type == 'uml:Dependency');
 			},
 			_isExecutionEnvironment: function(type) {
-				return (type == 'uml-ExecutionEnvironment');
+				return (type == 'uml:ExecutionEnvironment');
 			},
 			_isInterface: function(type) {
-				return (type == 'uml-Interface');
+				return (type == 'uml:Interface');
 			},
 			_isNode: function(type) {
-				return (type == 'uml-Node');
+				return (type == 'uml:Node');
 			},
 			_isPackage: function(type) {
-				return (type == 'uml-Package');
+				return (type == 'uml:Package');
 			},
 			_isRealization: function(type) {
-				return (type == 'uml-Realization');
+				return (type == 'uml:Realization');
 			},
 			_isUseCase: function(type) {
-				return (type == 'uml-UseCase');
+				return (type == 'uml:UseCase');
 			},
 			ready: function() {
 			},
 			attached: function() {
-				if(this.type == 'uml-Dependency') {
+				if(this.type == 'uml:Dependency') {
 					new UmlDependency(this);
 				}
-				else if(this.type == 'uml-Association') {
+				else if(this.type == 'uml:Association') {
 					new UmlAssociation(this);
 				}
-				else if(this.type == 'uml-Realization') {
+				else if(this.type == 'uml:Realization') {
 					new UmlRealization(this);
 				}
 				else {
@@ -273,9 +273,9 @@ Example:
 				}
 				this.async(function() {
 					if(
-							(this.type == 'uml-Dependency')
-							||(this.type == 'uml-Association')
-							||(this.type == 'uml-Realization')
+							(this.type == 'uml:Dependency')
+							||(this.type == 'uml:Association')
+							||(this.type == 'uml:Realization')
 					) {
 						this.umlElement.initializePosition();
 						this.umlElement.displayRelationship();

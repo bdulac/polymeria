@@ -18,7 +18,7 @@ Here is the source of an HTML document of a basic class diagram:
       </head>
       <body unresolved>
         <uml-model name="My model">
-          <uml-packagedElement type="uml-Class" name="MyClass" id="my-class">
+          <uml-packagedElement type="uml:Class" name="MyClass" id="my-class">
             <uml-ownedAttribute
               name="myAttribute"
               visibility="private"
@@ -30,7 +30,7 @@ Here is the source of an HTML document of a basic class diagram:
               type="my-other-class">
             </uml-ownedOperation>
           </uml-packagedElement>
-          <uml-packagedElement type="uml-Class" name="MyOtherClass" id="my-other-class">
+          <uml-packagedElement type="uml:Class" name="MyOtherClass" id="my-other-class">
             <uml-ownedOperation
               name="myOperationWithParameters"
               visibility="public"
@@ -41,18 +41,18 @@ Here is the source of an HTML document of a basic class diagram:
               </uml-ownedParameter>
             </uml-ownedOperation>
           </uml-packagedElement>
-          <uml-packagedElement type="uml-Class" name="MyAssociatedClass" id="my-associated-class">
+          <uml-packagedElement type="uml:Class" name="MyAssociatedClass" id="my-associated-class">
           </uml-packagedElement>
           <uml-packagedElement
-            type="uml-Dependency"
+            type="uml:Dependency"
             client="my-associated-class"
             supplier="my-other-class">
           </uml-packagedElement>
-          <uml-packagedElement type="uml-Package" name="My package">
-            <uml-packagedElement type="uml-Package" name="My nested package">
+          <uml-packagedElement type="uml:Package" name="My package">
+            <uml-packagedElement type="uml:Package" name="My nested package">
             </uml-packagedElement>
-            <uml-packagedElement type="uml-Class" name="MyPackageClass">
-              <uml-packagedElement type="uml-Class" name="MyNestedClass">
+            <uml-packagedElement type="uml:Class" name="MyPackageClass">
+              <uml-packagedElement type="uml:Class" name="MyNestedClass">
               </uml-packagedElement>
             </uml-packagedElement>
           </uml-packagedElement>

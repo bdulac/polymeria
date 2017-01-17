@@ -41,7 +41,7 @@
   <body style="background-color: #f9f9f9;" unresolved>
     <section>
       <uml-model name="My model">
-          <uml-packagedElement type="uml-Class" name="MyClass" id="classA">
+          <uml-packagedElement type="uml:Class" name="MyClass" id="classA">
             <uml-ownedAttribute
               name="myAttribute"
               visibility="private"
@@ -52,7 +52,7 @@
               visibility="protected"
               type="classB">
             </uml-ownedOperation>
-            <uml-packagedElement type="uml-Class" name="MyNestedClass">
+            <uml-packagedElement type="uml:Class" name="MyNestedClass">
               <uml-ownedAttribute
                 name="myOtherAttribute"
                 visibility="private"
@@ -60,26 +60,26 @@
             </uml-ownedAttribute>
             </uml-packagedElement>
           </uml-packagedElement>
-          <uml-packagedElement type="uml-Package" name="My hierarchy package">
-            <uml-packagedElement type="uml-Package" name="My nested package with an interface" class="vertical">
-              <uml-packagedElement type="uml-Interface" name="MyInterface" id="interface">
+          <uml-packagedElement type="uml:Package" name="My hierarchy package">
+            <uml-packagedElement type="uml:Package" name="My nested package with an interface" class="vertical">
+              <uml-packagedElement type="uml:Interface" name="MyInterface" id="interface">
               </uml-packagedElement>
-              <uml-packagedElement type="uml-Class" name="MyImplementation" id="implementation">
+              <uml-packagedElement type="uml:Class" name="MyImplementation" id="implementation">
               </uml-packagedElement>
               <uml-packagedElement
-                type="uml-Realization"
+                type="uml:Realization"
                 client="interface"
                 supplier="implementation">
               </uml-packagedElement>
             </uml-packagedElement>
-            <uml-packagedElement type="uml-Class" name="MyParentClass" id="parent">
+            <uml-packagedElement type="uml:Class" name="MyParentClass" id="parent">
             </uml-packagedElement>
-            <uml-packagedElement type="uml-Class" name="MyChildClass">
-              <uml-generalization type="uml-Generalization" general="parent">
+            <uml-packagedElement type="uml:Class" name="MyChildClass">
+              <uml-generalization type="uml:Generalization" general="parent">
               </uml-generalization>
             </uml-packagedElement>
           </uml-packagedElement>
-          <uml-packagedElement type="uml-Class" name="MyOtherClass" id="classB">
+          <uml-packagedElement type="uml:Class" name="MyOtherClass" id="classB">
             <uml-ownedOperation
               name="myOperationWithParameters"
               visibility="public"
@@ -90,9 +90,9 @@
               </uml-ownedParameter>
             </uml-ownedOperation>
           </uml-packagedElement>
-          <uml-packagedElement type="uml-Class" name="MyAssociatedClass" id="classC">
+          <uml-packagedElement type="uml:Class" name="MyAssociatedClass" id="classC">
           </uml-packagedElement>
-          <uml-packagedElement type="uml-Dependency" client="classC" supplier="classB">
+          <uml-packagedElement type="uml:Dependency" client="classC" supplier="classB">
           </uml-packagedElement>
       </uml-model>
     </section>
@@ -129,19 +129,19 @@
       <p><a href="http://bdulac.github.io/note/web-components-adapation-xml-document/" target="_blank">Adaptation of the XML source</a>: Web components names compatibility and self-closing tags removal</p>
       <pre>
 &lt;uml-model name="My model"&gt;
-  &lt;uml-packagedElement type="uml-Class" name="MyClass" &gt;
+  &lt;uml-packagedElement type="uml:Class" name="MyClass" &gt;
     &lt;uml-ownedAttribute name="myAttribute" visibility="private" type="test" &gt;
     &lt;/uml-ownedAttribute&gt;
     &lt;uml-ownedOperation name="myOperation" visibility="protected" type="test" &gt;
     &lt;/uml-ownedOperation&gt;
   &lt;/uml-packagedElement&gt;
-  &lt;uml-packagedElement type="uml-Package" name="My package"&gt;
-    &lt;uml-packagedElement type="uml-Class" name="MyPackageClass"&gt;
-      &lt;uml-packagedElement type="uml-Class" name="MyNestedClass"&gt;
+  &lt;uml-packagedElement type="uml:Package" name="My package"&gt;
+    &lt;uml-packagedElement type="uml:Class" name="MyPackageClass"&gt;
+      &lt;uml-packagedElement type="uml:Class" name="MyNestedClass"&gt;
       &lt;/uml-packagedElement&gt;
     &lt;/uml-packagedElement&gt;
   &lt;/uml-packagedElement&gt;
-  &lt;uml-packagedElement type="uml-Class" name="MyOtherClass" id="test" &gt;
+  &lt;uml-packagedElement type="uml:Class" name="MyOtherClass" id="test" &gt;
     &lt;uml-ownedOperation name="myOperationWithParameters" visibility="public"&gt;
       &lt;uml-ownedParameter name="myFirstParam"&gt;
       &lt;/uml-ownedParameter&gt;
@@ -149,9 +149,9 @@
       &lt;/uml-ownedParameter&gt;
     &lt;/uml-ownedOperation&gt;
   &lt;/uml-packagedElement&gt;
-  &lt;uml-packagedElement type="uml-Class" name="MyAssociatedClass" id="test2"&gt;
+  &lt;uml-packagedElement type="uml:Class" name="MyAssociatedClass" id="test2"&gt;
   &lt;/uml-packagedElement&gt;
-  &lt;uml-packagedElement type="uml-Dependency" client="test2" supplier="test"&gt;
+  &lt;uml-packagedElement type="uml:Dependency" client="test2" supplier="test"&gt;
   &lt;/uml-packagedElement&gt;
 &lt;/uml-model&gt;</pre>
     </div>
