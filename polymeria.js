@@ -684,7 +684,7 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 							);
 						}
 					}
-					if(this.webComponent.incoming) {
+					else if(this.webComponent.incoming) {
 						this.target = document.getElementById(this.webComponent.incoming);
 						if(!this.target) {
 							console.error('Id ' + this.webComponent.incoming + ' not found in the DOM');
@@ -733,6 +733,48 @@ UmlAssociation.prototype = Object.create(UmlRelationship.prototype, {
 }
 );
 UmlAssociation.prototype.constructor = UmlAssociation;
+
+
+
+/** 
+ * Adaptation of a Web Component into an UML dependency relationship.
+ * @param customElm
+ * Web component to adapt.
+ */
+function UmlDependency(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = true;
+}
+UmlDependency.prototype = Object.create(UmlRelationship.prototype, { 
+	drawRelationshipEnd: {
+		value : function() {
+			if(this.relationshipCanvas) {
+				var headlen = 17;   // length of head in pixels
+				var fromX = this.relationshipCanvasStartX;
+				var fromY = this.relationshipCanvasStartY;
+				var toX = this.relationshipCanvasEndX;
+				var toY = this.relationshipCanvasEndY;
+				var angle = Math.atan2(toY-fromY,toX-fromX);
+				
+				var context = this.relationshipCanvas.getContext('2d');
+				context.lineWidth = 2;
+				context.beginPath();
+				context.setLineDash([15, 0]);
+				context.moveTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle-Math.PI/8),toY-headlen*Math.sin(angle-Math.PI/8));
+				
+				
+				context.moveTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle+Math.PI/8),toY-headlen*Math.sin(angle+Math.PI/8));
+				
+				context.closePath();
+				context.stroke();
+			}
+		}
+	}
+}
+);
+UmlDependency.prototype.constructor = UmlDependency;
 
 /** 
  * Adaptation of a Web Component into an UML dependency relationship.
