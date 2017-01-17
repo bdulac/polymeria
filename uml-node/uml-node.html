@@ -1,0 +1,158 @@
+<link rel="import"
+  href="../../polymer/polymer.html">
+<!--
+`uml-node` is the representation of an UML [node element](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Node.html).
+
+An `uml-node` is an element which could be nested into a [package](http://download.eclipse.org/modeling/mdt/uml2/javadoc/3.0.0/org/eclipse/uml2/uml/Package.html). In other words, the container might be an [`uml-model`](#uml-model) or another `uml-packagedElement` of type `uml-Package`.
+
+The  `type` property allow to display different types of UML elements: 
+<ul>
+	<li>uml-InitialNode</li>
+    <li>uml-ControlFlow</li>
+    <li>uml-OpaqueAction</li>
+</ul>
+
+By default, the positioning of nodes is relative. It is possible to override the CSS position and dimension properties to get a custom result (for non relationship elements only). But this might have tricky effects on nested elements.
+
+Example:
+
+    <head>
+        <script src="webcomponentsjs/webcomponents-lite.min.js">
+        </script>
+        <link rel="import" href="polymeria-uml/uml-packagedElement/uml-packagedElement.html">
+    </head>
+    <body unresolved>
+        <uml-packagedElement type="uml-Activity" name='My activity' id="my-activity">
+        	<uml-node type="uml-InitialNode" id="initial-node">
+        	</uml-node>
+        	<uml-node type="uml-ControlFlow" outgoing="first-action" incoming="initial-node">
+        	</uml-node>
+        	<uml-node type="uml-OpaqueAction" name="My first action" id="first-action">
+        	</uml-node>
+         </uml-packagedElement>
+        </uml-packagedElement>
+    </body>        
+@demo uml-node/demo/uml-node.html
+-->
+<dom-module id="uml-node">
+	<template>
+		<link rel="stylesheet" type="text/css" href="../colors.css" >
+		<link rel="stylesheet" type="text/css" href="elements.css" >
+		<style>
+			:host {
+				display: block;
+				box-sizing: border-box;
+			}
+		</style>
+		<span>
+		<template is="dom-if" if="{{ _isInitialNode(type) }}">
+			<div class="name">
+				{{ name }}
+			</div>
+			<div id="element" class="initial-node" layout vertical>
+				<div class="stereotype accent-color"></div>
+			</div>
+			<div class="content">
+				<content></content>
+			</div>
+		</template>
+		<template is="dom-if" if="{{ _isOpaqueAction(type) }}">
+			<div id="element" class="opaque-action white-background" layout vertical>
+				<div class="stereotype accent-color"></div>
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		<template is="dom-if" if="{{ _isActivityFinalNode(type) }}">
+			<div class="name">
+				{{ name }}
+			</div>
+			<div id="element" class="activity-final-node" layout vertical>
+				<div class="stereotype accent-color"></div>
+				<div class="central-point"></div>
+			</div>
+			<div class="content">
+				<content></content>
+			</div>
+		</template>
+		</span>
+	</template>
+    <script src="../../jquery/dist/jquery.min.js"></script>
+    <script src="../polymeria.js"></script>
+	<script>
+	(function() {
+		var PackagedElement = Polymer({
+			is: "uml-node",
+			properties: {
+				/**
+				 * Element type.
+				 * Different types of `<uml-node>` are supported:
+				 *  <ul>
+				 *    <li>uml-InitialNode</li>
+				 *    <li>uml-ActivityFinalNode</li>
+				 *    <li>uml-ControlFlow</li>
+				 *    <li>uml-OpaqueAction</li>
+				 *  </ul>
+				 */
+				type: String,
+				/** Element displayed name. */
+				name: String,
+				/**
+				 * Specify the source of a flow
+				 * (`uml-ControlFlow`).
+				 */
+				outgoing: String,
+				/**
+				 * Specify the target of a flow
+				 * (`uml-ControlFlow`).
+				 */
+				incoming: String
+			},
+			_isInitialNode: function(type) {
+				return (type == 'uml-InitialNode');
+			},
+			_isOpaqueAction: function(type) {
+				return (type == 'uml-OpaqueAction');
+			},
+			_isControlFlow: function(type) {
+				return (type == 'uml-ControlFlow');
+			},
+			_isActivityFinalNode: function(type) {
+				return (type == 'uml-ActivityFinalNode');
+			},
+			ready: function() {
+			},
+			attached: function() {
+				if(this.type == 'uml-ControlFlow') {
+					new UmlControlFlow(this);
+				}
+				else {
+					new UmlElement(this);
+				}
+				this.async(function() {
+					if(
+							(this.type == 'uml-ControlFlow')
+					) {
+						this.umlElement.initializePosition();
+						this.umlElement.displayRelationship();
+						$(window).on("resize",
+								{ relationshipElement: this.umlElement },
+								function( event ) {
+									event.data.relationshipElement.displayRelationship();
+								}
+						);
+					}
+					else {
+						this.umlElement.initializePosition();
+					}
+				}, 800);
+			}
+		});
+		var el = new PackagedElement();
+	})();
+	</script>
+</dom-module>

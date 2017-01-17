@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>uml-packagedElement</title>
+    <script src="../../../webcomponentsjs/webcomponents-lite.min.js">
+    </script>
+    <link rel="import" href="../../uml-model/uml-model.html">
+    <link rel="import" href="../../uml-packagedElement/uml-packagedElement.html">
+    <link rel="import" href="../../uml-node/uml-node.html">
+  </head>
+  <style>
+    body {
+      margin: 0;
+	  padding: 0;
+	  width: 100%;
+	  height: 100%;
+	}
+  </style>
+  <body unresolved>
+    <section>
+     <uml-model name="My node demo">
+        <uml-packagedElement type="uml-Activity" name='My activity' id="my-activity">
+        	<uml-node type="uml-InitialNode" id="initial-node">
+        	</uml-node>
+        	<uml-node type="uml-ControlFlow" outgoing="initial-node" incoming="first-action">
+        	</uml-node>
+        	<uml-node type="uml-OpaqueAction" name="My first action" id="first-action">
+        	</uml-node>
+         </uml-packagedElement>
+        </uml-packagedElement>
+      </uml-model>
+    </section>
+  </body>
+</html>

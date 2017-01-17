@@ -8,6 +8,7 @@ An `uml-packagedElement` is an element which could be nested into a [package](ht
 The  `type` property allow to display different types of UML elements: 
 <ul>
 	<li>uml-Actor</li>
+	<li>uml-Activity</li>
     <li>uml-Artifact</li>
     <li>uml-Association</li>
     <li>uml-Class</li>
@@ -56,6 +57,17 @@ Example:
 		<span>
 		<template is="dom-if" if="{{ _isActor(type) }}">
 			<div id="element" class="actor" layout vertical>
+				<div class="stereotype"></div>
+				<div class="name">
+				{{ name }}
+				</div>
+				<div class="content">
+					<content></content>
+				</div>
+			</div>
+		</template>
+		<template is="dom-if" if="{{ _isActivity(type) }}">
+			<div id="element" class="activity" layout vertical>
 				<div class="stereotype"></div>
 				<div class="name">
 				{{ name }}
@@ -173,6 +185,7 @@ Example:
 				 * Different types of `<uml-packagedElement>` are supported:
 				 *  <ul>
 				 *    <li>uml-Actor</li>
+				 *    <li>uml-Activity</li>
 				 *    <li>uml-Artifact</li>
 				 *    <li>uml-Association</li>
 				 *    <li>uml-Class</li>
@@ -188,7 +201,7 @@ Example:
 				 *  </ul>
 				 */
 				type: String,
-				/** Element displayed name (`uml-Class`, `uml-Interface`, `uml-Package`) */
+				/** Element displayed name. */
 				name: String,
 				/**
 				 * Specify the source of a relationship
@@ -203,6 +216,9 @@ Example:
 			},
 			_isActor: function(type) {
 				return (type == 'uml-Actor');
+			},
+			_isActivity: function(type) {
+				return (type == 'uml-Activity');
 			},
 			_isArtifact: function(type) {
 				return (type == 'uml-Artifact');

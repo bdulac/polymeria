@@ -632,9 +632,14 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 							console.error('Id ' + this.webComponent.supplier + ' not found in the DOM')
 						}
 					}
+					// If we have an outgoing component
+					else if(this.webComponent.outgoing) {
+						// Then the source is the outgoing component itself
+						this.source = document.getElementById(this.webComponent.outgoing);
+					}
 					// If we have a note component
 					else if(this.webComponent.annotatedelement) {
-						// The the source is the note component itself
+						// Then the source is the note component itself
 						this.source = document.getElementById(this.webComponent.id);
 					}
 					// Else the source is the parent component
@@ -654,6 +659,11 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 							console.error('Id ' + this.webComponent.client + ' not found in the DOM');
 						}
 					}
+					// If we have an incoming component
+					else if(this.webComponent.incoming) {
+						// Then the source is the incoming component itself
+						this.target = document.getElementById(this.webComponent.incoming);
+					}
 					else if(this.webComponent.general) {
 						this.target = document.getElementById(this.webComponent.general);
 						if(!this.target) {
@@ -672,6 +682,12 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 							console.error(
 								'Id ' + this.webComponent.annotatedelement + 'not found in the DOM'
 							);
+						}
+					}
+					if(this.webComponent.incoming) {
+						this.target = document.getElementById(this.webComponent.incoming);
+						if(!this.target) {
+							console.error('Id ' + this.webComponent.incoming + ' not found in the DOM');
 						}
 					}
 					else {
@@ -723,11 +739,11 @@ UmlAssociation.prototype.constructor = UmlAssociation;
  * @param customElm
  * Web component to adapt.
  */
-function UmlDependency(customElm) {
+function UmlControlFlow(customElm) {
 	UmlRelationship.call(this, customElm);
 	this.dashed = true;
 }
-UmlDependency.prototype = Object.create(UmlRelationship.prototype, { 
+UmlControlFlow.prototype = Object.create(UmlRelationship.prototype, { 
 	drawRelationshipEnd: {
 		value : function() {
 			if(this.relationshipCanvas) {
@@ -756,7 +772,7 @@ UmlDependency.prototype = Object.create(UmlRelationship.prototype, {
 	}
 }
 );
-UmlDependency.prototype.constructor = UmlDependency;
+UmlControlFlow.prototype.constructor = UmlControlFlow;
 
 /** 
  * Adaptation of a Web Component into an UML include relationship.
@@ -949,3 +965,49 @@ UmlOwnedComment.prototype = Object.create(UmlRelationship.prototype, {
 }
 );
 UmlOwnedComment.prototype.constructor = UmlOwnedComment;
+
+/** 
+ * Adaptation of a Web Component into an UML control flow relationship.
+ * @param customElm
+ * Web component to adapt.
+ */
+function UmlControlFlow(customElm) {
+	UmlRelationship.call(this, customElm);
+	this.dashed = false;
+}
+UmlControlFlow.prototype = Object.create(UmlRelationship.prototype, { 
+	drawRelationshipEnd: {
+		value : function() {
+			if(this.relationshipCanvas) {
+				var headlen = 17;   // length of head in pixels
+				var fromX = this.relationshipCanvasStartX;
+				var fromY = this.relationshipCanvasStartY;
+				var toX = this.relationshipCanvasEndX;
+				var toY = this.relationshipCanvasEndY;
+				var angle = Math.atan2(toY-fromY,toX-fromX);
+				
+				var context = this.relationshipCanvas.getContext('2d');
+				
+				context.lineWidth = 1;
+				context.beginPath();
+				context.setLineDash([15, 0]);
+				
+				context.moveTo(toX-headlen*Math.cos(angle-Math.PI/7),toY-headlen*Math.sin(angle-Math.PI/8));
+				context.lineTo(toX, toY);
+				context.lineTo(toX-headlen*Math.cos(angle+Math.PI/7),toY-headlen*Math.sin(angle+Math.PI/8));
+				context.fillStyle="black";
+				
+				context.fill();
+				
+				
+				context.closePath();
+				
+				
+				
+				context.stroke();
+			}
+		}
+	}
+}
+);
+UmlControlFlow.prototype.constructor = UmlControlFlow;

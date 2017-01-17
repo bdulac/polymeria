@@ -316,3 +316,37 @@ uml-packagedelement[type="uml-Actor"] {
 	margin-top: 4.5em;
 	text-align: center;
 }
+
+uml-packagedelement[type="uml-Activity"] {
+	min-width: 200px;
+	width: 600px;
+	max-width: 100%;
+}
+.activity {
+	border-style: outset;
+	border-width: 1px;
+	border-radius: 1em;
+	padding: 0;
+	margin: 0 4em;
+	min-width: 90%;
+	width: 90%;
+	overflow: auto;
+	box-shadow: 1px 1px 1px silver;
+	font-family: sans-serif;
+	display: block;
+}
+.activity:active {
+	border-style: inset;
+	border-width: 2px;
+}
+.activity > .content {
+	padding: 5px;
+	background-color: none;
+	text-align: center;
+}
+.activity > .name  {
+	margin: 0.5em 1em auto;
+	margin-bottom: 15px;
+	padding: 0em;
+	text-align: center;
+}
