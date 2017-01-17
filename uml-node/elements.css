@@ -78,8 +78,8 @@ uml-node[type="uml-ActivityFinalNode"] > .name  {
 
 
 uml-node[type="uml-OpaqueAction"] {
-	min-width: 10em;
-	width: 10em;
+	min-width: 8em;
+	width: 8em;
 	max-width: 30em;
 	margin-top: 2.5em;
 	margin-bottom: 2.5em;
@@ -90,23 +90,25 @@ uml-node[type="uml-OpaqueAction"] {
 .opaque-action {
 	border-style: outset;
 	border-width: 1px;
-	border-radius: 0.5em;
-	padding: 0.5em;
+	border-radius: 1em;
+	border-style: inset;
+	border-width: 2px;
+	padding: 0;
 	max-width: 90%;
 	overflow: auto;
 	box-shadow: 1px 1px 1px silver;
 	font-family: sans-serif;
 	display: block;
 }
-.opaque-action {
-	border-style: inset;
-	border-width: 2px;
+.opaque-action > .stereotype {
+	padding: 0;
 }
 .opaque-action > .content {
-	padding: 5px;
+	padding: 2px;
 	background-color: none;
 	text-align: left;
 }
 .opaque-action > .name  {
+	padding: 1em 0.5em;
 	text-align: center;
 }
