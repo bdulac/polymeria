@@ -47,11 +47,9 @@ uml-node[type="uml:ActivityFinalNode"] > .activity-final-node {
 	border-style: outset;
 	border-width: 1px;
 	border-radius: 100%;
-	
 	text-align: center;
 	width: 1em;
 	height: 1em;
-	
 	overflow: visible;
 	box-shadow: 1px 1px 1px silver;
 	font-family: sans-serif;

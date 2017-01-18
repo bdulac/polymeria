@@ -19,12 +19,20 @@
   <body unresolved>
     <section>
      <uml-model name="My node demo">
+     	<uml-node type="uml:InitialNode" id="initial-node">
+        </uml-node>
+        <uml-node type="uml:ControlFlow" outgoing="initial-node" incoming="act-initial-node">
+        </uml-node>
         <uml-packagedElement type="uml:Activity" name='My activity' id="my-activity">
-        	<uml-node type="uml:InitialNode" id="initial-node">
+        	<uml-node type="uml:InitialNode" id="act-initial-node">
         	</uml-node>
-        	<uml-node type="uml:ControlFlow" outgoing="initial-node" incoming="first-action">
+        	<uml-node type="uml:ControlFlow" outgoing="act-initial-node" incoming="first-action" name="My Flow">
         	</uml-node>
         	<uml-node type="uml:OpaqueAction" name="My first action" id="first-action">
+        	</uml-node>
+        	<uml-node type="uml:ActivityFinalNode" id="act-final-node">
+        	</uml-node>
+        	<uml-node type="uml:ControlFlow" outgoing="first-action" incoming="act-final-node">
         	</uml-node>
          </uml-packagedElement>
         </uml-packagedElement>
