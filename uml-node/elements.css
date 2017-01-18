@@ -43,7 +43,7 @@ uml-node[type="uml:ActivityFinalNode"] {
 	max-width: 1em;
 	max-height: 1em;
 }
-.activity-final-node {
+uml-node[type="uml:ActivityFinalNode"] > .activity-final-node {
 	border-style: outset;
 	border-width: 1px;
 	border-radius: 100%;
@@ -58,7 +58,7 @@ uml-node[type="uml:ActivityFinalNode"] {
 	display: block;
 	background-color: black;
 }
-.activity-final-node:active {
+uml-node[type="uml:ActivityFinalNode"] > .activity-final-node:active {
 	border-style: inset;
 	border-width: 2px;
 }
@@ -68,10 +68,7 @@ uml-node[type="uml:ActivityFinalNode"] > .content {
 	text-align: left;
 }
 uml-node[type="uml:ActivityFinalNode"] > .name  {
-	margin-top: 1em;
-	margin-left: 0;
-	margin-right: 0;
-	margin-bottom: 15px;
+	margin: 1em;
 	padding: 15px;
 	text-align: center;
 }

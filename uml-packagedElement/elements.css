@@ -46,6 +46,7 @@ uml-packagedelement {
 
 uml-packagedelement[type="uml:Class"] {
 	max-width: 400px;
+	margin: 3em;
 }
 
 .class {
@@ -53,7 +54,6 @@ uml-packagedelement[type="uml:Class"] {
 	border-width: 1px;
 	border-radius: 3px;
 	padding: 0;
-	margin: 15px;
 	margin-left: auto;
 	margin-right: auto;
 	max-width: 90%;
@@ -85,6 +85,7 @@ uml-packagedelement[type="uml:Class"] {
 
 uml-packagedelement[type="uml:Interface"] {
 	max-width: 400px;
+	margin: 3em;
 }
 
 .interface {
@@ -121,14 +122,14 @@ uml-packagedelement[type="uml:Interface"] {
 	text-align: center;
 }
 
-uml-packagedelement[type="uml:Node"] {
+uml-packagedelement[type="uml:Node"], uml-packagedelement[type="uml:Device"], uml-packagedelement[type="uml:ExecutionEnvironment"]   {
 	max-width: 400px;
+	margin: 3em;
 }
 .node {
 	border-style: solid;
 	border-width: 1px;
 	padding: 0;
-	margin: 1em 4em;
 	max-width: 90%;
 	overflow: auto;
 	font-family: sans-serif;
@@ -179,6 +180,7 @@ uml-packagedelement[type="uml:Node"] {
 
 uml-packagedelement[type="uml:Artifact"] {
 	max-width: 400px;
+	margin: 3em;
 }
 
 .artifact {
@@ -186,7 +188,6 @@ uml-packagedelement[type="uml:Artifact"] {
 	border-width: 1px;
 	border-radius: 3px;
 	padding: 0;
-	margin: 15px;
 	margin-left: auto;
 	margin-right: auto;
 	max-width: 90%;
@@ -216,13 +217,13 @@ uml-packagedelement[type="uml:Artifact"] {
 
 uml-packagedelement[type="uml:Component"] {
 	max-width: 600px;
+	margin: 3em;
 }
 .component {
 	border-style: outset;
 	border-width: 1px;
 	border-radius: 3px;
 	padding: 0;
-	margin: 15px;
 	margin-left: auto;
 	margin-right: auto;
 	max-width: 90%;
@@ -261,6 +262,7 @@ uml-packagedelement[type="uml:UseCase"] {
 	min-width: 200px;
 	width: 300px;
 	max-width: 400px;
+	
 }
 .use-case {
 	border-style: outset;
@@ -295,15 +297,15 @@ uml-packagedelement[type="uml:UseCase"] {
 }
 
 uml-packagedelement[type="uml:Actor"] {
+	height: 6em;
+	width: 4em;
+	margin: 3em;
 }
 .actor {
 	background-image: url("actor.png");
 	background-repeat: no-repeat;
 	background-origin: content-box;
 	background-position: center; 
-	height: 6em;
-	width: 4em;
-	margin-right: 3em;
 }
 .actor:active {
 }
@@ -313,21 +315,24 @@ uml-packagedelement[type="uml:Actor"] {
 	text-align: left;
 }
 .actor > .name  {
-	margin-top: 4.5em;
+	margin-top: 6em;
 	text-align: center;
 }
 
 uml-packagedelement[type="uml:Activity"] {
-	min-width: 200px;
-	width: 600px;
+	min-width: 400px;
+	width: 400px;
 	max-width: 100%;
+	padding: 4em;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 }
 .activity {
 	border-style: outset;
 	border-width: 1px;
 	border-radius: 1em;
-	padding: 0;
-	margin: 0 4em;
+	padding: 1em;
 	min-width: 90%;
 	width: 90%;
 	overflow: auto;
@@ -340,7 +345,7 @@ uml-packagedelement[type="uml:Activity"] {
 	border-width: 2px;
 }
 .activity > .content {
-	padding: 5px;
+	padding: 0.5em;
 	background-color: none;
 	text-align: center;
 }
