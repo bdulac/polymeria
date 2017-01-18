@@ -1,22 +1,23 @@
 uml-ownedComment {
 	display: inline-block;
+	max-width: 400px;
 }
 
-.note {
+uml-ownedComment > .note {
 	border-style: solid;
-	border-width: 2px;
+	border-width: 1px;
 	border-radius: 0 1em 0 0;
 	padding: 0;
 	margin: 15px;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 400px;
+	max-width: 100%;
 	overflow: auto;
 	font-family: sans-serif;
 }
 .note:active {
 	border-style: inset;
-	border-width: 2px;
+	border-width: 1px;
 }
 .note > .content {
 	padding: 15px;

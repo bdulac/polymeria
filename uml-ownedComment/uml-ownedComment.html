@@ -26,8 +26,15 @@ Example:
 @demo uml-ownedComment/demo/uml-ownedComment.html
 -->
 <dom-module id="uml-ownedComment">
-	<link rel="stylesheet" type="text/css" href="elements.css" >
 	<template>
+		<link rel="stylesheet" type="text/css" href="../colors.css" >
+		<link rel="stylesheet" type="text/css" href="elements.css" >
+		<style>
+			:host {
+				display: block;
+				box-sizing: border-box;
+			}
+		</style>
 			<div id="element" class="note primary1-background" layout vertical>
 				<div class="name">
 				{{ name }}
