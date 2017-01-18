@@ -39,15 +39,15 @@
                 </uml-packagedElement>
             </uml-packagedElement>
             <uml-packagedElement type="uml:Package" name='My classes package' id="my-class-package">
-                <uml-packagedElement type="uml:Interface" id="my-realization-interface" name="My associated interface">
+                <uml-packagedElement type="uml:Interface" id="my-realization-interface" name="My realized interface">
                 </uml-packagedElement>
-                <uml-packagedElement type="uml:Class" id="my-realization-implementation" name="My sample class">
+                <uml-packagedElement type="uml:Class" id="my-realization-implementation" name="My implementing class">
                     <uml-ownedAttribute name="myPrivateAttribute" visibility="private"></uml-ownedAttribute>
                     <uml-ownedOperation name="myProtectedOperation" visibility="protected">
                         <uml-ownedParameter name="myParam"></uml-ownedParameter>
                     </uml-ownedOperation>
                 </uml-packagedElement>
-                <uml-packagedElement type="uml:Realization" supplier="my-realization-interface" client="my-realization-implementation">
+                <uml-packagedElement type="uml:Realization" supplier="my-realization-implementation" client="my-realization-interface">
                 </uml-packagedElement>
             </uml-packagedElement>
         </uml-model>
