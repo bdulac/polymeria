@@ -258,20 +258,52 @@ uml-packagedelement[type="uml:Component"] {
 	text-align: center;
 }
 
-uml-packagedelement[type="uml:UseCase"] {
-	min-width: 200px;
-	width: 300px;
-	max-width: 400px;
+uml-packagedelement[type="uml:Actor"] {
+	padding: 0;
+	display: inline-block;
+	text-align: center;
 	
 }
+.actor {
+	margin: 0 auto;
+	height: 5em;
+	width: 3em;
+	background-image: url("actor.svg");
+	background-repeat: no-repeat;
+	background-origin: content-box;
+	background-position: center; 
+	background-size: 100%;
+}
+.actor:active {
+}
+.actor > .name  {
+	margin:0;
+	padding: 0;
+	width: 100%;
+	max-width: 4em;
+	text-align: center;
+}
+.actor > .content {
+	padding: 15px;
+	background-color: none;
+	text-align: left;
+}
+
+
+uml-packagedelement[type="uml:UseCase"] {
+	margin: 3em;
+	height: 6em;
+	max-height: 6em;
+	display: inline-block;
+}
 .use-case {
+	min-width: 100%;
+	width: 100%;
+	max-width: 100%;
 	border-style: outset;
 	border-width: 1px;
 	border-radius: 100%;
 	padding: 0;
-	margin: 1em 4em;
-	width: 90%;
-	max-height: 6em;
 	overflow: auto;
 	box-shadow: 1px 1px 1px silver;
 	font-family: sans-serif;
@@ -288,34 +320,8 @@ uml-packagedelement[type="uml:UseCase"] {
 	max-height: 2em;
 }
 .use-case > .name  {
-	margin-top: 1em;
-	margin-left: 0;
-	margin-right: 0;
-	margin-bottom: 15px;
+	margin: 1em 0;
 	padding: 15px;
-	text-align: center;
-}
-
-uml-packagedelement[type="uml:Actor"] {
-	height: 6em;
-	width: 4em;
-	margin: 3em;
-}
-.actor {
-	background-image: url("actor.png");
-	background-repeat: no-repeat;
-	background-origin: content-box;
-	background-position: center; 
-}
-.actor:active {
-}
-.actor > .content {
-	padding: 15px;
-	background-color: none;
-	text-align: left;
-}
-.actor > .name  {
-	margin-top: 6em;
 	text-align: center;
 }
 
