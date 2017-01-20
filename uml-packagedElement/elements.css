@@ -12,15 +12,16 @@ uml-packagedelement {
 	margin: 0;
 	display: inline-block;
 }
-.uml-packagedelement > .package {
+uml-packagedelement[type="uml:Package"] {
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
+	max-width: 100%;
 }
 .package {
 	margin: 15px;
 	text-align: left;
-	max-width: 100%;
-	display: inline-block; 
+	width: 100%;
+	height: 100%;
 }
 .package > .name  {
 	font-family: sans-serif;
@@ -40,6 +41,7 @@ uml-packagedelement {
 	border-radius: 3px 3px 0px 0px;
 	padding: 25px;
 	margin-top: 0;
+	height: 100%; 
 	text-align: center;
 	min-width: 300px;
 }
