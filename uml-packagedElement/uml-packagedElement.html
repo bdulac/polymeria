@@ -267,6 +267,9 @@ Example:
 				else if(this.type == 'uml:Realization') {
 					new UmlRealization(this);
 				}
+				else if(this.type == 'uml:UseCase') {
+					new UmlUseCase(this);
+				}
 				else {
 					new UmlElement(this);
 				}

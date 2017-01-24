@@ -207,7 +207,10 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
 		// canvasLineStartY = (sourcePosition.y + sourceElement.height() / 2) - canvasStartY;
 		canvasLineStartY = (canvasEndY - canvasStartY) / 2;
 		// If we can have a straight line, 
-		if(canvasLineStartY < targetElement.height()) {
+		if(
+				(canvasLineStartY < targetElement.height()) 
+				&& (!targetComponent.umlElement.connectOnMiddle)
+		) {
 			// Then the start Y is the same as the end
 			canvasLineEndY = canvasLineStartY;
 		}
@@ -411,6 +414,7 @@ function UmlElement(customElm) {
 	this.webComponent.umlElement = this;
 	this.moveListeners = [];
 	this.childrenElements = [];
+	this.connectOnMiddle = null;
 }
 UmlElement.prototype = {
 	notifyMoveListeners : function() {
@@ -549,6 +553,36 @@ UmlElement.prototype = {
 		}
 	}
 }
+
+/** 
+ * Adaptation of a Web Component into an UML actor.
+ * @param customElm
+ * Web component to adapt.
+ */
+function UmlActor(customElm) {
+	UmlElement.call(this, customElm);
+	this.connectOnMiddle = true;
+}
+UmlActor.prototype = Object.create(UmlElement.prototype, { 
+}
+);
+UmlActor.prototype.constructor = UmlActor;
+
+/** 
+ * Adaptation of a Web Component into an UML use case.
+ * @param customElm
+ * Web component to adapt.
+ */
+function UmlUseCase(customElm) {
+	UmlElement.call(this, customElm);
+	this.connectOnMiddle = true;
+}
+UmlUseCase.prototype = Object.create(UmlElement.prototype, { 
+}
+);
+UmlUseCase.prototype.constructor = UmlUseCase;
+
+
 /** 
  * Adaptation of a Web Component into an UML member element.
  * @param customElm
