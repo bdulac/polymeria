@@ -209,7 +209,7 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
 		// If we can have a straight line, 
 		if(
 				(canvasLineStartY < targetElement.height()) 
-				&& (!targetComponent.umlElement.connectOnMiddle)
+				/*&& (!targetComponent.umlElement.connectOnMiddle)*/
 		) {
 			// Then the start Y is the same as the end
 			canvasLineEndY = canvasLineStartY;
@@ -266,9 +266,9 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     	// The we remove it
     	canvasDiv.parentNode.removeChild(canvasDiv);
     }
-    canvasDiv = document.createElement("div");
+    canvasDiv = document.createElement( "div" );
     canvasDiv.id = "relationship[" + webComponent.id + "]";
-    var html5Canvas = document.createElement("canvas");
+    var html5Canvas = document.createElement( "canvas" );
     canvasDiv.style.borderWith = 0;
     canvasDiv.style.borderStyle = "none";
     canvasDiv.style.position = "absolute";
@@ -291,8 +291,8 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     html5Canvas.style.padding   = 0;
     html5Canvas.style.zIndex   = 250;
     
-    document.body.appendChild(canvasDiv);
-    canvasDiv.appendChild(html5Canvas);
+    document.body.appendChild( canvasDiv );
+    canvasDiv.appendChild( html5Canvas );
     
     var colorValue = getStyleRuleValue('color', '.accent-color');
     if(!colorValue) {
@@ -302,7 +302,7 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     
     var canvas = html5Canvas;
 
-    var context = html5Canvas.getContext('2d');
+    var context = html5Canvas.getContext( '2d' );
     
     context.lineWidth = 1;
     // Drawing  the line
@@ -315,8 +315,8 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     
     // context.fillStyle = colorValue;
     
-    context.moveTo(canvasLineStartX, canvasLineStartY);
-    context.lineTo(canvasLineEndX, canvasLineEndY);
+    context.moveTo( canvasLineStartX, canvasLineStartY );
+    context.lineTo( canvasLineEndX, canvasLineEndY );
     //ink line
     
     
@@ -331,7 +331,7 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     		// The we remove it
     		labelDiv.parentNode.removeChild(labelDiv);
     	}
-    	labelDiv = document.createElement("div");
+    	labelDiv = document.createElement( "div" );
     	labelDiv.id = "label[" + webComponent.id + "]";
     	$(labelDiv).text(webComponent.name);
     	labelDiv.style.textAlign = "center";
@@ -340,7 +340,7 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     	var height = canvasLineEndY - canvasLineStartY;
     	labelDiv.style.width = width;
     	labelDiv.style.maxWidth = width;
-    	document.body.appendChild(labelDiv);
+    	document.body.appendChild( labelDiv );
     	var textTop = canvasTop + ( canvasHeight / 2  - 30 );
     	var textLeft = canvasLeft;
     	labelDiv.style.top = textTop + "px";
@@ -354,7 +354,7 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     		// The we remove it
     		stereotypeDiv.parentNode.removeChild(stereotypeDiv);
     	}
-    	stereotypeDiv = document.createElement("div");
+    	stereotypeDiv = document.createElement( "div" );
     	stereotypeDiv.id = "stereotype[" + webComponent.id + "]";
     	$(stereotypeDiv).text("«" + webComponent.stereotype + "»");
     	$(stereotypeDiv).addClass("accent-color");
@@ -368,7 +368,7 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     	stereotypeDiv.style.minWidth = width;
     	stereotypeDiv.style.margin = "0";
     	stereotypeDiv.style.padding = "0";
-    	document.body.appendChild(stereotypeDiv);
+    	document.body.appendChild( stereotypeDiv );
     	var height = stereotypeDiv.style.fontSize + stereotypeDiv.style.fontSize;
     	var textTop = canvasTop + ( canvasHeight / 2  - 30 );
     	var textLeft = canvasLeft;
@@ -415,6 +415,57 @@ function UmlElement(customElm) {
 	this.moveListeners = [];
 	this.childrenElements = [];
 	this.connectOnMiddle = null;
+	var children = this.webComponent.getEffectiveChildren();
+	this.description = [];
+	var descriptionIndex = 0;
+	for	(index = 0; index < children.length; index++) {
+		var childElement = children[index];
+		if(childElement.nodeName == 'META') {
+			var property = childElement.attributes['itemProp'];
+			if(!property) {
+				property = childElement.attributes['property'];
+			}
+			if(property) {
+				property = property.value;
+			}
+			var desc = new Object();
+			desc.name = property;
+			desc.value = childElement.content;
+			
+			this.description[descriptionIndex] = desc;
+			descriptionIndex = descriptionIndex + 1;
+		}
+	}
+	if(this.description.length > 0) {
+		var tableDiv = document.createElement( "div" );
+    	tableDiv.id = "description[" + this.webComponent.id + "]";
+    	document.body.appendChild( tableDiv );
+    	$( tableDiv).addClass( 'description' );
+    	var table = document.createElement( "table");
+    	tableDiv.appendChild( table );
+    	$( table ).addClass( 'primary1-background' );
+    	var tableHead = document.createElement( "thead" );    	
+    	table.appendChild( tableHead );
+    	var headRow = document.createElement( "tr" );
+    	tableHead.appendChild( headRow );
+    	var headCell = document.createElement( "th");
+    	headCell.colspan = 2;
+    	$(headCell).text( this.simpleName );
+    	headRow.appendChild(headCell);
+    	var tableBody = document.createElement( "tbody" );
+    	table.appendChild(tableBody);
+    	for	(index = 0; index < this.description.length; index++) {
+    		var row = document.createElement( "tr" );
+    		var desc = this.description[index];
+    		tableBody.appendChild( row );
+    		var nameCell = document.createElement( "td" );
+    		$(nameCell).text( desc.name );
+    		var valueCell = document.createElement( "td" );
+    		$(valueCell).text( desc.value );
+    		row.appendChild( nameCell );
+    		row.appendChild( valueCell );
+    	}
+	}
 }
 UmlElement.prototype = {
 	notifyMoveListeners : function() {
@@ -458,7 +509,7 @@ UmlElement.prototype = {
 		// Attaching the parent as move listener
 		var parentUmlElement = this.getParentElement();
 		if(parentUmlElement) {
-			parentUmlElement.addMoveListener(listener);
+			parentUmlElement.addMoveListener( listener );
 		}
 	}, 
 	/** 
@@ -487,14 +538,14 @@ UmlElement.prototype = {
 	},
 	initializePosition : function() {
 		/*
-		var elm = this.webComponent.$$('#element');
+		var elm = this.webComponent.$$( '#element' );
 		var id = this.webComponent.id;
-		var comp = document.getElementById(id);
+		var comp = document.getElementById( id );
 		// Absolute positioning
-		// var elPosition = $(this.webComponent).css('position');
+		// var elPosition = $(this.webComponent).css( 'position' );
 		var elPosition = comp.style.position;
 		if(elPosition) {
-			var elTop = $(this.webComponent).css('top');
+			var elTop = $(this.webComponent).css( 'top' );
 			var elLeft = $(this.webComponent).css('left');
 			$(elm).css({ position: elPosition,
 		        marginLeft: 0, marginTop: 0,
@@ -510,11 +561,11 @@ UmlElement.prototype = {
 			$(elm).css({ minWidth: elMinWidth});
 		}
 		
-		var elMaxWidth = $(this.webComponent).css('max-width');
+		var elMaxWidth = $(this.webComponent).css( 'max-width' );
 		if(elMaxWidth) {
 			$(elm).css({ maxWidth: elMaxWidth});
 		}
-		var elHeight = $(this.webComponent).css('height');
+		var elHeight = $(this.webComponent).css( 'height' );
 		if(elHeight) {
 			$(elm).css({ height: elHeight});
 		}
@@ -522,7 +573,7 @@ UmlElement.prototype = {
 		if(elMinHeight) {
 			$(elm).css({ minHeight: elMinHeight});
 		}
-		var elMaxHeight = $(this.webComponent).css('max-height');
+		var elMaxHeight = $(this.webComponent).css( 'max-height' );
 		if(elMaxHeight) {
 			$(elm).css({ maxHeight: elMaxHeight});
 		}
@@ -582,7 +633,6 @@ UmlUseCase.prototype = Object.create(UmlElement.prototype, {
 );
 UmlUseCase.prototype.constructor = UmlUseCase;
 
-
 /** 
  * Adaptation of a Web Component into an UML member element.
  * @param customElm
@@ -617,11 +667,11 @@ UmlMember.prototype = Object.create(UmlElement.prototype, {
 		value : function() {
 			var memberType = this.webComponent.type;
 			if(memberType) {
-				var typeComponent = document.getElementById(memberType);
+				var typeComponent = document.getElementById( memberType );
 				if(typeComponent) {
 					var typeUmlElement = typeComponent.umlElement;
 					if(typeUmlElement) {
-						$(this.webComponent.$.typeName).text(typeUmlElement.simpleName);
+						$(this.webComponent.$.typeName).text( typeUmlElement.simpleName );
 					}
 					else {
 						console.error(
@@ -630,12 +680,12 @@ UmlMember.prototype = Object.create(UmlElement.prototype, {
 						)
 					}
 				}
-				else if(this.webComponent.type) {
+				else if( this.webComponent.type ) {
 					console.log(
 							"ID '" + this.webComponent.type + "' not found in the DOM, "
 							+ "diplaying the literal value...");
-					$(this.webComponent.$.typeName).text(this.webComponent.type);
-					$(this.webComponent.$.typeName).css('color', 'black');
+					$(this.webComponent.$.typeName).text( this.webComponent.type );
+					$(this.webComponent.$.typeName).css( 'color', 'black' );
 				}
 			}
 			else {
@@ -661,7 +711,7 @@ UmlRelationship.prototype = Object.create(UmlElement.prototype, {
 				if(!this.source) {
 					// If we have a supplier (common case)
 					if(this.webComponent.supplier) {
-						this.source = document.getElementById(this.webComponent.supplier);
+						this.source = document.getElementById( this.webComponent.supplier );
 						if(!this.source) {
 							console.error('Id ' + this.webComponent.supplier + ' not found in the DOM')
 						}
@@ -767,8 +817,6 @@ UmlAssociation.prototype = Object.create(UmlRelationship.prototype, {
 }
 );
 UmlAssociation.prototype.constructor = UmlAssociation;
-
-
 
 /** 
  * Adaptation of a Web Component into an UML dependency relationship.
