@@ -438,7 +438,7 @@ function UmlElement(customElm) {
 	}
 	if(this.description.length > 0) {
 		var tableDiv = document.createElement( "div" );
-    	tableDiv.id = "description[" + this.webComponent.id + "]";
+    	tableDiv.id = "description-" + this.webComponent.id;
     	document.body.appendChild( tableDiv );
     	$( tableDiv).addClass( 'description' );
     	var table = document.createElement( "table");
@@ -449,7 +449,7 @@ function UmlElement(customElm) {
     	var headRow = document.createElement( "tr" );
     	tableHead.appendChild( headRow );
     	var headCell = document.createElement( "th");
-    	headCell.colspan = 2;
+    	headCell.colSpan = 2;
     	$(headCell).text( this.simpleName );
     	headRow.appendChild(headCell);
     	var tableBody = document.createElement( "tbody" );
