@@ -363,7 +363,10 @@ uml-packagedelement[type="uml:Activity"] {
 	padding: 0em;
 	text-align: center;
 }
-
+.description  {
+	font-family: sans-serif;
+    display: block;
+}
 .description table {
 	margin: 1em auto;
 	border-style: solid;
