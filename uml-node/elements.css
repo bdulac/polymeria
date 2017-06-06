@@ -1,18 +1,28 @@
-uml-node[type="uml:InitialNode"] {
+uml-node {
+	width: 100%;
 	padding: 0;
 	margin: auto;
-	max-width: 1em;
+}
+uml-node[type="uml:InitialNode"] {
+}
+uml-node[type="uml:InitialNode"] #element {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1em;
+    height: 1em;
+    max-width: 1em;
 	max-height: 1em;
 }
 .initial-node {
+	max-width: 1em;
+	max-height: 1em;
 	border-style: outset;
 	border-width: 1px;
 	border-radius: 100%;
-	
+	margin: auto;
 	text-align: center;
 	width: 1em;
 	height: 1em;
-	
 	overflow: visible;
 	box-shadow: 1px 1px 1px silver;
 	font-family: sans-serif;
@@ -22,6 +32,9 @@ uml-node[type="uml:InitialNode"] {
 .initial-node:active {
 	border-style: inset;
 	border-width: 2px;
+}
+uml-node .name {
+	width: 100%;
 }
 uml-node[type="uml:InitialNode"] > .content {
 	padding: 5px;
@@ -39,12 +52,10 @@ uml-node[type="uml:InitialNode"] > .name  {
 }
 
 uml-node[type="uml:ActivityFinalNode"] {
-	padding: 0;
-	margin: auto;
-	max-width: 1em;
-	max-height: 1em;
 }
 .activity-final-node {
+	margin-left: auto;
+	margin-right: auto;
 	border-style: outset;
 	border-width: 2px;
 	border-radius: 100%;
@@ -89,15 +100,16 @@ uml-node[type="uml:ActivityFinalNode"] > .name  {
 	text-align: center;
 }
 
-
 uml-node[type="uml:OpaqueAction"] {
 	min-width: 8em;
 	width: 8em;
 	max-width: 30em;
+	padding: 0;
 	margin-top: 4em;
 	margin-bottom: 4em;
 	margin-left: auto;
 	margin-right: auto;
+	padding: 0;
 }
 .opaque-action {
 	border-style: outset;
@@ -105,9 +117,13 @@ uml-node[type="uml:OpaqueAction"] {
 	border-radius: 1em;
 	border-style: inset;
 	border-width: 2px;
-	padding: 0;
-	max-width: 90%;
-	overflow: auto;
+	padding: 1em;
+	margin: 0;
+	min-width: 100%;
+	max-width: 100%;
+	min-height: 100%;
+	max-height: 100%;
+	overflow: none;
 	box-shadow: 1px 1px 1px silver;
 	font-family: sans-serif;
 	display: block;
@@ -116,11 +132,12 @@ uml-node[type="uml:OpaqueAction"] {
 	padding: 0;
 }
 .opaque-action > .content {
-	padding: 2px;
+	padding: 0;
 	background-color: none;
 	text-align: left;
 }
 .opaque-action > .name  {
-	padding: 1em 0.5em;
 	text-align: center;
+	margin: 0;
+	width: 100%;
 }

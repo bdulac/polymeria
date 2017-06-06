@@ -23,16 +23,15 @@ Example:
     </head>
     <body unresolved>
         <uml-packagedElement type="uml:Activity" name='My activity' id="my-activity">
-        	<uml-node type="uml:InitialNode" id="initial-node">
-        	</uml-node>
-        	<uml-node type="uml:ControlFlow" outgoing="first-action" incoming="initial-node">
-        	</uml-node>
-        	<uml-node type="uml:OpaqueAction" name="My first action" id="first-action">
-        	</uml-node>
-         </uml-packagedElement>
+            <uml-node type="uml:InitialNode" id="initial-node">
+            </uml-node>
+            <uml-node type="uml:ControlFlow" outgoing="first-action" incoming="initial-node">
+            </uml-node>
+            <uml-node type="uml:OpaqueAction" name="My first action" id="first-action">
+            </uml-node>
         </uml-packagedElement>
     </body>        
-@demo uml-node/demo/uml-node.html
+    @demo uml-node/demo/uml-node.html
 -->
 <dom-module id="uml-node">
 	<template>
@@ -67,11 +66,11 @@ Example:
 			</div>
 		</template>
 		<template is="dom-if" if="{{ _isActivityFinalNode(type) }}">
-			<div class="name">
-				{{ name }}
-			</div>
 			<div id="element" class="activity-final-node" layout vertical>
 				<div class="central-point"></div>
+			</div>
+			<div class="name">
+				{{ name }}
 			</div>
 			<div class="content">
 				<content></content>

@@ -52,6 +52,8 @@ Example:
 			:host {
 				display: block;
 				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
 			}
 		</style>
 		<template is="dom-if" if="{{ _isActor(type) }}">
@@ -59,15 +61,13 @@ Example:
 				<div class="actor">
 					&nbsp;
 				</div>
-				<div class="stereotype"></div>
-				<div class="name">{{ name }}</div>
-				<div class="content">
-					<content></content>
-				</div>
 			</div>
+			<div class="stereotype"></div>
+			<div class="name">{{ name }}</div>
+			<div class="content"><content></content></div>
 		</template>
 		<template is="dom-if" if="{{ _isActivity(type) }}">
-			<div id="element" class="activity" layout vertical>
+			<div id="element" class="activity white-background" layout vertical>
 				<div class="stereotype"></div>
 				<div class="name">
 				{{ name }}
@@ -166,7 +166,7 @@ Example:
 				<div class="name">
 				{{ name }}
 				</div>
-				<div class="content">
+				<div class=	"content">
 					<content></content>
 				</div>
 			</div>

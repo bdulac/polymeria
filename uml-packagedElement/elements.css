@@ -1,5 +1,20 @@
 uml-packagedelement {
 	display: inline-block;
+	padding: 0;
+	overflow: visible;
+}
+uml-packagedelement #element {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+}
+uml-packagedelement .name, uml-packagedelement .content {
+	font-family: sans-serif;
+	font-weight: normal;
+}
+uml-packagedelement .content {
+	font-size: small;
 }
 .uml-packagedelement {
 	display: inline-block;
@@ -261,13 +276,16 @@ uml-packagedelement[type="uml:Component"] {
 }
 
 uml-packagedelement[type="uml:Actor"] {
+	margin: 0;
 	padding: 0;
+	min-height: 6em;
 	display: inline-block;
 	text-align: center;
 	
 }
 .actor {
-	margin: 0 auto;
+	margin: auto;
+	padding: 0;
 	height: 5em;
 	width: 3em;
 	background-image: url("actor.svg");
@@ -278,24 +296,23 @@ uml-packagedelement[type="uml:Actor"] {
 }
 .actor:active {
 }
-.actor > .name  {
-	margin:0;
+uml-packagedelement[type="uml:Actor"] > .name  {
+	margin: auto;
 	padding: 0;
 	width: 100%;
 	max-width: 4em;
 	text-align: center;
+	display: block;
 }
-.actor > .content {
+uml-packagedelement[type="uml:Actor"] > .content {
 	padding: 15px;
 	background-color: none;
 	text-align: left;
+	display: block;
 }
-
-
 uml-packagedelement[type="uml:UseCase"] {
-	margin: 3em;
-	height: 6em;
-	max-height: 6em;
+	margin: 0;
+	padding: 0;
 	display: inline-block;
 }
 .use-case {
@@ -306,6 +323,7 @@ uml-packagedelement[type="uml:UseCase"] {
 	border-width: 1px;
 	border-radius: 100%;
 	padding: 0;
+	margin: 0;
 	overflow: auto;
 	box-shadow: 1px 1px 1px silver;
 	font-family: sans-serif;
@@ -315,35 +333,40 @@ uml-packagedelement[type="uml:UseCase"] {
 	border-style: inset;
 	border-width: 2px;
 }
-.use-case > .content {
-	padding: 5px;
-	background-color: none;
-	text-align: left;
-	max-height: 2em;
-}
 .use-case > .name  {
 	margin: 1em 0;
-	padding: 15px;
 	text-align: center;
+	display: block;
 }
-
+.use-case > .content {
+	display: none;
+	background-color: none;
+	max-height: 0;
+}
 uml-packagedelement[type="uml:Activity"] {
+    display: block;
 	min-width: 400px;
 	width: 400px;
 	max-width: 100%;
-	padding: 4em;
+	padding: 0;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
+}
+uml-packagedelement[type="uml:Activity"] #element {
+    padding: 0;
+    margin: 0;
 }
 .activity {
 	border-style: outset;
 	border-width: 1px;
 	border-radius: 1em;
-	padding: 1em;
+	padding: 0;
+	margin: 0;
 	min-width: 90%;
-	width: 90%;
-	overflow: auto;
+	width: 100%;
+	height: 100%;
+	overflow: none;
 	box-shadow: 1px 1px 1px silver;
 	font-family: sans-serif;
 	display: block;
@@ -359,9 +382,10 @@ uml-packagedelement[type="uml:Activity"] {
 }
 .activity > .name  {
 	margin: 0.5em 1em auto;
-	margin-bottom: 15px;
+	margin-bottom: 2em;
 	padding: 0em;
 	text-align: center;
+	font-weight: bold;
 }
 .description  {
 	font-family: sans-serif;
