@@ -335,16 +335,16 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     	labelDiv.id = "label[" + webComponent.id + "]";
     	$(labelDiv).text(webComponent.name);
     	labelDiv.style.textAlign = "center";
-    	labelDiv.style.position = "absolute";
+    	labelDiv.style.position = "fixed";
     	var width = canvasLineEndX - canvasLineStartX;
     	var height = canvasLineEndY - canvasLineStartY;
-    	labelDiv.style.width = width;
-    	labelDiv.style.maxWidth = width;
+    	// labelDiv.style.width = width;
+    	// labelDiv.style.maxWidth = width;
     	document.body.appendChild( labelDiv );
     	var textTop = canvasTop + ( canvasHeight / 2  - 30 );
     	var textLeft = canvasLeft;
     	labelDiv.style.top = textTop + "px";
-    	labelDiv.style.left = textLeft + "px";
+    	labelDiv.style.left = textLeft - (width / 2) + "px";
     }
     if(webComponent.stereotype) {
     	// Trying to fetch an existing element
@@ -612,7 +612,6 @@ UmlElement.prototype = {
  */
 function UmlActor(customElm) {
 	UmlElement.call(this, customElm);
-	this.connectOnMiddle = true;
 }
 UmlActor.prototype = Object.create(UmlElement.prototype, { 
 }
@@ -626,7 +625,6 @@ UmlActor.prototype.constructor = UmlActor;
  */
 function UmlUseCase(customElm) {
 	UmlElement.call(this, customElm);
-	this.connectOnMiddle = true;
 }
 UmlUseCase.prototype = Object.create(UmlElement.prototype, { 
 }
