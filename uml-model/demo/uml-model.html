@@ -22,14 +22,42 @@
                 <uml-packagedElement type="uml:UseCase" id="my-use-case" name="My use case">
                     <uml-include type="uml:Include" addition="my-included-use-case"/>
                 </uml-packagedElement>
-                <uml-packagedElement type="uml:UseCase" id="my-included-use-case" name="My included use case">
+                <uml-packagedElement type="uml:UseCase" id="my-included-case" name="My included use case">
                 </uml-packagedElement>
                 <uml-packagedElement type="uml:Dependency" supplier="my-use-cases-actor" client="my-use-case">
                 </uml-packagedElement>
             </uml-packagedElement>
             <uml-ownedComment type="uml:Comment" annotatedElement="my-use-cases-package">
-                 <body>This example package contains use cases. More informations about <em>uml-packagedElement</em> are available in <a href="../../#uml-packagedElement" target="_blank" rel="noopener noreferrer">the Web component documentation</a>.</body>
-           </uml-ownedComment>
+                <body>This example package contains use cases. More informations about <em>uml-packagedElement</em> are available in <a href="../../#uml-packagedElement" target="_blank">the Web component documentation</a>.</body>
+            </uml-ownedComment>
+            <uml-packagedElement type="uml:Package" name='My activity package' id="my-activity-package">
+                <uml-packagedElement type="uml:Activity" name='My activity' id="my-activity">
+                    <uml-node type="uml:InitialNode" id="my-activity-initial" name="My initial node">
+                    </uml-node>
+                    <uml-node type="uml:ControlFlow" 
+                    	id="my-activity-starting-flow" 
+                    	name="My starting flow"
+                    	outgoing="my-activity-initial" incoming="my-action">
+                    </uml-node>
+                    <uml-node type="uml:OpaqueAction" name="My action" id="my-action">
+                    </uml-node>
+                    <uml-node type="uml:ControlFlow" 
+                    	id="my-activity-ending-flow" 
+                    	name="My ending flow"
+                    	outgoing="my-action" incoming="my-activity-final">
+                    </uml-node>
+                    <uml-node type="uml:ActivityFinalNode" name="My final node" id="my-activity-final">
+                    </uml-node>
+                </uml-packagedElement>
+            </uml-packagedElement>
+            <uml-packagedElement type="uml:Package" name='My component package' id="my-component-package">
+                <uml-packagedElement type="uml:Component" id="my-association-supplier" name="My first component">
+                </uml-packagedElement>
+                <uml-packagedElement type="uml:Component" id="my-association-client" name="My other component">
+                </uml-packagedElement>
+                <uml-packagedElement type="uml:Association" supplier="my-association-supplier" client="my-association-client">
+                </uml-packagedElement>
+            </uml-packagedElement>
             <uml-packagedElement type="uml:Package" name='My deployment package' id="my-deployment-package">
                 <uml-packagedElement type="uml:Device" id="my-dependency-supplier" name="My device">
                 </uml-packagedElement>
@@ -39,15 +67,15 @@
                 </uml-packagedElement>
             </uml-packagedElement>
             <uml-packagedElement type="uml:Package" name='My classes package' id="my-class-package">
-                <uml-packagedElement type="uml:Interface" id="my-realization-interface" name="My realized interface">
+                <uml-packagedElement type="uml:Interface" id="my-realization-interface" name="My associated interface">
                 </uml-packagedElement>
-                <uml-packagedElement type="uml:Class" id="my-realization-implementation" name="My implementing class">
+                <uml-packagedElement type="uml:Class" id="my-realization-implementation" name="My sample class">
                     <uml-ownedAttribute name="myPrivateAttribute" visibility="private"></uml-ownedAttribute>
                     <uml-ownedOperation name="myProtectedOperation" visibility="protected">
                         <uml-ownedParameter name="myParam"></uml-ownedParameter>
                     </uml-ownedOperation>
                 </uml-packagedElement>
-                <uml-packagedElement type="uml:Realization" supplier="my-realization-implementation" client="my-realization-interface">
+                <uml-packagedElement type="uml:Realization" supplier="my-realization-interface" client="my-realization-implementation">
                 </uml-packagedElement>
             </uml-packagedElement>
         </uml-model>

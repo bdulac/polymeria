@@ -28,8 +28,28 @@ Example:
                 </uml-packagedElement>
             </uml-packagedElement>
             <uml-ownedComment type="uml:Comment" annotatedElement="my-use-cases-package">
-                 <body>This example package contains use cases. More informations about <em>uml-packagedElement</em> are available in <a href="../../#uml-packagedElement" target="_blank">the Web component documentation</a>.</body>
-           </uml-ownedComment>
+                <body>This example package contains use cases. More informations about <em>uml-packagedElement</em> are available in <a href="../../#uml-packagedElement" target="_blank">the Web component documentation</a>.</body>
+            </uml-ownedComment>
+            <uml-packagedElement type="uml:Package" name='My activity package' id="my-activity-package">
+                <uml-packagedElement type="uml:Activity" name='My activity' id="my-activity">
+                    <uml-node type="uml:InitialNode" id="my-activity-initial" name="My initial node">
+                    </uml-node>
+                    <uml-node type="uml:ControlFlow" 
+                    	id="my-activity-starting-flow" 
+                    	name="My starting flow"
+                    	outgoing="my-activity-initial" incoming="my-action">
+                    </uml-node>
+                    <uml-node type="uml:OpaqueAction" name="My action" id="my-action">
+                    </uml-node>
+                    <uml-node type="uml:ControlFlow" 
+                    	id="my-activity-ending-flow" 
+                    	name="My ending flow"
+                    	outgoing="my-action" incoming="my-activity-final">
+                    </uml-node>
+                    <uml-node type="uml:ActivityFinalNode" name="My final node" id="my-activity-final">
+                    </uml-node>
+                </uml-packagedElement>
+            </uml-packagedElement>
             <uml-packagedElement type="uml:Package" name='My deployment package' id="my-deployment-package">
                 <uml-packagedElement type="uml:Device" id="my-dependency-supplier" name="My device">
                 </uml-packagedElement>
