@@ -1,4 +1,4 @@
-*Polymeria* UML
+*Polymeria* (Web components, UML)
 ========
 
 *Polymeria* UML is a set of [Polymer](https://www.polymer-project.org/) [Web components](http://www.w3.org/TR/custom-elements/) inspired by the [Eclipse UML2](http://www.eclipse.org/modeling/mdt/?project=uml2) model file.
