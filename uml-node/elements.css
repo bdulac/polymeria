@@ -1,33 +1,43 @@
 uml-node {
-	width: 100%;
-	padding: 0;
-	margin: auto;
+  width: 100%;
+  padding: 0;
+  margin: auto;
 }
-uml-node[type="uml:InitialNode"] {
+uml-node[type="uml:InitialNode"], uml-node[type="uml:ActivityFinalNode"], uml-node[type="uml:OpaqueAction"] {
+  min-width: 8em;
+  width: 8em;
+  max-width: 30em;
+  padding: 0;
+  margin-top: 4em;
+  margin-bottom: 4em;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 uml-node[type="uml:InitialNode"] #element {
-    margin-left: auto;
-    margin-right: auto;
-    width: 1em;
-    height: 1em;
-    max-width: 1em;
-	max-height: 1em;
+  margin: 0 auto;
+  width: 1em;
+  height: 1em;
+  max-width: 1em;
+	 max-height: 1em;
+  background-color: black;
+  display: inline-block;
 }
 .initial-node {
-	max-width: 1em;
-	max-height: 1em;
-	border-style: outset;
-	border-width: 1px;
-	border-radius: 100%;
-	margin: auto;
-	text-align: center;
-	width: 1em;
-	height: 1em;
-	overflow: visible;
-	box-shadow: 1px 1px 1px silver;
-	font-family: sans-serif;
-	display: block;
-	background-color: black;
+  max-width: 1em;
+  max-height: 1em;
+  border-style: outset;
+  border-width: 1px;
+  border-radius: 100%;
+  margin: auto;
+  text-align: center;
+  width: 1em;
+  height: 1em;
+  overflow: visible;
+  box-shadow: 1px 1px 1px silver;
+  font-family: sans-serif;
+  display: block;
+  background-color: black;
 }
 .initial-node:active {
 	border-style: inset;
@@ -51,11 +61,11 @@ uml-node[type="uml:InitialNode"] > .name  {
 	width: 20em;
 }
 
-uml-node[type="uml:ActivityFinalNode"] {
+uml-node[type="uml:ActivityFinalNode"] #element {
+  display: inline-block ;
 }
 .activity-final-node {
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0 auto;
 	border-style: outset;
 	border-width: 2px;
 	border-radius: 100%;
@@ -63,10 +73,12 @@ uml-node[type="uml:ActivityFinalNode"] {
 	text-align: center;
 	width: 1em;
 	height: 1em;
+ max-width: 1em;
+ max-height: 1em;
 	overflow: visible;
 	box-shadow: 1px 1px 1px silver;
 	font-family: sans-serif;
-	display: block;
+	display: inline-block;
 	background-color: white;
 }
 .central-point {
@@ -101,15 +113,7 @@ uml-node[type="uml:ActivityFinalNode"] > .name  {
 }
 
 uml-node[type="uml:OpaqueAction"] {
-	min-width: 8em;
-	width: 8em;
-	max-width: 30em;
-	padding: 0;
-	margin-top: 4em;
-	margin-bottom: 4em;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 0;
+
 }
 .opaque-action {
 	border-style: outset;
@@ -140,4 +144,10 @@ uml-node[type="uml:OpaqueAction"] {
 	text-align: center;
 	margin: 0;
 	width: 100%;
+}
+
+
+uml-node[type="uml:ControlFlow"] {
+  position: fixed;
+
 }
