@@ -335,7 +335,7 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     	labelDiv.id = "label[" + webComponent.id + "]";
     	$(labelDiv).text(webComponent.name);
     	labelDiv.style.textAlign = "center";
-    	labelDiv.style.position = "fixed";
+    	labelDiv.style.position = "absolute";
     	var width = canvasLineEndX - canvasLineStartX;
     	var height = canvasLineEndY - canvasLineStartY;
     	// labelDiv.style.width = width;
@@ -356,7 +356,7 @@ function drawRelationship(webComponent, sourceComponent, targetComponent) {
     	}
     	stereotypeDiv = document.createElement( "div" );
     	stereotypeDiv.id = "stereotype[" + webComponent.id + "]";
-    	$(stereotypeDiv).text("«" + webComponent.stereotype + "»");
+    	$(stereotypeDiv).html('&laquo;' + webComponent.stereotype + '&raquo;');
     	$(stereotypeDiv).addClass("accent-color");
     	$(stereotypeDiv).addClass("stereotype");
     	stereotypeDiv.style.textAlign = "center";

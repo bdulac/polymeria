@@ -45,6 +45,7 @@ uml-packagedelement[type="uml:Package"] {
 	border-width: 1px;
 	border-radius: 3px 3px 0px 0px;
 	padding: 3px;
+ padding-left: 1em;
 	margin-left: 5px;
 	max-width: 250px;
 	overflow: auto;
@@ -276,12 +277,12 @@ uml-packagedelement[type="uml:Component"] {
 }
 
 uml-packagedelement[type="uml:Actor"] {
-	margin: 0;
+	margin: 0 2em;
 	padding: 0;
-	min-height: 6em;
+	min-height: 10em;
 	display: inline-block;
+ vertical-align: middle;
 	text-align: center;
-	
 }
 .actor {
 	margin: auto;
@@ -308,12 +309,15 @@ uml-packagedelement[type="uml:Actor"] > .content {
 	padding: 15px;
 	background-color: none;
 	text-align: left;
-	display: block;
+	display: inline-block;
 }
 uml-packagedelement[type="uml:UseCase"] {
-	margin: 0;
+	margin: 0 2em;
 	padding: 0;
+ min-height: 10em;
+ text-align: center;
 	display: inline-block;
+ vertical-align: middle;
 }
 .use-case {
 	min-width: 100%;
@@ -334,7 +338,7 @@ uml-packagedelement[type="uml:UseCase"] {
 	border-width: 2px;
 }
 .use-case > .name  {
-	margin: 1em 0;
+	margin: 1em;
 	text-align: center;
 	display: block;
 }
@@ -344,7 +348,7 @@ uml-packagedelement[type="uml:UseCase"] {
 	max-height: 0;
 }
 uml-packagedelement[type="uml:Activity"] {
-    display: block;
+  display: block;
 	min-width: 400px;
 	width: 400px;
 	max-width: 100%;
@@ -354,8 +358,8 @@ uml-packagedelement[type="uml:Activity"] {
 	text-align: center;
 }
 uml-packagedelement[type="uml:Activity"] #element {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 .activity {
 	border-style: outset;

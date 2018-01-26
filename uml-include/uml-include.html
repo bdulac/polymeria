@@ -33,16 +33,11 @@ Example:
 	<script src="../polymeria.js"></script>
 	<script>
 	(function() {
-		var Generalization = Polymer({
+		var Include = Polymer({
 			is: "uml-include",
 			properties: {
 				name: String,
-				/** The `id` of the element target of the inclusion. */
-				addition: String
-				/*, direction: {
-					type: String,
-					value: 'vertical'
-				},*/
+    addition: String
 			},
 			ready: function() {
 			},
@@ -60,7 +55,7 @@ Example:
 				}, 800);
 			}
 		});
-		var el = new Generalization();
+		var el = new Include();
 	})();
 	</script>
 </dom-module>
