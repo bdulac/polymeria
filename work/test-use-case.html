@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+    <title>UML Use case diagram</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js">
+    </script>
+    <link rel="import" href="../uml-model/uml-model.html">
+    <link rel="import" href="../uml-packagedElement/uml-packagedElement.html">
+    <link rel="import" href="../uml-include/uml-include.html">
+  </head>
+  <style>
+    body {
+      margin: 0;
+	  padding: 0;
+	  width: 100%;
+	  height: 100%;
+	}
+	#my-package {
+		position: absolute;
+		top: 3em;
+		left: 3em;
+		width: 50em;
+		height: 25em;
+	}
+	#my-use-cases-actor {
+		position: absolute;
+		top: 16em;
+		left: 4em;
+	}
+	#my-use-case {
+		position: absolute;
+		top: 5em;
+		left: 15em;
+		width: 10em;
+		height: 4em;
+	}
+	#my-included-use-case {
+		position: absolute;
+		top: 18em;
+		left: 26em;
+	}
+	#description-my-use-case {
+		position: absolute;
+		top: 30em;
+		left: 6em;
+	}
+  </style>
+  <body unresolved>
+    <section>
+      <uml-model name="My use cases demo">
+        <uml-packagedElement type="uml:Actor" id="my-use-cases-actor" name="My actor">
+          <p>It might have a content.</p>
+          <p>Even two paragraphs!</p>
+        </uml-packagedElement>
+        <uml-packagedElement type="uml:UseCase" id="my-use-case" name="My use case">
+          It might have a content ...?
+          <meta itemprop="Description" content="A sample use case." />
+          <meta itemprop="Summary" content="An illustration of a use case description." />
+          <meta property="Preconditions" content="Using a modern Web browser." />
+          <meta property="Postconditions" content="A sharp and clear understanding of the use case." />
+          <uml-include type="uml:Include" addition="my-included-use-case"/>
+        </uml-packagedElement>
+        <uml-packagedElement type="uml:UseCase" id="my-included-use-case" name="My included use case">
+          <meta itemprop="Description" content="An included use case." />
+          <meta itemprop="Summary" content="An illustration of a use case included by another use case." />
+          <meta property="Preconditions" content="Using a modern Web browser." />
+          <meta property="Postconditions" content="The context of the use case inclusion." />
+        </uml-packagedElement>
+        <uml-packagedElement type="uml:Dependency" supplier="my-use-cases-actor" client="my-use-case">
+         </uml-packagedElement>
+      </uml-model>  
+    </section>
+  </body>
+</html>
