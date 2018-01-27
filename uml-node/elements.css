@@ -1,57 +1,65 @@
 uml-node {
-  width: 100%;
-  padding: 0;
-  margin: auto;
+	width: 100%;
+	padding: 0;
+	margin: auto;
 }
-uml-node[type="uml:InitialNode"], uml-node[type="uml:ActivityFinalNode"], uml-node[type="uml:OpaqueAction"] {
-  min-width: 8em;
-  width: 8em;
-  max-width: 30em;
-  padding: 0;
-  margin-top: 4em;
-  margin-bottom: 4em;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+
+uml-node[type="uml:InitialNode"], uml-node[type="uml:ActivityFinalNode"],
+	uml-node[type="uml:OpaqueAction"] {
+	min-width: 8em;
+	width: 8em;
+	max-width: 30em;
+	padding: 0;
+	margin-top: 4em;
+	margin-bottom: 4em;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 }
+
 uml-node[type="uml:InitialNode"] #element {
-  margin: 0 auto;
-  width: 1em;
-  height: 1em;
-  max-width: 1em;
-	 max-height: 1em;
-  background-color: black;
-  display: inline-block;
+	margin: 0 auto;
+	width: 1em;
+	height: 1em;
+	max-width: 1em;
+	max-height: 1em;
+	background-color: black;
+	display: inline-block;
 }
+
 .initial-node {
-  max-width: 1em;
-  max-height: 1em;
-  border-style: outset;
-  border-width: 1px;
-  border-radius: 100%;
-  margin: auto;
-  text-align: center;
-  width: 1em;
-  height: 1em;
-  overflow: visible;
-  box-shadow: 1px 1px 1px silver;
-  font-family: sans-serif;
-  display: block;
-  background-color: black;
+	max-width: 1em;
+	max-height: 1em;
+	border-style: outset;
+	border-width: 1px;
+	border-radius: 100%;
+	margin: auto;
+	text-align: center;
+	width: 1em;
+	height: 1em;
+	overflow: visible;
+	box-shadow: 1px 1px 1px silver;
+	font-family: sans-serif;
+	display: block;
+	background-color: black;
 }
+
 .initial-node:active {
 	border-style: inset;
 	border-width: 2px;
 }
+
 uml-node .name {
 	width: 100%;
 }
-uml-node[type="uml:InitialNode"] > .content {
+
+uml-node[type="uml:InitialNode"]>.content {
 	padding: 5px;
 	background-color: none;
 	text-align: left;
 }
-uml-node[type="uml:InitialNode"] > .name  {
+
+uml-node[type="uml:InitialNode"]>.name {
 	margin-top: 1em;
 	margin-left: 0;
 	margin-right: 0;
@@ -62,8 +70,9 @@ uml-node[type="uml:InitialNode"] > .name  {
 }
 
 uml-node[type="uml:ActivityFinalNode"] #element {
-  display: inline-block ;
+	display: inline-block;
 }
+
 .activity-final-node {
 	margin: 0 auto;
 	border-style: outset;
@@ -73,14 +82,15 @@ uml-node[type="uml:ActivityFinalNode"] #element {
 	text-align: center;
 	width: 1em;
 	height: 1em;
- max-width: 1em;
- max-height: 1em;
+	max-width: 1em;
+	max-height: 1em;
 	overflow: visible;
 	box-shadow: 1px 1px 1px silver;
 	font-family: sans-serif;
 	display: inline-block;
 	background-color: white;
 }
+
 .central-point {
 	margin: 0.25em;
 	padding: 0;
@@ -97,24 +107,28 @@ uml-node[type="uml:ActivityFinalNode"] #element {
 	display: block;
 	background-color: black;
 }
-uml-node[type="uml:ActivityFinalNode"] > .activity-final-node:active {
+
+uml-node[type="uml:ActivityFinalNode"]>.activity-final-node:active {
 	border-style: inset;
 	border-width: 2px;
 }
-uml-node[type="uml:ActivityFinalNode"] > .content {
+
+uml-node[type="uml:ActivityFinalNode"]>.content {
 	padding: 5px;
 	background-color: none;
 	text-align: left;
 }
-uml-node[type="uml:ActivityFinalNode"] > .name  {
+
+uml-node[type="uml:ActivityFinalNode"]>.name {
 	margin: 1em;
 	padding: 15px;
 	text-align: center;
 }
 
 uml-node[type="uml:OpaqueAction"] {
-
+	
 }
+
 .opaque-action {
 	border-style: outset;
 	border-width: 1px;
@@ -132,22 +146,23 @@ uml-node[type="uml:OpaqueAction"] {
 	font-family: sans-serif;
 	display: block;
 }
-.opaque-action > .stereotype {
+
+.opaque-action>.stereotype {
 	padding: 0;
 }
-.opaque-action > .content {
+
+.opaque-action>.content {
 	padding: 0;
 	background-color: none;
 	text-align: left;
 }
-.opaque-action > .name  {
+
+.opaque-action>.name {
 	text-align: center;
 	margin: 0;
 	width: 100%;
 }
 
-
 uml-node[type="uml:ControlFlow"] {
-  position: fixed;
-
+	position: fixed;
 }

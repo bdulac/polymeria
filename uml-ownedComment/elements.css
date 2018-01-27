@@ -3,7 +3,7 @@ uml-ownedComment {
 	max-width: 400px;
 }
 
-uml-ownedComment > .note {
+uml-ownedComment>.note {
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 0 1em 0 0;
@@ -15,15 +15,18 @@ uml-ownedComment > .note {
 	overflow: auto;
 	font-family: sans-serif;
 }
+
 .note:active {
 	border-style: inset;
 	border-width: 1px;
 }
-.note > .content {
+
+.note>.content {
 	padding: 15px;
 	background-color: none;
 }
-.note > .name  {
+
+.note>.name {
 	margin-top: 0;
 	border-style: none;
 	margin-left: 0;
